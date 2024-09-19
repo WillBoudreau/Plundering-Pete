@@ -62,4 +62,28 @@ public class UIManager : MonoBehaviour
                 break;
         }
     }
+    public void SetGameState(string state)
+    {
+        switch(state)
+        {
+            case "MainMenu":
+                currentGameState = GameState.MainMenu;
+                break;
+            case "Options":
+                currentGameState = GameState.Options;
+                break;
+            case "GamePlay":
+                currentGameState = GameState.GamePlay;
+                break;
+            case "Pause":
+                currentGameState = GameState.Pause;
+                break;
+            case "GameOver":
+                currentGameState = GameState.GameOver;
+                break;
+            case "Win":
+                currentGameState = GameState.Win;
+                break;
+        }
+    }
 }

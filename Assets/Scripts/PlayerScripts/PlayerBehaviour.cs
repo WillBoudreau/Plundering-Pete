@@ -40,6 +40,5 @@ public class PlayerBehaviour : MonoBehaviour
             Destroy(bullet, 2.0f);
             fireRate = newFireRate;
         }
-
     }
 }
