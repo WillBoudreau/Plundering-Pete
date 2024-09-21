@@ -3159,6 +3159,11 @@ MonoBehaviour:
   uiManager: {fileID: 1728282020}
   levelManager: {fileID: 1051185688}
   player: {fileID: 551069641}
+  Shark: {fileID: 4724370820435506893, guid: 276f63cd8fc351b42a0406ce0fd8f74a, type: 3}
+  SharkSpawn: {fileID: 3267169091984192866, guid: f86f17bb3304e9544a00b2e4347a7fa4, type: 3}
+  enemySpawn: []
+  NumSharks: 0
+  spawnPoints: []
 --- !u!114 &1547232564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4005,9 +4010,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1547232562}
     m_Modifications:
+    - target: {fileID: 4289566359749055770, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: field of view
+      value: 179
+      objectReference: {fileID: 0}
     - target: {fileID: 4680544976309677066, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
       propertyPath: m_Name
-      value: Square
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 6204835971353954689, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
       propertyPath: m_LocalPosition.x
