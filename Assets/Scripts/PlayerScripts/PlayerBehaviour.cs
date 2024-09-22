@@ -13,6 +13,7 @@ public class PlayerBehaviour : MonoBehaviour
     public float fireRate;
 
     public float newFireRate;
+    public float damage;
 
     // Start is called before the first frame update
     void Start()

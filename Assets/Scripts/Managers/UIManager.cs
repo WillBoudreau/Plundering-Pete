@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
         GamePlay,
         Pause,
         GameOver,
+        Upgrades,
         Win
     }
     public GameState currentGameState;
@@ -21,6 +22,7 @@ public class UIManager : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject gameOver;
     public GameObject winMenu;
+    public GameObject upgradesMenu;
     // Start is called before the first frame update
     void Start()
     {
@@ -60,6 +62,40 @@ public class UIManager : MonoBehaviour
                 gameOver.SetActive(false);
                 winMenu.SetActive(false);
                 break;
+            case GameState.Pause:
+                mainMenu.SetActive(false);
+                optionsMenu.SetActive(false);
+                gamePlay.SetActive(false);
+                pauseMenu.SetActive(true);
+                gameOver.SetActive(false);
+                winMenu.SetActive(false);
+                break;
+            case GameState.GameOver:
+                mainMenu.SetActive(false);
+                optionsMenu.SetActive(false);
+                gamePlay.SetActive(false);
+                pauseMenu.SetActive(false);
+                gameOver.SetActive(true);
+                winMenu.SetActive(false);
+                break;
+            case GameState.Win:
+                mainMenu.SetActive(false);
+                optionsMenu.SetActive(false);
+                gamePlay.SetActive(false);
+                pauseMenu.SetActive(false);
+                gameOver.SetActive(false);
+                winMenu.SetActive(true);
+                break;
+            case GameState.Upgrades:
+                mainMenu.SetActive(false);
+                optionsMenu.SetActive(false);
+                gamePlay.SetActive(false);
+                pauseMenu.SetActive(false);
+                gameOver.SetActive(false);
+                winMenu.SetActive(false);
+                upgradesMenu.SetActive(true);
+                break;
+            
         }
     }
     public void SetGameState(string state)
@@ -83,6 +119,9 @@ public class UIManager : MonoBehaviour
                 break;
             case "Win":
                 currentGameState = GameState.Win;
+                break;
+            case "Upgrades":
+                currentGameState = GameState.Upgrades;
                 break;
         }
     }

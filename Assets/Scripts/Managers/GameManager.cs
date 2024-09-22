@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
         NumSharks = 5;
         uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
         uiManager.currentGameState = UIManager.GameState.MainMenu;
+        DisablePlayer();
     }
 
     // Update is called once per frame
@@ -34,9 +35,9 @@ public class GameManager : MonoBehaviour
             spawnPoints.Add(enemspawn.transform);
         }
         uiManager.UpdateUI();
-        player.SetActive(uiManager.currentGameState == UIManager.GameState.GamePlay);
         if (levelManager.levelName == "GameTestScene")
         {
+            EnablePlayer();
             spawnEnemy();
         }
     }
@@ -49,5 +50,15 @@ public class GameManager : MonoBehaviour
                 Instantiate(Shark, enemspawn.transform.position, Quaternion.identity);
             }
         }
+    }
+    void EnablePlayer()
+    {
+        player.GetComponent<PlayerBehaviour>().enabled = true;
+        player.GetComponent<SpriteRenderer>().enabled = true;
+    }
+    void DisablePlayer()
+    {
+        player.GetComponent<PlayerBehaviour>().enabled = false;
+        player.GetComponent<SpriteRenderer>().enabled = false;
     }
 }
