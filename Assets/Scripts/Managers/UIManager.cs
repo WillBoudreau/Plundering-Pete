@@ -45,6 +45,7 @@ public class UIManager : MonoBehaviour
                 pauseMenu.SetActive(false);
                 gameOver.SetActive(false);
                 winMenu.SetActive(false);
+                upgradesMenu.SetActive(false);
                 break;
             case GameState.Options:
                 mainMenu.SetActive(false);
@@ -53,6 +54,7 @@ public class UIManager : MonoBehaviour
                 pauseMenu.SetActive(false);
                 gameOver.SetActive(false);
                 winMenu.SetActive(false);
+                upgradesMenu.SetActive(false);
                 break;
             case GameState.GamePlay:
                 mainMenu.SetActive(false);
@@ -61,6 +63,7 @@ public class UIManager : MonoBehaviour
                 pauseMenu.SetActive(false);
                 gameOver.SetActive(false);
                 winMenu.SetActive(false);
+                upgradesMenu.SetActive(false);
                 break;
             case GameState.Pause:
                 mainMenu.SetActive(false);
@@ -69,6 +72,7 @@ public class UIManager : MonoBehaviour
                 pauseMenu.SetActive(true);
                 gameOver.SetActive(false);
                 winMenu.SetActive(false);
+                upgradesMenu.SetActive(false);
                 break;
             case GameState.GameOver:
                 mainMenu.SetActive(false);
@@ -77,6 +81,7 @@ public class UIManager : MonoBehaviour
                 pauseMenu.SetActive(false);
                 gameOver.SetActive(true);
                 winMenu.SetActive(false);
+                upgradesMenu.SetActive(false);
                 break;
             case GameState.Win:
                 mainMenu.SetActive(false);
@@ -85,6 +90,7 @@ public class UIManager : MonoBehaviour
                 pauseMenu.SetActive(false);
                 gameOver.SetActive(false);
                 winMenu.SetActive(true);
+                upgradesMenu.SetActive(false);
                 break;
             case GameState.Upgrades:
                 mainMenu.SetActive(false);

@@ -6,28 +6,28 @@ public class PlayerBehaviour : MonoBehaviour
 {
 
     public float speed;
-    public Rigidbody rb;
-
-    public GameObject bulletPrefab;
-
+    public float health;
     public float fireRate;
-
-    public float newFireRate;
     public float damage;
 
+    public Rigidbody2D rb;
+    public GameObject bulletPrefab;
     // Start is called before the first frame update
     void Start()
     {
         fireRate = 0f;
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody2D>();
         speed = 10.0f;
-        newFireRate = 5f;
+        health = 100.0f;
+        damage = 10.0f;
+
     }
 
     // Update is called once per frame
     void Update()
     {
         KeyBinds();
+        Death();
     }
     void KeyBinds()
     {
@@ -39,7 +39,21 @@ public class PlayerBehaviour : MonoBehaviour
             GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
             bullet.GetComponent<Rigidbody>().velocity = transform.up * 10.0f;
             Destroy(bullet, 2.0f);
-            fireRate = newFireRate;
+        }
+    }
+    public void Death()
+    {
+        if(health <= 0)
+        {
+            Destroy(this.gameObject);   
+        }
+    }
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
+        if(health <= 0)
+        {
+            Destroy(gameObject);
         }
     }
 }
