@@ -39,7 +39,7 @@ public class PlayerBehaviour : MonoBehaviour
             Vector2 mouseWorldPOS = mainCamera.ScreenToWorldPoint(Input.mousePosition);
             GameObject bullet = Instantiate(bulletPrefab, transform.position,Quaternion.identity);
             Vector2 shootdirection = (mouseWorldPOS - (Vector2)transform.position).normalized;
-            bullet.GetComponent<Rigidbody>().velocity = shootdirection * 10.0f;
+            bullet.GetComponent<Rigidbody2D>().velocity = shootdirection * 10.0f;
             Destroy(bullet, 2.0f);
             fireRate = 10f;
         }
