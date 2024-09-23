@@ -3911,6 +3911,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1417476913}
   m_CullTransparentMesh: 1
+--- !u!20 &1437435774 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 4289566359749055770, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+  m_PrefabInstance: {fileID: 1893215411}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1440979893
 GameObject:
   m_ObjectHideFlags: 0
@@ -5590,9 +5595,21 @@ PrefabInstance:
       propertyPath: rb
       value: 
       objectReference: {fileID: 551069649}
+    - target: {fileID: 3116806254861534645, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 1437435774}
+    - target: {fileID: 4289566359749055770, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: orthographic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4289566359749055770, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
       propertyPath: field of view
       value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 4289566359749055770, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: orthographic size
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 4680544976309677066, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
       propertyPath: m_Name

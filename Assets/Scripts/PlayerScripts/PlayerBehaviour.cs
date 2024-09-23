@@ -9,12 +9,14 @@ public class PlayerBehaviour : MonoBehaviour
     public float health;
     public float fireRate;
     public float damage;
+    public Transform mouse;
+    public Camera mainCamera;
 
     public Rigidbody2D rb;
     public GameObject bulletPrefab;
     // Start is called before the first frame update
     void Start()
-    {
+    { 
         fireRate = 0f;
         rb = GetComponent<Rigidbody2D>();
         speed = 10.0f;
@@ -26,20 +28,36 @@ public class PlayerBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        KeyBinds();
+        HandleMovement();
+        HandleShooting();
         Death();
     }
     void KeyBinds()
     {
-        fireRate -= Time.deltaTime;
         Debug.Log(fireRate);    
         rb.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, Input.GetAxis("Vertical") * speed);
-        if(Input.GetKeyDown(KeyCode.Mouse0) && fireRate <= 0)
+       
+    }
+    void HandleShooting()
+    {
+        fireRate -= Time.deltaTime;
+        if (Input.GetKeyDown(KeyCode.Mouse0) && fireRate <= 0)
         {
-            GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
-            bullet.GetComponent<Rigidbody>().velocity = transform.up * 10.0f;
+            Vector2 mouseWorldPOS = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+            GameObject bullet = Instantiate(bulletPrefab, transform.position,Quaternion.identity);
+            Vector2 shootdirection = (mouseWorldPOS - (Vector2)transform.position).normalized;
+            bullet.GetComponent<Rigidbody>().velocity = shootdirection * 10.0f;
             Destroy(bullet, 2.0f);
+            fireRate = 10f;
         }
+    }
+    void HandleMovement()
+    {
+        float moveHorizontal = Input.GetAxis("Horizontal");
+        float moveVertical = Input.GetAxis("Vertical");
+
+        Vector2 movement = new Vector2(moveHorizontal, moveVertical) * speed;
+        rb.velocity = movement;
     }
     public void Death()
     {
