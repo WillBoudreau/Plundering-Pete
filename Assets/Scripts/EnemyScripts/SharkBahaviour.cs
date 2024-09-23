@@ -39,6 +39,7 @@ public class SharkBahaviour : MonoBehaviour
     }
     public void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log("Player");
         if(other.gameObject.tag == "Player")
         {
             other.gameObject.GetComponent<PlayerBehaviour>().TakeDamage(damage);

@@ -19,6 +19,7 @@ public class UpgradeManager : MonoBehaviour
     public TextMeshProUGUI healthText;
     public TextMeshProUGUI speedText;
     public TextMeshProUGUI MessageCostText;
+    public TextMeshProUGUI NumberCoinsText;
     //Values and their max values
     public float damageUpgrade;
     public float damageMax;
@@ -61,6 +62,7 @@ public class UpgradeManager : MonoBehaviour
         damageText.text = "Damage: " + player.damage;
         healthText.text = "Health: " + player.health;
         speedText.text = "Speed: " + player.speed;
+        NumberCoinsText.text = "Doubloons " + inventory.coinCount;
         
     }
     public void UpgradeDamage()

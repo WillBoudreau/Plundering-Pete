@@ -9,7 +9,6 @@ public class PlayerBehaviour : MonoBehaviour
     public float health;
     public float fireRate;
     public float damage;
-    public Transform mouse;
     public Camera mainCamera;
 
     public Rigidbody2D rb;
@@ -31,12 +30,6 @@ public class PlayerBehaviour : MonoBehaviour
         HandleMovement();
         HandleShooting();
         Death();
-    }
-    void KeyBinds()
-    {
-        Debug.Log(fireRate);    
-        rb.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, Input.GetAxis("Vertical") * speed);
-       
     }
     void HandleShooting()
     {
