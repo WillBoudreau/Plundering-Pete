@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        NumSharks = 5;
+        NumSharks = 1;
         uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
         uiManager.currentGameState = UIManager.GameState.MainMenu;
         DisablePlayer();
@@ -38,7 +38,6 @@ public class GameManager : MonoBehaviour
         if (levelManager.levelName == "GameTestScene")
         {
             EnablePlayer();
-            spawnEnemy();
         }
     }
     void spawnEnemy()

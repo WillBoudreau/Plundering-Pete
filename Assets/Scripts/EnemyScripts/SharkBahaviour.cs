@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class SharkBahaviour : MonoBehaviour
 {
     public float stoppingDistance;
     public float detectionDistance;
     public Transform player;
+    public NavMeshAgent agent;
 
     public float speed;
     public float damage;
@@ -17,9 +19,9 @@ public class SharkBahaviour : MonoBehaviour
     void Start()
     {
         speed = 2;
-        health = 100;
-        maxHealth = 100;
-        damage = 10;
+        health = 2;
+        maxHealth = 2;
+        damage = 1;
         stoppingDistance = 2;
         detectionDistance = 10;
     }
@@ -32,9 +34,10 @@ public class SharkBahaviour : MonoBehaviour
     }
     public void Move()
     {
-        if(Vector2.Distance(transform.position, player.position) < detectionDistance)
+        float DistanceToPlayer = Vector2.Distance(transform.position, player.position);
+        if(DistanceToPlayer < detectionDistance)
         {
-            transform.position = Vector2.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
+            agent.SetDestination(player.position);
         }
     }
     public void OnTriggerEnter2D(Collider2D other)
@@ -44,7 +47,6 @@ public class SharkBahaviour : MonoBehaviour
             //case player:
             //player.TakeDamage(damage);
             //break;
-
         }
     }
     public void TakeDamage(float damage)
