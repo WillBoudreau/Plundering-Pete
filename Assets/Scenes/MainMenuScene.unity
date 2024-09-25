@@ -1481,6 +1481,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   volumeSlider: {fileID: 1820428726}
+  musicSource: {fileID: 0}
+  MusicChanger: {fileID: 2083907198}
 --- !u!1 &472894841
 GameObject:
   m_ObjectHideFlags: 0
@@ -4796,6 +4798,7 @@ Transform:
   - {fileID: 1592440692}
   - {fileID: 551069645}
   - {fileID: 1764451576}
+  - {fileID: 2083907200}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1547232563
@@ -6890,12 +6893,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2083907198}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 532.2005, y: 302.27725, z: -2.9488444}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1547232562}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2083907201
 MonoBehaviour:
@@ -7320,4 +7323,3 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1547232562}
-  - {fileID: 2083907200}
