@@ -2,69 +2,74 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerBehaviour : MonoBehaviour
+public class PlayerBehaviour : HealthManager
 {
 
     public float speed;
-    public float health;
     public float fireRate;
     public float damage;
-    public Camera mainCamera;
+    public float bulletVelocity;
+    public float playerHealth;
 
+    public Camera mainCamera;
     public Rigidbody2D rb;
     public GameObject bulletPrefab;
+
+
     // Start is called before the first frame update
     void Start()
     { 
         fireRate = 0f;
         rb = GetComponent<Rigidbody2D>();
         speed = 10.0f;
-        health = 100.0f;
+        playerHealth = 100f;
         damage = 10.0f;
-
+        bulletVelocity = 25f;
+        health = playerHealth;
     }
 
     // Update is called once per frame
     void Update()
     {
+        playerhealth.value = playerHealth;
         HandleMovement();
         HandleShooting();
         Death();
     }
     void HandleShooting()
     {
+        //Handle player shooting by tracking the mouse pos
         fireRate -= Time.deltaTime;
         if (Input.GetKeyDown(KeyCode.Mouse0) && fireRate <= 0)
         {
+            TakeDamage(50);
             Vector2 mouseWorldPOS = mainCamera.ScreenToWorldPoint(Input.mousePosition);
             GameObject bullet = Instantiate(bulletPrefab, transform.position,Quaternion.identity);
             Vector2 shootdirection = (mouseWorldPOS - (Vector2)transform.position).normalized;
-            bullet.GetComponent<Rigidbody2D>().velocity = shootdirection * 10.0f;
+            bullet.GetComponent<Rigidbody2D>().velocity = shootdirection * bulletVelocity;
             Destroy(bullet, 2.0f);
             fireRate = 10f;
         }
     }
     void HandleMovement()
     {
+        //Handle input using the old inout system. TODO: change to new input system
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
 
         Vector2 movement = new Vector2(moveHorizontal, moveVertical) * speed;
         rb.velocity = movement;
     }
-    public void Death()
+    public override void Death()
     {
-        if(health <= 0)
+        if(playerHealth <= 0)
         {
-            Destroy(this.gameObject);   
+            IsDead = true;
         }
     }
-    public void TakeDamage(float damage)
+    public override void TakeDamage(float damage)
     {
-        health -= damage;
-        if(health <= 0)
-        {
-            Destroy(gameObject);
-        }
+        playerHealth -= damage;
+        Death();
     }
 }

@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public UIManager uiManager;
-
+    public HealthManager healthManager;
     public LevelManager levelManager;
     public GameObject player;
     public GameObject Shark;
@@ -38,6 +38,10 @@ public class GameManager : MonoBehaviour
         if (levelManager.levelName == "GameTestScene")
         {
             EnablePlayer();
+        }
+        if(healthManager.IsDead == true)
+        {
+            uiManager.currentGameState = UIManager.GameState.GameOver;
         }
     }
     void spawnEnemy()
