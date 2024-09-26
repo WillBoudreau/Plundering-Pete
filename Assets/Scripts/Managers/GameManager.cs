@@ -39,9 +39,10 @@ public class GameManager : MonoBehaviour
         {
             EnablePlayer();
         }
-        if(healthManager.IsDead == true)
+        if(player.GetComponent<PlayerBehaviour>().Win == true)
         {
-            uiManager.currentGameState = UIManager.GameState.GameOver;
+            uiManager.currentGameState = UIManager.GameState.Win;
+            DisablePlayer();
         }
     }
     void spawnEnemy()

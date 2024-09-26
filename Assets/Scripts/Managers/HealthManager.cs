@@ -14,6 +14,7 @@ public class HealthManager : MonoBehaviour
     void Start()
     {
         IsDead = false;
+        uIManager = FindObjectOfType<UIManager>();
     }
 
     // Update is called once per frame
@@ -29,9 +30,10 @@ public class HealthManager : MonoBehaviour
     {
         if (health <= 0)
         {
+            health = 0;
             Destroy(gameObject);
         }
-
         IsDead = true;
+        uIManager.currentGameState = UIManager.GameState.GameOver;
     }
 }

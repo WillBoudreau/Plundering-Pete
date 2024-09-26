@@ -1128,6 +1128,18 @@ MonoBehaviour:
           m_StringArgument: MainMenuScene
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1728282020}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: SetGameState
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: MainMenu
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &362043390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2853,16 +2865,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1051185688}
-        m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
-        m_MethodName: LoadLevel
+      - m_Target: {fileID: 1728282020}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: SetGameState
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: MainMenuScene
+          m_StringArgument: MainMenu
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &809989351
@@ -6173,6 +6185,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb6c6962b94f7e84d845fa63478f8071, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  obstacle1: []
+  obstacle2: []
+  obstacle3: []
 --- !u!1 &1728282018
 GameObject:
   m_ObjectHideFlags: 0

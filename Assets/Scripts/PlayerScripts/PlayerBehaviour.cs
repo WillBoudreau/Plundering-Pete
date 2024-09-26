@@ -14,6 +14,7 @@ public class PlayerBehaviour : HealthManager
     public Camera mainCamera;
     public Rigidbody2D rb;
     public GameObject bulletPrefab;
+    public bool Win;
 
 
     // Start is called before the first frame update
@@ -25,6 +26,7 @@ public class PlayerBehaviour : HealthManager
         playerHealth = 100f;
         damage = 10.0f;
         bulletVelocity = 25f;
+        Win = false;
         health = playerHealth;
     }
 
@@ -60,6 +62,16 @@ public class PlayerBehaviour : HealthManager
         Vector2 movement = new Vector2(moveHorizontal, moveVertical) * speed;
         rb.velocity = movement;
     }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log("Collided with: " + other.gameObject.name);
+        if(other.gameObject.tag == "WinTrig")
+        {
+            Win = true;
+            Debug.Log("You Win!");
+        }
+    }
+
     public override void Death()
     {
         if(playerHealth <= 0)
