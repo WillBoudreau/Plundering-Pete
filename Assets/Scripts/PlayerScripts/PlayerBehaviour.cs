@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerBehaviour : HealthManager
 {
 
+    public int Doubloons = 0;
     public float speed;
     public float fireRate;
     public float damage;
@@ -23,8 +24,8 @@ public class PlayerBehaviour : HealthManager
         fireRate = 0f;
         rb = GetComponent<Rigidbody2D>();
         speed = 10.0f;
-        playerHealth = 100f;
-        damage = 10.0f;
+        playerHealth = 5f;
+        damage = 1f;
         bulletVelocity = 25f;
         Win = false;
         health = playerHealth;
@@ -44,7 +45,6 @@ public class PlayerBehaviour : HealthManager
         fireRate -= Time.deltaTime;
         if (Input.GetKeyDown(KeyCode.Mouse0) && fireRate <= 0)
         {
-            TakeDamage(50);
             Vector2 mouseWorldPOS = mainCamera.ScreenToWorldPoint(Input.mousePosition);
             GameObject bullet = Instantiate(bulletPrefab, transform.position,Quaternion.identity);
             Vector2 shootdirection = (mouseWorldPOS - (Vector2)transform.position).normalized;
@@ -65,10 +65,18 @@ public class PlayerBehaviour : HealthManager
     void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("Collided with: " + other.gameObject.name);
-        if(other.gameObject.tag == "WinTrig")
+        switch(other.gameObject.tag)
         {
-            Win = true;
-            Debug.Log("You Win!");
+            case "Doubloon":
+                Doubloons++;
+                Destroy(other.gameObject);
+                break;
+            case "Win":
+                Win = true;
+                break;
+            case "Enemy":
+                TakeDamage(10);
+                break;
         }
     }
 
@@ -77,10 +85,14 @@ public class PlayerBehaviour : HealthManager
         if(playerHealth <= 0)
         {
             IsDead = true;
+            playerHealth = 0;
+            uIManager.SetGameState("GameOver");
         }
     }
     public override void TakeDamage(float damage)
     {
+        Debug.Log("Player took damage: " + damage);
+        Debug.Log("Player health: " + playerHealth);
         playerHealth -= damage;
         Death();
     }

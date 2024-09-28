@@ -8,8 +8,6 @@ public class SharkBahaviour : MonoBehaviour
     public float stoppingDistance;
     public float detectionDistance;
     public Transform player;
-    public NavMeshAgent agent;
-
     public float speed;
     public float damage;
     public float health;
@@ -34,19 +32,22 @@ public class SharkBahaviour : MonoBehaviour
     }
     public void Move()
     {
-        float DistanceToPlayer = Vector2.Distance(transform.position, player.position);
-        if(DistanceToPlayer < detectionDistance)
+        if(Vector2.Distance(transform.position, player.position) < detectionDistance)
         {
-            agent.SetDestination(player.position);
+            float DistanceToPlayer = Vector2.Distance(transform.position, player.position);
+            if(DistanceToPlayer < detectionDistance)
+            {
+                Vector3 targetPosition = Vector2.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
+                targetPosition.z = -2;
+                transform.position = targetPosition;
+            }   
         }
     }
-    public void OnTriggerEnter2D(Collider2D other)
+    public void OnCollisionEnter2D(Collision2D collision)
     {
-        switch(other)
+        if(collision.gameObject.tag == "Player")
         {
-            //case player:
-            //player.TakeDamage(damage);
-            //break;
+            collision.gameObject.GetComponent<PlayerBehaviour>().TakeDamage(damage);
         }
     }
     public void TakeDamage(float damage)
@@ -57,5 +58,4 @@ public class SharkBahaviour : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
 }

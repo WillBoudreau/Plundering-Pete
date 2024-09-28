@@ -106,6 +106,7 @@ public class UIManager : MonoBehaviour
     }
     public void SetGameState(string state)
     {
+        Debug.Log("Changing game state to: " + state);
         switch(state)
         {
             case "MainMenu":

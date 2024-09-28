@@ -35,5 +35,6 @@ public class HealthManager : MonoBehaviour
         }
         IsDead = true;
         uIManager.currentGameState = UIManager.GameState.GameOver;
+        uIManager.SetGameState("GameOver");
     }
 }

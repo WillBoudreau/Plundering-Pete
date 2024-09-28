@@ -9,19 +9,14 @@ public class GameManager : MonoBehaviour
     public HealthManager healthManager;
     public LevelManager levelManager;
     public GameObject player;
-    public GameObject Shark;
-    public GameObject SharkSpawn;
-    public GameObject[] enemySpawn;
+    public PlayerBehaviour playerBehaviour; 
 
-    public int NumSharks;
-
-    public List<Transform> spawnPoints = new List<Transform>();
 
     // Start is called before the first frame update
     void Start()
     {
-        NumSharks = 1;
         uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
+        playerBehaviour = GameObject.Find("Player").GetComponent<PlayerBehaviour>();
         uiManager.currentGameState = UIManager.GameState.MainMenu;
         DisablePlayer();
     }
@@ -29,30 +24,15 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        enemySpawn = GameObject.FindGameObjectsWithTag("EnemySpawn");
-        foreach (GameObject enemspawn in enemySpawn)
-        {
-            spawnPoints.Add(enemspawn.transform);
-        }
         uiManager.UpdateUI();
         if (levelManager.levelName == "GameTestScene")
         {
             EnablePlayer();
         }
-        if(player.GetComponent<PlayerBehaviour>().Win == true)
+        else if(player.GetComponent<PlayerBehaviour>().Win == true)
         {
             uiManager.currentGameState = UIManager.GameState.Win;
             DisablePlayer();
-        }
-    }
-    void spawnEnemy()
-    {
-        for(int i = 0; i < NumSharks; i++)
-        {
-            foreach (GameObject enemspawn in enemySpawn)
-            {
-                Instantiate(Shark, enemspawn.transform.position, Quaternion.identity);
-            }
         }
     }
     void EnablePlayer()
