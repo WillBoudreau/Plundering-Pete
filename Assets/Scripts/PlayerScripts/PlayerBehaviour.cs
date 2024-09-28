@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerBehaviour : HealthManager
 {
@@ -12,10 +13,13 @@ public class PlayerBehaviour : HealthManager
     public float bulletVelocity;
     public float playerHealth;
 
+    public TextMeshProUGUI DoubloonText;
+
     public Camera mainCamera;
     public Rigidbody2D rb;
     public GameObject bulletPrefab;
     public bool Win;
+    public InventoryManager inventoryManager;
 
 
     // Start is called before the first frame update
@@ -34,10 +38,17 @@ public class PlayerBehaviour : HealthManager
     // Update is called once per frame
     void Update()
     {
+        inventoryManager = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
+        DoubloonText = GameObject.Find("DoubloonsText").GetComponent<TextMeshProUGUI>();
         playerhealth.value = playerHealth;
         HandleMovement();
         HandleShooting();
+        UpdateCounter();
         Death();
+    }
+    void UpdateCounter()
+    {
+        DoubloonText.text = "Doubloons: " + Doubloons;
     }
     void HandleShooting()
     {
@@ -64,19 +75,17 @@ public class PlayerBehaviour : HealthManager
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Collided with: " + other.gameObject.name);
-        switch(other.gameObject.tag)
+        Debug.Log("Collided with: " + other.gameObject.tag);
+        if (other.gameObject.tag == "WinTrig")
         {
-            case "Doubloon":
-                Doubloons++;
-                Destroy(other.gameObject);
-                break;
-            case "Win":
-                Win = true;
-                break;
-            case "Enemy":
-                TakeDamage(10);
-                break;
+            Win = true;
+            uIManager.SetGameState("Win");
+        }
+        if (other.gameObject.tag == "Gold")
+        {
+            Doubloons++;
+            inventoryManager.coinCount = Doubloons;
+            Destroy(other.gameObject);
         }
     }
 

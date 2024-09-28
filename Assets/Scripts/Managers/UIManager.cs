@@ -32,7 +32,7 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdateUI();
+        //UpdateUI();
     }
     public void UpdateUI()
     {
@@ -101,11 +101,13 @@ public class UIManager : MonoBehaviour
                 winMenu.SetActive(false);
                 upgradesMenu.SetActive(true);
                 break;
+            default:
+                break;
             
         }
     }
     public void SetGameState(string state)
-    {
+    { 
         Debug.Log("Changing game state to: " + state);
         switch(state)
         {
@@ -129,6 +131,9 @@ public class UIManager : MonoBehaviour
                 break;
             case "Upgrades":
                 currentGameState = GameState.Upgrades;
+                break;
+            default:
+                currentGameState = GameState.MainMenu;
                 break;
         }
     }

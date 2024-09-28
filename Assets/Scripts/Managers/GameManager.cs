@@ -25,13 +25,18 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         uiManager.UpdateUI();
-        if (levelManager.levelName == "GameTestScene")
+        if (levelManager.levelName == "GameTestScene" && uiManager.currentGameState == UIManager.GameState.GamePlay)
         {
             EnablePlayer();
+            Time.timeScale = 1;
         }
-        else if(player.GetComponent<PlayerBehaviour>().Win == true)
+        else if(uiManager.currentGameState == UIManager.GameState.Pause)
         {
-            uiManager.currentGameState = UIManager.GameState.Win;
+            Time.timeScale = 0;
+            DisablePlayer();
+        }
+        else
+        {
             DisablePlayer();
         }
     }

@@ -8,6 +8,7 @@ TagManager:
   - Bullet
   - Gold
   - WinTrig
+  - Enemy
   layers:
   - Default
   - TransparentFX
