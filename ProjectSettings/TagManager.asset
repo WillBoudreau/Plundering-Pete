@@ -9,6 +9,7 @@ TagManager:
   - Gold
   - WinTrig
   - Enemy
+  - Obstacle
   layers:
   - Default
   - TransparentFX
