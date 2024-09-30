@@ -87,7 +87,7 @@ public class PlayerBehaviour : HealthManager
         {
             Doubloons++;
             inventoryManager.coinCount = Doubloons;
-            Destroy(other.gameObject);
+            other.gameObject.SetActive(false);
         }
         if (other.gameObject.tag == "Obstacle")
         {

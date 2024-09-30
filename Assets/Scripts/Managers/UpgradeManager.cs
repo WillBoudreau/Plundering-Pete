@@ -70,13 +70,14 @@ public class UpgradeManager : MonoBehaviour
         if(player.damage < damageMax)
         {
             player.damage += damageUpgrade;
-            Debug.Log("Damage upgraded to: " + damageUpgrade);
-            MessageCostText.text = "Damage upgraded to: " + damageUpgrade;
+            Debug.Log("Damage upgraded to: " + player.damage);
+            MessageCostText.text = "Damage upgraded to: " + player.damage;
         }
         else
         {
             Debug.Log("Max damage reached");
             MessageCostText.text = "Max damage reached";
+            inventory.coinCount += damageCost;
         }
     }
     public void DamageCostCheck()
@@ -106,6 +107,7 @@ public class UpgradeManager : MonoBehaviour
         {
             Debug.Log("Max health reached");
             MessageCostText.text = "Max health reached";
+            inventory.coinCount += healthCost;
         }
     }
     public void HealthCostCheck()
@@ -134,6 +136,7 @@ public class UpgradeManager : MonoBehaviour
         {
             Debug.Log("Max speed reached");
             MessageCostText.text = "Max speed reached";
+            inventory.coinCount += speedCost;
         }
     }
     public void SpeedCostCheck()

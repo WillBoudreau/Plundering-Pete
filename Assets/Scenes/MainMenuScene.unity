@@ -3762,7 +3762,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.09071612, g: 1, b: 0, a: 0.7647059}
+  m_Color: {r: 0.09071612, g: 1, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -6873,7 +6873,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a6454328799efa4f91df101aefb68d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelManager: {fileID: 1051185688}
+  Doubloon: {fileID: 7112107127442301048, guid: 8c67685f1765d5a4582752a597e62618, type: 3}
   Doubloons: []
+  numofDoubloons: 0
 --- !u!1 &1827410775
 GameObject:
   m_ObjectHideFlags: 0

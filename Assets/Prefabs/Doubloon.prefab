@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 4101939239356132708}
   - component: {fileID: 3241234259455816613}
   - component: {fileID: 8878604470641991988}
-  - component: {fileID: 8124597232583262530}
+  - component: {fileID: -3128931492001068823}
   m_Layer: 0
   m_Name: Doubloon
-  m_TagString: Bullet
+  m_TagString: Gold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -131,30 +131,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.16, y: 0.16}
   m_EdgeRadius: 0
---- !u!50 &8124597232583262530
-Rigidbody2D:
-  serializedVersion: 4
+--- !u!114 &-3128931492001068823
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7112107127442301048}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fb02621c5ef10e4a8d789f8b7396878, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collectableType: 0
