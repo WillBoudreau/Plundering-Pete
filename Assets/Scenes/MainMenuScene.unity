@@ -6877,6 +6877,7 @@ MonoBehaviour:
   Doubloon: {fileID: 7112107127442301048, guid: 8c67685f1765d5a4582752a597e62618, type: 3}
   Doubloons: []
   numofDoubloons: 0
+  numofCoins: 0
 --- !u!1 &1827410775
 GameObject:
   m_ObjectHideFlags: 0
@@ -7262,6 +7263,10 @@ PrefabInstance:
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 1437435774}
+    - target: {fileID: 3116806254861534645, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: DoubloonText
+      value: 
+      objectReference: {fileID: 846168839}
     - target: {fileID: 3116806254861534645, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
       propertyPath: playerhealth
       value: 

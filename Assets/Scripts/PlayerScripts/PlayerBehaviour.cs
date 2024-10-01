@@ -57,7 +57,14 @@ public class PlayerBehaviour : HealthManager
         if (Input.GetKeyDown(KeyCode.Mouse0) && fireRate <= 0)
         {
             Vector2 mouseWorldPOS = mainCamera.ScreenToWorldPoint(Input.mousePosition);
-            GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+            Vector2 direction = (mouseWorldPOS - (Vector2)transform.position).normalized;
+            
+            float bulletSpawnDist = 1.0f;
+            Vector2 bulletSpawnPos = (Vector2)transform.position + direction * bulletSpawnDist;
+
+
+            GameObject bullet = Instantiate(bulletPrefab,bulletSpawnPos, Quaternion.identity);
+
             Vector2 shootdirection = (mouseWorldPOS - (Vector2)transform.position).normalized;
             bullet.GetComponent<Rigidbody2D>().velocity = shootdirection * bulletVelocity;
             Destroy(bullet, 2.0f);

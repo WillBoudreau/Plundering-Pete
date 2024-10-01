@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4101939239356132708}
   - component: {fileID: 3241234259455816613}
   - component: {fileID: 8878604470641991988}
-  - component: {fileID: 8124597232583262530}
+  - component: {fileID: 4287549345781631713}
   m_Layer: 0
   m_Name: PLACEHOLDER_Prefab_Bullet
   m_TagString: Bullet
@@ -131,7 +131,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.16, y: 0.16}
   m_EdgeRadius: 0
---- !u!50 &8124597232583262530
+--- !u!50 &4287549345781631713
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -146,7 +146,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
