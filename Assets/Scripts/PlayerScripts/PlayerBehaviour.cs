@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class PlayerBehaviour : HealthManager
+public class PlayerBehaviour : MonoBehaviour
 {
     public int Doubloons = 0;
     public float speed;
@@ -18,7 +18,11 @@ public class PlayerBehaviour : HealthManager
     public Rigidbody2D rb;
     public GameObject bulletPrefab;
     public bool Win;
+    [Header("Class calls")]
     public InventoryManager inventoryManager;
+    public UIManager uIManager;
+    public HealthManager healthManager;
+    public MusicChanger musicManager;
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +34,7 @@ public class PlayerBehaviour : HealthManager
         damage = 1f;
         bulletVelocity = 25f;
         Win = false;
-        health = playerHealth;
+        healthManager.health = playerHealth;
     }
 
     // Update is called once per frame
@@ -38,7 +42,7 @@ public class PlayerBehaviour : HealthManager
     {
         inventoryManager = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
         DoubloonText = GameObject.Find("DoubloonsText").GetComponent<TextMeshProUGUI>();
-        playerhealth.value = playerHealth;
+        healthManager.playerhealth.value = playerHealth;
         HandleMovement();
         HandleShooting();
         UpdateCounter();
@@ -63,7 +67,7 @@ public class PlayerBehaviour : HealthManager
             Vector3 bulletSpawnPos = (Vector2)transform.position + direction * bulletSpawnDist;
             bulletSpawnPos.z = -2;
 
-
+            musicManager.PlaySound(0);
             GameObject bullet = Instantiate(bulletPrefab,bulletSpawnPos, Quaternion.identity);
 
             Vector2 shootdirection = (mouseWorldPOS - (Vector2)transform.position).normalized;
@@ -103,18 +107,18 @@ public class PlayerBehaviour : HealthManager
         }
     }
 
-    public override void Death()
+    public void Death()
     {
         if (playerHealth <= 0)
         {
-            IsDead = true;
+            healthManager.IsDead = true;
             playerHealth = 0;
             uIManager.SetGameState("GameOver");
             ResetHealth();
         }
     }
 
-    public override void TakeDamage(float damage)
+    public void TakeDamage(float damage)
     {
         Debug.Log("Player took damage: " + damage);
         Debug.Log("Player health: " + playerHealth);
@@ -125,7 +129,7 @@ public class PlayerBehaviour : HealthManager
     private void ResetHealth()
     {
         playerHealth = 100f;
-        health = playerHealth;
-        IsDead = false;
+        healthManager.health = playerHealth;
+        healthManager.IsDead = false;
     }
 }
