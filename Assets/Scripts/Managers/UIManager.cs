@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
         GamePlay,
         Pause,
         GameOver,
+        Upgrades,
         Win
     }
     public GameState currentGameState;
@@ -21,6 +22,7 @@ public class UIManager : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject gameOver;
     public GameObject winMenu;
+    public GameObject upgradesMenu;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,7 +32,7 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdateUI();
+        //UpdateUI();
     }
     public void UpdateUI()
     {
@@ -43,6 +45,7 @@ public class UIManager : MonoBehaviour
                 pauseMenu.SetActive(false);
                 gameOver.SetActive(false);
                 winMenu.SetActive(false);
+                upgradesMenu.SetActive(false);
                 break;
             case GameState.Options:
                 mainMenu.SetActive(false);
@@ -51,6 +54,7 @@ public class UIManager : MonoBehaviour
                 pauseMenu.SetActive(false);
                 gameOver.SetActive(false);
                 winMenu.SetActive(false);
+                upgradesMenu.SetActive(false);
                 break;
             case GameState.GamePlay:
                 mainMenu.SetActive(false);
@@ -59,6 +63,77 @@ public class UIManager : MonoBehaviour
                 pauseMenu.SetActive(false);
                 gameOver.SetActive(false);
                 winMenu.SetActive(false);
+                upgradesMenu.SetActive(false);
+                break;
+            case GameState.Pause:
+                mainMenu.SetActive(false);
+                optionsMenu.SetActive(false);
+                gamePlay.SetActive(false);
+                pauseMenu.SetActive(true);
+                gameOver.SetActive(false);
+                winMenu.SetActive(false);
+                upgradesMenu.SetActive(false);
+                break;
+            case GameState.GameOver:
+                mainMenu.SetActive(false);
+                optionsMenu.SetActive(false);
+                gamePlay.SetActive(false);
+                pauseMenu.SetActive(false);
+                gameOver.SetActive(true);
+                winMenu.SetActive(false);
+                upgradesMenu.SetActive(false);
+                break;
+            case GameState.Win:
+                mainMenu.SetActive(false);
+                optionsMenu.SetActive(false);
+                gamePlay.SetActive(false);
+                pauseMenu.SetActive(false);
+                gameOver.SetActive(false);
+                winMenu.SetActive(true);
+                upgradesMenu.SetActive(false);
+                break;
+            case GameState.Upgrades:
+                mainMenu.SetActive(false);
+                optionsMenu.SetActive(false);
+                gamePlay.SetActive(false);
+                pauseMenu.SetActive(false);
+                gameOver.SetActive(false);
+                winMenu.SetActive(false);
+                upgradesMenu.SetActive(true);
+                break;
+            default:
+                break;
+            
+        }
+    }
+    public void SetGameState(string state)
+    { 
+        Debug.Log("Changing game state to: " + state);
+        switch(state)
+        {
+            case "MainMenu":
+                currentGameState = GameState.MainMenu;
+                break;
+            case "Options":
+                currentGameState = GameState.Options;
+                break;
+            case "GamePlay":
+                currentGameState = GameState.GamePlay;
+                break;
+            case "Pause":
+                currentGameState = GameState.Pause;
+                break;
+            case "GameOver":
+                currentGameState = GameState.GameOver;
+                break;
+            case "Win":
+                currentGameState = GameState.Win;
+                break;
+            case "Upgrades":
+                currentGameState = GameState.Upgrades;
+                break;
+            default:
+                currentGameState = GameState.MainMenu;
                 break;
         }
     }
