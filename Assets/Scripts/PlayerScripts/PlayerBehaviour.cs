@@ -60,7 +60,8 @@ public class PlayerBehaviour : HealthManager
             Vector2 direction = (mouseWorldPOS - (Vector2)transform.position).normalized;
             
             float bulletSpawnDist = 1.0f;
-            Vector2 bulletSpawnPos = (Vector2)transform.position + direction * bulletSpawnDist;
+            Vector3 bulletSpawnPos = (Vector2)transform.position + direction * bulletSpawnDist;
+            bulletSpawnPos.z = -2;
 
 
             GameObject bullet = Instantiate(bulletPrefab,bulletSpawnPos, Quaternion.identity);
