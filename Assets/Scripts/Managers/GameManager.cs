@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -40,6 +43,35 @@ public class GameManager : MonoBehaviour
             DisablePlayer();
         }
     }
+    public void Save()
+    {
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Open(Application.persistentDataPath + "/playerInfo.dat", FileMode.Create);
+
+        PlayerData data = new PlayerData();
+        data.damage = playerBehaviour.damage;
+        data.health = playerBehaviour.health;
+        data.speed = playerBehaviour.speed;
+        data.Gold = playerBehaviour.Doubloons;
+
+        bf.Serialize(file, data);
+        file.Close();
+    }
+    public void Load()
+    {
+         if (File.Exists(Application.persistentDataPath + "/playerInfo.dat"))
+         {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + "/playerInfo.dat", FileMode.Open);
+            PlayerData data = (PlayerData)bf.Deserialize(file);
+            file.Close();
+
+            playerBehaviour.health = data.health;
+            playerBehaviour.damage = data.damage;
+            playerBehaviour.speed = data.speed;
+            playerBehaviour.Doubloons = data.Gold;
+         }
+    }
     void EnablePlayer()
     {
         player.GetComponent<PlayerBehaviour>().enabled = true;
@@ -49,5 +81,13 @@ public class GameManager : MonoBehaviour
     {
         player.GetComponent<PlayerBehaviour>().enabled = false;
         player.GetComponent<SpriteRenderer>().enabled = false;
+    }
+    [System.Serializable]
+    class PlayerData
+    {
+        public float health;
+        public float damage;
+        public float speed;
+        public int Gold;
     }
 }

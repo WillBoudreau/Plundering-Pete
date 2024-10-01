@@ -6,10 +6,11 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour
 {
     public string levelName;
+    public CollectorManager collectorManager;
     // Start is called before the first frame update
     void Start()
-    {
-        
+    { 
+
     }
 
     // Update is called once per frame
@@ -21,6 +22,10 @@ public class LevelManager : MonoBehaviour
     {
         Debug.Log("Level load requested for: " + name);
         SceneManager.LoadScene(name);
+        if (name == "GameTestScene")
+        {
+            collectorManager.SpawnDoubloons();
+        }
     }
     public void QuitRequest()
     {
