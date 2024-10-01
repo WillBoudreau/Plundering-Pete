@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
 
         PlayerData data = new PlayerData();
         data.damage = playerBehaviour.damage;
-        data.health = playerBehaviour.health;
+        data.health = playerBehaviour.playerHealth;
         data.speed = playerBehaviour.speed;
         data.Gold = playerBehaviour.Doubloons;
 
@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
             PlayerData data = (PlayerData)bf.Deserialize(file);
             file.Close();
 
-            playerBehaviour.health = data.health;
+            playerBehaviour.playerHealth = data.health;
             playerBehaviour.damage = data.damage;
             playerBehaviour.speed = data.speed;
             playerBehaviour.Doubloons = data.Gold;

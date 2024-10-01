@@ -7,6 +7,7 @@ public class LevelManager : MonoBehaviour
 {
     public string levelName;
     public CollectorManager collectorManager;
+    public MusicChanger musicChanger;
     // Start is called before the first frame update
     void Start()
     { 
@@ -25,6 +26,7 @@ public class LevelManager : MonoBehaviour
         if (name == "GameTestScene")
         {
             collectorManager.SpawnDoubloons();
+            musicChanger.PlayNextTrack();
         }
     }
     public void QuitRequest()
