@@ -101,11 +101,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stoppingDistance: 0
   detectionDistance: 0
-  player: {fileID: 6204835971353954689, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+  player: {fileID: 3116806254861534645, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
   speed: 0
   damage: 0
   health: 0
   maxHealth: 0
+  renderer: {fileID: 0}
+  originalColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!61 &8339142492698101944
 BoxCollider2D:
   m_ObjectHideFlags: 0
