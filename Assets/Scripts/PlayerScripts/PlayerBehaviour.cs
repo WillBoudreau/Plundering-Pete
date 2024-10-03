@@ -105,6 +105,10 @@ public class PlayerBehaviour : MonoBehaviour
         {
             TakeDamage(other.gameObject.GetComponent<Obstacle>().damage);
         }
+        if(other.gameObject.tag == "Enemy")
+        {
+            TakeDamage(other.gameObject.GetComponent<SharkBahaviour>().damage);
+        }
     }
 
     public void Death()
