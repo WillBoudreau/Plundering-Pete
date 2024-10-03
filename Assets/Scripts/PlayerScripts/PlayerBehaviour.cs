@@ -18,6 +18,10 @@ public class PlayerBehaviour : MonoBehaviour
     public Rigidbody2D rb;
     public GameObject bulletPrefab;
     public bool Win;
+    Renderer renderer;
+    private Color originalColor;
+    public float FlickerDuration = 0.1f; 
+    public int FlickerCount = 5;
     [Header("Class calls")]
     public InventoryManager inventoryManager;
     public UIManager uIManager;
@@ -27,6 +31,8 @@ public class PlayerBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     { 
+        renderer = GetComponent<Renderer>();
+        originalColor = GetComponent<Renderer>().material.color;
         fireRate = 0f;
         rb = GetComponent<Rigidbody2D>();
         speed = 10.0f;
@@ -124,8 +130,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        Debug.Log("Player took damage: " + damage);
-        Debug.Log("Player health: " + playerHealth);
+        StartCoroutine(Flicker());
         playerHealth -= damage;
         Death();
     }
@@ -135,5 +140,16 @@ public class PlayerBehaviour : MonoBehaviour
         playerHealth = 100f;
         healthManager.health = playerHealth;
         healthManager.IsDead = false;
+    }
+    IEnumerator Flicker()
+    {
+        for(int i = 0; i < FlickerCount; i++)
+        {
+            GetComponent<Renderer>().material.color = Color.red;
+            yield return new WaitForSeconds(FlickerDuration);
+            GetComponent<Renderer>().material.color = originalColor;
+            yield return new WaitForSeconds(FlickerDuration);
+        }
+        GetComponent<Renderer>().material.color = originalColor;
     }
 }
