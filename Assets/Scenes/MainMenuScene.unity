@@ -1445,7 +1445,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Ver 1.37
+  m_text: Ver 1.39
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3021,7 +3021,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.0022603236, y: -0.001291588}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -3032,7 +3032,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.16, y: 0.16}
+  m_Size: {x: 0.19035259, y: 0.38473853}
   m_EdgeRadius: 0
 --- !u!1 &555280507
 GameObject:
@@ -8565,6 +8565,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1547232562}
     m_Modifications:
+    - target: {fileID: 2285652677014323481, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: m_Size.x
+      value: 0.22416282
+      objectReference: {fileID: 0}
+    - target: {fileID: 2285652677014323481, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: m_Size.y
+      value: 0.41476595
+      objectReference: {fileID: 0}
+    - target: {fileID: 2285652677014323481, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.000049289316
+      objectReference: {fileID: 0}
+    - target: {fileID: 2285652677014323481, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.00087308884
+      objectReference: {fileID: 0}
     - target: {fileID: 2285652677014323481, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
       propertyPath: m_IsTrigger
       value: 1
