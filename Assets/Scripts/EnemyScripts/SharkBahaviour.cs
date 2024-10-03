@@ -12,10 +12,15 @@ public class SharkBahaviour : MonoBehaviour
     public float damage;
     public float health;
     public float maxHealth;
-
+    public Renderer renderer;
+    public Color originalColor; 
+    public float FlickerDuration = 0.1f;
+    public int FlickerCount = 5;
     // Start is called before the first frame update
     void Start()
     {
+        renderer = GetComponent<Renderer>();
+        originalColor = renderer.material.color;
         speed = 2;
         health = 2;
         maxHealth = 2;
@@ -53,14 +58,27 @@ public class SharkBahaviour : MonoBehaviour
         {
             TakeDamage(player.damage);
             Destroy(collision.gameObject);
+
         }
     }
     public void TakeDamage(float damage)
     {
+        StartCoroutine(Flicker());
         health -= damage;
         if(health <= 0)
         {
             Destroy(gameObject);
         }
+    }
+    IEnumerator Flicker()
+    {
+        for(int i = 0; i < FlickerCount; i++)
+        {
+            renderer.material.color = Color.red;
+            yield return new WaitForSeconds(FlickerDuration);
+            renderer.material.color = originalColor;
+            yield return new WaitForSeconds(FlickerDuration);
+        }
+        renderer.material.color = originalColor;
     }
 }
