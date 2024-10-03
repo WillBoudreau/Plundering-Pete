@@ -22,12 +22,13 @@ public class CollectorManager : MonoBehaviour
 
     void Update()
     {
+        AddDoubloonsToList();
         SpawnDoubloons();
     }
 
     void AddDoubloonsToList()
     {
-        if (Doubloons.Count == 0)
+        if (Doubloons.Count <= 0)
         {
             for (int i = 0; i < numofDoubloons; i++)
             {
@@ -36,7 +37,7 @@ public class CollectorManager : MonoBehaviour
         }
     }
 
-    void SpawnDoubloons()
+    public void SpawnDoubloons()
     {
         if (levelManager.levelName == "GameTestScene" && !hasSpawnedDoubloons)
         {

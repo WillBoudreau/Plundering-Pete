@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
         MainMenu,
         Options,
         GamePlay,
+        Instructions,
         Pause,
         GameOver,
         Upgrades,
@@ -23,6 +24,7 @@ public class UIManager : MonoBehaviour
     public GameObject gameOver;
     public GameObject winMenu;
     public GameObject upgradesMenu;
+    public GameObject InstructionsScreen;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,6 +48,7 @@ public class UIManager : MonoBehaviour
                 gameOver.SetActive(false);
                 winMenu.SetActive(false);
                 upgradesMenu.SetActive(false);
+                InstructionsScreen.SetActive(false);
                 break;
             case GameState.Options:
                 mainMenu.SetActive(false);
@@ -55,6 +58,7 @@ public class UIManager : MonoBehaviour
                 gameOver.SetActive(false);
                 winMenu.SetActive(false);
                 upgradesMenu.SetActive(false);
+                InstructionsScreen.SetActive(false);
                 break;
             case GameState.GamePlay:
                 mainMenu.SetActive(false);
@@ -64,6 +68,7 @@ public class UIManager : MonoBehaviour
                 gameOver.SetActive(false);
                 winMenu.SetActive(false);
                 upgradesMenu.SetActive(false);
+                InstructionsScreen.SetActive(false);
                 break;
             case GameState.Pause:
                 mainMenu.SetActive(false);
@@ -73,6 +78,7 @@ public class UIManager : MonoBehaviour
                 gameOver.SetActive(false);
                 winMenu.SetActive(false);
                 upgradesMenu.SetActive(false);
+                InstructionsScreen.SetActive(false);
                 break;
             case GameState.GameOver:
                 mainMenu.SetActive(false);
@@ -82,6 +88,7 @@ public class UIManager : MonoBehaviour
                 gameOver.SetActive(true);
                 winMenu.SetActive(false);
                 upgradesMenu.SetActive(false);
+                InstructionsScreen.SetActive(false);
                 break;
             case GameState.Win:
                 mainMenu.SetActive(false);
@@ -91,6 +98,7 @@ public class UIManager : MonoBehaviour
                 gameOver.SetActive(false);
                 winMenu.SetActive(true);
                 upgradesMenu.SetActive(false);
+                InstructionsScreen.SetActive(false);
                 break;
             case GameState.Upgrades:
                 mainMenu.SetActive(false);
@@ -100,6 +108,17 @@ public class UIManager : MonoBehaviour
                 gameOver.SetActive(false);
                 winMenu.SetActive(false);
                 upgradesMenu.SetActive(true);
+                InstructionsScreen.SetActive(false);
+                break;
+            case GameState.Instructions:
+                mainMenu.SetActive(false);
+                optionsMenu.SetActive(false);
+                gamePlay.SetActive(false);
+                pauseMenu.SetActive(false);
+                gameOver.SetActive(false);
+                winMenu.SetActive(false);
+                upgradesMenu.SetActive(false);
+                InstructionsScreen.SetActive(true);
                 break;
             default:
                 break;
@@ -131,6 +150,9 @@ public class UIManager : MonoBehaviour
                 break;
             case "Upgrades":
                 currentGameState = GameState.Upgrades;
+                break;
+            case "Instructions":
+                currentGameState = GameState.Instructions;
                 break;
             default:
                 currentGameState = GameState.MainMenu;

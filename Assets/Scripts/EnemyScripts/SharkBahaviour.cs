@@ -7,7 +7,7 @@ public class SharkBahaviour : MonoBehaviour
 {
     public float stoppingDistance;
     public float detectionDistance;
-    public Transform player;
+    public PlayerBehaviour player;
     public float speed;
     public float damage;
     public float health;
@@ -27,17 +27,17 @@ public class SharkBahaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        player = GameObject.Find("Player").transform;
+        player = GameObject.Find("Player").GetComponent<PlayerBehaviour>();
         Move();
     }
     public void Move()
     {
-        if(Vector2.Distance(transform.position, player.position) < detectionDistance)
+        if(Vector2.Distance(transform.position, player.transform.position) < detectionDistance)
         {
-            float DistanceToPlayer = Vector2.Distance(transform.position, player.position);
+            float DistanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
             if(DistanceToPlayer < detectionDistance)
             {
-                Vector3 targetPosition = Vector2.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
+                Vector3 targetPosition = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
                 targetPosition.z = -2;
                 transform.position = targetPosition;
             }   
@@ -48,6 +48,11 @@ public class SharkBahaviour : MonoBehaviour
         if(collision.gameObject.tag == "Player")
         {
             collision.gameObject.GetComponent<PlayerBehaviour>().TakeDamage(damage);
+        }
+        if(collision.gameObject.tag == "Bullet")
+        {
+            TakeDamage(player.damage);
+            Destroy(collision.gameObject);
         }
     }
     public void TakeDamage(float damage)

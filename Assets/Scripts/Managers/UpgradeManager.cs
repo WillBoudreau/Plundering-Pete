@@ -60,7 +60,7 @@ public class UpgradeManager : MonoBehaviour
     {
         inventory = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
         damageText.text = "Damage: " + player.damage;
-        healthText.text = "Health: " + player.health;
+        healthText.text = "Health: " + player.playerHealth;
         speedText.text = "Speed: " + player.speed;
         NumberCoinsText.text = "Doubloons " + inventory.coinCount;
         
@@ -96,9 +96,9 @@ public class UpgradeManager : MonoBehaviour
     }
     public void UpgradeHealth()
     {
-        if(player.health < healthMax)
+        if(player.playerHealth < healthMax)
         {
-            player.health += healthUpgrade;
+            player.playerHealth += healthUpgrade;
             Debug.Log("Health upgraded to: " + healthUpgrade);
             MessageCostText.text = "Health upgraded to: " + healthUpgrade;
 
