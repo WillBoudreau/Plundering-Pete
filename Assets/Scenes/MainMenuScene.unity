@@ -617,6 +617,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpeedSlot
       objectReference: {fileID: 0}
+    - target: {fileID: 6756319946861893356, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+      propertyPath: m_text
+      value: Rudder
+      objectReference: {fileID: 0}
     - target: {fileID: 7001577010587437497, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2654,6 +2658,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HealthSlot
       objectReference: {fileID: 0}
+    - target: {fileID: 6756319946861893356, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+      propertyPath: m_text
+      value: Integrity
+      objectReference: {fileID: 0}
     - target: {fileID: 7001577010587437497, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4631,7 +4639,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1007322668
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6046,6 +6054,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UpgradeSlot (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 6756319946861893356, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+      propertyPath: m_text
+      value: Cargo Hold
+      objectReference: {fileID: 0}
     - target: {fileID: 7001577010587437497, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -6383,6 +6395,10 @@ PrefabInstance:
     - target: {fileID: 1745737824268037150, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_Name
       value: UpgradeSlot (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6756319946861893356, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+      propertyPath: m_text
+      value: THE B.F.M
       objectReference: {fileID: 0}
     - target: {fileID: 7001577010587437497, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_Pivot.x
@@ -7096,6 +7112,10 @@ PrefabInstance:
     - target: {fileID: 1745737824268037150, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_Name
       value: UpgradeSlot (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6756319946861893356, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+      propertyPath: m_text
+      value: Fire rate
       objectReference: {fileID: 0}
     - target: {fileID: 7001577010587437497, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_Pivot.x
@@ -10036,6 +10056,10 @@ PrefabInstance:
     - target: {fileID: 1745737824268037150, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_Name
       value: DamageSlot
+      objectReference: {fileID: 0}
+    - target: {fileID: 6756319946861893356, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+      propertyPath: m_text
+      value: Canon
       objectReference: {fileID: 0}
     - target: {fileID: 7001577010587437497, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_Pivot.x
