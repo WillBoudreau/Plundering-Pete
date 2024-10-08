@@ -13,6 +13,7 @@ public class PlayerBehaviour : MonoBehaviour
     public float playerHealth;
 
     public TextMeshProUGUI DoubloonText;
+    public Transform firePoint;
 
     public Camera mainCamera;
     public Rigidbody2D rb;
@@ -70,7 +71,7 @@ public class PlayerBehaviour : MonoBehaviour
             Vector2 direction = (mouseWorldPOS - (Vector2)transform.position).normalized;
             
             float bulletSpawnDist = 1.0f;
-            Vector3 bulletSpawnPos = (Vector2)transform.position + direction * bulletSpawnDist;
+            Vector3 bulletSpawnPos = firePoint.position + (firePoint.forward * bulletSpawnDist);
             bulletSpawnPos.z = -2;
 
             musicManager.PlaySound(0);
