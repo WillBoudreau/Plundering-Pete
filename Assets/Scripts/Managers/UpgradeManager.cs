@@ -27,130 +27,144 @@ public class UpgradeManager : MonoBehaviour
     public float healthMax;
     public float speedUpgrade;
     public float speedMax;
-    //Cost for the upgrades
+    //Start Cost and Cost for the upgrades
     public int damageCost;
+    public int StartDanageCost;
     public int healthCost;
+    public int StartHealthCost;
     public int speedCost;
+    public int StartSpeedCost;
 
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player").GetComponent<PlayerBehaviour>();
-
-
-        damageUpgrade = 1;
-        damageMax = 6;
-
-
-        healthUpgrade = 10;
-        healthMax = 100;
-
-
-        speedUpgrade = 1;
-        speedMax = 10;
-
-        damageCost = 15;
-        healthCost = 15;
-        speedCost = 15;
+        SetValues();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        inventory = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
-        damageText.text = "Damage: " + player.damage;
-        healthText.text = "Health: " + player.playerHealth;
-        speedText.text = "Speed: " + player.speed;
-        NumberCoinsText.text = "Doubloons " + inventory.coinCount;
-        
-    }
-    public void UpgradeDamage()
-    {
-        if(player.damage < damageMax)
+        // Update is called once per frame
+        void Update()
         {
-            player.damage += damageUpgrade;
-            Debug.Log("Damage upgraded to: " + player.damage);
-            MessageCostText.text = "Damage upgraded to: " + player.damage;
-        }
-        else
-        {
-            Debug.Log("Max damage reached");
-            MessageCostText.text = "Max damage reached";
-            inventory.coinCount += damageCost;
-        }
-    }
-    public void DamageCostCheck()
-    {
-        if(inventory.coinCount >= damageCost )
-        {
-            inventory.coinCount -= damageCost;
-            Debug.Log("You have enough coins");
-            UpgradeDamage();
-        }
-        else
-        {
-            Debug.Log("You do not have enough coins");
-            MessageCostText.text = "You do not have enough coins";
-        }
-    }
-    public void UpgradeHealth()
-    {
-        if(player.playerHealth < healthMax)
-        {
-            player.playerHealth += healthUpgrade;
-            Debug.Log("Health upgraded to: " + healthUpgrade);
-            MessageCostText.text = "Health upgraded to: " + healthUpgrade;
+            inventory = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
+            damageText.text = "Damage: " + player.startdamage;
+            healthText.text = "Health: " + player.startHealth;
+            speedText.text = "Speed: " + player.StartSpeed;
+            NumberCoinsText.text = "Doubloons " + inventory.coinCount;
 
         }
-        else
+        //Set the variable values at the start of the game
+        void SetValues()
         {
-            Debug.Log("Max health reached");
-            MessageCostText.text = "Max health reached";
-            inventory.coinCount += healthCost;
+            //Set the Starting costs 
+            StartDanageCost = 15;
+            StartHealthCost = 15;
+            StartSpeedCost = 15;
+
+            //Set the values to their starting costs
+            damageCost = StartDanageCost;
+            healthCost = StartHealthCost;
+            speedCost = StartSpeedCost;
+
+            //Set the max values
+            damageMax = 4;
+            speedMax = 25;
+            healthMax = 20;
+
+            //Set the amount per upgrade
+            damageUpgrade = 1;
+            healthUpgrade = 5;
+            speedUpgrade = 5;
+
         }
-    }
-    public void HealthCostCheck()
-    {
-        if(inventory.coinCount >= healthCost )
+        public void UpgradeDamage()
         {
-            inventory.coinCount -= healthCost;
-            Debug.Log("You have enough coins");
-            UpgradeHealth();
+            if (player.damage < damageMax)
+            {
+                player.startdamage += damageUpgrade;
+                Debug.Log("Damage upgraded to: " + player.damage);
+                MessageCostText.text = "Damage upgraded to: " + player.damage;
+            }
+            else
+            {
+                Debug.Log("Max damage reached");
+                MessageCostText.text = "Max damage reached";
+                inventory.coinCount += damageCost;
+            }
         }
-        else
+        public void DamageCostCheck()
         {
-            Debug.Log("You do not have enough coins");
-            MessageCostText.text = "You do not have enough coins";
+            if (inventory.coinCount >= damageCost)
+            {
+                inventory.coinCount -= damageCost;
+                Debug.Log("You have enough coins");
+                UpgradeDamage();
+                damageCost += 15;
+            }
+            else
+            {
+                Debug.Log("You do not have enough coins");
+                MessageCostText.text = "You do not have enough coins";
+            }
         }
-    }
-    public void UpgradeSpeed()
-    {
-        if(player.speed < speedMax)
+        public void UpgradeHealth()
         {
-            player.speed += speedUpgrade;
-            Debug.Log("Speed upgraded to: " + speedUpgrade);
-            MessageCostText.text = "Speed upgraded to: " + speedUpgrade;
+            if (player.playerHealth < healthMax)
+            {
+                player.playerHealth += healthUpgrade;
+                Debug.Log("Health upgraded to: " + healthUpgrade);
+                MessageCostText.text = "Health upgraded to: " + healthUpgrade;
+
+            }
+            else
+            {
+                Debug.Log("Max health reached");
+                MessageCostText.text = "Max health reached";
+                inventory.coinCount += healthCost;
+            }
         }
-        else
+        public void HealthCostCheck()
         {
-            Debug.Log("Max speed reached");
-            MessageCostText.text = "Max speed reached";
-            inventory.coinCount += speedCost;
+            if (inventory.coinCount >= healthCost)
+            {
+                inventory.coinCount -= healthCost;
+                Debug.Log("You have enough coins");
+                UpgradeHealth();
+                healthCost += 15;
+            }
+            else
+            {
+                Debug.Log("You do not have enough coins");
+                MessageCostText.text = "You do not have enough coins";
+            }
         }
-    }
-    public void SpeedCostCheck()
-    {
-        if(inventory.coinCount >= speedCost )
+        public void UpgradeSpeed()
         {
-            inventory.coinCount -= speedCost;
-            Debug.Log("You have enough coins");
-            UpgradeSpeed();
+            if (player.speed < speedMax)
+            {
+                player.speed += speedUpgrade;
+                Debug.Log("Speed upgraded to: " + speedUpgrade);
+                MessageCostText.text = "Speed upgraded to: " + speedUpgrade;
+            }
+            else
+            {
+                Debug.Log("Max speed reached");
+                MessageCostText.text = "Max speed reached";
+                inventory.coinCount += speedCost;
+            }
         }
-        else
+        public void SpeedCostCheck()
         {
-            Debug.Log("You do not have enough coins");
-            MessageCostText.text = "You do not have enough coins";
+            if (inventory.coinCount >= speedCost)
+            {
+                inventory.coinCount -= speedCost;
+                Debug.Log("You have enough coins");
+                UpgradeSpeed();
+                speedCost += 15;
+            }
+            else
+            {
+                Debug.Log("You do not have enough coins");
+                MessageCostText.text = "You do not have enough coins";
+            }
         }
-    }
 }
