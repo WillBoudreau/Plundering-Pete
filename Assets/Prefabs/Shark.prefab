@@ -29,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 4724370820435506893}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -2}
-  m_LocalScale: {x: 20, y: 20, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -108,6 +108,8 @@ MonoBehaviour:
   maxHealth: 0
   renderer: {fileID: 0}
   originalColor: {r: 0, g: 0, b: 0, a: 0}
+  FlickerDuration: 0.1
+  FlickerCount: 5
 --- !u!61 &8339142492698101944
 BoxCollider2D:
   m_ObjectHideFlags: 0
