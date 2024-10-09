@@ -46,7 +46,7 @@ public class UpgradeManager : MonoBehaviour
         void Update()
         {
             inventory = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
-            damageText.text = "Damage: " + player.startdamage;
+            damageText.text = "Damage: " + player.damage;
             healthText.text = "Health: " + player.startHealth;
             speedText.text = "Speed: " + player.StartSpeed;
             NumberCoinsText.text = "Doubloons " + inventory.coinCount;
@@ -80,7 +80,7 @@ public class UpgradeManager : MonoBehaviour
         {
             if (player.damage < damageMax)
             {
-                player.startdamage += damageUpgrade;
+                player.damage += damageUpgrade;
                 Debug.Log("Damage upgraded to: " + player.damage);
                 MessageCostText.text = "Damage upgraded to: " + player.damage;
             }
