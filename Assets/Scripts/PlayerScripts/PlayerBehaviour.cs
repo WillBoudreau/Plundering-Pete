@@ -102,8 +102,8 @@ public class PlayerBehaviour : MonoBehaviour
             musicManager.PlaySound(0);
             GameObject bullet = Instantiate(bulletPrefab,bulletSpawnPos, Quaternion.identity);
 
-            Vector2 shootdirection = (mouseWorldPOS - (Vector2)transform.position).normalized;
-            bullet.GetComponent<Rigidbody2D>().velocity = shootdirection * bulletVelocity;
+            //Vector2 shootdirection = (mouseWorldPOS - (Vector2)transform.position).normalized;
+            bullet.GetComponent<Rigidbody2D>().velocity = Vector2.up * bulletVelocity;
             Destroy(bullet, 2.0f);
             fireRate = 2f;
         }
