@@ -7695,7 +7695,7 @@ MonoBehaviour:
   SharkPrefab: {fileID: 4724370820435506893, guid: 276f63cd8fc351b42a0406ce0fd8f74a, type: 3}
   SerpentPrefab: {fileID: 0}
   ShipPrefab: {fileID: 0}
-  numSharks: 0
+  numSharks: 50
   numSerpents: 0
   numShips: 0
 --- !u!1 &1728282018
