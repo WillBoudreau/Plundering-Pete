@@ -3,19 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class SharkBahaviour : MonoBehaviour
+public class SharkBahaviour : Enemy
 {
+    [Header("Shark")]
+    [Header("Shark Values")]
+    //Shark Values
     public float stoppingDistance;
     public float detectionDistance;
-    public PlayerBehaviour player;
-    public float speed;
-    public float damage;
-    public float health;
     public float maxHealth;
-    public Renderer renderer;
-    public Color originalColor; 
-    public float FlickerDuration = 0.1f;
-    public int FlickerCount = 5;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,7 +30,7 @@ public class SharkBahaviour : MonoBehaviour
         player = GameObject.Find("Player").GetComponent<PlayerBehaviour>();
         Move();
     }
-    public void Move()
+    public override void Move()
     {
         if(Vector2.Distance(transform.position, player.transform.position) < detectionDistance)
         {
@@ -61,7 +56,7 @@ public class SharkBahaviour : MonoBehaviour
 
         }
     }
-    public void TakeDamage(float damage)
+    public override void TakeDamage(float damage)
     {
         StartCoroutine(Flicker());
         health -= damage;
@@ -70,7 +65,7 @@ public class SharkBahaviour : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    IEnumerator Flicker()
+    public override IEnumerator Flicker()
     {
         for(int i = 0; i < FlickerCount; i++)
         {

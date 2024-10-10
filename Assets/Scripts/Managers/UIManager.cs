@@ -41,89 +41,63 @@ public class UIManager : MonoBehaviour
         switch(currentGameState)
         {
             case GameState.MainMenu:
+                DeactivateAllUI();
                 mainMenu.SetActive(true);
-                optionsMenu.SetActive(false);
-                gamePlay.SetActive(false);
-                pauseMenu.SetActive(false);
-                gameOver.SetActive(false);
-                winMenu.SetActive(false);
-                upgradesMenu.SetActive(false);
-                InstructionsScreen.SetActive(false);
                 break;
             case GameState.Options:
-                mainMenu.SetActive(false);
+                DeactivateAllUI();
                 optionsMenu.SetActive(true);
-                gamePlay.SetActive(false);
-                pauseMenu.SetActive(false);
-                gameOver.SetActive(false);
-                winMenu.SetActive(false);
-                upgradesMenu.SetActive(false);
-                InstructionsScreen.SetActive(false);
                 break;
             case GameState.GamePlay:
-                mainMenu.SetActive(false);
-                optionsMenu.SetActive(false);
+                DeactivateAllUI();
                 gamePlay.SetActive(true);
-                pauseMenu.SetActive(false);
-                gameOver.SetActive(false);
-                winMenu.SetActive(false);
-                upgradesMenu.SetActive(false);
-                InstructionsScreen.SetActive(false);
                 break;
             case GameState.Pause:
-                mainMenu.SetActive(false);
-                optionsMenu.SetActive(false);
-                gamePlay.SetActive(false);
+                DeactivateAllUI();
                 pauseMenu.SetActive(true);
-                gameOver.SetActive(false);
-                winMenu.SetActive(false);
-                upgradesMenu.SetActive(false);
-                InstructionsScreen.SetActive(false);
                 break;
             case GameState.GameOver:
-                mainMenu.SetActive(false);
-                optionsMenu.SetActive(false);
-                gamePlay.SetActive(false);
-                pauseMenu.SetActive(false);
+                DeactivateAllUI();
                 gameOver.SetActive(true);
-                winMenu.SetActive(false);
-                upgradesMenu.SetActive(false);
-                InstructionsScreen.SetActive(false);
                 break;
             case GameState.Win:
-                mainMenu.SetActive(false);
-                optionsMenu.SetActive(false);
-                gamePlay.SetActive(false);
-                pauseMenu.SetActive(false);
-                gameOver.SetActive(false);
+                DeactivateAllUI();
                 winMenu.SetActive(true);
-                upgradesMenu.SetActive(false);
-                InstructionsScreen.SetActive(false);
                 break;
             case GameState.Upgrades:
-                mainMenu.SetActive(false);
-                optionsMenu.SetActive(false);
-                gamePlay.SetActive(false);
-                pauseMenu.SetActive(false);
-                gameOver.SetActive(false);
-                winMenu.SetActive(false);
+                DeactivateAllUI();
                 upgradesMenu.SetActive(true);
-                InstructionsScreen.SetActive(false);
                 break;
             case GameState.Instructions:
-                mainMenu.SetActive(false);
-                optionsMenu.SetActive(false);
-                gamePlay.SetActive(false);
-                pauseMenu.SetActive(false);
-                gameOver.SetActive(false);
-                winMenu.SetActive(false);
-                upgradesMenu.SetActive(false);
+                DeactivateAllUI();
                 InstructionsScreen.SetActive(true);
                 break;
             default:
                 break;
             
         }
+    }
+    void ActivateAllUI()
+    {
+        mainMenu.SetActive(true);
+        optionsMenu.SetActive(true);
+        gamePlay.SetActive(true);
+        pauseMenu.SetActive(true);
+        gameOver.SetActive(true);
+        winMenu.SetActive(true);
+        upgradesMenu.SetActive(true);
+        InstructionsScreen.SetActive(true);
+    }
+    void DeactivateAllUI()
+    {
+        mainMenu.SetActive(false);
+        optionsMenu.SetActive(false);
+        gamePlay.SetActive(false);
+        pauseMenu.SetActive(false);
+        gameOver.SetActive(false);
+        winMenu.SetActive(false);
+        upgradesMenu.SetActive(false);
+        InstructionsScreen.SetActive(false);
     }
     public void SetGameState(string state)
     { 

@@ -35,13 +35,13 @@ public class Obstacle : MonoBehaviour
         switch(obstacleType)
         {
             case ObstacleType.Rock:
-                damage = 10f;
+                damage = 1f;
                 break;
             case ObstacleType.Iceberg:
-                damage = 20f;
+                damage = 5f;
                 break;
             case ObstacleType.Debris:
-                damage = 30f;
+                damage = 10f;
                 break;
         }
     }

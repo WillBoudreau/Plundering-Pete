@@ -6,24 +6,38 @@ using TMPro;
 public class PlayerBehaviour : MonoBehaviour
 {
     public int Doubloons = 0;
+
+    //Player values 
     public float speed;
     public float fireRate;
     public float damage;
-    public float bulletVelocity;
     public float playerHealth;
+    
+    
+    //Starting values
+    public float startHealth;
+    public float startdamage;
+    public float StartSpeed;
+    public float startFireRate;
+
+    public float bulletVelocity;
+    public bool Win;
 
     public TextMeshProUGUI DoubloonText;
+    public Transform firePoint;
 
     public Camera mainCamera;
     public Rigidbody2D rb;
     public GameObject bulletPrefab;
-    public bool Win;
+    [Header("Renderer Calls")]
     Renderer renderer;
     private Color originalColor;
     public float FlickerDuration = 0.1f; 
     public int FlickerCount = 5;
+
     [Header("Class calls")]
     public InventoryManager inventoryManager;
+    public LevelManager levelManager;
     public UIManager uIManager;
     public HealthManager healthManager;
     public MusicChanger musicManager;
@@ -33,14 +47,8 @@ public class PlayerBehaviour : MonoBehaviour
     { 
         renderer = GetComponent<Renderer>();
         originalColor = GetComponent<Renderer>().material.color;
-        fireRate = 0f;
         rb = GetComponent<Rigidbody2D>();
-        speed = 10.0f;
-        playerHealth = 100f;
-        damage = 1f;
-        bulletVelocity = 25f;
-        Win = false;
-        healthManager.health = playerHealth;
+        SetValues();
     }
 
     // Update is called once per frame
@@ -48,18 +56,38 @@ public class PlayerBehaviour : MonoBehaviour
     {
         inventoryManager = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
         DoubloonText = GameObject.Find("DoubloonsText").GetComponent<TextMeshProUGUI>();
+        levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         healthManager.playerhealth.value = playerHealth;
+        //SetValues();
         HandleMovement();
         HandleShooting();
         UpdateCounter();
         Death();
     }
+    void SetValues()
+    {
+        //Set starting values
+        startHealth = 5;
+        startdamage = 1;
+        StartSpeed = 10;
+        startFireRate = 2;
+        bulletVelocity = 25f;
+        healthManager.health = playerHealth;
+        //Assign values to be the starting values
+        playerHealth = startHealth;
+        speed = StartSpeed;
+        damage = startdamage;
+        fireRate = startFireRate;
+        //Set Win Bool
+        Win = false;
 
+    }
+    //Update the Doubloon counter
     void UpdateCounter()
     {
         DoubloonText.text = "Doubloons: " + Doubloons;
     }
-
+    //Handle the players shooting
     void HandleShooting()
     {
         //Handle player shooting by tracking the mouse pos
@@ -70,19 +98,19 @@ public class PlayerBehaviour : MonoBehaviour
             Vector2 direction = (mouseWorldPOS - (Vector2)transform.position).normalized;
             
             float bulletSpawnDist = 1.0f;
-            Vector3 bulletSpawnPos = (Vector2)transform.position + direction * bulletSpawnDist;
+            Vector3 bulletSpawnPos = firePoint.position + (firePoint.forward * bulletSpawnDist);
             bulletSpawnPos.z = -2;
 
             musicManager.PlaySound(0);
             GameObject bullet = Instantiate(bulletPrefab,bulletSpawnPos, Quaternion.identity);
 
-            Vector2 shootdirection = (mouseWorldPOS - (Vector2)transform.position).normalized;
-            bullet.GetComponent<Rigidbody2D>().velocity = shootdirection * bulletVelocity;
+            //Vector2 shootdirection = (mouseWorldPOS - (Vector2)transform.position).normalized;
+            bullet.GetComponent<Rigidbody2D>().velocity = Vector2.up * bulletVelocity;
             Destroy(bullet, 2.0f);
-            fireRate = 10f;
+            fireRate = 2f;
         }
     }
-
+    //Handle the player movement
     void HandleMovement()
     {
         //Handle input using the old input system. TODO: change to new input system
@@ -137,10 +165,11 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void ResetHealth()
     {
-        playerHealth = 100f;
+        playerHealth = startHealth;
         healthManager.health = playerHealth;
         healthManager.IsDead = false;
     }
+    //Flicker for damaage
     IEnumerator Flicker()
     {
         for(int i = 0; i < FlickerCount; i++)
