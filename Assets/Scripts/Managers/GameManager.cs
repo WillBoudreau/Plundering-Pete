@@ -12,7 +12,8 @@ public class GameManager : MonoBehaviour
     public HealthManager healthManager;
     public LevelManager levelManager;
     public GameObject player;
-    public PlayerBehaviour playerBehaviour; 
+    public PlayerBehaviour playerBehaviour;
+    public bool PlayerEnabled;
 
 
     // Start is called before the first frame update
@@ -27,6 +28,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Pause();
         uiManager.UpdateUI();
         if (levelManager.levelName == "GameTestScene" && uiManager.currentGameState == UIManager.GameState.GamePlay)
         {
@@ -41,6 +43,23 @@ public class GameManager : MonoBehaviour
         else
         {
             DisablePlayer();
+        }
+    }
+    void Pause()
+    {
+        if(PlayerEnabled == true)
+        {
+            if(Input.GetKeyDown(KeyCode.Escape))
+            {
+                uiManager.currentGameState = UIManager.GameState.Pause;
+            }
+        }
+        else if(PlayerEnabled == false && uiManager.currentGameState == UIManager.GameState.Pause)
+        {
+            if(Input.GetKeyDown(KeyCode.Escape))
+            {
+                uiManager.currentGameState = UIManager.GameState.GamePlay;
+            }
         }
     }
     public void Save()
@@ -74,11 +93,13 @@ public class GameManager : MonoBehaviour
     }
     void EnablePlayer()
     {
+        PlayerEnabled = true;
         player.GetComponent<PlayerBehaviour>().enabled = true;
         player.GetComponent<SpriteRenderer>().enabled = true;
     }
     void DisablePlayer()
     {
+        PlayerEnabled = false;
         player.GetComponent<PlayerBehaviour>().enabled = false;
         player.GetComponent<SpriteRenderer>().enabled = false;
     }
