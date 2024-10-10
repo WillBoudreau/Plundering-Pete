@@ -37,6 +37,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     [Header("Class calls")]
     public InventoryManager inventoryManager;
+    public LevelManager levelManager;
     public UIManager uIManager;
     public HealthManager healthManager;
     public MusicChanger musicManager;
@@ -55,6 +56,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         inventoryManager = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
         DoubloonText = GameObject.Find("DoubloonsText").GetComponent<TextMeshProUGUI>();
+        levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         healthManager.playerhealth.value = playerHealth;
         //SetValues();
         HandleMovement();
