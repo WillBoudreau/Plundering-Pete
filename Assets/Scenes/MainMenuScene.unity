@@ -2226,7 +2226,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &392818793
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2289,6 +2289,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 392818792}
   m_CullTransparentMesh: 1
+--- !u!114 &411883205 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7458618460828365315, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+  m_PrefabInstance: {fileID: 1641570941}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &424658875
 GameObject:
   m_ObjectHideFlags: 0
@@ -3777,6 +3788,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 785625141}
   m_CullTransparentMesh: 1
+--- !u!114 &786514658 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7458618460828365315, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+  m_PrefabInstance: {fileID: 1444767382}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &803351714
 GameObject:
   m_ObjectHideFlags: 0
@@ -4932,7 +4954,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1007322668
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5187,6 +5209,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coins: []
   coinCount: 0
+  maxCoins: 0
+  IsMax: 0
 --- !u!1 &1051185686
 GameObject:
   m_ObjectHideFlags: 0
@@ -5299,18 +5323,33 @@ MonoBehaviour:
   speedText: {fileID: 1461656693}
   MessageCostText: {fileID: 1151608682}
   NumberCoinsText: {fileID: 387048878}
+  MagnetText: {fileID: 786514658}
+  CargoText: {fileID: 1526153278}
+  FireRateText: {fileID: 411883205}
   damageUpgrade: 0
   damageMax: 0
   healthUpgrade: 0
   healthMax: 0
   speedUpgrade: 0
   speedMax: 0
+  magnetUpgrade: 0
+  magnetMax: 0
+  CargoUpgrade: 0
+  CargoMax: 0
+  FireRateUpgrade: 0
+  FireRateMax: 0
   damageCost: 0
   StartDanageCost: 0
   healthCost: 0
   StartHealthCost: 0
   speedCost: 0
   StartSpeedCost: 0
+  magnetCost: 0
+  StartMagnetCost: 0
+  CargoCost: 0
+  StartCargoCost: 0
+  FireRateCost: 0
+  StartFireRateCost: 0
 --- !u!1 &1134395747
 GameObject:
   m_ObjectHideFlags: 0
@@ -7156,6 +7195,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1523760262}
   m_CullTransparentMesh: 1
+--- !u!114 &1526153278 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7458618460828365315, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+  m_PrefabInstance: {fileID: 1336965473}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1534835232
 GameObject:
   m_ObjectHideFlags: 0

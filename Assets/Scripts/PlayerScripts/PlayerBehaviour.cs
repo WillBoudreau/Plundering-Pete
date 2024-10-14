@@ -12,14 +12,12 @@ public class PlayerBehaviour : MonoBehaviour
     public float fireRate;
     public float damage;
     public float playerHealth;
-    
-    
+    public float magnet;
     //Starting values
     public float startHealth;
     public float startdamage;
     public float StartSpeed;
     public float startFireRate;
-
     public float bulletVelocity;
     public bool Win;
 
@@ -59,9 +57,14 @@ public class PlayerBehaviour : MonoBehaviour
         levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         healthManager.playerhealth.value = playerHealth;
         //SetValues();
+        HandlePlayer();
+    }
+    void HandlePlayer()
+    {
         HandleMovement();
         HandleShooting();
         UpdateCounter();
+        HandleMagnit();
         Death();
     }
     void SetValues()
@@ -73,6 +76,7 @@ public class PlayerBehaviour : MonoBehaviour
         startFireRate = 2;
         bulletVelocity = 25f;
         healthManager.health = playerHealth;
+        magnet = 2f;
         //Assign values to be the starting values
         playerHealth = startHealth;
         speed = StartSpeed;
@@ -120,7 +124,18 @@ public class PlayerBehaviour : MonoBehaviour
         Vector2 movement = new Vector2(moveHorizontal, moveVertical) * speed;
         rb.velocity = movement;
     }
-
+    void HandleMagnit()
+    {
+        //Handle the magnet powerup
+        foreach (GameObject coin in GameObject.FindGameObjectsWithTag("Gold"))
+        {
+            if (Vector2.Distance(transform.position, coin.transform.position) < magnet)
+            {
+                coin.transform.position = Vector2.MoveTowards(coin.transform.position, transform.position, 0.1f);
+            }
+        }
+    }
+    //Handle the player colliding with objects
     void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("Collided with: " + other.gameObject.tag);
@@ -131,9 +146,18 @@ public class PlayerBehaviour : MonoBehaviour
         }
         if (other.gameObject.tag == "Gold")
         {
-            Doubloons++;
-            inventoryManager.coinCount = Doubloons;
-            other.gameObject.SetActive(false);
+            if(inventoryManager.IsMax == false)
+            {
+                Doubloons++;
+                inventoryManager.coinCount = Doubloons;
+                other.gameObject.SetActive(false);
+            }
+            else
+            {
+                Debug.Log("Max coins reached");
+                other.gameObject.SetActive(true);
+                magnet = 0;
+            }
         }
         if (other.gameObject.tag == "Obstacle")
         {

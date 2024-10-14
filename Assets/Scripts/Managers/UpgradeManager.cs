@@ -5,7 +5,6 @@ using TMPro;
 
 public class UpgradeManager : MonoBehaviour
 {
-
     //Player reference  
     public PlayerBehaviour player;
     //InventoryManager reference
@@ -20,6 +19,10 @@ public class UpgradeManager : MonoBehaviour
     public TextMeshProUGUI speedText;
     public TextMeshProUGUI MessageCostText;
     public TextMeshProUGUI NumberCoinsText;
+    public TextMeshProUGUI MagnetText;
+    public TextMeshProUGUI CargoText;
+    public TextMeshProUGUI FireRateText;
+
     //Values and their max values
     public float damageUpgrade;
     public float damageMax;
@@ -27,6 +30,13 @@ public class UpgradeManager : MonoBehaviour
     public float healthMax;
     public float speedUpgrade;
     public float speedMax;
+    public float magnetUpgrade;
+    public float magnetMax;
+    public int CargoUpgrade;
+    public int CargoMax;
+    public float FireRateUpgrade;
+    public float FireRateMax;
+
     //Start Cost and Cost for the upgrades
     public int damageCost;
     public int StartDanageCost;
@@ -34,6 +44,12 @@ public class UpgradeManager : MonoBehaviour
     public int StartHealthCost;
     public int speedCost;
     public int StartSpeedCost;
+    public int magnetCost;
+    public int StartMagnetCost;
+    public int CargoCost;
+    public int StartCargoCost;
+    public int FireRateCost;
+    public int StartFireRateCost;
 
 
     // Start is called before the first frame update
@@ -46,11 +62,17 @@ public class UpgradeManager : MonoBehaviour
         void Update()
         {
             inventory = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
-            damageText.text = "Damage: " + player.damage;
-            healthText.text = "Health: " + player.startHealth;
-            speedText.text = "Speed: " + player.StartSpeed;
+            SetText();
+        }
+        void SetText()
+        {
             NumberCoinsText.text = "Doubloons " + inventory.coinCount;
-
+            damageText.text = "Damage: " + player.damage + " Cost: " + damageCost;
+            healthText.text = "Health: " + player.playerHealth + " Cost: " + healthCost;
+            speedText.text = "Speed: " + player.speed + " Cost: " + speedCost;
+            MagnetText.text = "Magnet: " + player.magnet + " Cost: " + magnetCost;
+            CargoText.text = "Cargo: " + inventory.maxCoins + " Cost: " + CargoCost;
+            FireRateText.text = "FireRate: " + player.fireRate + " Cost: " + FireRateCost;
         }
         //Set the variable values at the start of the game
         void SetValues()
@@ -59,22 +81,58 @@ public class UpgradeManager : MonoBehaviour
             StartDanageCost = 15;
             StartHealthCost = 15;
             StartSpeedCost = 15;
+            StartMagnetCost = 15;
+            StartCargoCost = 15;
+            StartFireRateCost = 15;
 
             //Set the values to their starting costs
             damageCost = StartDanageCost;
             healthCost = StartHealthCost;
             speedCost = StartSpeedCost;
+            magnetCost = StartMagnetCost;
+            CargoCost = StartCargoCost;
+            FireRateCost = StartFireRateCost;
 
             //Set the max values
             damageMax = 4;
             speedMax = 25;
             healthMax = 20;
+            magnetMax = 10;
+            CargoMax = 50;
+            FireRateMax = 10;
 
             //Set the amount per upgrade
             damageUpgrade = 1;
             healthUpgrade = 5;
             speedUpgrade = 5;
+            magnetUpgrade = 1;
+            CargoUpgrade = 5;
+            FireRateUpgrade = 1;
 
+        }
+        public void SelectUpgrede(string upgrade)
+        {
+            switch (upgrade)
+            {
+                case "Damage":
+                    DamageCostCheck();
+                    break;
+                case "Health":
+                    HealthCostCheck();
+                    break;
+                case "Speed":
+                    SpeedCostCheck();
+                    break;
+                case "Magnet":
+                    MagnetCostCheck();
+                    break;
+                case "Cargo":
+                    CargoCostCheck();
+                    break;
+                case "FireRate":
+                    FireRateCostCheck();
+                    break;
+            }
         }
         public void UpgradeDamage()
         {
@@ -165,6 +223,97 @@ public class UpgradeManager : MonoBehaviour
             {
                 Debug.Log("You do not have enough coins");
                 MessageCostText.text = "You do not have enough coins";
+            }
+        }
+        public void UpgradeMagnet()
+        {
+            if (player.speed < speedMax)
+            {
+                player.speed += speedUpgrade;
+                Debug.Log("Speed upgraded to: " + speedUpgrade);
+                MessageCostText.text = "Speed upgraded to: " + speedUpgrade;
+            }
+            else
+            {
+                Debug.Log("Max speed reached");
+                MessageCostText.text = "Max speed reached";
+                inventory.coinCount += speedCost;
+            }
+        }
+        public void MagnetCostCheck()
+        {
+            if (inventory.coinCount >= speedCost)
+            {
+                inventory.coinCount -= speedCost;
+                Debug.Log("You have enough coins");
+                UpgradeSpeed();
+                speedCost += 15;
+            }
+            else
+            {
+                Debug.Log("You do not have enough coins");
+                MessageCostText.text = "You do not have enough coins";
+            }
+        }
+        public void CargoCostCheck()
+        {
+            if (inventory.coinCount >= CargoCost)
+            {
+                inventory.coinCount -= CargoCost;
+                Debug.Log("You have enough coins");
+                UpgradeCargo();
+                CargoCost += 15;
+            }
+            else
+            {
+                Debug.Log("You do not have enough coins");
+                MessageCostText.text = "You do not have enough coins";
+            }
+        }
+        public void UpgradeCargo()
+        {
+            if(inventory.maxCoins < CargoMax)
+            {
+                inventory.maxCoins += CargoUpgrade;
+                Debug.Log("Cargo upgraded to: " + inventory.maxCoins);
+                MessageCostText.text = "Cargo upgraded to: " + inventory.maxCoins;
+            }
+            else
+            {
+                Debug.Log("Max Cargo reached");
+                MessageCostText.text = "Max Cargo reached";
+                inventory.coinCount += CargoCost;
+            }
+        }
+        public void FireRateCostCheck()
+        {
+            if (inventory.coinCount >= FireRateCost)
+            {
+                inventory.coinCount -= FireRateCost;
+                Debug.Log("You have enough coins");
+                UpgradeFireRate();
+                FireRateCost += 15;
+            }
+            else
+            {
+                Debug.Log("You do not have enough coins");
+                MessageCostText.text = "You do not have enough coins";
+            }
+        }
+        public void UpgradeFireRate()
+        {
+            if (player.fireRate < FireRateMax)
+            {
+                player.fireRate += FireRateUpgrade;
+                Debug.Log("FireRate upgraded to: " + player.fireRate);
+                MessageCostText.text = "FireRate upgraded to: " + player.fireRate;
+
+            }
+            else
+            {
+                Debug.Log("Max FireRate reached");
+                MessageCostText.text = "Max FireRate reached";
+                inventory.coinCount += FireRateCost;
             }
         }
 }
