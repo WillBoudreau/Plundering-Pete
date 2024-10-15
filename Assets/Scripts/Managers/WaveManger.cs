@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class WaveManger : MonoBehaviour
 {
-
     //Class calls
     [Header("Classes")]
     public EnemyManager enemMan;
+<<<<<<< Updated upstream
     public LevelManager levelMan;
+=======
+>>>>>>> Stashed changes
 
     //List of all the enemy objects
     public List<GameObject> Sharks;
@@ -29,15 +31,16 @@ public class WaveManger : MonoBehaviour
     public GameObject[] SpawnPoints1;
     public GameObject[] SpawnPoints2;
     public GameObject[] SpawnPoints3;
-    public GameObject[] Spawns;
-
+    public GameObject[][] Spawns;
 
     // Start is called before the first frame update
     void Start()
     {
         SetStartValues();
         SetArrays();
+        FillArrays();
     }
+
     void SetStartValues()
     {
         //Set the number of starting enemies
@@ -50,6 +53,7 @@ public class WaveManger : MonoBehaviour
         //Update Lists after initiating the values
         UpdateLists();
     }
+<<<<<<< Updated upstream
     void UpdateValues()
     {
         //Update the values of enemies after the player reaches a checkpoint
@@ -57,12 +61,16 @@ public class WaveManger : MonoBehaviour
         numSerpents = 20;
         numShips = 0;
     }
+=======
+
+>>>>>>> Stashed changes
     //Set the Length of the Arrays
     void SetArrays()
     {
         SpawnPoints1 = new GameObject[3];
         SpawnPoints2 = new GameObject[3];
         SpawnPoints3 = new GameObject[3];
+<<<<<<< Updated upstream
         Spawns = new GameObject [3];
 
         //Set each individual array
@@ -80,7 +88,16 @@ public class WaveManger : MonoBehaviour
         SpawnPoints3[0] = new GameObject();
         SpawnPoints3[1] = new GameObject();
         SpawnPoints3[2] = new GameObject();
+=======
+        Spawns = new GameObject[3][];
+
+        // Initialize the master array with the individual arrays
+        Spawns[0] = SpawnPoints1;
+        Spawns[1] = SpawnPoints2;
+        Spawns[2] = SpawnPoints3;
+>>>>>>> Stashed changes
     }
+
     void UpdateLists()
     {
         //Update Lists based off values from the num variables
@@ -96,5 +113,35 @@ public class WaveManger : MonoBehaviour
         {
             Ships.Add(ShipPrefab);
         }
+    }
+
+    //Fill the arrays with the spawn points
+    void FillArrays()
+    {
+        //Fill the first array with spawn points tagged "SpawnPoint1"
+        GameObject[] spawnPoints1 = GameObject.FindGameObjectsWithTag("SpawnPoint1");
+        for(int i = 0; i < SpawnPoints1.Length && i < spawnPoints1.Length; i++)
+        {
+            SpawnPoints1[i] = spawnPoints1[i];
+        }
+
+        //Fill the second array with spawn points tagged "SpawnPoint2"
+        GameObject[] spawnPoints2 = GameObject.FindGameObjectsWithTag("SpawnPoint2");
+        for(int i = 0; i < SpawnPoints2.Length && i < spawnPoints2.Length; i++)
+        {
+            SpawnPoints2[i] = spawnPoints2[i];
+        }
+
+        //Fill the third array with spawn points tagged "SpawnPoint3"
+        GameObject[] spawnPoints3 = GameObject.FindGameObjectsWithTag("SpawnPoint3");
+        for(int i = 0; i < SpawnPoints3.Length && i < spawnPoints3.Length; i++)
+        {
+            SpawnPoints3[i] = spawnPoints3[i];
+        }
+
+        // Fill the master array with each of the other arrays
+        Spawns[0] = SpawnPoints1;
+        Spawns[1] = SpawnPoints2;
+        Spawns[2] = SpawnPoints3;
     }
 }
