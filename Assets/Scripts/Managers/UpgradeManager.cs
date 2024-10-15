@@ -5,6 +5,7 @@ using TMPro;
 
 public class UpgradeManager : MonoBehaviour
 {
+    [Header("Class calls")]
     //Player reference  
     public PlayerBehaviour player;
     //InventoryManager reference
@@ -51,6 +52,7 @@ public class UpgradeManager : MonoBehaviour
     public int StartCargoCost;
     public int FireRateCost;
     public int StartFireRateCost;
+    public int ShipCost;
 
 
     // Start is called before the first frame update
@@ -85,6 +87,7 @@ public class UpgradeManager : MonoBehaviour
         StartMagnetCost = 15;
         StartCargoCost = 15;
         StartFireRateCost = 15;
+        ShipCost = 100;
 
         //Set the values to their starting costs
         damageCost = StartDanageCost;
@@ -135,13 +138,15 @@ public class UpgradeManager : MonoBehaviour
                 break;
         }
     }
-    public void UpgradeStat(string upgrade)
+    public void UpgradeShip()
     {
-
+        if (inventory.coinCount >= ShipCost)
+        {
+            inventory.coinCount -= ShipCost;
+            Debug.Log("You have enough coins");
+        }
     }
-
-
-    public void UpgradeDamage()
+    void UpgradeDamage()
     {
         if (player.damage < damageMax)
         {
@@ -156,7 +161,7 @@ public class UpgradeManager : MonoBehaviour
             inventory.coinCount += damageCost;
         }
     }
-    public void DamageCostCheck()
+    void DamageCostCheck()
     {
         if (inventory.coinCount >= damageCost)
         {
@@ -171,7 +176,7 @@ public class UpgradeManager : MonoBehaviour
             MessageCostText.text = "You do not have enough coins";
         }
     }
-    public void UpgradeHealth()
+    void UpgradeHealth()
     {
         if (player.playerHealth < healthMax)
         {
@@ -187,7 +192,7 @@ public class UpgradeManager : MonoBehaviour
             inventory.coinCount += healthCost;
         }
     }
-    public void HealthCostCheck()
+    void HealthCostCheck()
     {
         if (inventory.coinCount >= healthCost)
         {
@@ -202,7 +207,7 @@ public class UpgradeManager : MonoBehaviour
             MessageCostText.text = "You do not have enough coins";
         }
     }
-    public void UpgradeSpeed()
+    void UpgradeSpeed()
     {
         if (player.speed < speedMax)
         {
@@ -217,7 +222,7 @@ public class UpgradeManager : MonoBehaviour
             inventory.coinCount += speedCost;
         }
     }
-    public void SpeedCostCheck()
+    void SpeedCostCheck()
     {
         if (inventory.coinCount >= speedCost)
         {
@@ -232,28 +237,28 @@ public class UpgradeManager : MonoBehaviour
             MessageCostText.text = "You do not have enough coins";
         }
     }
-    public void UpgradeMagnet()
+    void UpgradeMagnet()
     {
-        if (player.speed < speedMax)
+        if (player.magnet < magnetMax)
         {
-            player.speed += speedUpgrade;
-            Debug.Log("Speed upgraded to: " + speedUpgrade);
-            MessageCostText.text = "Speed upgraded to: " + speedUpgrade;
+            player.speed += magnetUpgrade;
+            Debug.Log("Magnet upgraded to: " + magnetUpgrade);
+            MessageCostText.text = "Magnet upgraded to: " + magnetUpgrade;
         }
         else
         {
-            Debug.Log("Max speed reached");
-            MessageCostText.text = "Max speed reached";
-            inventory.coinCount += speedCost;
+            Debug.Log("Max magnet reached");
+            MessageCostText.text = "Max magnet reached";
+            inventory.coinCount += magnetCost;
         }
     }
-    public void MagnetCostCheck()
+    void MagnetCostCheck()
     {
         if (inventory.coinCount >= speedCost)
         {
             inventory.coinCount -= speedCost;
             Debug.Log("You have enough coins");
-            UpgradeSpeed();
+            UpgradeMagnet();
             speedCost += 15;
         }
         else
@@ -262,7 +267,7 @@ public class UpgradeManager : MonoBehaviour
             MessageCostText.text = "You do not have enough coins";
         }
     }
-    public void CargoCostCheck()
+    void CargoCostCheck()
     {
         if (inventory.coinCount >= CargoCost)
         {
@@ -277,7 +282,7 @@ public class UpgradeManager : MonoBehaviour
             MessageCostText.text = "You do not have enough coins";
         }
     }
-    public void UpgradeCargo()
+    void UpgradeCargo()
     {
         if (inventory.maxCoins < CargoMax)
         {
@@ -292,7 +297,7 @@ public class UpgradeManager : MonoBehaviour
             inventory.coinCount += CargoCost;
         }
     }
-    public void FireRateCostCheck()
+    void FireRateCostCheck()
     {
         if (inventory.coinCount >= FireRateCost)
         {
@@ -307,7 +312,7 @@ public class UpgradeManager : MonoBehaviour
             MessageCostText.text = "You do not have enough coins";
         }
     }
-    public void UpgradeFireRate()
+    void UpgradeFireRate()
     {
         if (player.fireRate < FireRateMax)
         {

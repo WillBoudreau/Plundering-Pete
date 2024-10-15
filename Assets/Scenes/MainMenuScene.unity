@@ -1398,6 +1398,98 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 164978906}
   m_CullTransparentMesh: 1
+--- !u!1 &177806781
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 177806782}
+  - component: {fileID: 177806784}
+  - component: {fileID: 177806783}
+  m_Layer: 0
+  m_Name: Camera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &177806782
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 177806781}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -30}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1547232562}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!81 &177806783
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 177806781}
+  m_Enabled: 1
+--- !u!20 &177806784
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 177806781}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 50
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
 --- !u!1 &232086087
 GameObject:
   m_ObjectHideFlags: 0
@@ -1883,9 +1975,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1547232563}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: Save
+      - m_Target: {fileID: 1080032326}
+        m_TargetAssemblyTypeName: UpgradeManager, Assembly-CSharp
+        m_MethodName: UpgradeShip
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3175,11 +3267,6 @@ PrefabInstance:
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7001577010587437497, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
   m_PrefabInstance: {fileID: 478942378}
-  m_PrefabAsset: {fileID: 0}
---- !u!20 &518452427 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 4289566359749055770, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
-  m_PrefabInstance: {fileID: 1893215411}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &532731839
 GameObject:
@@ -5227,7 +5314,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1007322668
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5533,6 +5620,9 @@ MonoBehaviour:
   collectorManager: {fileID: 1826889079}
   musicChanger: {fileID: 2083907201}
   waveManager: {fileID: 1713031254}
+  obstacles: []
+  gold: []
+  enemies: []
 --- !u!114 &1077516791 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7458618460828365315, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
@@ -5625,6 +5715,7 @@ MonoBehaviour:
   StartCargoCost: 0
   FireRateCost: 0
   StartFireRateCost: 0
+  ShipCost: 0
 --- !u!1 &1088758525
 GameObject:
   m_ObjectHideFlags: 0
@@ -5805,8 +5896,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Shark: {fileID: 4724370820435506893, guid: 276f63cd8fc351b42a0406ce0fd8f74a, type: 3}
   SharkSpawn: {fileID: 3267169091984192866, guid: f86f17bb3304e9544a00b2e4347a7fa4, type: 3}
-  enemySpawn: []
-  spawnTime: 0
   NumSharks: 0
   spawnPoints: []
 --- !u!1 &1150563975
@@ -7750,6 +7839,7 @@ Transform:
   - {fileID: 1592440692}
   - {fileID: 1764451576}
   - {fileID: 551069645}
+  - {fileID: 177806782}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1547232563
@@ -8862,7 +8952,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37f8474392495e64e86e5db000e1cdaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemMan: {fileID: 1134395749}
   Sharks: []
   Serpents: []
   Ships: []
@@ -8872,6 +8961,10 @@ MonoBehaviour:
   numSharks: 50
   numSerpents: 0
   numShips: 0
+  spawnTime: 0
+  FirstCheckpoint: 0
+  SecondCheckpoint: 0
+  ThirdCheckpoint: 0
   SpawnPoints1: []
   SpawnPoints2: []
   SpawnPoints3: []
@@ -10133,7 +10226,7 @@ PrefabInstance:
     - target: {fileID: 3116806254861534645, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
       propertyPath: mainCamera
       value: 
-      objectReference: {fileID: 518452427}
+      objectReference: {fileID: 177806784}
     - target: {fileID: 3116806254861534645, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
       propertyPath: DoubloonText
       value: 
@@ -10252,6 +10345,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3246469996780949601, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+    - {fileID: 2241049214329273526, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 6204835971353954689, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}

@@ -32,7 +32,7 @@ public class PlayerBehaviour : MonoBehaviour
     public Rigidbody2D rb;
     public GameObject bulletPrefab;
     [Header("Renderer Calls")]
-    Renderer renderer;
+    public Renderer renderer;
     private Color originalColor;
     public float FlickerDuration = 0.1f; 
     public int FlickerCount = 5;
@@ -47,8 +47,8 @@ public class PlayerBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     { 
-        renderer = GetComponent<Renderer>();
-        originalColor = GetComponent<Renderer>().material.color;
+        renderer = GetComponentInChildren<Renderer>();
+        originalColor = GetComponentInChildren<Renderer>().material.color;
         rb = GetComponent<Rigidbody2D>();
         SetValues();
     }
@@ -128,6 +128,13 @@ public class PlayerBehaviour : MonoBehaviour
 
         Vector2 movement = new Vector2(moveHorizontal, moveVertical) * speed;
         rb.velocity = movement;
+
+        // Ensure the player remains within the camera bounds
+        Vector3 pos = transform.position;
+        Vector3 viewportPos = mainCamera.WorldToViewportPoint(pos);
+        viewportPos.x = Mathf.Clamp(viewportPos.x, 0.05f, 0.95f);
+        viewportPos.y = Mathf.Clamp(viewportPos.y, 0.05f, 0.95f);
+        transform.position = mainCamera.ViewportToWorldPoint(viewportPos);
     }
     void HandleMagnit()
     {
@@ -203,11 +210,11 @@ public class PlayerBehaviour : MonoBehaviour
     {
         for(int i = 0; i < FlickerCount; i++)
         {
-            GetComponent<Renderer>().material.color = Color.red;
+            GetComponentInChildren<Renderer>().material.color = Color.red;
             yield return new WaitForSeconds(FlickerDuration);
-            GetComponent<Renderer>().material.color = originalColor;
+            GetComponentInChildren<Renderer>().material.color = originalColor;
             yield return new WaitForSeconds(FlickerDuration);
         }
-        GetComponent<Renderer>().material.color = originalColor;
+        GetComponentInChildren<Renderer>().material.color = originalColor;
     }
 }

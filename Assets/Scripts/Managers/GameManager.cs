@@ -96,13 +96,13 @@ public class GameManager : MonoBehaviour
     {
         PlayerEnabled = true;
         player.GetComponent<PlayerBehaviour>().enabled = true;
-        player.GetComponent<SpriteRenderer>().enabled = true;
+        player.GetComponentInChildren<SpriteRenderer>().enabled = true;
     }
     void DisablePlayer()
     {
         PlayerEnabled = false;
         player.GetComponent<PlayerBehaviour>().enabled = false;
-        player.GetComponent<SpriteRenderer>().enabled = false;
+        player.GetComponentInChildren<SpriteRenderer>().enabled = false;
     }
     [System.Serializable]
     class PlayerData
