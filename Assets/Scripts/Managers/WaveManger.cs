@@ -53,49 +53,18 @@ public class WaveManger : MonoBehaviour
         //Update Lists after initiating the values
         UpdateLists();
     }
-<<<<<<< Updated upstream
-    void UpdateValues()
-    {
-        //Update the values of enemies after the player reaches a checkpoint
-        numSharks = 100;
-        numSerpents = 20;
-        numShips = 0;
-    }
-=======
-
->>>>>>> Stashed changes
     //Set the Length of the Arrays
     void SetArrays()
     {
         SpawnPoints1 = new GameObject[3];
         SpawnPoints2 = new GameObject[3];
         SpawnPoints3 = new GameObject[3];
-<<<<<<< Updated upstream
-        Spawns = new GameObject [3];
-
-        //Set each individual array
-        //Set Array 1
-        SpawnPoints1[0] = new GameObject();
-        SpawnPoints1[1] = new GameObject();
-        SpawnPoints1[2] = new GameObject();
-
-        //Set Array2
-        SpawnPoints2[0] = new GameObject();
-        SpawnPoints2[1] = new GameObject();
-        SpawnPoints2[2] = new GameObject();
-
-        //Set Array3
-        SpawnPoints3[0] = new GameObject();
-        SpawnPoints3[1] = new GameObject();
-        SpawnPoints3[2] = new GameObject();
-=======
         Spawns = new GameObject[3][];
 
         // Initialize the master array with the individual arrays
         Spawns[0] = SpawnPoints1;
         Spawns[1] = SpawnPoints2;
         Spawns[2] = SpawnPoints3;
->>>>>>> Stashed changes
     }
 
     void UpdateLists()
