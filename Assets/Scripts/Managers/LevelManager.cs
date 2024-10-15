@@ -8,6 +8,7 @@ public class LevelManager : MonoBehaviour
     public string levelName;
     public CollectorManager collectorManager;
     public MusicChanger musicChanger;
+    public WaveManger waveManager;
     // Start is called before the first frame update
     void Start()
     { 
@@ -27,6 +28,7 @@ public class LevelManager : MonoBehaviour
         {
             collectorManager.SpawnDoubloons();
             musicChanger.PlayNextTrack();
+            waveManager.Start();
         }
     }
     public void QuitRequest()

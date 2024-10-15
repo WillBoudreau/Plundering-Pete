@@ -6,10 +6,8 @@ public class WaveManger : MonoBehaviour
 {
     //Class calls
     [Header("Classes")]
-    public EnemyManager enemMan;
-    public LevelManager levelMan;
 
-
+    [Header("Variables")]
     //List of all the enemy objects
     public List<GameObject> Sharks;
     public List<GameObject> Serpents;
@@ -24,7 +22,15 @@ public class WaveManger : MonoBehaviour
     public int numSharks;
     public int numSerpents;
     public int numShips;
+    //Spawn Values
+    public float spawnTime;
 
+    [Header("Bools")]
+    //Bools for checkpoints
+    public bool FirstCheckpoint;
+    public bool SecondCheckpoint;
+    public bool ThirdCheckpoint;
+    [Header("Lists")]
     //List of Spawn points
     public GameObject[] SpawnPoints1;
     public GameObject[] SpawnPoints2;
@@ -32,19 +38,24 @@ public class WaveManger : MonoBehaviour
     public GameObject[][] Spawns;
 
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         SetStartValues();
         SetArrays();
         FillArrays();
+        SpawnEnemies();
     }
-
+    void Update()
+    {
+        spawnTime -= Time.deltaTime;
+    }
     void SetStartValues()
     {
         //Set the number of starting enemies
         numSharks = 50;
         numSerpents = 0;
         numShips = 0;
+        spawnTime = 5f;
 
         Debug.Log("Number of Sharks: " + numSharks);
         
@@ -110,5 +121,33 @@ public class WaveManger : MonoBehaviour
         Spawns[0] = SpawnPoints1;
         Spawns[1] = SpawnPoints2;
         Spawns[2] = SpawnPoints3;
+    }
+    void SpawnEnemies()
+    {
+        if(spawnTime <= 0 && !FirstCheckpoint)
+        {
+            for(int i = 0; i < numSharks;i++)
+            {
+                foreach(GameObject spawn in SpawnPoints1)
+                {
+                    Vector3 spawnpos = spawn.transform.position;
+                    spawnpos.z = -2;
+                    Instantiate(SharkPrefab, spawnpos, Quaternion.identity);
+                }
+            }
+        }
+        //if (spawnTime <= 0)
+        //{
+        //    for (int i = 0; i < NumSharks; i++)
+        //    {
+        //        foreach (GameObject enemspawn in enemySpawn)
+        //        {
+        //            Vector3 spawnPosition = enemspawn.transform.position;
+        //            spawnPosition.z = -2;
+        //            Instantiate(Shark, spawnPosition, Quaternion.identity);
+        //        }
+        //    }
+        //    spawnTime = 5;
+        //}
     }
 }

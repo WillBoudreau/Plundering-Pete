@@ -5227,7 +5227,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1007322668
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5532,6 +5532,7 @@ MonoBehaviour:
   levelName: 
   collectorManager: {fileID: 1826889079}
   musicChanger: {fileID: 2083907201}
+  waveManager: {fileID: 1713031254}
 --- !u!114 &1077516791 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7458618460828365315, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
@@ -8862,7 +8863,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemMan: {fileID: 1134395749}
-  levelMan: {fileID: 1051185688}
   Sharks: []
   Serpents: []
   Ships: []
@@ -8875,7 +8875,6 @@ MonoBehaviour:
   SpawnPoints1: []
   SpawnPoints2: []
   SpawnPoints3: []
-  Spawns: []
 --- !u!1 &1728282018
 GameObject:
   m_ObjectHideFlags: 0

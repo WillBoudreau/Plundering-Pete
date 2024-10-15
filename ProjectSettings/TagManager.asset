@@ -11,6 +11,7 @@ TagManager:
   - Enemy
   - Obstacle
   - Checkpoint
+  - SpawnPoint1
   layers:
   - Default
   - TransparentFX

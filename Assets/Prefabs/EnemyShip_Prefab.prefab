@@ -73,8 +73,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 0.13088842, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 8757d86469db8ae41803adf7e1d95b78, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 7061460246296302905}
   - component: {fileID: 2849385836390260978}
   - component: {fileID: 2977485949181822998}
+  - component: {fileID: 2575576752301967334}
   m_Layer: 0
   m_Name: EnemyShip_Prefab
   m_TagString: Enemy
@@ -150,7 +151,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.110839844, y: -0.110839844}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -161,7 +162,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 6.60968, y: 3.472351}
   m_EdgeRadius: 0
 --- !u!61 &2977485949181822998
 BoxCollider2D:
@@ -195,7 +196,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0020141602, y: 0.01637268}
+  m_Offset: {x: -0.12991333, y: -0.07740784}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -206,5 +207,28 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.2119141, y: 1.1701355}
+  m_Size: {x: 7.026184, y: 4.1199036}
   m_EdgeRadius: 0
+--- !u!114 &2575576752301967334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7852544878138870391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5025c7f2cfafb574daa1df856a1e50a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  speed: 0
+  damage: 0
+  renderer: {fileID: 4507842330446763989}
+  originalColor: {r: 0, g: 0, b: 0, a: 0}
+  FlickerDuration: 0
+  FlickerCount: 0
+  player: {fileID: 0}
+  stoppingDistance: 0
+  detectionDistance: 0
+  maxHealth: 0
