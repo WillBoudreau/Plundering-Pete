@@ -102,6 +102,7 @@ public class PlayerBehaviour : MonoBehaviour
         fireRate -= Time.deltaTime;
         if (Input.GetKeyDown(KeyCode.Mouse0) && fireRate <= 0)
         {
+            fireRate = 0;
             Vector2 mouseWorldPOS = mainCamera.ScreenToWorldPoint(Input.mousePosition);
             Vector2 direction = (mouseWorldPOS - (Vector2)transform.position).normalized;
             

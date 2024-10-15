@@ -7,10 +7,8 @@ public class WaveManger : MonoBehaviour
     //Class calls
     [Header("Classes")]
     public EnemyManager enemMan;
-<<<<<<< Updated upstream
     public LevelManager levelMan;
-=======
->>>>>>> Stashed changes
+
 
     //List of all the enemy objects
     public List<GameObject> Sharks;
