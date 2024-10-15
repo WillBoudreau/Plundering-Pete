@@ -8,7 +8,7 @@ public class WaveManger : MonoBehaviour
     //Class calls
     [Header("Classes")]
     public EnemyManager enemMan;
-
+    public LevelManager levelMan;
 
     //List of all the enemy objects
     public List<GameObject> Sharks;
@@ -50,13 +50,20 @@ public class WaveManger : MonoBehaviour
         //Update Lists after initiating the values
         UpdateLists();
     }
+    void UpdateValues()
+    {
+        //Update the values of enemies after the player reaches a checkpoint
+        numSharks = 100;
+        numSerpents = 20;
+        numShips = 0;
+    }
     //Set the Length of the Arrays
     void SetArrays()
     {
         SpawnPoints1 = new GameObject[3];
         SpawnPoints2 = new GameObject[3];
         SpawnPoints3 = new GameObject[3];
-        Spawns = new GameObject[3];
+        Spawns = new GameObject [3];
 
         //Set each individual array
         //Set Array 1
@@ -73,24 +80,19 @@ public class WaveManger : MonoBehaviour
         SpawnPoints3[0] = new GameObject();
         SpawnPoints3[1] = new GameObject();
         SpawnPoints3[2] = new GameObject();
-
-        //Set the master array
-        //Spawns[0] = new GameObject[SpawnPoints1];
-        //Spawns[1] = new GameObject[SpawnPoints2];
-        //Spawns[2] = new GameObject[SpawnPoints3];
     }
     void UpdateLists()
     {
         //Update Lists based off values from the num variables
-        for(int i = 0; i <= numSharks; i++)
+        for(int i = 0; i < numSharks; i++)
         {
             Sharks.Add(SharkPrefab);
         }
-        for(int i = 0; i <= numSerpents; i++)
+        for(int i = 0; i < numSerpents; i++)
         {
             Serpents.Add(SerpentPrefab);
         }
-        for(int i = 0; i <= numShips; i++)
+        for(int i = 0; i < numShips; i++)
         {
             Ships.Add(ShipPrefab);
         }

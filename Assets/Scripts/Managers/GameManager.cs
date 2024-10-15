@@ -8,6 +8,7 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    [Header("Class Calls")]
     public UIManager uiManager;
     public HealthManager healthManager;
     public LevelManager levelManager;

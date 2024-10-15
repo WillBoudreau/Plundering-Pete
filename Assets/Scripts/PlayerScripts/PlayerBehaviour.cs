@@ -5,7 +5,6 @@ using TMPro;
 
 public class PlayerBehaviour : MonoBehaviour
 {
-    public int Doubloons = 0;
 
     //Player values 
     public float speed;
@@ -13,6 +12,11 @@ public class PlayerBehaviour : MonoBehaviour
     public float damage;
     public float playerHealth;
     public float magnet;
+    public int Doubloons = 0;
+    [Header("Number of Kills")]
+    public int SharkKills;
+    public int SerpentKills;
+    public int ShipKills;
     //Starting values
     public float startHealth;
     public float startdamage;

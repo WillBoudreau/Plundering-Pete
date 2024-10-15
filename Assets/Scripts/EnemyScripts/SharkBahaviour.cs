@@ -53,7 +53,6 @@ public class SharkBahaviour : Enemy
         {
             TakeDamage(player.damage);
             Destroy(collision.gameObject);
-
         }
     }
     public override void TakeDamage(float damage)
@@ -62,6 +61,7 @@ public class SharkBahaviour : Enemy
         health -= damage;
         if(health <= 0)
         {
+            player.SharkKills++;
             Destroy(gameObject);
         }
     }

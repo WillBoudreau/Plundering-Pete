@@ -13,6 +13,7 @@ public class UpgradeManager : MonoBehaviour
     public GameObject damageSlot;
     public GameObject healthSlot;
     public GameObject speedSlot;
+    [Header("Text Slots")]
     //Text for the slots
     public TextMeshProUGUI damageText;
     public TextMeshProUGUI healthText;
@@ -22,7 +23,7 @@ public class UpgradeManager : MonoBehaviour
     public TextMeshProUGUI MagnetText;
     public TextMeshProUGUI CargoText;
     public TextMeshProUGUI FireRateText;
-
+    [Header("Variables")]
     //Values and their max values
     public float damageUpgrade;
     public float damageMax;

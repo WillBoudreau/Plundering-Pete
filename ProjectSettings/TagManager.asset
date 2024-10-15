@@ -10,6 +10,7 @@ TagManager:
   - WinTrig
   - Enemy
   - Obstacle
+  - Checkpoint
   layers:
   - Default
   - TransparentFX

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class UIManager : MonoBehaviour
     }
     public GameState currentGameState;
     public static UIManager instance;
+    [Header("Class calls")]
+    public PlayerBehaviour player;
+    [Header("UI GameObjects")]
     public GameObject mainMenu;
     public GameObject optionsMenu;
     public GameObject gamePlay;
@@ -25,17 +29,12 @@ public class UIManager : MonoBehaviour
     public GameObject winMenu;
     public GameObject upgradesMenu;
     public GameObject InstructionsScreen;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [Header("Texts")]
+    public TextMeshProUGUI playerCoins;
+    public TextMeshProUGUI playerSharkKills;
+    public TextMeshProUGUI playerSerpentKills;
+    public TextMeshProUGUI playerShipKills;
 
-    // Update is called once per frame
-    void Update()
-    {
-        //UpdateUI();
-    }
     public void UpdateUI()
     {
         switch(currentGameState)
@@ -59,6 +58,7 @@ public class UIManager : MonoBehaviour
             case GameState.GameOver:
                 DeactivateAllUI();
                 gameOver.SetActive(true);
+                UpdateGameOver();
                 break;
             case GameState.Win:
                 DeactivateAllUI();
@@ -98,6 +98,14 @@ public class UIManager : MonoBehaviour
         winMenu.SetActive(false);
         upgradesMenu.SetActive(false);
         InstructionsScreen.SetActive(false);
+    }
+    void UpdateGameOver()
+    {
+        //Set the texts in the Game Over screen
+        playerCoins.text = "Coins Collected: " + player.Doubloons.ToString();
+        playerSharkKills.text = "Sharks Killed: " + player.SharkKills.ToString();
+        playerSerpentKills.text = "Serpents Killed: " + player.SerpentKills.ToString();
+        playerShipKills.text = "Ships Sunk: " + player.ShipKills.ToString();
     }
     public void SetGameState(string state)
     { 
