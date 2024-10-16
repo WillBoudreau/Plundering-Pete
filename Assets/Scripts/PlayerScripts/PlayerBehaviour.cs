@@ -65,6 +65,7 @@ public class PlayerBehaviour : MonoBehaviour
     }
     void HandlePlayer()
     {
+        StaywithinBounds();
         HandleMovement();
         HandleShooting();
         UpdateCounter();
@@ -128,7 +129,9 @@ public class PlayerBehaviour : MonoBehaviour
 
         Vector2 movement = new Vector2(moveHorizontal, moveVertical) * speed;
         rb.velocity = movement;
-
+    }
+    void StaywithinBounds()
+    {
         // Ensure the player remains within the camera bounds
         Vector3 pos = transform.position;
         Vector3 viewportPos = mainCamera.WorldToViewportPoint(pos);

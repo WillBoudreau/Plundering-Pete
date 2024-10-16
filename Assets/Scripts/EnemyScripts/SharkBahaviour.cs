@@ -11,6 +11,7 @@ public class SharkBahaviour : Enemy
     public float stoppingDistance;
     public float detectionDistance;
     public float maxHealth;
+    float bottomY = -13f;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +23,7 @@ public class SharkBahaviour : Enemy
         damage = 1;
         stoppingDistance = 2;
         detectionDistance = 10;
+        //bottomY = Camera.main.ViewportToWorldPoint(new Vector3(0,0,0)).y;
     }
 
     // Update is called once per frame
@@ -32,16 +34,23 @@ public class SharkBahaviour : Enemy
     }
     public override void Move()
     {
-        Vector3 targetPosition = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
-        targetPosition.z = -2;
-        transform.position = targetPosition;
-        // if(Vector2.Distance(transform.position, player.transform.position) < detectionDistance)
-        // {
-        //     float DistanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
-        //     if(DistanceToPlayer < detectionDistance)
-        //     {
-        //     }   
-        // }
+        if(transform.position.y < -15)
+        {
+            Debug.Log("Dead");
+            Destroy(gameObject);
+        }
+        else if (transform.position.y > bottomY)
+        {
+            Vector3 targetPosition = new Vector3(transform.position.x, bottomY, transform.position.z);
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+        }
+        else if (Vector2.Distance(transform.position, player.transform.position) < detectionDistance)
+        { 
+        
+                Vector3 targetPosition = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+                targetPosition.z = -2;
+                transform.position = targetPosition;
+        }
     }
     public void OnCollisionEnter2D(Collision2D collision)
     {
@@ -61,8 +70,7 @@ public class SharkBahaviour : Enemy
         health -= damage;
         if(health <= 0)
         {
-            player.SharkKills++;
-            Destroy(gameObject);
+            Death();
         }
     }
     public override IEnumerator Flicker()
@@ -75,5 +83,10 @@ public class SharkBahaviour : Enemy
             yield return new WaitForSeconds(FlickerDuration);
         }
         renderer.material.color = originalColor;
+    }
+    void Death()
+    {
+        Destroy(gameObject);
+        Debug.Log("Shark Kills" + player.SharkKills);
     }
 }

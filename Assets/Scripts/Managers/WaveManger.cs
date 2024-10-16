@@ -33,11 +33,6 @@ public class WaveManger : MonoBehaviour
     [Header("Lists")]
     //List of Spawn points
     public GameObject[] SpawnPoints1;
-
-    // Start is called before the first frame update
-    public void Start()
-    {
-    }
     public void SetAll()
     {
         SetStartValues();
@@ -48,7 +43,6 @@ public class WaveManger : MonoBehaviour
         Timer();
         FillArrays();
         StartCoroutine(SpawnEnemies());
-        Debug.Log("Timer: " + spawnTime);
     }
     void Timer()
     {
