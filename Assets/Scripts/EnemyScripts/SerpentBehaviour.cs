@@ -10,7 +10,7 @@ public class SerpentBehaviour : Enemy
     public float stoppingDistance;
     public float detectionDistance;
     public float maxHealth;
-    
+    float bottomY = -15f;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,15 +32,22 @@ public class SerpentBehaviour : Enemy
     }
     public override void Move()
     {
-        if(Vector2.Distance(transform.position, player.transform.position) < detectionDistance)
+        if (transform.position.y <= bottomY)
         {
-            float DistanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
-            if(DistanceToPlayer < detectionDistance)
-            {
-                Vector3 targetPosition = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
-                targetPosition.z = -2;
-                transform.position = targetPosition;
-            }
+            Debug.Log("Dead");
+            Destroy(gameObject);
+        }
+        else if (transform.position.y > bottomY)
+        {
+            Vector3 targetPosition = new Vector3(transform.position.x, bottomY, transform.position.z);
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+        }
+        else if (Vector2.Distance(transform.position, player.transform.position) < detectionDistance)
+        {
+
+            Vector3 targetPosition = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+            targetPosition.z = -2;
+            transform.position = targetPosition;
         }
     }
     public override void TakeDamage(float damage)

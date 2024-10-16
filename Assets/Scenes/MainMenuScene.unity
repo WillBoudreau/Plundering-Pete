@@ -7818,6 +7818,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerBehaviour: {fileID: 551069647}
+  waveManger: {fileID: 1713031254}
   Distance: 0
   GameTimer: 0
   ditanceTracker: {fileID: 364805127}
@@ -8901,7 +8902,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37f8474392495e64e86e5db000e1cdaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceTracker: {fileID: 0}
   Sharks: []
   Serpents: []
   Ships: []

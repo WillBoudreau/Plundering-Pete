@@ -8,6 +8,7 @@ public class DistanceTracker : MonoBehaviour
 {
     [Header("Class calls")]
     public PlayerBehaviour playerBehaviour;
+    public WaveManger waveManger;
     [Header("Variables")]
     public float Distance;
     public float GameTimer;
@@ -24,6 +25,7 @@ public class DistanceTracker : MonoBehaviour
     {
         Timer();
         TrackDist();
+        Checkpoints();
     }
     void SetValues()
     {
@@ -41,5 +43,12 @@ public class DistanceTracker : MonoBehaviour
     {
         //Tracks the time and translates into distance
         ditanceTracker.value = GameTimer;
+    }
+    void Checkpoints()
+    {
+        if(GameTimer >= 25f)
+        {
+            waveManger.FirstCheckpoint = true;
+        }
     }
 }
