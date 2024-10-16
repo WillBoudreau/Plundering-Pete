@@ -8965,7 +8965,10 @@ MonoBehaviour:
   FirstCheckpoint: 0
   SecondCheckpoint: 0
   ThirdCheckpoint: 0
-  SpawnPoints1: []
+  SpawnPoints1:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   SpawnPoints2: []
   SpawnPoints3: []
 --- !u!1 &1728282018

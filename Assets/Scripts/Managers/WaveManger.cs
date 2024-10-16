@@ -23,7 +23,7 @@ public class WaveManger : MonoBehaviour
     public int numSerpents;
     public int numShips;
     //Spawn Values
-    public float spawnTime;
+    public float spawnTime = 5f;
 
     [Header("Bools")]
     //Bools for checkpoints
@@ -33,19 +33,24 @@ public class WaveManger : MonoBehaviour
     [Header("Lists")]
     //List of Spawn points
     public GameObject[] SpawnPoints1;
-    public GameObject[] SpawnPoints2;
-    public GameObject[] SpawnPoints3;
-    public GameObject[][] Spawns;
 
     // Start is called before the first frame update
     public void Start()
     {
+    }
+    public void SetAll()
+    {
         SetStartValues();
         SetArrays();
-        FillArrays();
-        SpawnEnemies();
     }
-    void Update()
+    void FixedUpdate()
+    {
+        Timer();
+        FillArrays();
+        StartCoroutine(SpawnEnemies());
+        Debug.Log("Timer: " + spawnTime);
+    }
+    void Timer()
     {
         spawnTime -= Time.deltaTime;
     }
@@ -55,7 +60,6 @@ public class WaveManger : MonoBehaviour
         numSharks = 50;
         numSerpents = 0;
         numShips = 0;
-        spawnTime = 5f;
 
         Debug.Log("Number of Sharks: " + numSharks);
         
@@ -66,14 +70,6 @@ public class WaveManger : MonoBehaviour
     void SetArrays()
     {
         SpawnPoints1 = new GameObject[3];
-        SpawnPoints2 = new GameObject[3];
-        SpawnPoints3 = new GameObject[3];
-        Spawns = new GameObject[3][];
-
-        // Initialize the master array with the individual arrays
-        Spawns[0] = SpawnPoints1;
-        Spawns[1] = SpawnPoints2;
-        Spawns[2] = SpawnPoints3;
     }
 
     void UpdateLists()
@@ -102,52 +98,25 @@ public class WaveManger : MonoBehaviour
         {
             SpawnPoints1[i] = spawnPoints1[i];
         }
-
-        //Fill the second array with spawn points tagged "SpawnPoint2"
-        GameObject[] spawnPoints2 = GameObject.FindGameObjectsWithTag("SpawnPoint2");
-        for(int i = 0; i < SpawnPoints2.Length && i < spawnPoints2.Length; i++)
-        {
-            SpawnPoints2[i] = spawnPoints2[i];
-        }
-
-        //Fill the third array with spawn points tagged "SpawnPoint3"
-        GameObject[] spawnPoints3 = GameObject.FindGameObjectsWithTag("SpawnPoint3");
-        for(int i = 0; i < SpawnPoints3.Length && i < spawnPoints3.Length; i++)
-        {
-            SpawnPoints3[i] = spawnPoints3[i];
-        }
-
-        // Fill the master array with each of the other arrays
-        Spawns[0] = SpawnPoints1;
-        Spawns[1] = SpawnPoints2;
-        Spawns[2] = SpawnPoints3;
     }
-    void SpawnEnemies()
+    IEnumerator SpawnEnemies()
     {
-        if(spawnTime <= 0 && !FirstCheckpoint)
+        while (true)
         {
-            for(int i = 0; i < numSharks;i++)
+            if (spawnTime <= 0 && !FirstCheckpoint)
             {
-                foreach(GameObject spawn in SpawnPoints1)
+                for (int i = 0; i < numSharks; i++)
                 {
-                    Vector3 spawnpos = spawn.transform.position;
-                    spawnpos.z = -2;
-                    Instantiate(SharkPrefab, spawnpos, Quaternion.identity);
+                    foreach (GameObject spawn in SpawnPoints1)
+                    {
+                        Vector3 spawnpos = spawn.transform.position;
+                        spawnpos.z = -2;
+                        Instantiate(SharkPrefab, spawnpos, Quaternion.identity);
+                    }
                 }
+                spawnTime = 5f; 
             }
+            yield return new WaitForSeconds(1f);
         }
-        //if (spawnTime <= 0)
-        //{
-        //    for (int i = 0; i < NumSharks; i++)
-        //    {
-        //        foreach (GameObject enemspawn in enemySpawn)
-        //        {
-        //            Vector3 spawnPosition = enemspawn.transform.position;
-        //            spawnPosition.z = -2;
-        //            Instantiate(Shark, spawnPosition, Quaternion.identity);
-        //        }
-        //    }
-        //    spawnTime = 5;
-        //}
     }
 }

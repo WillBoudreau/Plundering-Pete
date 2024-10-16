@@ -32,16 +32,16 @@ public class SharkBahaviour : Enemy
     }
     public override void Move()
     {
-        if(Vector2.Distance(transform.position, player.transform.position) < detectionDistance)
-        {
-            float DistanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
-            if(DistanceToPlayer < detectionDistance)
-            {
-                Vector3 targetPosition = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
-                targetPosition.z = -2;
-                transform.position = targetPosition;
-            }   
-        }
+        Vector3 targetPosition = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+        targetPosition.z = -2;
+        transform.position = targetPosition;
+        // if(Vector2.Distance(transform.position, player.transform.position) < detectionDistance)
+        // {
+        //     float DistanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
+        //     if(DistanceToPlayer < detectionDistance)
+        //     {
+        //     }   
+        // }
     }
     public void OnCollisionEnter2D(Collision2D collision)
     {

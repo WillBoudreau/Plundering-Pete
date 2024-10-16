@@ -36,8 +36,8 @@ public class LevelManager : MonoBehaviour
         {
             collectorManager.SpawnDoubloons();
             musicChanger.PlayNextTrack();
-            waveManager.Start();
-            RespawnObjects();
+            waveManager.SetAll();
+            //RespawnObjects();
         }
     }
 
