@@ -6,7 +6,7 @@ public class WaveManger : MonoBehaviour
 {
     //Class calls
     [Header("Classes")]
-
+    public DistanceTracker distanceTracker;
     [Header("Variables")]
     //List of all the enemy objects
     public List<GameObject> Sharks;

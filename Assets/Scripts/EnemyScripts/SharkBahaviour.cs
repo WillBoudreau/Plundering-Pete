@@ -11,7 +11,7 @@ public class SharkBahaviour : Enemy
     public float stoppingDistance;
     public float detectionDistance;
     public float maxHealth;
-    float bottomY = -13f;
+    float bottomY = -15f;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,7 +34,7 @@ public class SharkBahaviour : Enemy
     }
     public override void Move()
     {
-        if(transform.position.y < -15)
+        if(transform.position.y <= bottomY)
         {
             Debug.Log("Dead");
             Destroy(gameObject);
