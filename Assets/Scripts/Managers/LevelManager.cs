@@ -2,24 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
-    public string levelName;
+    [Header("Level Manager")]
+    [Header("Class Calls")]
     public CollectorManager collectorManager;
     public MusicChanger musicChanger;
     public WaveManger waveManager;
-    public GameObject[] obstacles;
-    public GameObject[] gold;
-    public GameObject[] enemies;
-
-    private Vector3[] obstaclePositions;
-    private Vector3[] goldPositions;
-    private Vector3[] enemyPositions;
+    public UIManager uiManager;
+    public ObstacleManager obstacleManager;
+    [Header("Loading Screen")]
+    public List<AsyncOperation> scenesToLoad = new List<AsyncOperation>();
+    [Header("Level Variables")]
+    public string levelName;
+    public Transform playerSpawnPoint; 
 
     void Start()
     {
-        SaveInitialPositions();
+        
     }
 
     // Update is called once per frame
@@ -32,12 +34,11 @@ public class LevelManager : MonoBehaviour
     {
         Debug.Log("Level load requested for: " + name);
         SceneManager.LoadScene(name);
+
         if (name == "GameTestScene")
         {
-            collectorManager.SpawnDoubloons();
-            musicChanger.PlayNextTrack();
-            waveManager.SetAll();
-            //RespawnObjects();
+            // Respawn the objects when the scene is reloaded
+            StartCoroutine(WaitForSceneToLoadAndRespawn(name));
         }
     }
 
@@ -47,43 +48,53 @@ public class LevelManager : MonoBehaviour
         Application.Quit();
     }
 
-    private void SaveInitialPositions()
+    private IEnumerator WaitForSceneToLoadAndRespawn(string sceneName)
     {
-        obstaclePositions = new Vector3[obstacles.Length];
-        goldPositions = new Vector3[gold.Length];
-        enemyPositions = new Vector3[enemies.Length];
+        yield return new WaitForSeconds(uiManager.fadeTime); // Adjust timing if needed
 
-        for (int i = 0; i < obstacles.Length; i++)
-        {
-            obstaclePositions[i] = obstacles[i].transform.position;
-        }
+        Debug.Log("Scene Loaded. Respawning Objects...");
 
-        for (int i = 0; i < gold.Length; i++)
-        {
-            goldPositions[i] = gold[i].transform.position;
-        }
+        // Rest of the setup
+        collectorManager.hasSpawnedDoubloons = false;   
+        obstacleManager.hasSpawnedRocks = false;
+        musicChanger.PlayNextTrack();
+        waveManager.SetAll();
+    }   
 
-        for (int i = 0; i < enemies.Length; i++)
+    private void SetPlayerSpawnPoint()
+    {
+        GameObject player = GameObject.FindWithTag("Player");
+        if (player != null && playerSpawnPoint != null)
         {
-            enemyPositions[i] = enemies[i].transform.position;
+            player.transform.position = playerSpawnPoint.position;
         }
     }
 
-    private void RespawnObjects()
+    private IEnumerator WaitForScreenLoad(string sceneName)
     {
-        for (int i = 0; i < obstacles.Length; i++)
+        yield return new WaitForSeconds(uiManager.fadeTime);
+        Debug.Log("Loading Scene Starting");
+
+        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
+        operation.completed += OperationCompleted;
+        scenesToLoad.Add(operation);
+    }
+
+    public float GetLoadingProgress()
+    {
+        float totalprogress = 0;
+
+        foreach (AsyncOperation operation in scenesToLoad)
         {
-            obstacles[i].transform.position = obstaclePositions[i];
+            totalprogress += operation.progress;
         }
 
-        for (int i = 0; i < gold.Length; i++)
-        {
-            gold[i].transform.position = goldPositions[i];
-        }
+        return totalprogress / scenesToLoad.Count;
+    }
 
-        for (int i = 0; i < enemies.Length; i++)
-        {
-            enemies[i].transform.position = enemyPositions[i];
-        }
+    private void OperationCompleted(AsyncOperation operation)
+    {
+        Debug.Log("Scene Loaded");
+        scenesToLoad.Remove(operation);
     }
 }

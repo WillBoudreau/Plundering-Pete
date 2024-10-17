@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
 
@@ -20,6 +21,7 @@ public class UIManager : MonoBehaviour
     public static UIManager instance;
     [Header("Class calls")]
     public PlayerBehaviour player;
+    public LevelManager levelManager;
     [Header("UI GameObjects")]
     public GameObject mainMenu;
     public GameObject optionsMenu;
@@ -29,11 +31,16 @@ public class UIManager : MonoBehaviour
     public GameObject winMenu;
     public GameObject upgradesMenu;
     public GameObject InstructionsScreen;
+    public GameObject LoadingScreen;
     [Header("Texts")]
     public TextMeshProUGUI playerCoins;
     public TextMeshProUGUI playerSharkKills;
     public TextMeshProUGUI playerSerpentKills;
     public TextMeshProUGUI playerShipKills;
+    [Header("Loading Bar")]
+    public CanvasGroup loadingScreenCanvasGroup;
+    public float fadeTime = 0.5f;
+    public Image loadingBar;
 
     public void UpdateUI()
     {
@@ -140,5 +147,71 @@ public class UIManager : MonoBehaviour
                 currentGameState = GameState.MainMenu;
                 break;
         }
+    }
+    public void UILoadingScreen(GameObject uiPanel)
+    {
+        StartCoroutine(LoadingUIFadeIN());
+        StartCoroutine(DelayedSwitchUIPanel(fadeTime, uiPanel));
+    }
+    private IEnumerator LoadingUIFadeOut()
+    {
+        Debug.Log("Starting Fadeout");
+
+        float timer = 0;
+
+        while (timer < fadeTime)
+        {
+            loadingScreenCanvasGroup.alpha = Mathf.Lerp(1, 0, timer/fadeTime);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        loadingScreenCanvasGroup.alpha = 0;
+        LoadingScreen.SetActive(false);
+
+        Debug.Log("Ending Fadeout");
+    }
+    private IEnumerator LoadingUIFadeIN()
+    {
+        Debug.Log("Starting Fadein");
+        float timer = 0;
+        LoadingScreen.SetActive(true);
+
+        while (timer < fadeTime)
+        {
+            loadingScreenCanvasGroup.alpha = Mathf.Lerp(0, 1, timer / fadeTime);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        loadingScreenCanvasGroup.alpha = 1;
+
+        Debug.Log("Ending Fadein");
+        StartCoroutine(LoadingBarProgress());
+    }
+   private IEnumerator LoadingBarProgress()
+    {
+        Debug.Log("Starting Progress Bar");
+        while (levelManager.scenesToLoad.Count <= 0)
+        {
+            //waiting for loading to begin
+            yield return null;
+        }
+        while (levelManager.scenesToLoad.Count > 0)
+        {
+            loadingBar.fillAmount = levelManager.GetLoadingProgress();
+            yield return null;
+        }
+        yield return new WaitForEndOfFrame();
+        Debug.Log("Ending Progress Bar");
+        StartCoroutine(LoadingUIFadeOut());
+        loadingBar.fillAmount = 0;
+    }
+    private IEnumerator DelayedSwitchUIPanel(float time, GameObject uiPanel)
+    {
+        yield return new WaitForSeconds(time);
+        DeactivateAllUI();
+        LoadingScreen.SetActive(true);
+        uiPanel.SetActive(true);
     }
 }

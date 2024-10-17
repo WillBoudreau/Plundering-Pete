@@ -10,7 +10,7 @@ public class CollectorManager : MonoBehaviour
     public List<GameObject> Doubloons = new List<GameObject>();
     public int numofDoubloons;
     public int numofCoins;
-    private bool hasSpawnedDoubloons = false; 
+    public bool hasSpawnedDoubloons = false; 
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +39,7 @@ public class CollectorManager : MonoBehaviour
 
     public void SpawnDoubloons()
     {
+        Debug.Log("Spawned Doubloons");
         if (levelManager.levelName == "GameTestScene" && !hasSpawnedDoubloons)
         {
             for (int i = 0; i < numofDoubloons; i++)

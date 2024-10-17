@@ -85,6 +85,7 @@ public class SerpentBehaviour : Enemy
         }
         if(collision.gameObject.tag == "Bullet")
         {
+            Destroy(collision.gameObject);
             TakeDamage(player.damage);
         }
     }
