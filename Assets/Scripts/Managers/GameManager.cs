@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
             EnablePlayer();
             Time.timeScale = 1;
         }
-        else if(uiManager.currentGameState == UIManager.GameState.Pause)
+        else if(uiManager.currentGameState == UIManager.GameState.Pause | uiManager.currentGameState == UIManager.GameState.GameOver)
         {
             Time.timeScale = 0;
             DisablePlayer();

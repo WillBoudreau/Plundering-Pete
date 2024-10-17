@@ -38,7 +38,7 @@ public class LevelManager : MonoBehaviour
         if (name == "GameTestScene")
         {
             // Respawn the objects when the scene is reloaded
-            StartCoroutine(WaitForSceneToLoadAndRespawn(name));
+            StartCoroutine(WaitForSceneToLoadAndRespawn());
         }
     }
 
@@ -48,7 +48,7 @@ public class LevelManager : MonoBehaviour
         Application.Quit();
     }
 
-    private IEnumerator WaitForSceneToLoadAndRespawn(string sceneName)
+    private IEnumerator WaitForSceneToLoadAndRespawn()
     {
         yield return new WaitForSeconds(uiManager.fadeTime); // Adjust timing if needed
 

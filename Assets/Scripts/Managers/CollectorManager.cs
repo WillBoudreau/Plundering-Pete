@@ -5,12 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class CollectorManager : MonoBehaviour
 {
+    [Header("Class calls")]
     public LevelManager levelManager;
+    [Header("Variables")]
     public GameObject Doubloon;
     public List<GameObject> Doubloons = new List<GameObject>();
     public int numofDoubloons;
     public int numofCoins;
-    public bool hasSpawnedDoubloons = false; 
+    public bool hasSpawnedDoubloons; 
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +27,7 @@ public class CollectorManager : MonoBehaviour
         AddDoubloonsToList();
         SpawnDoubloons();
     }
-
+    //Add doubloons to list
     void AddDoubloonsToList()
     {
         if (Doubloons.Count <= 0)
@@ -36,7 +38,7 @@ public class CollectorManager : MonoBehaviour
             }
         }
     }
-
+    //Spawn Doubloons from list
     public void SpawnDoubloons()
     {
         Debug.Log("Spawned Doubloons");

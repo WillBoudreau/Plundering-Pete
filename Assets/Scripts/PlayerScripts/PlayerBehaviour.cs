@@ -154,13 +154,13 @@ public class PlayerBehaviour : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("Collided with: " + other.gameObject.tag);
-        if (other.gameObject.tag == "WinTrig")
+        switch(other.gameObject.tag)
         {
+            case "WinTrig":
             Win = true;
             uIManager.SetGameState("Win");
-        }
-        if (other.gameObject.tag == "Gold")
-        {
+            break;
+            case "Gold":
             if(inventoryManager.IsMax == false)
             {
                 Doubloons++;
@@ -173,14 +173,13 @@ public class PlayerBehaviour : MonoBehaviour
                 other.gameObject.SetActive(true);
                 magnet = 0;
             }
-        }
-        if (other.gameObject.tag == "Obstacle")
-        {
+            break;
+            case "Obstacle":
             TakeDamage(other.gameObject.GetComponent<Obstacle>().damage);
-        }
-        if(other.gameObject.tag == "Enemy")
-        {
+            break;
+            case "Shark":
             TakeDamage(other.gameObject.GetComponent<SharkBahaviour>().damage);
+            break;
         }
     }
 
@@ -190,6 +189,7 @@ public class PlayerBehaviour : MonoBehaviour
         {
             healthManager.IsDead = true;
             playerHealth = 0;
+            //gameObject.SetActive(false);
             uIManager.SetGameState("GameOver");
             ResetHealth();
         }

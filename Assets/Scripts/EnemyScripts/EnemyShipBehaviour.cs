@@ -8,8 +8,11 @@ public class EnemyShipBehaviour : Enemy
     [Header("EnemyShip Values")]
     //EnemyShip Values
     public float stoppingDistance;
-    public float detectionDistance;
     public float maxHealth;
+    public float CanonVelocity;
+    public float fireRate;
+    public GameObject CanonBall;
+    public Transform CanonFirePoint;
 
     // Start is called before the first frame update
     void Start()
@@ -21,27 +24,36 @@ public class EnemyShipBehaviour : Enemy
         maxHealth = 2;
         damage = 1;
         stoppingDistance = 2;
-        detectionDistance = 10;
-        
+        CanonVelocity = 25f;
+        fireRate = 5f;
     }
 
     // Update is called once per frame
     void Update()
     {
+        fireRate -= Time.deltaTime;
         player = GameObject.Find("Player").GetComponent<PlayerBehaviour>();
         Move();
+        HandleShooting();
     }
     public override void Move()
     {
-        if(Vector2.Distance(transform.position, player.transform.position) < detectionDistance)
+        
+    }
+    void HandleShooting()
+    {
+        if(fireRate <= 0)
         {
-            float DistanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
-            if(DistanceToPlayer < detectionDistance)
-            {
-                Vector3 targetPosition = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
-                targetPosition.z = -2;
-                transform.position = targetPosition;
-            }
+            float bulletSpawnDist = 1.0f;
+            Vector3 CanonBallSpawnPos = CanonFirePoint.position + (CanonFirePoint.forward * bulletSpawnDist);
+            CanonBallSpawnPos.z = -2;
+        
+            //musicManager.PlaySound(0);
+            GameObject CannonBall = Instantiate(CanonBall,CanonBallSpawnPos, Quaternion.identity);
+            //Vector2 shootdirection = (mouseWorldPOS - (Vector2)transform.position).normalized;
+            CannonBall.GetComponent<Rigidbody2D>().velocity = Vector2.up * CanonVelocity;
+            Destroy(CannonBall, 5.0f);
+            fireRate = 5f;     
         }
     }
     public override void TakeDamage(float damage)

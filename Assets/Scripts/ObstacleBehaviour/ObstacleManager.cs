@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class ObstacleManager : MonoBehaviour
 {
+    [Header("Class Calls")]
     public LevelManager levelManager;
+    [Header("Variables")]
     public GameObject Rock;
     public List<GameObject> obstacle_Rock = new List<GameObject>();
     public int obstacle_Rock_Count;
@@ -27,6 +29,7 @@ public class ObstacleManager : MonoBehaviour
         spawnRocks();
         AddRocksToList();
     }
+    //Add the Rocks to a list
     void AddRocksToList()
     {
         if (obstacle_Rock.Count <= 0)
@@ -37,7 +40,7 @@ public class ObstacleManager : MonoBehaviour
             }
         }
     }
-
+    //Spawn Rocks dependent on how many in the array
     void spawnRocks()
     {
         Debug.Log("Spawned Rocks");

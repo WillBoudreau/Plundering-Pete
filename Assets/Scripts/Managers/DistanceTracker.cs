@@ -25,7 +25,6 @@ public class DistanceTracker : MonoBehaviour
     {
         Timer();
         TrackDist();
-        Checkpoints();
     }
     void SetValues()
     {
@@ -43,12 +42,5 @@ public class DistanceTracker : MonoBehaviour
     {
         //Tracks the time and translates into distance
         ditanceTracker.value = GameTimer;
-    }
-    void Checkpoints()
-    {
-        if(GameTimer >= 25f)
-        {
-            waveManger.FirstCheckpoint = true;
-        }
     }
 }

@@ -6,7 +6,7 @@ public class WaveManger : MonoBehaviour
 {
     //Class calls
     [Header("Classes")]
-
+    public DistanceTracker distanceTracker;
     [Header("Variables")]
     //List of all the enemy objects
     public List<GameObject> Sharks;
@@ -42,6 +42,7 @@ public class WaveManger : MonoBehaviour
     {
         Timer();
         FillArrays();
+        UpdateCheckpoints(distanceTracker.GameTimer);
         StartCoroutine(SpawnEnemies());
     }
     void Timer()
@@ -53,9 +54,7 @@ public class WaveManger : MonoBehaviour
         //Set the number of starting enemies
         numSharks = 50;
         numSerpents = 1;
-        numShips = 0;
-
-        Debug.Log("Number of Sharks: " + numSharks);
+        numShips = 1;
         
         //Update Lists after initiating the values
         UpdateLists();
@@ -93,11 +92,29 @@ public class WaveManger : MonoBehaviour
             SpawnPoints1[i] = spawnPoints1[i];
         }
     }
+    public void UpdateCheckpoints(float value)
+    {
+        if(value == distanceTracker.Distance/4)
+        {
+            FirstCheckpoint = true;
+        }
+        else if(value == distanceTracker.Distance/2)
+        {
+            SecondCheckpoint = true;
+        }
+        else 
+        {
+            ThirdCheckpoint = true;
+        }
+        // FirstCheckpoint = false;
+        // SecondCheckpoint = false;
+        // ThirdCheckpoint = false;
+    }
     IEnumerator SpawnEnemies()
     {
         while (true)
         {
-            if (spawnTime <= 0 && !FirstCheckpoint)
+            if (spawnTime <= 0 && FirstCheckpoint)
             {
                 for (int i = 0; i < numSharks; i++)
                 {
@@ -110,7 +127,7 @@ public class WaveManger : MonoBehaviour
                 }
                 spawnTime = 5f; 
             }
-            if(spawnTime <= 0 && FirstCheckpoint)
+            if(spawnTime <= 0 && SecondCheckpoint)
             {
                 for(int i = 0; i < numSerpents;i++)
                 {
@@ -119,6 +136,20 @@ public class WaveManger : MonoBehaviour
                         Vector3 spawnpos = spawn.transform.position;
                         spawnpos.z = -2;
                         Instantiate(SerpentPrefab, spawnpos, Quaternion.identity);
+                    }
+                }
+                spawnTime = 5f;
+            }
+            yield return new WaitForSeconds(1f);
+            if(spawnTime <= 0 && ThirdCheckpoint)
+            {
+                for(int i = 0; i < numSerpents;i++)
+                {
+                    foreach(GameObject spawn in SpawnPoints1)
+                    {
+                        Vector3 spawnpos = spawn.transform.position;
+                        spawnpos.z = -2;
+                        Instantiate(ShipPrefab, spawnpos, Quaternion.identity);
                     }
                 }
                 spawnTime = 5f;

@@ -5681,7 +5681,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1007322668
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5990,7 +5990,7 @@ MonoBehaviour:
   musicChanger: {fileID: 2083907201}
   waveManager: {fileID: 1713031254}
   uiManager: {fileID: 1728282020}
-  obstacleManager: {fileID: 0}
+  obstacleManager: {fileID: 1683598818}
   levelName: 
   playerSpawnPoint: {fileID: 0}
 --- !u!114 &1077516791 stripped
@@ -9288,6 +9288,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37f8474392495e64e86e5db000e1cdaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  distanceTracker: {fileID: 1547232565}
   Sharks: []
   Serpents: []
   Ships: []
@@ -9297,7 +9298,7 @@ MonoBehaviour:
   numSharks: 50
   numSerpents: 0
   numShips: 0
-  spawnTime: 0
+  spawnTime: 5
   FirstCheckpoint: 0
   SecondCheckpoint: 0
   ThirdCheckpoint: 0
@@ -9365,9 +9366,9 @@ MonoBehaviour:
   playerSharkKills: {fileID: 312332215}
   playerSerpentKills: {fileID: 1829017820}
   playerShipKills: {fileID: 1565549284}
-  loadingScreenCanvasGroup: {fileID: 788866813}
+  loadingScreenCanvasGroup: {fileID: 0}
   fadeTime: 0.5
-  loadingBar: {fileID: 167484984}
+  loadingBar: {fileID: 0}
 --- !u!1 &1742792122
 GameObject:
   m_ObjectHideFlags: 0
