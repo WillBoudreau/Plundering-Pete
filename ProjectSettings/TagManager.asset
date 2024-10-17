@@ -13,6 +13,7 @@ TagManager:
   - Checkpoint
   - SpawnPoint1
   - PlayerSpawn
+  - Shark
   layers:
   - Default
   - TransparentFX
