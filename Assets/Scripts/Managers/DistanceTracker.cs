@@ -12,35 +12,31 @@ public class DistanceTracker : MonoBehaviour
     [Header("Variables")]
     public float Distance;
     public float GameTimer;
+    public Transform startPosition;
+    public Transform endPosition;
     [Header("UI elements")]
-    public Slider ditanceTracker;
-    // Start is called before the first frame update
-    void Start()
-    {
-        SetValues();
-    }
-
+    public Slider distanceTracker;
     // Update is called once per frame
     void Update()
     {
-        Timer();
+        startPosition = GameObject.Find("StartPos").transform;
+        endPosition = GameObject.Find("EndPOS").transform;
+        SetValues();
         TrackDist();
     }
+
     void SetValues()
     {
-        //Set all starting values
-        Distance = 100f;
-        GameTimer = 0f;
-        ditanceTracker.maxValue = Distance;
+        // Set all starting values
+        Distance = Vector3.Distance(startPosition.position, endPosition.position);
+        distanceTracker.maxValue = Distance;
+        Debug.Log("Distance: " + Distance); 
+        Debug.Log("Distval: " + distanceTracker.maxValue);
     }
-    void Timer()
-    {
-        //Overall Game timer
-        GameTimer += Time.deltaTime;
-    }
+
     void TrackDist()
     {
-        //Tracks the time and translates into distance
-        ditanceTracker.value = GameTimer;
+        float playerDistance = Vector3.Distance(startPosition.position, playerBehaviour.transform.position);
+        distanceTracker.value = playerDistance;
     }
 }

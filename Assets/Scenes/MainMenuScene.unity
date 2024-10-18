@@ -1383,6 +1383,7 @@ GameObject:
   - component: {fileID: 177806782}
   - component: {fileID: 177806784}
   - component: {fileID: 177806783}
+  - component: {fileID: 177806785}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -1464,6 +1465,19 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &177806785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 177806781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aad998990bb25fe4388d1db1200192f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
 --- !u!1 &232086087
 GameObject:
   m_ObjectHideFlags: 0
@@ -8133,7 +8147,6 @@ GameObject:
   - component: {fileID: 1547232562}
   - component: {fileID: 1547232563}
   - component: {fileID: 1547232564}
-  - component: {fileID: 1547232565}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -8191,13 +8204,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab0dac5deeb828449b25b46fabf9560c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1547232565
+--- !u!1 &1556131824
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1556131825}
+  - component: {fileID: 1556131826}
+  m_Layer: 0
+  m_Name: DistanceTracker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1556131825
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1556131824}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 325.01624, y: -167.43683, z: 2.9312022}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1612513595}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1556131826
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1547232561}
+  m_GameObject: {fileID: 1556131824}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3581f1bd9e8e635489f8efc8deb2b8d2, type: 3}
@@ -8207,7 +8252,9 @@ MonoBehaviour:
   waveManger: {fileID: 1713031254}
   Distance: 0
   GameTimer: 0
-  ditanceTracker: {fileID: 364805127}
+  startPosition: {fileID: 0}
+  endPosition: {fileID: 0}
+  distanceTracker: {fileID: 364805127}
 --- !u!1 &1565549282
 GameObject:
   m_ObjectHideFlags: 0
@@ -8493,6 +8540,7 @@ Transform:
   - {fileID: 1826889078}
   - {fileID: 729927824}
   - {fileID: 1713031253}
+  - {fileID: 1556131825}
   m_Father: {fileID: 1547232562}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1641570941
@@ -9288,7 +9336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37f8474392495e64e86e5db000e1cdaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceTracker: {fileID: 1547232565}
+  distanceTracker: {fileID: 0}
   Sharks: []
   Serpents: []
   Ships: []

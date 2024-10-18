@@ -43,7 +43,6 @@ public class ObstacleManager : MonoBehaviour
     //Spawn Rocks dependent on how many in the array
     void spawnRocks()
     {
-        Debug.Log("Spawned Rocks");
         if (levelManager.levelName == "GameTestScene" && !hasSpawnedRocks)
         {
             for (int i = 0; i < obstacle_Rock_Count; i++)
