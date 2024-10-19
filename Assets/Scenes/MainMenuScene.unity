@@ -6005,8 +6005,10 @@ MonoBehaviour:
   waveManager: {fileID: 1713031254}
   uiManager: {fileID: 1728282020}
   obstacleManager: {fileID: 1683598818}
+  player: {fileID: 0}
   levelName: 
   playerSpawnPoint: {fileID: 0}
+  safeDistance: 5
 --- !u!114 &1077516791 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7458618460828365315, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
@@ -9349,11 +9351,19 @@ MonoBehaviour:
   numSharks: 50
   numSerpents: 0
   numShips: 0
-  spawnTime: 5
-  FirstCheckpoint: 0
-  SecondCheckpoint: 0
-  ThirdCheckpoint: 0
+  spawnTime: 2
+  FirstCheckpoint: 1
+  SecondCheckpoint: 1
+  ThirdCheckpoint: 1
   SpawnPoints1:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  SpawnPoints2:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  SpawnPoints3:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}

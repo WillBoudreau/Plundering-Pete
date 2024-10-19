@@ -33,6 +33,8 @@ public class WaveManger : MonoBehaviour
     [Header("Arrays")]
     //List of Spawn points
     public GameObject[] SpawnPoints1;
+    public GameObject[] SpawnPoints2;
+    public GameObject[] SpawnPoints3;
     public List<GameObject> Allenemies;
     private int currentSpawnPointIndex = 0;
     void Start()
@@ -59,8 +61,8 @@ public class WaveManger : MonoBehaviour
     {
         //Set the number of starting enemies
         numSharks = 50;
-        numSerpents = 1;
-        numShips = 1;
+        numSerpents = 50;
+        numShips = 50;
         
         //Update Lists after initiating the values
         UpdateLists();
@@ -69,6 +71,8 @@ public class WaveManger : MonoBehaviour
     void SetArrays()
     {
         SpawnPoints1 = new GameObject[3];
+        SpawnPoints2 = new GameObject[3];
+        SpawnPoints3 = new GameObject[3];
         Allenemies = new List<GameObject>();
     }
 
@@ -94,9 +98,22 @@ public class WaveManger : MonoBehaviour
     {
         //Fill the first array with spawn points tagged "SpawnPoint1"
         GameObject[] spawnPoints1 = GameObject.FindGameObjectsWithTag("SpawnPoint1");
+        GameObject[] spawnPoints2 = GameObject.FindGameObjectsWithTag("SpawnPoint2");
+        GameObject[] spawnPoints3 = GameObject.FindGameObjectsWithTag("SpawnPoint3");
+
         for(int i = 0; i < SpawnPoints1.Length && i < spawnPoints1.Length; i++)
         {
             SpawnPoints1[i] = spawnPoints1[i];
+        }
+
+        for(int i = 0; i < SpawnPoints2.Length && i < spawnPoints2.Length; i++)
+        {
+            SpawnPoints2[i] = spawnPoints2[i];
+        }
+
+        for(int i = 0; i < SpawnPoints3.Length && i < spawnPoints3.Length; i++)
+        {
+            SpawnPoints3[i] = spawnPoints3[i];
         }
     }
     IEnumerator SpawnEnemies()
@@ -105,44 +122,35 @@ public class WaveManger : MonoBehaviour
         {
             if (spawnTime <= 0 && FirstCheckpoint)
             {
-                for (int i = 0; i < numSharks; i++)
-                {
-                    Vector3 spawnpos = SpawnPoints1[currentSpawnPointIndex].transform.position;
-                    spawnpos.z = -2;
-                    GameObject newShark = Instantiate(SharkPrefab, spawnpos, Quaternion.identity);
-                    Allenemies.Add(newShark);
-                    currentSpawnPointIndex = (currentSpawnPointIndex + 1) % SpawnPoints1.Length;
-                }
+                SpawnEnemyGroup(SharkPrefab, numSharks, SpawnPoints1);
                 spawnTime = 5f; 
-            }
-            if(spawnTime <= 0 && SecondCheckpoint)
-            {
-                for(int i = 0; i < numSerpents;i++)
-                {
-                    Vector3 spawnpos = SpawnPoints1[currentSpawnPointIndex].transform.position;
-                    spawnpos.z = -2;
-                    GameObject newSerpent = Instantiate(SerpentPrefab, spawnpos, Quaternion.identity);
-                    Allenemies.Add(newSerpent);
-                    currentSpawnPointIndex = (currentSpawnPointIndex + 1) % SpawnPoints1.Length;
-                }
+                SpawnEnemyGroup(SerpentPrefab, numSerpents, SpawnPoints2);
+                spawnTime = 5f;
+                SpawnEnemyGroup(ShipPrefab, numShips, SpawnPoints3);
                 spawnTime = 5f;
             }
-            yield return new WaitForSeconds(1f);
-            if(spawnTime <= 0 && ThirdCheckpoint)
-            {
-                for(int i = 0; i < numShips;i++)
-                {
-                    Vector3 spawnpos = SpawnPoints1[currentSpawnPointIndex].transform.position;
-                    spawnpos.z = -2;
-                    GameObject newShip = Instantiate(ShipPrefab, spawnpos, Quaternion.identity);
-                    Allenemies.Add(newShip);
-                    currentSpawnPointIndex = (currentSpawnPointIndex + 1) % SpawnPoints1.Length;
-                }
-                spawnTime = 5f;
-            }
+            // if(spawnTime <= 0 && SecondCheckpoint)
+            // {
+            // }
+            // if(spawnTime <= 0 && ThirdCheckpoint)
+            // {
+            // }
             yield return new WaitForSeconds(1f);
         }
     }
+
+    void SpawnEnemyGroup(GameObject enemyPrefab, int numEnemies, GameObject[] spawnPoints)
+    {
+        for (int i = 0; i < numEnemies; i++)
+        {
+            Vector3 spawnpos = spawnPoints[currentSpawnPointIndex].transform.position;
+            spawnpos.z = -2;
+            GameObject newEnemy = Instantiate(enemyPrefab, spawnpos, Quaternion.identity);
+            Allenemies.Add(newEnemy);
+            currentSpawnPointIndex = (currentSpawnPointIndex + 1) % spawnPoints.Length;
+        }
+    }
+
     public void UpdateCheckpointStatus(int checkpointIndex, bool status)
     {
         Debug.Log("Checkpoint " + checkpointIndex + " status: " + status);
