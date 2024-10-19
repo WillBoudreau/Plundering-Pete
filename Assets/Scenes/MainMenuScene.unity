@@ -5234,7 +5234,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &884719223
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5652,11 +5652,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 932696558}
   m_CullTransparentMesh: 1
---- !u!1 &942233463 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1745737824268037150, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
-  m_PrefabInstance: {fileID: 478942378}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &950993216
 GameObject:
   m_ObjectHideFlags: 0
@@ -5844,7 +5839,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1007322668
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6179,6 +6174,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1080032325}
   - component: {fileID: 1080032326}
+  - component: {fileID: 1080032328}
+  - component: {fileID: 1080032327}
   m_Layer: 0
   m_Name: UpgradeManager
   m_TagString: Untagged
@@ -6215,10 +6212,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 551069647}
   inventory: {fileID: 1039502979}
-  damageSlot: {fileID: 2096044596}
-  healthSlot: {fileID: 942233463}
-  speedSlot: {fileID: 1502179951}
-  damageText: {fileID: 1779852602}
   healthText: {fileID: 1077516791}
   speedText: {fileID: 1461656693}
   MessageCostText: {fileID: 1151608682}
@@ -6251,6 +6244,43 @@ MonoBehaviour:
   FireRateCost: 0
   StartFireRateCost: 0
   ShipCost: 0
+--- !u!114 &1080032327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1080032324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70514b2a1f322114f9921b75b16ae0e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventory: {fileID: 1039502979}
+  player: {fileID: 551069647}
+  cost: 0
+  damageText: {fileID: 1779852602}
+  costText: {fileID: 1151608682}
+  MaxDamage: 0
+  damageUpgrade:
+  - {fileID: 1452840230}
+  - {fileID: 1732322558}
+  - {fileID: 1679824561}
+--- !u!114 &1080032328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1080032324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef74369c0a99e3b4faa5da2de8eb5ede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventory: {fileID: 1039502979}
+  player: {fileID: 551069647}
+  cost: 0
 --- !u!1 &1088758525
 GameObject:
   m_ObjectHideFlags: 0
@@ -7882,6 +7912,53 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7001577010587437497, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
   m_PrefabInstance: {fileID: 1444767382}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1452840230 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5338968883979651826, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+  m_PrefabInstance: {fileID: 2941383977895402374}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &1452840234
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1452840230}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1459037978
 GameObject:
   m_ObjectHideFlags: 0
@@ -8027,11 +8104,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1502179951 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1745737824268037150, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
-  m_PrefabInstance: {fileID: 108716511}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1514264335
 GameObject:
   m_ObjectHideFlags: 0
@@ -8344,6 +8416,7 @@ MonoBehaviour:
   playerBehaviour: {fileID: 551069647}
   collectorManager: {fileID: 1826889079}
   obstacleManager: {fileID: 1683598818}
+  inventoryManager: {fileID: 1039502979}
   PlayerEnabled: 0
   playerSpawnPoint: {fileID: 0}
 --- !u!114 &1547232564
@@ -9355,6 +9428,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1671259356}
   m_CullTransparentMesh: 1
+--- !u!1 &1679824561 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1744041394810459262, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+  m_PrefabInstance: {fileID: 2941383977895402374}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1683598816
 GameObject:
   m_ObjectHideFlags: 0
@@ -9658,6 +9736,7 @@ MonoBehaviour:
   currentGameState: 0
   player: {fileID: 551069647}
   levelManager: {fileID: 1051185688}
+  inventoryManager: {fileID: 1039502979}
   mainMenu: {fileID: 884719222}
   optionsMenu: {fileID: 1440979893}
   gamePlay: {fileID: 902718851}
@@ -9673,7 +9752,12 @@ MonoBehaviour:
   playerShipKills: {fileID: 1565549284}
   loadingScreenCanvasGroup: {fileID: 0}
   fadeTime: 0.5
-  loadingBar: {fileID: 0}
+  loadingBar: {fileID: 1919307529}
+--- !u!1 &1732322558 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8829330189392537515, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+  m_PrefabInstance: {fileID: 2941383977895402374}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1742792122
 GameObject:
   m_ObjectHideFlags: 0
@@ -10324,6 +10408,8 @@ MonoBehaviour:
   numofDoubloons: 0
   numofCoins: 0
   hasSpawnedDoubloons: 0
+  mapMinBounds: {x: 0, y: 0}
+  mapMaxBounds: {x: 5, y: 50}
 --- !u!1 &1827410775
 GameObject:
   m_ObjectHideFlags: 0
@@ -12457,11 +12543,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!1 &2096044596 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1745737824268037150, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
-  m_PrefabInstance: {fileID: 2941383977895402374}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2128001522
 GameObject:
   m_ObjectHideFlags: 0
@@ -12610,23 +12691,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 227171249040155241, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 227171249040155241, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1080032326}
+      objectReference: {fileID: 1080032327}
     - target: {fileID: 227171249040155241, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 227171249040155241, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SelectUpgrade
+      value: CostCheck
       objectReference: {fileID: 0}
     - target: {fileID: 227171249040155241, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UpgradeManager, Assembly-CSharp
+      value: DamageUpgrade, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 227171249040155241, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
@@ -12727,7 +12808,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5338968883979651826, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1452840234}
   m_SourcePrefab: {fileID: 100100000, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
 --- !u!224 &2941383977895402375 stripped
 RectTransform:

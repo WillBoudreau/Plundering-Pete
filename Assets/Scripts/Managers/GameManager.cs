@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public PlayerBehaviour playerBehaviour;
     public CollectorManager collectorManager;
     public ObstacleManager obstacleManager;
+    public InventoryManager inventoryManager;
     [Header("Variables")]
     public bool PlayerEnabled;
     public Transform playerSpawnPoint;
@@ -47,6 +48,10 @@ public class GameManager : MonoBehaviour
         else if(uiManager.currentGameState == UIManager.GameState.Pause | uiManager.currentGameState == UIManager.GameState.GameOver)
         {
             Time.timeScale = 0;
+            DisablePlayer();
+        }
+        else if(uiManager.currentGameState == UIManager.GameState.GameOver)
+        {
             DisablePlayer();
         }
         else
@@ -101,7 +106,7 @@ public class GameManager : MonoBehaviour
         data.damage = playerBehaviour.damage;
         data.health = playerBehaviour.playerHealth;
         data.speed = playerBehaviour.speed;
-        data.Gold = playerBehaviour.Doubloons;
+        data.Gold = inventoryManager.coinCount;
 
         bf.Serialize(file, data);
         file.Close();
@@ -118,7 +123,7 @@ public class GameManager : MonoBehaviour
             playerBehaviour.playerHealth = data.health;
             playerBehaviour.damage = data.damage;
             playerBehaviour.speed = data.speed;
-            playerBehaviour.Doubloons = data.Gold;
+            inventoryManager.coinCount = data.Gold;
          }
     }
     [System.Serializable]

@@ -13,6 +13,8 @@ public class CollectorManager : MonoBehaviour
     public int numofDoubloons;
     public int numofCoins;
     public bool hasSpawnedDoubloons; 
+    public Vector2 mapMinBounds;
+    public Vector2 mapMaxBounds;
 
     // Start is called before the first frame update
     void Start()
@@ -44,10 +46,14 @@ public class CollectorManager : MonoBehaviour
         {
             for (int i = 0; i < numofDoubloons; i++)
             {
-                Vector3 spawnPosition = new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), -2);
+                Vector3 spawnPosition = GetRandomSpawnPosition();
                 if (Vector3.Distance(spawnPosition, playerTransform.position) < safeDistance)
                 {
-                    spawnPosition = new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), -2);
+                    spawnPosition = GetRandomSpawnPosition();
+                }
+                else if(spawnPosition == Doubloons[i].transform.position)
+                {
+                    spawnPosition = GetRandomSpawnPosition();
                 }
                 else
                 {
@@ -56,5 +62,12 @@ public class CollectorManager : MonoBehaviour
             }
             hasSpawnedDoubloons = true; 
         }
+    }
+
+    Vector3 GetRandomSpawnPosition()
+    {
+        float x = Random.Range(mapMinBounds.x, mapMaxBounds.x);
+        float y = Random.Range(mapMinBounds.y, mapMaxBounds.y);
+        return new Vector3(x, y, -2);
     }
 }

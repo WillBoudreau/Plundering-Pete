@@ -11,7 +11,6 @@ public class PlayerBehaviour : MonoBehaviour
     public float damage;
     public float playerHealth;
     public float magnet;
-    public int Doubloons = 0;
     [Header("Number of Kills")]
     public int SharkKills;
     public int SerpentKills;
@@ -69,7 +68,6 @@ public class PlayerBehaviour : MonoBehaviour
         DoubloonText = GameObject.Find("DoubloonsText").GetComponent<TextMeshProUGUI>();
         levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         healthManager.playerhealth.value = playerHealth;
-        inventoryManager.coinCount = Doubloons;
         //SetValues();
     }
     void HandlePlayer()
@@ -113,10 +111,9 @@ public class PlayerBehaviour : MonoBehaviour
             PlayerLevels[2].SetActive(true);
         }
     }
-    //Update the Doubloon counter
     void UpdateCounter()
     {
-        DoubloonText.text = "Doubloons: " + Doubloons;
+        DoubloonText.text = "Doubloons: " + inventoryManager.coinCount;
     }
     //Handle the players shooting
     void HandleShooting()
@@ -200,8 +197,7 @@ public class PlayerBehaviour : MonoBehaviour
             case "Gold":
             if(inventoryManager.IsMax == false)
             {
-                Doubloons++;
-                inventoryManager.coinCount = Doubloons;
+                inventoryManager.coinCount += 1;
                 other.gameObject.SetActive(false);
             }
             else

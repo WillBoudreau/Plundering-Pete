@@ -10,13 +10,8 @@ public class UpgradeManager : MonoBehaviour
     public PlayerBehaviour player;
     //InventoryManager reference
     public InventoryManager inventory;
-    // UpgradeSlots
-    public GameObject damageSlot;
-    public GameObject healthSlot;
-    public GameObject speedSlot;
     [Header("Text Slots")]
     //Text for the slots
-    public TextMeshProUGUI damageText;
     public TextMeshProUGUI healthText;
     public TextMeshProUGUI speedText;
     public TextMeshProUGUI MessageCostText;
@@ -71,7 +66,6 @@ public class UpgradeManager : MonoBehaviour
     void SetText()
     {
         NumberCoinsText.text = "Doubloons " + inventory.coinCount;
-        damageText.text = "Damage: " + player.damage + " Cost: " + damageCost;
         healthText.text = "Health: " + player.playerHealth + " Cost: " + healthCost;
         speedText.text = "Speed: " + player.speed + " Cost: " + speedCost;
         MagnetText.text = "Magnet: " + player.magnet + " Cost: " + magnetCost;
@@ -119,9 +113,6 @@ public class UpgradeManager : MonoBehaviour
     {
         switch (upgrade)
         {
-            case "Damage":
-                DamageCostCheck();
-                break;
             case "Health":
                 HealthCostCheck();
                 break;
@@ -154,36 +145,6 @@ public class UpgradeManager : MonoBehaviour
                 player.IsLevel2 = false;
                 player.IsLevel3 = true;
             }
-        }
-    }
-    void UpgradeDamage()
-    {
-        if (player.damage < damageMax)
-        {
-            player.damage += damageUpgrade;
-            Debug.Log("Damage upgraded to: " + player.damage);
-            MessageCostText.text = "Damage upgraded to: " + player.damage;
-        }
-        else
-        {
-            Debug.Log("Max damage reached");
-            MessageCostText.text = "Max damage reached";
-            inventory.coinCount += damageCost;
-        }
-    }
-    void DamageCostCheck()
-    {
-        if (inventory.coinCount >= damageCost)
-        {
-            inventory.coinCount -= damageCost;
-            Debug.Log("You have enough coins");
-            UpgradeDamage();
-            damageCost += 15;
-        }
-        else
-        {
-            Debug.Log("You do not have enough coins");
-            MessageCostText.text = "You do not have enough coins";
         }
     }
     void UpgradeHealth()

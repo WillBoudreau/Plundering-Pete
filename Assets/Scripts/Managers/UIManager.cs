@@ -22,6 +22,7 @@ public class UIManager : MonoBehaviour
     [Header("Class calls")]
     public PlayerBehaviour player;
     public LevelManager levelManager;
+    public InventoryManager inventoryManager;
     [Header("UI GameObjects")]
     public GameObject mainMenu;
     public GameObject optionsMenu;
@@ -109,7 +110,8 @@ public class UIManager : MonoBehaviour
     void UpdateGameOver()
     {
         //Set the texts in the Game Over screen
-        playerCoins.text = "Coins Collected: " + player.Doubloons.ToString();
+        playerCoins.text = "Coins Collected: " + inventoryManager.coinCount.ToString();
+        Debug.Log(inventoryManager.coinCount);
         playerSharkKills.text = "Sharks Killed: " + player.SharkKills.ToString();
         playerSerpentKills.text = "Serpents Killed: " + player.SerpentKills.ToString();
         playerShipKills.text = "Ships Sunk: " + player.ShipKills.ToString();

@@ -12,10 +12,13 @@ public class SharkBahaviour : Enemy
     public float detectionDistance;
     public float maxHealth;
     float bottomY = -15f;
+    public GameObject doubloonPrefab;
+
     // Start is called before the first frame update
     void Start()
     {
         renderer = GetComponent<Renderer>();
+        Gold = GameObject.FindGameObjectWithTag("Gold");
         originalColor = renderer.material.color;
         speed = 2;
         health = 2;
@@ -31,6 +34,10 @@ public class SharkBahaviour : Enemy
     {
         player = GameObject.Find("Player").GetComponent<PlayerBehaviour>();
         Move();
+        if(Gold == null)
+        {
+            Gold = GameObject.FindGameObjectWithTag("Gold");
+        }
     }
     public override void Move()
     {
@@ -86,7 +93,9 @@ public class SharkBahaviour : Enemy
     }
     void Death()
     {
+        Instantiate(Gold, transform.position, Quaternion.identity);
         Destroy(gameObject);
         Debug.Log("Shark Kills" + player.SharkKills);
+        player.SharkKills += 1;
     }
 }
