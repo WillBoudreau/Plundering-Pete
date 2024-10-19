@@ -122,6 +122,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &2997848 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5338968883979651826, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+  m_PrefabInstance: {fileID: 108716511}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &23754031
 GameObject:
   m_ObjectHideFlags: 0
@@ -365,6 +370,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 79804371}
   m_CullTransparentMesh: 1
+--- !u!1 &86777432 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5338968883979651826, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+  m_PrefabInstance: {fileID: 1444767382}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &94269945
 GameObject:
   m_ObjectHideFlags: 0
@@ -490,23 +500,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 227171249040155241, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 227171249040155241, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1080032326}
+      objectReference: {fileID: 1080032332}
     - target: {fileID: 227171249040155241, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 227171249040155241, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SelectUpgrade
+      value: CostCheck
       objectReference: {fileID: 0}
     - target: {fileID: 227171249040155241, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UpgradeManager, Assembly-CSharp
+      value: SpeedUpgrade, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 227171249040155241, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
@@ -1535,7 +1545,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Ver 2.41
+  m_text: Ver 2.43
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3522,6 +3532,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &517402562 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1744041394810459262, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+  m_PrefabInstance: {fileID: 108716511}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &532731839
 GameObject:
   m_ObjectHideFlags: 0
@@ -5239,7 +5254,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &884719223
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5438,6 +5453,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 887945055}
   m_CullTransparentMesh: 1
+--- !u!1 &900754622 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8829330189392537515, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+  m_PrefabInstance: {fileID: 108716511}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &902718851
 GameObject:
   m_ObjectHideFlags: 0
@@ -5844,7 +5864,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1007322668
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6187,6 +6207,9 @@ GameObject:
   - component: {fileID: 1080032328}
   - component: {fileID: 1080032327}
   - component: {fileID: 1080032329}
+  - component: {fileID: 1080032332}
+  - component: {fileID: 1080032331}
+  - component: {fileID: 1080032330}
   m_Layer: 0
   m_Name: UpgradeManager
   m_TagString: Untagged
@@ -6223,33 +6246,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 551069647}
   inventory: {fileID: 1039502979}
-  healthText: {fileID: 1077516791}
-  speedText: {fileID: 1461656693}
   MessageCostText: {fileID: 1151608682}
   NumberCoinsText: {fileID: 387048878}
-  MagnetText: {fileID: 786514658}
   CargoText: {fileID: 1526153278}
   FireRateText: {fileID: 411883205}
-  damageUpgrade: 0
-  damageMax: 0
-  healthUpgrade: 0
-  healthMax: 0
-  speedUpgrade: 0
-  speedMax: 0
-  magnetUpgrade: 0
-  magnetMax: 0
   CargoUpgrade: 0
   CargoMax: 0
   FireRateUpgrade: 0
   FireRateMax: 0
-  damageCost: 0
-  StartDanageCost: 0
-  healthCost: 0
-  StartHealthCost: 0
-  speedCost: 0
-  StartSpeedCost: 0
-  magnetCost: 0
-  StartMagnetCost: 0
   CargoCost: 0
   StartCargoCost: 0
   FireRateCost: 0
@@ -6314,6 +6318,72 @@ MonoBehaviour:
   - {fileID: 1189057694}
   - {fileID: 431684031}
   - {fileID: 1055681760}
+--- !u!114 &1080032330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1080032324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d8e5ab5013a7ca4bbe2b5090cb651e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventory: {fileID: 1039502979}
+  player: {fileID: 551069647}
+  cost: 0
+  CargoText: {fileID: 1526153278}
+  costText: {fileID: 1151608682}
+  MaxCargo: 0
+  CargoUpgrade:
+  - {fileID: 1135685405}
+  - {fileID: 1431269637}
+  - {fileID: 1260723178}
+--- !u!114 &1080032331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1080032324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfa59a6b3f97bfb41b1acda3e6c15b04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventory: {fileID: 1039502979}
+  player: {fileID: 551069647}
+  cost: 0
+  MFGText: {fileID: 786514658}
+  costText: {fileID: 1151608682}
+  MaxMagnet: 0
+  BFMUpgrade:
+  - {fileID: 86777432}
+  - {fileID: 1788299820}
+  - {fileID: 1139992408}
+--- !u!114 &1080032332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1080032324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e473aac6336a6e4428dc4a836605d176, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventory: {fileID: 1039502979}
+  player: {fileID: 551069647}
+  cost: 0
+  speedText: {fileID: 1461656693}
+  costText: {fileID: 1151608682}
+  MaxSpeed: 0
+  speedUpgrade:
+  - {fileID: 2997848}
+  - {fileID: 900754622}
+  - {fileID: 517402562}
 --- !u!1 &1088758525
 GameObject:
   m_ObjectHideFlags: 0
@@ -6496,6 +6566,16 @@ MonoBehaviour:
   SharkSpawn: {fileID: 3267169091984192866, guid: f86f17bb3304e9544a00b2e4347a7fa4, type: 3}
   NumSharks: 0
   spawnPoints: []
+--- !u!1 &1135685405 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5338968883979651826, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+  m_PrefabInstance: {fileID: 1336965473}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1139992408 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1744041394810459262, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+  m_PrefabInstance: {fileID: 1444767382}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1150563975
 GameObject:
   m_ObjectHideFlags: 0
@@ -7090,6 +7170,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1243261893}
   m_CullTransparentMesh: 1
+--- !u!1 &1260723178 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1744041394810459262, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+  m_PrefabInstance: {fileID: 1336965473}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1296462014
 GameObject:
   m_ObjectHideFlags: 0
@@ -7369,23 +7454,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 227171249040155241, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 227171249040155241, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1080032326}
+      objectReference: {fileID: 1080032330}
     - target: {fileID: 227171249040155241, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 227171249040155241, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SelectUpgrade
+      value: CostCheck
       objectReference: {fileID: 0}
     - target: {fileID: 227171249040155241, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UpgradeManager, Assembly-CSharp
+      value: GoldStorageUpgrade, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 227171249040155241, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
@@ -7397,7 +7482,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1745737824268037150, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_Name
-      value: UpgradeSlot (3)
+      value: CargoHoldUpgradeSlot
       objectReference: {fileID: 0}
     - target: {fileID: 6756319946861893356, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_text
@@ -7733,6 +7818,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1368000653}
   m_CullTransparentMesh: 1
+--- !u!1 &1431269637 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8829330189392537515, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+  m_PrefabInstance: {fileID: 1336965473}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1440979893
 GameObject:
   m_ObjectHideFlags: 0
@@ -7826,23 +7916,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 227171249040155241, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 227171249040155241, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1080032326}
+      objectReference: {fileID: 1080032331}
     - target: {fileID: 227171249040155241, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 227171249040155241, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SelectUpgrade
+      value: CostCheck
       objectReference: {fileID: 0}
     - target: {fileID: 227171249040155241, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UpgradeManager, Assembly-CSharp
+      value: MFGUpgrade, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 227171249040155241, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
@@ -7854,7 +7944,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1745737824268037150, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_Name
-      value: UpgradeSlot (4)
+      value: MagnetSlot
       objectReference: {fileID: 0}
     - target: {fileID: 6756319946861893356, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_text
@@ -8944,7 +9034,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1745737824268037150, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_Name
-      value: UpgradeSlot (5)
+      value: FireRateSlot
       objectReference: {fileID: 0}
     - target: {fileID: 6756319946861893356, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_text
@@ -10028,6 +10118,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1781372011}
   m_CullTransparentMesh: 1
+--- !u!1 &1788299820 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8829330189392537515, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+  m_PrefabInstance: {fileID: 1444767382}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1806458887
 GameObject:
   m_ObjectHideFlags: 0
