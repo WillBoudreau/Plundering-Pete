@@ -3,7 +3,11 @@ guid: fdf7ff617c470ec4ebe6a5f414dd1e4e
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - Gold: {fileID: 7112107127442301048, guid: 8c67685f1765d5a4582752a597e62618, type: 3}
+  - renderer: {instanceID: 0}
+  - player: {instanceID: 0}
+  - doubloonPrefab: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

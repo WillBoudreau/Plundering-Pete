@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8456556133613244300}
   - component: {fileID: 6407149740483761424}
   m_Layer: 0
-  m_Name: SharkSpawnPoint
+  m_Name: SpawnPoint
   m_TagString: EnemySpawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

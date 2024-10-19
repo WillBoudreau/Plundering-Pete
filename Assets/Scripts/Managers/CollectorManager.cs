@@ -5,12 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class CollectorManager : MonoBehaviour
 {
+    [Header("Class calls")]
     public LevelManager levelManager;
+    [Header("Variables")]
     public GameObject Doubloon;
     public List<GameObject> Doubloons = new List<GameObject>();
     public int numofDoubloons;
     public int numofCoins;
-    private bool hasSpawnedDoubloons = false; 
+    public bool hasSpawnedDoubloons; 
+    public Vector2 mapMinBounds;
+    public Vector2 mapMaxBounds;
 
     // Start is called before the first frame update
     void Start()
@@ -23,9 +27,8 @@ public class CollectorManager : MonoBehaviour
     void Update()
     {
         AddDoubloonsToList();
-        SpawnDoubloons();
     }
-
+    //Add doubloons to list
     void AddDoubloonsToList()
     {
         if (Doubloons.Count <= 0)
@@ -36,16 +39,35 @@ public class CollectorManager : MonoBehaviour
             }
         }
     }
-
-    public void SpawnDoubloons()
+    //Spawn Doubloons from list
+    public void SpawnDoubloons(Transform playerTransform, float safeDistance)
     {
         if (levelManager.levelName == "GameTestScene" && !hasSpawnedDoubloons)
         {
             for (int i = 0; i < numofDoubloons; i++)
             {
-                Instantiate(Doubloons[i], new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), -2), Quaternion.identity);
+                Vector3 spawnPosition = GetRandomSpawnPosition();
+                if (Vector3.Distance(spawnPosition, playerTransform.position) < safeDistance)
+                {
+                    spawnPosition = GetRandomSpawnPosition();
+                }
+                else if(spawnPosition == Doubloons[i].transform.position)
+                {
+                    spawnPosition = GetRandomSpawnPosition();
+                }
+                else
+                {
+                    Instantiate(Doubloons[i], spawnPosition, Quaternion.identity);
+                }
             }
             hasSpawnedDoubloons = true; 
         }
+    }
+
+    Vector3 GetRandomSpawnPosition()
+    {
+        float x = Random.Range(mapMinBounds.x, mapMaxBounds.x);
+        float y = Random.Range(mapMinBounds.y, mapMaxBounds.y);
+        return new Vector3(x, y, -2);
     }
 }
