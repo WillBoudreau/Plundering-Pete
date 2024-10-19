@@ -111,7 +111,6 @@ public class UIManager : MonoBehaviour
     {
         //Set the texts in the Game Over screen
         playerCoins.text = "Coins Collected: " + inventoryManager.coinCount.ToString();
-        Debug.Log(inventoryManager.coinCount);
         playerSharkKills.text = "Sharks Killed: " + player.SharkKills.ToString();
         playerSerpentKills.text = "Serpents Killed: " + player.SerpentKills.ToString();
         playerShipKills.text = "Ships Sunk: " + player.ShipKills.ToString();

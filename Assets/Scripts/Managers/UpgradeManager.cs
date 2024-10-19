@@ -12,7 +12,6 @@ public class UpgradeManager : MonoBehaviour
     public InventoryManager inventory;
     [Header("Text Slots")]
     //Text for the slots
-    public TextMeshProUGUI healthText;
     public TextMeshProUGUI speedText;
     public TextMeshProUGUI MessageCostText;
     public TextMeshProUGUI NumberCoinsText;
@@ -21,10 +20,6 @@ public class UpgradeManager : MonoBehaviour
     public TextMeshProUGUI FireRateText;
     [Header("Variables")]
     //Values and their max values
-    public float damageUpgrade;
-    public float damageMax;
-    public float healthUpgrade;
-    public float healthMax;
     public float speedUpgrade;
     public float speedMax;
     public float magnetUpgrade;
@@ -35,10 +30,6 @@ public class UpgradeManager : MonoBehaviour
     public float FireRateMax;
 
     //Start Cost and Cost for the upgrades
-    public int damageCost;
-    public int StartDanageCost;
-    public int healthCost;
-    public int StartHealthCost;
     public int speedCost;
     public int StartSpeedCost;
     public int magnetCost;
@@ -66,7 +57,6 @@ public class UpgradeManager : MonoBehaviour
     void SetText()
     {
         NumberCoinsText.text = "Doubloons " + inventory.coinCount;
-        healthText.text = "Health: " + player.playerHealth + " Cost: " + healthCost;
         speedText.text = "Speed: " + player.speed + " Cost: " + speedCost;
         MagnetText.text = "Magnet: " + player.magnet + " Cost: " + magnetCost;
         CargoText.text = "Cargo: " + inventory.maxCoins + " Cost: " + CargoCost;
@@ -76,8 +66,6 @@ public class UpgradeManager : MonoBehaviour
     void SetValues()
     {
         //Set the Starting costs 
-        StartDanageCost = 15;
-        StartHealthCost = 15;
         StartSpeedCost = 15;
         StartMagnetCost = 15;
         StartCargoCost = 15;
@@ -85,24 +73,18 @@ public class UpgradeManager : MonoBehaviour
         ShipCost = 100;
 
         //Set the values to their starting costs
-        damageCost = StartDanageCost;
-        healthCost = StartHealthCost;
         speedCost = StartSpeedCost;
         magnetCost = StartMagnetCost;
         CargoCost = StartCargoCost;
         FireRateCost = StartFireRateCost;
 
         //Set the max values
-        damageMax = 4;
         speedMax = 25;
-        healthMax = 20;
         magnetMax = 10;
         CargoMax = 50;
         FireRateMax = 10;
 
         //Set the amount per upgrade
-        damageUpgrade = 1;
-        healthUpgrade = 5;
         speedUpgrade = 5;
         magnetUpgrade = 1;
         CargoUpgrade = 5;
@@ -113,9 +95,6 @@ public class UpgradeManager : MonoBehaviour
     {
         switch (upgrade)
         {
-            case "Health":
-                HealthCostCheck();
-                break;
             case "Speed":
                 SpeedCostCheck();
                 break;
@@ -145,37 +124,6 @@ public class UpgradeManager : MonoBehaviour
                 player.IsLevel2 = false;
                 player.IsLevel3 = true;
             }
-        }
-    }
-    void UpgradeHealth()
-    {
-        if (player.playerHealth < healthMax)
-        {
-            player.playerHealth += healthUpgrade;
-            Debug.Log("Health upgraded to: " + healthUpgrade);
-            MessageCostText.text = "Health upgraded to: " + healthUpgrade;
-
-        }
-        else
-        {
-            Debug.Log("Max health reached");
-            MessageCostText.text = "Max health reached";
-            inventory.coinCount += healthCost;
-        }
-    }
-    void HealthCostCheck()
-    {
-        if (inventory.coinCount >= healthCost)
-        {
-            inventory.coinCount -= healthCost;
-            Debug.Log("You have enough coins");
-            UpgradeHealth();
-            healthCost += 15;
-        }
-        else
-        {
-            Debug.Log("You do not have enough coins");
-            MessageCostText.text = "You do not have enough coins";
         }
     }
     void UpgradeSpeed()

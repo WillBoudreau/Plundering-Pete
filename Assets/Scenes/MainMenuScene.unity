@@ -2953,6 +2953,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 424658875}
   m_CullTransparentMesh: 1
+--- !u!1 &431684031 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8829330189392537515, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+  m_PrefabInstance: {fileID: 478942378}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &438871299
 GameObject:
   m_ObjectHideFlags: 0
@@ -3357,23 +3362,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 227171249040155241, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 227171249040155241, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1080032326}
+      objectReference: {fileID: 1080032329}
     - target: {fileID: 227171249040155241, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 227171249040155241, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SelectUpgrade
+      value: CostCheck
       objectReference: {fileID: 0}
     - target: {fileID: 227171249040155241, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UpgradeManager, Assembly-CSharp
+      value: HealthUpgrade, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 227171249040155241, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
@@ -6153,6 +6158,11 @@ MonoBehaviour:
   levelName: 
   playerSpawnPoint: {fileID: 0}
   safeDistance: 5
+--- !u!1 &1055681760 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1744041394810459262, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+  m_PrefabInstance: {fileID: 478942378}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1077516791 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7458618460828365315, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
@@ -6176,6 +6186,7 @@ GameObject:
   - component: {fileID: 1080032326}
   - component: {fileID: 1080032328}
   - component: {fileID: 1080032327}
+  - component: {fileID: 1080032329}
   m_Layer: 0
   m_Name: UpgradeManager
   m_TagString: Untagged
@@ -6281,6 +6292,28 @@ MonoBehaviour:
   inventory: {fileID: 1039502979}
   player: {fileID: 551069647}
   cost: 0
+--- !u!114 &1080032329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1080032324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39ee20128d5b06e4e86bcf286a1a09d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventory: {fileID: 1039502979}
+  player: {fileID: 551069647}
+  cost: 0
+  healthText: {fileID: 1077516791}
+  costText: {fileID: 1151608682}
+  MaxHeatlh: 0
+  healthUpgrade:
+  - {fileID: 1189057694}
+  - {fileID: 431684031}
+  - {fileID: 1055681760}
 --- !u!1 &1088758525
 GameObject:
   m_ObjectHideFlags: 0
@@ -6865,6 +6898,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1183909497}
   m_CullTransparentMesh: 1
+--- !u!1 &1189057694 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5338968883979651826, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+  m_PrefabInstance: {fileID: 478942378}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1209334040
 GameObject:
   m_ObjectHideFlags: 0
