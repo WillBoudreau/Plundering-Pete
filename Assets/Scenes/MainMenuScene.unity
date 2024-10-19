@@ -5864,7 +5864,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1007322668
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6210,6 +6210,7 @@ GameObject:
   - component: {fileID: 1080032332}
   - component: {fileID: 1080032331}
   - component: {fileID: 1080032330}
+  - component: {fileID: 1080032333}
   m_Layer: 0
   m_Name: UpgradeManager
   m_TagString: Untagged
@@ -6384,6 +6385,25 @@ MonoBehaviour:
   - {fileID: 2997848}
   - {fileID: 900754622}
   - {fileID: 517402562}
+--- !u!114 &1080032333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1080032324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f31134aa207fd024a98154d22703e380, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventory: {fileID: 1039502979}
+  player: {fileID: 551069647}
+  cost: 0
+  FireRateText: {fileID: 411883205}
+  costText: {fileID: 1151608682}
+  MaxFireRate: 0
+  FRUpgrade: []
 --- !u!1 &1088758525
 GameObject:
   m_ObjectHideFlags: 0
@@ -9006,23 +9026,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 227171249040155241, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 227171249040155241, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1080032326}
+      objectReference: {fileID: 1080032333}
     - target: {fileID: 227171249040155241, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 227171249040155241, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SelectUpgrade
+      value: CostCheck
       objectReference: {fileID: 0}
     - target: {fileID: 227171249040155241, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UpgradeManager, Assembly-CSharp
+      value: FireRateUpgrade, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 227171249040155241, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
