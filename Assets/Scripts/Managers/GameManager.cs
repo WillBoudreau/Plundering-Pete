@@ -14,14 +14,19 @@ public class GameManager : MonoBehaviour
     public LevelManager levelManager;
     public GameObject player;
     public PlayerBehaviour playerBehaviour;
+    public CollectorManager collectorManager;
+    public ObstacleManager obstacleManager;
+    [Header("Variables")]
     public bool PlayerEnabled;
-
+    public Transform playerSpawnPoint;
 
     // Start is called before the first frame update
     void Start()
     {
         uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
         playerBehaviour = GameObject.Find("Player").GetComponent<PlayerBehaviour>();
+        collectorManager = GameObject.Find("CollectorManager").GetComponent<CollectorManager>();
+        obstacleManager = GameObject.Find("ObstacleManager").GetComponent<ObstacleManager>();
         uiManager.currentGameState = UIManager.GameState.MainMenu;
         DisablePlayer();
     }
@@ -33,6 +38,9 @@ public class GameManager : MonoBehaviour
         uiManager.UpdateUI();
         if (levelManager.levelName == "GameTestScene" && uiManager.currentGameState == UIManager.GameState.GamePlay)
         {
+            playerSpawnPoint = GameObject.Find("PlayerSpawnPoint").transform;
+
+            //PlacePlayer(); 
             EnablePlayer();
             Time.timeScale = 1;
         }
@@ -46,6 +54,8 @@ public class GameManager : MonoBehaviour
             DisablePlayer();
         }
     }
+   
+
     void Pause()
     {
         if(PlayerEnabled == true)
@@ -62,6 +72,25 @@ public class GameManager : MonoBehaviour
                 uiManager.currentGameState = UIManager.GameState.GamePlay;
             }
         }
+    }
+    void PlacePlayer()
+    {
+        if (playerSpawnPoint != null)
+        {
+            player.transform.position = playerSpawnPoint.position;
+        }
+    }
+    void EnablePlayer()
+    {
+        PlayerEnabled = true;
+        player.GetComponent<PlayerBehaviour>().enabled = true;
+        player.GetComponentInChildren<SpriteRenderer>().enabled = true;
+    }
+    void DisablePlayer()
+    {
+        PlayerEnabled = false;
+        player.GetComponent<PlayerBehaviour>().enabled = false;
+        player.GetComponentInChildren<SpriteRenderer>().enabled = false;
     }
     public void Save()
     {
@@ -91,18 +120,6 @@ public class GameManager : MonoBehaviour
             playerBehaviour.speed = data.speed;
             playerBehaviour.Doubloons = data.Gold;
          }
-    }
-    void EnablePlayer()
-    {
-        PlayerEnabled = true;
-        player.GetComponent<PlayerBehaviour>().enabled = true;
-        player.GetComponentInChildren<SpriteRenderer>().enabled = true;
-    }
-    void DisablePlayer()
-    {
-        PlayerEnabled = false;
-        player.GetComponent<PlayerBehaviour>().enabled = false;
-        player.GetComponentInChildren<SpriteRenderer>().enabled = false;
     }
     [System.Serializable]
     class PlayerData

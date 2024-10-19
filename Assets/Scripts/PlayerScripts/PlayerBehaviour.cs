@@ -5,7 +5,6 @@ using TMPro;
 
 public class PlayerBehaviour : MonoBehaviour
 {
-
     //Player values 
     public float speed;
     public float fireRate;
@@ -17,12 +16,14 @@ public class PlayerBehaviour : MonoBehaviour
     public int SharkKills;
     public int SerpentKills;
     public int ShipKills;
+    [Header("Player values")]
     //Starting values
     public float startHealth;
     public float startdamage;
     public float StartSpeed;
     public float startFireRate;
     public float bulletVelocity;
+    public int checkpoint;
     public bool Win;
 
     public TextMeshProUGUI DoubloonText;
@@ -43,6 +44,7 @@ public class PlayerBehaviour : MonoBehaviour
     public UIManager uIManager;
     public HealthManager healthManager;
     public MusicChanger musicManager;
+    public WaveManger waveManager;
 
     // Start is called before the first frame update
     void Start()
@@ -56,12 +58,12 @@ public class PlayerBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        HandlePlayer();
         inventoryManager = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
         DoubloonText = GameObject.Find("DoubloonsText").GetComponent<TextMeshProUGUI>();
         levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         healthManager.playerhealth.value = playerHealth;
         //SetValues();
-        HandlePlayer();
     }
     void HandlePlayer()
     {
@@ -153,7 +155,6 @@ public class PlayerBehaviour : MonoBehaviour
     //Handle the player colliding with objects
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Collided with: " + other.gameObject.tag);
         switch(other.gameObject.tag)
         {
             case "WinTrig":
@@ -179,6 +180,22 @@ public class PlayerBehaviour : MonoBehaviour
             break;
             case "Shark":
             TakeDamage(other.gameObject.GetComponent<SharkBahaviour>().damage);
+            break;
+            case "Serpent":
+            TakeDamage(other.gameObject.GetComponent<SerpentBehaviour>().damage);
+            break;
+            case "Ship":
+            TakeDamage(other.gameObject.GetComponent<EnemyShipBehaviour>().damage);
+            break;
+        }
+    }
+    void OnTriggerExit2D(Collider2D other)
+    {
+        switch(other.gameObject.tag)
+        {
+            case "Checkpoint":
+            checkpoint++;
+            waveManager.UpdateCheckpointStatus(checkpoint,true);
             break;
         }
     }

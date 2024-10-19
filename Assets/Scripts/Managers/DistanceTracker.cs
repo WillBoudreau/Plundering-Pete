@@ -16,27 +16,50 @@ public class DistanceTracker : MonoBehaviour
     public Transform endPosition;
     [Header("UI elements")]
     public Slider distanceTracker;
+
     // Update is called once per frame
     void Update()
     {
-        startPosition = GameObject.Find("StartPos").transform;
-        endPosition = GameObject.Find("EndPOS").transform;
+        if (startPosition == null || endPosition == null)
+        {
+            FindPositions();
+        }
         SetValues();
         TrackDist();
+    }
+
+    void FindPositions()
+    {
+        GameObject startObj = GameObject.Find("StartPos");
+        GameObject endObj = GameObject.Find("EndPOS");
+
+        if (startObj != null)
+        {
+            startPosition = startObj.transform;
+        }
+
+        if (endObj != null)
+        {
+            endPosition = endObj.transform;
+        }
     }
 
     void SetValues()
     {
         // Set all starting values
-        Distance = Vector3.Distance(startPosition.position, endPosition.position);
-        distanceTracker.maxValue = Distance;
-        Debug.Log("Distance: " + Distance); 
-        Debug.Log("Distval: " + distanceTracker.maxValue);
+        if (startPosition != null && endPosition != null)
+        {
+            Distance = Vector3.Distance(startPosition.position, endPosition.position);
+            distanceTracker.maxValue = Distance;
+        }
     }
 
     void TrackDist()
     {
-        float playerDistance = Vector3.Distance(startPosition.position, playerBehaviour.transform.position);
-        distanceTracker.value = playerDistance;
+        if (startPosition != null && playerBehaviour != null)
+        {
+            float playerDistance = Vector3.Distance(startPosition.position, playerBehaviour.transform.position);
+            distanceTracker.value = playerDistance;
+        }
     }
 }

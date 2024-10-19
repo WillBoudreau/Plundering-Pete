@@ -13,15 +13,17 @@ public class LevelManager : MonoBehaviour
     public WaveManger waveManager;
     public UIManager uiManager;
     public ObstacleManager obstacleManager;
+    public PlayerBehaviour player;
     [Header("Loading Screen")]
     public List<AsyncOperation> scenesToLoad = new List<AsyncOperation>();
     [Header("Level Variables")]
     public string levelName;
     public Transform playerSpawnPoint; 
+    public float safeDistance = 5f;
 
     void Start()
     {
-        
+        player = GameObject.Find("Player").GetComponent<PlayerBehaviour>();
     }
 
     // Update is called once per frame
@@ -52,14 +54,18 @@ public class LevelManager : MonoBehaviour
     {
         yield return new WaitForSeconds(uiManager.fadeTime); // Adjust timing if needed
 
-        Debug.Log("Scene Loaded. Respawning Objects...");
-
         // Rest of the setup
-        collectorManager.hasSpawnedDoubloons = false;   
-        obstacleManager.hasSpawnedRocks = false;
+        SpawnObjects();
         musicChanger.PlayNextTrack();
         waveManager.SetAll();
     }   
+    void SpawnObjects()
+    {
+        //Spawn Doubloons
+        collectorManager.SpawnDoubloons(player.transform, safeDistance);
+        //Spawn Rocks
+        obstacleManager.spawnRocks(player.transform, safeDistance);
+    }
 
     private void SetPlayerSpawnPoint()
     {

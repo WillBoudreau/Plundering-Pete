@@ -25,7 +25,6 @@ public class CollectorManager : MonoBehaviour
     void Update()
     {
         AddDoubloonsToList();
-        SpawnDoubloons();
     }
     //Add doubloons to list
     void AddDoubloonsToList()
@@ -39,13 +38,21 @@ public class CollectorManager : MonoBehaviour
         }
     }
     //Spawn Doubloons from list
-    public void SpawnDoubloons()
+    public void SpawnDoubloons(Transform playerTransform, float safeDistance)
     {
         if (levelManager.levelName == "GameTestScene" && !hasSpawnedDoubloons)
         {
             for (int i = 0; i < numofDoubloons; i++)
             {
-                Instantiate(Doubloons[i], new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), -2), Quaternion.identity);
+                Vector3 spawnPosition = new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), -2);
+                if (Vector3.Distance(spawnPosition, playerTransform.position) < safeDistance)
+                {
+                    spawnPosition = new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), -2);
+                }
+                else
+                {
+                    Instantiate(Doubloons[i], spawnPosition, Quaternion.identity);
+                }
             }
             hasSpawnedDoubloons = true; 
         }

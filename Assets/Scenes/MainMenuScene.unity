@@ -5090,7 +5090,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &884719223
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8191,7 +8191,10 @@ MonoBehaviour:
   levelManager: {fileID: 1051185688}
   player: {fileID: 551069641}
   playerBehaviour: {fileID: 551069647}
+  collectorManager: {fileID: 1826889079}
+  obstacleManager: {fileID: 1683598818}
   PlayerEnabled: 0
+  playerSpawnPoint: {fileID: 0}
 --- !u!114 &1547232564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9336,7 +9339,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37f8474392495e64e86e5db000e1cdaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceTracker: {fileID: 0}
+  distanceTracker: {fileID: 1556131826}
   Sharks: []
   Serpents: []
   Ships: []
@@ -9354,6 +9357,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  Allenemies: []
 --- !u!1 &1728282018
 GameObject:
   m_ObjectHideFlags: 0
@@ -10900,6 +10904,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 177806784}
     - target: {fileID: 3116806254861534645, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: waveManager
+      value: 
+      objectReference: {fileID: 1713031254}
+    - target: {fileID: 3116806254861534645, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
       propertyPath: DoubloonText
       value: 
       objectReference: {fileID: 846168839}
@@ -11014,6 +11022,10 @@ PrefabInstance:
     - target: {fileID: 8216936406431620621, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
       propertyPath: m_LocalPosition.z
       value: -20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8501782850704957342, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3246469996780949601, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}

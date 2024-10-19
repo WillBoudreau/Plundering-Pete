@@ -26,7 +26,6 @@ public class ObstacleManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        spawnRocks();
         AddRocksToList();
     }
     //Add the Rocks to a list
@@ -41,13 +40,22 @@ public class ObstacleManager : MonoBehaviour
         }
     }
     //Spawn Rocks dependent on how many in the array
-    void spawnRocks()
+    public void spawnRocks(Transform playerTransform, float safeDistance)
     {
         if (levelManager.levelName == "GameTestScene" && !hasSpawnedRocks)
         {
             for (int i = 0; i < obstacle_Rock_Count; i++)
             {
-                Instantiate(obstacle_Rock[i], new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), -2), Quaternion.identity);
+                Vector3 spawnPosition = new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), -2);
+                if (Vector3.Distance(spawnPosition, playerTransform.position) < safeDistance)
+                {
+                    spawnPosition = new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), -2);
+                }
+                else
+                {
+                    Debug.Log("Spawning Rocks");
+                    Instantiate(obstacle_Rock[i], spawnPosition, Quaternion.identity);
+                }
             }
             hasSpawnedRocks = true; 
         }
