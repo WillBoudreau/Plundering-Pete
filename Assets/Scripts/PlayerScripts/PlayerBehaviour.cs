@@ -5,23 +5,27 @@ using TMPro;
 
 public class PlayerBehaviour : MonoBehaviour
 {
-    public int Doubloons = 0;
-
     //Player values 
     public float speed;
     public float fireRate;
     public float damage;
     public float playerHealth;
-    
-    
+    public float magnet;
+    [Header("Number of Kills")]
+    public int SharkKills;
+    public int SerpentKills;
+    public int ShipKills;
+    [Header("Player values")]
     //Starting values
     public float startHealth;
     public float startdamage;
     public float StartSpeed;
     public float startFireRate;
-
     public float bulletVelocity;
+    public int checkpoint;
     public bool Win;
+    public bool IsLevel2;
+    public bool IsLevel3;
 
     public TextMeshProUGUI DoubloonText;
     public Transform firePoint;
@@ -29,11 +33,14 @@ public class PlayerBehaviour : MonoBehaviour
     public Camera mainCamera;
     public Rigidbody2D rb;
     public GameObject bulletPrefab;
+    public GameObject level2BulletPrefab;
+    public GameObject level3BulletPrefab;
     [Header("Renderer Calls")]
-    Renderer renderer;
+    public Renderer renderer;
     private Color originalColor;
     public float FlickerDuration = 0.1f; 
     public int FlickerCount = 5;
+    public List<GameObject> PlayerLevels = new List<GameObject>();
 
     [Header("Class calls")]
     public InventoryManager inventoryManager;
@@ -41,12 +48,13 @@ public class PlayerBehaviour : MonoBehaviour
     public UIManager uIManager;
     public HealthManager healthManager;
     public MusicChanger musicManager;
+    public WaveManger waveManager;
 
     // Start is called before the first frame update
     void Start()
     { 
-        renderer = GetComponent<Renderer>();
-        originalColor = GetComponent<Renderer>().material.color;
+        renderer = GetComponentInChildren<Renderer>();
+        originalColor = GetComponentInChildren<Renderer>().material.color;
         rb = GetComponent<Rigidbody2D>();
         SetValues();
     }
@@ -54,14 +62,21 @@ public class PlayerBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        HandlePlayer();
+        LevelUp();
         inventoryManager = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
         DoubloonText = GameObject.Find("DoubloonsText").GetComponent<TextMeshProUGUI>();
         levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         healthManager.playerhealth.value = playerHealth;
         //SetValues();
+    }
+    void HandlePlayer()
+    {
+        StaywithinBounds();
         HandleMovement();
         HandleShooting();
         UpdateCounter();
+        HandleMagnit();
         Death();
     }
     void SetValues()
@@ -73,6 +88,7 @@ public class PlayerBehaviour : MonoBehaviour
         startFireRate = 2;
         bulletVelocity = 25f;
         healthManager.health = playerHealth;
+        magnet = 2f;
         //Assign values to be the starting values
         playerHealth = startHealth;
         speed = StartSpeed;
@@ -82,10 +98,22 @@ public class PlayerBehaviour : MonoBehaviour
         Win = false;
 
     }
-    //Update the Doubloon counter
+    public void LevelUp()
+    {
+        if(IsLevel2)
+        {
+            PlayerLevels[0].SetActive(false);
+            PlayerLevels[1].SetActive(true);
+        }
+        else if(IsLevel3)
+        {
+            PlayerLevels[1].SetActive(false);
+            PlayerLevels[2].SetActive(true);
+        }
+    }
     void UpdateCounter()
     {
-        DoubloonText.text = "Doubloons: " + Doubloons;
+        DoubloonText.text = "Doubloons: " + inventoryManager.coinCount;
     }
     //Handle the players shooting
     void HandleShooting()
@@ -94,6 +122,7 @@ public class PlayerBehaviour : MonoBehaviour
         fireRate -= Time.deltaTime;
         if (Input.GetKeyDown(KeyCode.Mouse0) && fireRate <= 0)
         {
+            fireRate = 0;
             Vector2 mouseWorldPOS = mainCamera.ScreenToWorldPoint(Input.mousePosition);
             Vector2 direction = (mouseWorldPOS - (Vector2)transform.position).normalized;
             
@@ -102,11 +131,27 @@ public class PlayerBehaviour : MonoBehaviour
             bulletSpawnPos.z = -2;
 
             musicManager.PlaySound(0);
-            GameObject bullet = Instantiate(bulletPrefab,bulletSpawnPos, Quaternion.identity);
-
-            //Vector2 shootdirection = (mouseWorldPOS - (Vector2)transform.position).normalized;
-            bullet.GetComponent<Rigidbody2D>().velocity = Vector2.up * bulletVelocity;
-            Destroy(bullet, 2.0f);
+            if(IsLevel2)
+            {
+                for(int i = 0; i < 2; i++)
+                {
+                    GameObject bullet1 = Instantiate(level2BulletPrefab, bulletSpawnPos, Quaternion.identity); 
+                    bullet1.GetComponent<Rigidbody2D>().velocity = Vector2.up * bulletVelocity;
+                    Destroy(bullet1, 2.0f);
+                }
+            }
+            else if(IsLevel3)
+            {
+                GameObject bullet2 = Instantiate(level3BulletPrefab, bulletSpawnPos, Quaternion.identity);
+                bullet2.GetComponent<Rigidbody2D>().velocity = Vector2.up * bulletVelocity;
+                Destroy(bullet2, 2.0f);
+            }
+            else
+            {
+                GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPos, Quaternion.identity);
+                bullet.GetComponent<Rigidbody2D>().velocity = Vector2.up * bulletVelocity;
+                Destroy(bullet, 2.0f);
+            }
             fireRate = 2f;
         }
     }
@@ -120,28 +165,74 @@ public class PlayerBehaviour : MonoBehaviour
         Vector2 movement = new Vector2(moveHorizontal, moveVertical) * speed;
         rb.velocity = movement;
     }
-
+    void StaywithinBounds()
+    {
+        // Ensure the player remains within the camera bounds
+        Vector3 pos = transform.position;
+        Vector3 viewportPos = mainCamera.WorldToViewportPoint(pos);
+        viewportPos.x = Mathf.Clamp(viewportPos.x, 0.05f, 0.95f);
+        viewportPos.y = Mathf.Clamp(viewportPos.y, 0.05f, 0.95f);
+        transform.position = mainCamera.ViewportToWorldPoint(viewportPos);
+    }
+    void HandleMagnit()
+    {
+        //Handle the magnet powerup
+        foreach (GameObject coin in GameObject.FindGameObjectsWithTag("Gold"))
+        {
+            if (Vector2.Distance(transform.position, coin.transform.position) < magnet)
+            {
+                coin.transform.position = Vector2.MoveTowards(coin.transform.position, transform.position, 0.1f);
+            }
+        }
+    }
+    //Handle the player colliding with objects
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Collided with: " + other.gameObject.tag);
-        if (other.gameObject.tag == "WinTrig")
+        switch(other.gameObject.tag)
         {
+            case "WinTrig":
             Win = true;
             uIManager.SetGameState("Win");
-        }
-        if (other.gameObject.tag == "Gold")
-        {
-            Doubloons++;
-            inventoryManager.coinCount = Doubloons;
-            other.gameObject.SetActive(false);
-        }
-        if (other.gameObject.tag == "Obstacle")
-        {
+            break;
+            case "Gold":
+            if(inventoryManager.IsMax == false)
+            {
+                inventoryManager.coinCount += 1;
+                other.gameObject.SetActive(false);
+            }
+            else
+            {
+                Debug.Log("Max coins reached");
+                other.gameObject.SetActive(true);
+                magnet = 0;
+            }
+            break;
+            case "Obstacle":
             TakeDamage(other.gameObject.GetComponent<Obstacle>().damage);
-        }
-        if(other.gameObject.tag == "Enemy")
-        {
+            break;
+            case "Shark":
             TakeDamage(other.gameObject.GetComponent<SharkBahaviour>().damage);
+            break;
+            case "Serpent":
+            TakeDamage(other.gameObject.GetComponent<SerpentBehaviour>().damage);
+            break;
+            case "Ship":
+            TakeDamage(other.gameObject.GetComponent<EnemyShipBehaviour>().damage);
+            break;
+            // case "Checkpoint":
+            // checkpoint += 1;
+            // waveManager.UpdateCheckpointStatus(checkpoint, true);
+            // break;
+        }
+    }
+    void OnTriggerExit2D(Collider2D other)
+    {
+        switch(other.gameObject.tag)
+        {
+            case "Checkpoint":
+            checkpoint += 1;
+            waveManager.UpdateCheckpointStatus(checkpoint, true);
+            break;
         }
     }
 
@@ -151,6 +242,7 @@ public class PlayerBehaviour : MonoBehaviour
         {
             healthManager.IsDead = true;
             playerHealth = 0;
+            //gameObject.SetActive(false);
             uIManager.SetGameState("GameOver");
             ResetHealth();
         }
@@ -174,11 +266,11 @@ public class PlayerBehaviour : MonoBehaviour
     {
         for(int i = 0; i < FlickerCount; i++)
         {
-            GetComponent<Renderer>().material.color = Color.red;
+            GetComponentInChildren<Renderer>().material.color = Color.red;
             yield return new WaitForSeconds(FlickerDuration);
-            GetComponent<Renderer>().material.color = originalColor;
+            GetComponentInChildren<Renderer>().material.color = originalColor;
             yield return new WaitForSeconds(FlickerDuration);
         }
-        GetComponent<Renderer>().material.color = originalColor;
+        GetComponentInChildren<Renderer>().material.color = originalColor;
     }
 }

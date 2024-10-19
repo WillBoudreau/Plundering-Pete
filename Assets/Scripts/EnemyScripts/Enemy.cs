@@ -9,6 +9,7 @@ public abstract class Enemy : MonoBehaviour
     public float health;
     public float speed;
     public float damage;
+    public GameObject Gold;
     public Renderer renderer;
     public Color originalColor;
     public float FlickerDuration;

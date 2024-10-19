@@ -8,19 +8,26 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    [Header("Class Calls")]
     public UIManager uiManager;
     public HealthManager healthManager;
     public LevelManager levelManager;
     public GameObject player;
     public PlayerBehaviour playerBehaviour;
+    public CollectorManager collectorManager;
+    public ObstacleManager obstacleManager;
+    public InventoryManager inventoryManager;
+    [Header("Variables")]
     public bool PlayerEnabled;
-
+    public Transform playerSpawnPoint;
 
     // Start is called before the first frame update
     void Start()
     {
         uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
         playerBehaviour = GameObject.Find("Player").GetComponent<PlayerBehaviour>();
+        collectorManager = GameObject.Find("CollectorManager").GetComponent<CollectorManager>();
+        obstacleManager = GameObject.Find("ObstacleManager").GetComponent<ObstacleManager>();
         uiManager.currentGameState = UIManager.GameState.MainMenu;
         DisablePlayer();
     }
@@ -32,12 +39,19 @@ public class GameManager : MonoBehaviour
         uiManager.UpdateUI();
         if (levelManager.levelName == "GameTestScene" && uiManager.currentGameState == UIManager.GameState.GamePlay)
         {
+            playerSpawnPoint = GameObject.Find("PlayerSpawnPoint").transform;
+
+            //PlacePlayer(); 
             EnablePlayer();
             Time.timeScale = 1;
         }
-        else if(uiManager.currentGameState == UIManager.GameState.Pause)
+        else if(uiManager.currentGameState == UIManager.GameState.Pause | uiManager.currentGameState == UIManager.GameState.GameOver)
         {
             Time.timeScale = 0;
+            DisablePlayer();
+        }
+        else if(uiManager.currentGameState == UIManager.GameState.GameOver)
+        {
             DisablePlayer();
         }
         else
@@ -45,6 +59,8 @@ public class GameManager : MonoBehaviour
             DisablePlayer();
         }
     }
+   
+
     void Pause()
     {
         if(PlayerEnabled == true)
@@ -62,6 +78,25 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+    void PlacePlayer()
+    {
+        if (playerSpawnPoint != null)
+        {
+            player.transform.position = playerSpawnPoint.position;
+        }
+    }
+    void EnablePlayer()
+    {
+        PlayerEnabled = true;
+        player.GetComponent<PlayerBehaviour>().enabled = true;
+        player.GetComponentInChildren<SpriteRenderer>().enabled = true;
+    }
+    void DisablePlayer()
+    {
+        PlayerEnabled = false;
+        player.GetComponent<PlayerBehaviour>().enabled = false;
+        player.GetComponentInChildren<SpriteRenderer>().enabled = false;
+    }
     public void Save()
     {
         BinaryFormatter bf = new BinaryFormatter();
@@ -71,7 +106,7 @@ public class GameManager : MonoBehaviour
         data.damage = playerBehaviour.damage;
         data.health = playerBehaviour.playerHealth;
         data.speed = playerBehaviour.speed;
-        data.Gold = playerBehaviour.Doubloons;
+        data.Gold = inventoryManager.coinCount;
 
         bf.Serialize(file, data);
         file.Close();
@@ -88,20 +123,8 @@ public class GameManager : MonoBehaviour
             playerBehaviour.playerHealth = data.health;
             playerBehaviour.damage = data.damage;
             playerBehaviour.speed = data.speed;
-            playerBehaviour.Doubloons = data.Gold;
+            inventoryManager.coinCount = data.Gold;
          }
-    }
-    void EnablePlayer()
-    {
-        PlayerEnabled = true;
-        player.GetComponent<PlayerBehaviour>().enabled = true;
-        player.GetComponent<SpriteRenderer>().enabled = true;
-    }
-    void DisablePlayer()
-    {
-        PlayerEnabled = false;
-        player.GetComponent<PlayerBehaviour>().enabled = false;
-        player.GetComponent<SpriteRenderer>().enabled = false;
     }
     [System.Serializable]
     class PlayerData
