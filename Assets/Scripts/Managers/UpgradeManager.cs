@@ -65,6 +65,7 @@ public class UpgradeManager : MonoBehaviour
     void Update()
     {
         inventory = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
+        inventory.maxCoins = CargoMax;
         SetText();
     }
     void SetText()
@@ -144,6 +145,15 @@ public class UpgradeManager : MonoBehaviour
         {
             inventory.coinCount -= ShipCost;
             Debug.Log("You have enough coins");
+            if(player.IsLevel2 == false)
+            {
+                player.IsLevel2 = true;
+            }
+            else if(player.IsLevel2 == true && player.IsLevel3 == false)
+            {
+                player.IsLevel2 = false;
+                player.IsLevel3 = true;
+            }
         }
     }
     void UpgradeDamage()

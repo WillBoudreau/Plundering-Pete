@@ -25,6 +25,8 @@ public class PlayerBehaviour : MonoBehaviour
     public float bulletVelocity;
     public int checkpoint;
     public bool Win;
+    public bool IsLevel2;
+    public bool IsLevel3;
 
     public TextMeshProUGUI DoubloonText;
     public Transform firePoint;
@@ -32,11 +34,14 @@ public class PlayerBehaviour : MonoBehaviour
     public Camera mainCamera;
     public Rigidbody2D rb;
     public GameObject bulletPrefab;
+    public GameObject level2BulletPrefab;
+    public GameObject level3BulletPrefab;
     [Header("Renderer Calls")]
     public Renderer renderer;
     private Color originalColor;
     public float FlickerDuration = 0.1f; 
     public int FlickerCount = 5;
+    public List<GameObject> PlayerLevels = new List<GameObject>();
 
     [Header("Class calls")]
     public InventoryManager inventoryManager;
@@ -59,10 +64,12 @@ public class PlayerBehaviour : MonoBehaviour
     void Update()
     {
         HandlePlayer();
+        LevelUp();
         inventoryManager = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
         DoubloonText = GameObject.Find("DoubloonsText").GetComponent<TextMeshProUGUI>();
         levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         healthManager.playerhealth.value = playerHealth;
+        inventoryManager.coinCount = Doubloons;
         //SetValues();
     }
     void HandlePlayer()
@@ -93,6 +100,19 @@ public class PlayerBehaviour : MonoBehaviour
         Win = false;
 
     }
+    public void LevelUp()
+    {
+        if(IsLevel2)
+        {
+            PlayerLevels[0].SetActive(false);
+            PlayerLevels[1].SetActive(true);
+        }
+        else if(IsLevel3)
+        {
+            PlayerLevels[1].SetActive(false);
+            PlayerLevels[2].SetActive(true);
+        }
+    }
     //Update the Doubloon counter
     void UpdateCounter()
     {
@@ -114,11 +134,27 @@ public class PlayerBehaviour : MonoBehaviour
             bulletSpawnPos.z = -2;
 
             musicManager.PlaySound(0);
-            GameObject bullet = Instantiate(bulletPrefab,bulletSpawnPos, Quaternion.identity);
-
-            //Vector2 shootdirection = (mouseWorldPOS - (Vector2)transform.position).normalized;
-            bullet.GetComponent<Rigidbody2D>().velocity = Vector2.up * bulletVelocity;
-            Destroy(bullet, 2.0f);
+            if(IsLevel2)
+            {
+                for(int i = 0; i < 2; i++)
+                {
+                    GameObject bullet1 = Instantiate(level2BulletPrefab, bulletSpawnPos, Quaternion.identity); 
+                    bullet1.GetComponent<Rigidbody2D>().velocity = Vector2.up * bulletVelocity;
+                    Destroy(bullet1, 2.0f);
+                }
+            }
+            else if(IsLevel3)
+            {
+                GameObject bullet2 = Instantiate(level3BulletPrefab, bulletSpawnPos, Quaternion.identity);
+                bullet2.GetComponent<Rigidbody2D>().velocity = Vector2.up * bulletVelocity;
+                Destroy(bullet2, 2.0f);
+            }
+            else
+            {
+                GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPos, Quaternion.identity);
+                bullet.GetComponent<Rigidbody2D>().velocity = Vector2.up * bulletVelocity;
+                Destroy(bullet, 2.0f);
+            }
             fireRate = 2f;
         }
     }
@@ -187,6 +223,10 @@ public class PlayerBehaviour : MonoBehaviour
             case "Ship":
             TakeDamage(other.gameObject.GetComponent<EnemyShipBehaviour>().damage);
             break;
+            // case "Checkpoint":
+            // checkpoint += 1;
+            // waveManager.UpdateCheckpointStatus(checkpoint, true);
+            // break;
         }
     }
     void OnTriggerExit2D(Collider2D other)
@@ -194,8 +234,8 @@ public class PlayerBehaviour : MonoBehaviour
         switch(other.gameObject.tag)
         {
             case "Checkpoint":
-            checkpoint++;
-            waveManager.UpdateCheckpointStatus(checkpoint,true);
+            checkpoint += 1;
+            waveManager.UpdateCheckpointStatus(checkpoint, true);
             break;
         }
     }

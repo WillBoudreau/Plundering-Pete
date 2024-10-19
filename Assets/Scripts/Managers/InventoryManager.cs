@@ -18,7 +18,6 @@ public class InventoryManager : MonoBehaviour
     void Start()
     {
         coins = new List<GameObject>();
-        maxCoins = 10;
         originalColor = coinText.color;
     }
 

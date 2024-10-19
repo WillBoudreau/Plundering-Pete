@@ -124,17 +124,17 @@ public class WaveManger : MonoBehaviour
             {
                 SpawnEnemyGroup(SharkPrefab, numSharks, SpawnPoints1);
                 spawnTime = 5f; 
+            }
+            if(spawnTime <= 0 && SecondCheckpoint)
+            {
                 SpawnEnemyGroup(SerpentPrefab, numSerpents, SpawnPoints2);
                 spawnTime = 5f;
+            }
+            if(spawnTime <= 0 && ThirdCheckpoint)
+            {
                 SpawnEnemyGroup(ShipPrefab, numShips, SpawnPoints3);
                 spawnTime = 5f;
             }
-            // if(spawnTime <= 0 && SecondCheckpoint)
-            // {
-            // }
-            // if(spawnTime <= 0 && ThirdCheckpoint)
-            // {
-            // }
             yield return new WaitForSeconds(1f);
         }
     }
