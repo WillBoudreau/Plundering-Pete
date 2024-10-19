@@ -64,6 +64,20 @@ public class HealthUpgrade : Upgrade
             healthText.text = "Max health Reached";
         }
     }
+    public override void Reset()
+    {
+        foreach (var upgrade in healthUpgrade)
+        {
+            var image = upgrade.GetComponent<UnityEngine.UI.Image>();
+            if (image != null)
+            {
+                image.color = Color.green;
+            }
+        }
+        currentUpgradeIndex = 0;
+        MaxHeatlh += 3;
+        cost += 10;
+    }
 
     void UpdateUpgradeDisplay()
     {

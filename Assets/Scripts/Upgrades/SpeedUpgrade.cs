@@ -64,6 +64,20 @@ public class SpeedUpgrade : Upgrade
             speedText.text = "Max Speed Reached";
         }
     }
+    public override void Reset()
+    {
+        foreach (var upgrade in speedUpgrade)
+        {
+            var image = upgrade.GetComponent<UnityEngine.UI.Image>();
+            if (image != null)
+            {
+                image.color = Color.green;
+            }
+        }
+        currentUpgradeIndex = 0;
+        MaxSpeed += 3;
+        cost += 10;
+    }
 
     void UpdateUpgradeDisplay()
     {

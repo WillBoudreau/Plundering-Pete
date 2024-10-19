@@ -64,6 +64,20 @@ public class FireRateUpgrade : Upgrade
             FireRateText.text = "Max Fire Rate Reached";
         }
     }
+    public override void Reset()
+    {
+        foreach (var upgrade in FRUpgrade)
+        {
+            var image = upgrade.GetComponent<UnityEngine.UI.Image>();
+            if (image != null)
+            {
+                image.color = Color.green;
+            }
+        }
+        currentUpgradeIndex = 0;
+        MaxFireRate += 3;
+        cost += 10;
+    }
 
     void UpdateUpgradeDisplay()
     {

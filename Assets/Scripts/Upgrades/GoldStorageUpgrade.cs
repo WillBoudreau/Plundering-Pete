@@ -64,6 +64,20 @@ public class GoldStorageUpgrade : Upgrade
             CargoText.text = "Max Cargo Reached";
         }
     }
+    public override void Reset()
+    {
+        foreach (var upgrade in CargoUpgrade)
+        {
+            var image = upgrade.GetComponent<UnityEngine.UI.Image>();
+            if (image != null)
+            {
+                image.color = Color.green;
+            }
+        }
+        currentUpgradeIndex = 0;
+        MaxCargo += 3;
+        cost += 10;
+    }
 
     void UpdateUpgradeDisplay()
     {

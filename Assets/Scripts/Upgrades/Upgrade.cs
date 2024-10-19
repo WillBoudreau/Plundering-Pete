@@ -26,4 +26,8 @@ public class Upgrade : MonoBehaviour
     {
         Debug.Log("Upgrading Player");
     }
+    public virtual void Reset()
+    {
+        Debug.Log("Resetting Player");
+    }
 }

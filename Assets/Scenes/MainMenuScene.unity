@@ -1545,7 +1545,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Ver 2.43
+  m_text: Ver 2.44
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1831,6 +1831,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 267346149}
   m_CullTransparentMesh: 1
+--- !u!1 &297331619 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1744041394810459262, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+  m_PrefabInstance: {fileID: 1641570941}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &312332213
 GameObject:
   m_ObjectHideFlags: 0
@@ -5864,7 +5869,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1007322668
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6246,19 +6251,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 551069647}
+  upgrades:
+  - {fileID: 1080032327}
+  - {fileID: 1080032329}
+  - {fileID: 1080032332}
+  - {fileID: 1080032331}
+  - {fileID: 1080032330}
+  - {fileID: 1080032333}
   inventory: {fileID: 1039502979}
-  MessageCostText: {fileID: 1151608682}
   NumberCoinsText: {fileID: 387048878}
-  CargoText: {fileID: 1526153278}
-  FireRateText: {fileID: 411883205}
-  CargoUpgrade: 0
-  CargoMax: 0
-  FireRateUpgrade: 0
-  FireRateMax: 0
-  CargoCost: 0
-  StartCargoCost: 0
-  FireRateCost: 0
-  StartFireRateCost: 0
   ShipCost: 0
 --- !u!114 &1080032327
 MonoBehaviour:
@@ -6403,7 +6404,10 @@ MonoBehaviour:
   FireRateText: {fileID: 411883205}
   costText: {fileID: 1151608682}
   MaxFireRate: 0
-  FRUpgrade: []
+  FRUpgrade:
+  - {fileID: 1542909941}
+  - {fileID: 1710565628}
+  - {fileID: 297331619}
 --- !u!1 &1088758525
 GameObject:
   m_ObjectHideFlags: 0
@@ -8507,6 +8511,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1542909941 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5338968883979651826, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+  m_PrefabInstance: {fileID: 1641570941}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1547232561
 GameObject:
   m_ObjectHideFlags: 0
@@ -9766,6 +9775,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1700722431}
   m_CullTransparentMesh: 1
+--- !u!1 &1710565628 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8829330189392537515, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+  m_PrefabInstance: {fileID: 1641570941}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1713031252
 GameObject:
   m_ObjectHideFlags: 0

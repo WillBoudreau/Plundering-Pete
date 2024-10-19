@@ -63,6 +63,20 @@ public class DamageUpgrade : Upgrade
             damageText.text = "Max Damage Reached";
         }
     }
+    public override void Reset()
+    {
+        foreach (var upgrade in damageUpgrade)
+        {
+            var image = upgrade.GetComponent<UnityEngine.UI.Image>();
+            if (image != null)
+            {
+                image.color = Color.green;
+            }
+        }
+        currentUpgradeIndex = 0;
+        MaxDamage += 3;
+        cost += 10;
+    }
 
     void UpdateUpgradeDisplay()
     {
