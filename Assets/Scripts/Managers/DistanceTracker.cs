@@ -51,9 +51,9 @@ public class DistanceTracker : MonoBehaviour
 
     void SetValues()
     {
-        Checkpoint1 = 100;
-        Checkpoint2 = 200;
-        Checkpoint3 = 300;
+        Checkpoint1 = 0;
+        Checkpoint2 = 100;
+        Checkpoint3 = 200;
         // Set all starting values
         if (startPosition != null && endPosition != null)
         {

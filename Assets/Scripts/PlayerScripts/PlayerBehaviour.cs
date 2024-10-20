@@ -202,7 +202,6 @@ public class PlayerBehaviour : MonoBehaviour
             }
             else
             {
-                Debug.Log("Max coins reached");
                 other.gameObject.SetActive(true);
                 magnet = 0;
             }

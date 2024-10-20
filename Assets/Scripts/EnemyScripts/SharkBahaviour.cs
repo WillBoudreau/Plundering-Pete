@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-
 public class SharkBahaviour : Enemy
 {
     [Header("Shark")]
@@ -13,6 +12,16 @@ public class SharkBahaviour : Enemy
     public float maxHealth;
     float bottomY = -15f;
     public GameObject doubloonPrefab;
+
+    private PlayerBehaviour player;
+    private Renderer renderer;
+    private GameObject Gold;
+    private Color originalColor;
+    private float speed;
+    private float health;
+    private float damage;
+    private int FlickerCount = 3;
+    private float FlickerDuration = 0.1f;
 
     // Start is called before the first frame update
     void Start()
@@ -26,19 +35,20 @@ public class SharkBahaviour : Enemy
         damage = 1;
         stoppingDistance = 2;
         detectionDistance = 10;
+        player = GameObject.Find("Player").GetComponent<PlayerBehaviour>();
         //bottomY = Camera.main.ViewportToWorldPoint(new Vector3(0,0,0)).y;
     }
 
     // Update is called once per frame
     void Update()
     {
-        player = GameObject.Find("Player").GetComponent<PlayerBehaviour>();
         Move();
         if(Gold == null)
         {
             Gold = GameObject.FindGameObjectWithTag("Gold");
         }
     }
+
     public override void Move()
     {
         if(transform.position.y <= bottomY)
@@ -46,19 +56,19 @@ public class SharkBahaviour : Enemy
             Debug.Log("Dead");
             Destroy(gameObject);
         }
+        else if (Vector2.Distance(transform.position, player.transform.position) < detectionDistance)
+        {
+            Vector3 targetPosition = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+            targetPosition.z = -2;
+            transform.position = targetPosition;
+        }
         else if (transform.position.y > bottomY)
         {
             Vector3 targetPosition = new Vector3(transform.position.x, bottomY, transform.position.z);
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
         }
-        else if (Vector2.Distance(transform.position, player.transform.position) < detectionDistance)
-        { 
-        
-                Vector3 targetPosition = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
-                targetPosition.z = -2;
-                transform.position = targetPosition;
-        }
     }
+
     public void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.tag == "Player")
@@ -71,6 +81,7 @@ public class SharkBahaviour : Enemy
             Destroy(collision.gameObject);
         }
     }
+
     public override void TakeDamage(float damage)
     {
         StartCoroutine(Flicker());
@@ -80,6 +91,7 @@ public class SharkBahaviour : Enemy
             Death();
         }
     }
+
     public override IEnumerator Flicker()
     {
         for(int i = 0; i < FlickerCount; i++)
@@ -91,6 +103,7 @@ public class SharkBahaviour : Enemy
         }
         renderer.material.color = originalColor;
     }
+
     void Death()
     {
         Instantiate(Gold, transform.position, Quaternion.identity);

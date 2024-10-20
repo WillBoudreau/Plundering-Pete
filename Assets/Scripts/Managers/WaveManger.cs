@@ -23,7 +23,11 @@ public class WaveManger : MonoBehaviour
     public int numSerpents;
     public int numShips;
     //Spawn Values
-    public float spawnTime = 5f;
+    public float spawnTime = 0f;
+    private int currentSpawnPointIndex = 0;
+    public int SharkSpawnIndex;
+    public int SerpentSpawnIndex;
+    public int ShipSpawnIndex;
 
     [Header("Bools")]
     //Bools for checkpoints
@@ -35,8 +39,7 @@ public class WaveManger : MonoBehaviour
     public GameObject[] SpawnPoints1;
     public GameObject[] SpawnPoints2;
     public GameObject[] SpawnPoints3;
-    public List<GameObject> Allenemies;
-    private int currentSpawnPointIndex = 0;
+    public List<GameObject> Enemies = new List<GameObject>();
     void Start()
     {
         UpdateCheckpointStatus(0, true);
@@ -48,10 +51,18 @@ public class WaveManger : MonoBehaviour
     }
     void FixedUpdate()
     {
+        StartCoroutine(SpawnEnemies());
         Timer();
         FillArrays();
+        if(FirstCheckpoint)
+        {
+            Debug.Log("FirstCheckpoint: " + FirstCheckpoint); 
+        }
+        if(SecondCheckpoint)
+        {
+            Debug.Log("SecondCheckpoint: " + SecondCheckpoint);
+        }
         //UpdateCheckpoints();
-        StartCoroutine(SpawnEnemies());
     }
     void Timer()
     {
@@ -73,7 +84,6 @@ public class WaveManger : MonoBehaviour
         SpawnPoints1 = new GameObject[3];
         SpawnPoints2 = new GameObject[3];
         SpawnPoints3 = new GameObject[3];
-        Allenemies = new List<GameObject>();
     }
 
     void UpdateLists()
@@ -120,40 +130,44 @@ public class WaveManger : MonoBehaviour
     {
         while (true)
         {
-            if (spawnTime <= 0 && FirstCheckpoint)
+            if (spawnTime <= 1 && FirstCheckpoint)
             {
-                SpawnEnemyGroup(SharkPrefab, 1, SpawnPoints1); // Only spawn one shark at a time
-                spawnTime = 5f; 
-            }
-            if(spawnTime <= 0 && SecondCheckpoint)
-            {
-                SpawnEnemyGroup(SerpentPrefab, 1, SpawnPoints2);
+                //Debug.Log("Spawning Sharks");
+                SpawnEnemyGroup(SharkPrefab, 1, SpawnPoints1, ref SharkSpawnIndex);
                 spawnTime = 5f;
+                if (SecondCheckpoint)
+                {
+                        // Spawn 5 sharks before each serpent
+                        SpawnEnemyGroup(SharkPrefab, 5, SpawnPoints2, ref SerpentSpawnIndex);
+                        Debug.Log("Spawning Serpents");
+                        SpawnEnemyGroup(SerpentPrefab, 1, SpawnPoints2, ref SerpentSpawnIndex);
+                    spawnTime = 5f;
+                }
+                if (ThirdCheckpoint)
+                {
+                    Debug.Log("Spawning Ships");
+                    SpawnEnemyGroup(ShipPrefab, numShips, SpawnPoints3, ref ShipSpawnIndex);
+                    spawnTime = 5f;
+                }
             }
-            if(spawnTime <= 0 && ThirdCheckpoint)
-            {
-                SpawnEnemyGroup(ShipPrefab, 1, SpawnPoints3);
-                spawnTime = 5f;
-            }
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(2f);
         }
     }
 
-    void SpawnEnemyGroup(GameObject enemyPrefab, int numEnemies, GameObject[] spawnPoints)
+    void SpawnEnemyGroup(GameObject enemyPrefab, int numEnemies, GameObject[] spawnPoints, ref int currentSpawnPointIndex)
     {
         for (int i = 0; i < numEnemies; i++)
         {
             Vector3 spawnpos = spawnPoints[currentSpawnPointIndex].transform.position;
             spawnpos.z = -2;
-            GameObject newEnemy = Instantiate(enemyPrefab, spawnpos, Quaternion.identity);
-            Allenemies.Add(newEnemy);
+            GameObject enemy = Instantiate(enemyPrefab, spawnpos, Quaternion.identity);
+            Enemies.Add(enemy);
             currentSpawnPointIndex = (currentSpawnPointIndex + 1) % spawnPoints.Length;
         }
     }
 
     public void UpdateCheckpointStatus(int checkpointIndex, bool status)
     {
-        Debug.Log("Checkpoint " + checkpointIndex + " status: " + status);
         switch (checkpointIndex)
         {
             case 0:
