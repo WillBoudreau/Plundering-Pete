@@ -11454,6 +11454,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1039502979}
     - target: {fileID: 3116806254861534645, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: gorundLayer.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3116806254861534645, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
       propertyPath: level2BulletPrefab
       value: 
       objectReference: {fileID: 7112107127442301048, guid: f02f163f8e234174bbe061f2bec20ad8, type: 3}

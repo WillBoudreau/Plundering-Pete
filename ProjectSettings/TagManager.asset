@@ -23,11 +23,11 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - EasyLevel
   - Water
   - UI
-  - 
-  - 
+  - MedLevel
+  - HardLevel
   - 
   - 
   - 

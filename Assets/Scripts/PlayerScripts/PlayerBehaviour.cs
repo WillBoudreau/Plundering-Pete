@@ -5,28 +5,29 @@ using TMPro;
 
 public class PlayerBehaviour : MonoBehaviour
 {
+    [Header("Number of Kills")]
+    public int SharkKills;
+    public int SerpentKills;
+    public int ShipKills;
+    [Header("Starting values")]
+    //Starting values
+    public float startHealth;
+    public float startdamage;
+    public float StartSpeed;
+    public float startFireRate;
+    [Header("Player values")]
     //Player values 
     public float speed;
     public float fireRate;
     public float damage;
     public float playerHealth;
     public float magnet;
-    [Header("Number of Kills")]
-    public int SharkKills;
-    public int SerpentKills;
-    public int ShipKills;
-    [Header("Player values")]
-    //Starting values
-    public float startHealth;
-    public float startdamage;
-    public float StartSpeed;
-    public float startFireRate;
     public float bulletVelocity;
     public int checkpoint;
+    public LayerMask gorundLayer;
     public bool Win;
     public bool IsLevel2;
-    public bool IsLevel3;
-
+    public bool IsLevel3; 
     public TextMeshProUGUI DoubloonText;
     public Transform firePoint;
 
@@ -64,6 +65,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         HandlePlayer();
         LevelUp();
+        GetPlayerLayerMask();
         inventoryManager = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
         DoubloonText = GameObject.Find("DoubloonsText").GetComponent<TextMeshProUGUI>();
         levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
@@ -275,5 +277,16 @@ public class PlayerBehaviour : MonoBehaviour
             yield return new WaitForSeconds(FlickerDuration);
         }
         GetComponentInChildren<Renderer>().material.color = originalColor;
+    }
+
+    public void GetPlayerLayerMask()
+    {
+        float dist = 5.0f;
+        Debug.DrawRay(transform.position, Vector3.forward * dist, Color.red);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.up, dist, gorundLayer);
+        if (hit.collider != null)
+        {
+            Debug.Log("Player is on the ground");
+        }
     }
 }

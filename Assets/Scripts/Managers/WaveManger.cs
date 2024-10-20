@@ -54,14 +54,6 @@ public class WaveManger : MonoBehaviour
         StartCoroutine(SpawnEnemies());
         Timer();
         FillArrays();
-        if(FirstCheckpoint)
-        {
-            Debug.Log("FirstCheckpoint: " + FirstCheckpoint); 
-        }
-        if(SecondCheckpoint)
-        {
-            Debug.Log("SecondCheckpoint: " + SecondCheckpoint);
-        }
         //UpdateCheckpoints();
     }
     void Timer()
@@ -138,14 +130,15 @@ public class WaveManger : MonoBehaviour
                 if (SecondCheckpoint)
                 {
                     // Spawn 5 sharks before each serpent
-                    SpawnEnemyGroup(SharkPrefab, 5, SpawnPoints2, ref SerpentSpawnIndex);
-                    Debug.Log("Spawning Serpents");
+                    for (int i = 0; i < 5; i++)
+                    {
+                        SpawnEnemyGroup(SharkPrefab, 1, SpawnPoints2, ref SerpentSpawnIndex);
+                    }
                     SpawnEnemyGroup(SerpentPrefab, 1, SpawnPoints2, ref SerpentSpawnIndex);
                     spawnTime = 5f;
                 }
                 if (ThirdCheckpoint)
                 {
-                    Debug.Log("Spawning Ships");
                     SpawnEnemyGroup(ShipPrefab, 1, SpawnPoints3, ref ShipSpawnIndex);
                     SpawnEnemyGroup(SharkPrefab, 10, SpawnPoints2, ref SerpentSpawnIndex);
                     SpawnEnemyGroup(SerpentPrefab, 5, SpawnPoints2, ref SerpentSpawnIndex);
