@@ -70,8 +70,6 @@ public class EnemyShipBehaviour : Enemy
             float bulletSpawnDist = 1.0f;
             Vector3 CanonBallSpawnPos = CanonFirePoint.position + (CanonFirePoint.forward * bulletSpawnDist);
             CanonBallSpawnPos.z = -2;
-
-            //musicManager.PlaySound(0);
             GameObject CannonBall = Instantiate(CanonBall, CanonBallSpawnPos, Quaternion.identity);
             //Vector2 shootdirection = (mouseWorldPOS - (Vector2)transform.position).normalized;
             CannonBall.GetComponent<Rigidbody2D>().velocity = Vector2.up * CanonVelocity;

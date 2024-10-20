@@ -16,7 +16,7 @@ public class SerpentBehaviour : Enemy
     {
         renderer = GetComponent<Renderer>();
         originalColor = renderer.material.color;
-        speed = 2;
+        speed = 5;
         health = 2;
         damage = 1;
         stoppingDistance = 2;
@@ -41,13 +41,12 @@ public class SerpentBehaviour : Enemy
         {
             Vector3 targetPosition = new Vector3(transform.position.x, bottomY, transform.position.z);
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
-        }
-        else if (Vector2.Distance(transform.position, player.transform.position) < detectionDistance)
-        {
-
-            Vector3 targetPosition = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
-            targetPosition.z = -2;
-            transform.position = targetPosition;
+            if (Vector2.Distance(transform.position, player.transform.position) < detectionDistance)
+            {
+                targetPosition = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+                targetPosition.z = -2;
+                transform.position = targetPosition;
+            }
         }
     }
     public override void TakeDamage(float damage)

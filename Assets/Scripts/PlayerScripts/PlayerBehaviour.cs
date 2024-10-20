@@ -218,6 +218,10 @@ public class PlayerBehaviour : MonoBehaviour
             case "Ship":
             TakeDamage(other.gameObject.GetComponent<EnemyShipBehaviour>().damage);
             break;
+            case "CanonBall":
+            TakeDamage(other.gameObject.GetComponent<EnemyShipBehaviour>().damage);
+            Destroy(other.gameObject);
+            break;
             // case "Checkpoint":
             // checkpoint += 1;
             // waveManager.UpdateCheckpointStatus(checkpoint, true);

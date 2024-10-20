@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public CollectorManager collectorManager;
     public ObstacleManager obstacleManager;
     public InventoryManager inventoryManager;
+    public CameraManager cameraManager;
     [Header("Variables")]
     public bool PlayerEnabled;
     public Transform playerSpawnPoint;
@@ -28,8 +29,11 @@ public class GameManager : MonoBehaviour
         playerBehaviour = GameObject.Find("Player").GetComponent<PlayerBehaviour>();
         collectorManager = GameObject.Find("CollectorManager").GetComponent<CollectorManager>();
         obstacleManager = GameObject.Find("ObstacleManager").GetComponent<ObstacleManager>();
+        inventoryManager = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
+        cameraManager = GameObject.Find("CameraManager").GetComponent<CameraManager>();
         uiManager.currentGameState = UIManager.GameState.MainMenu;
         DisablePlayer();
+        DisableCamera();
     }
 
     // Update is called once per frame
@@ -43,6 +47,7 @@ public class GameManager : MonoBehaviour
 
             //PlacePlayer(); 
             EnablePlayer();
+            EnableCamera();
             Time.timeScale = 1;
         }
         else if(uiManager.currentGameState == UIManager.GameState.Pause | uiManager.currentGameState == UIManager.GameState.GameOver)
@@ -84,6 +89,14 @@ public class GameManager : MonoBehaviour
         {
             player.transform.position = playerSpawnPoint.position;
         }
+    }
+    void EnableCamera()
+    {
+        cameraManager.enabled = true;
+    }
+    void DisableCamera()
+    {
+        cameraManager.enabled = false;
     }
     void EnablePlayer()
     {

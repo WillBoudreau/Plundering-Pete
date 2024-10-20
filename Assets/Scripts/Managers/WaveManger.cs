@@ -130,23 +130,23 @@ public class WaveManger : MonoBehaviour
     {
         while (true)
         {
-            if (spawnTime <= 1 && FirstCheckpoint)
+            if (spawnTime <= 0 && FirstCheckpoint)
             {
                 //Debug.Log("Spawning Sharks");
                 SpawnEnemyGroup(SharkPrefab, 1, SpawnPoints1, ref SharkSpawnIndex);
                 spawnTime = 5f;
                 if (SecondCheckpoint)
                 {
-                        // Spawn 5 sharks before each serpent
-                        SpawnEnemyGroup(SharkPrefab, 5, SpawnPoints2, ref SerpentSpawnIndex);
-                        Debug.Log("Spawning Serpents");
-                        SpawnEnemyGroup(SerpentPrefab, 1, SpawnPoints2, ref SerpentSpawnIndex);
+                    // Spawn 5 sharks before each serpent
+                    SpawnEnemyGroup(SharkPrefab, 5, SpawnPoints2, ref SerpentSpawnIndex);
+                    Debug.Log("Spawning Serpents");
+                    SpawnEnemyGroup(SerpentPrefab, 1, SpawnPoints2, ref SerpentSpawnIndex);
                     spawnTime = 5f;
                 }
                 if (ThirdCheckpoint)
                 {
                     Debug.Log("Spawning Ships");
-                    SpawnEnemyGroup(ShipPrefab, numShips, SpawnPoints3, ref ShipSpawnIndex);
+                    SpawnEnemyGroup(ShipPrefab, 1, SpawnPoints3, ref ShipSpawnIndex);
                     spawnTime = 5f;
                 }
             }
