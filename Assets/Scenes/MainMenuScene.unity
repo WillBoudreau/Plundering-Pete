@@ -8570,10 +8570,12 @@ MonoBehaviour:
   healthManager: {fileID: 734893757}
   levelManager: {fileID: 1051185688}
   player: {fileID: 551069641}
+  Camera: {fileID: 177806781}
   playerBehaviour: {fileID: 551069647}
   collectorManager: {fileID: 1826889079}
   obstacleManager: {fileID: 1683598818}
   inventoryManager: {fileID: 1039502979}
+  cameraManager: {fileID: 177806785}
   PlayerEnabled: 0
   playerSpawnPoint: {fileID: 0}
 --- !u!114 &1547232564

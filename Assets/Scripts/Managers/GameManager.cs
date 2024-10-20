@@ -4,7 +4,6 @@ using UnityEngine;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using TMPro;
-
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
@@ -13,6 +12,7 @@ public class GameManager : MonoBehaviour
     public HealthManager healthManager;
     public LevelManager levelManager;
     public GameObject player;
+    public GameObject Camera;
     public PlayerBehaviour playerBehaviour;
     public CollectorManager collectorManager;
     public ObstacleManager obstacleManager;
@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
         collectorManager = GameObject.Find("CollectorManager").GetComponent<CollectorManager>();
         obstacleManager = GameObject.Find("ObstacleManager").GetComponent<ObstacleManager>();
         inventoryManager = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
-        cameraManager = GameObject.Find("CameraManager").GetComponent<CameraManager>();
+        cameraManager = GameObject.Find("Camera").GetComponent<CameraManager>();
         uiManager.currentGameState = UIManager.GameState.MainMenu;
         DisablePlayer();
         DisableCamera();
@@ -92,11 +92,11 @@ public class GameManager : MonoBehaviour
     }
     void EnableCamera()
     {
-        cameraManager.enabled = true;
+        Camera.GetComponent<CameraManager>().enabled = true;
     }
     void DisableCamera()
     {
-        cameraManager.enabled = false;
+        Camera.GetComponent<CameraManager>().enabled = false;
     }
     void EnablePlayer()
     {

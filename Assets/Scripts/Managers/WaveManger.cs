@@ -147,6 +147,8 @@ public class WaveManger : MonoBehaviour
                 {
                     Debug.Log("Spawning Ships");
                     SpawnEnemyGroup(ShipPrefab, 1, SpawnPoints3, ref ShipSpawnIndex);
+                    SpawnEnemyGroup(SharkPrefab, 10, SpawnPoints2, ref SerpentSpawnIndex);
+                    SpawnEnemyGroup(SerpentPrefab, 5, SpawnPoints2, ref SerpentSpawnIndex);
                     spawnTime = 5f;
                 }
             }

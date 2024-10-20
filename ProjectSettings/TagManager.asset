@@ -16,6 +16,9 @@ TagManager:
   - Shark
   - SpawnPoint2
   - SpawnPoint3
+  - CanonBall
+  - EnemyShip
+  - Serpent
   layers:
   - Default
   - TransparentFX

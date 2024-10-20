@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 9074038438388678436}
   m_Layer: 0
   m_Name: Serpent_Prefab
-  m_TagString: Enemy
+  m_TagString: Serpent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -140,6 +140,7 @@ MonoBehaviour:
   health: 0
   speed: 0
   damage: 0
+  Gold: {fileID: 0}
   renderer: {fileID: 0}
   originalColor: {r: 0, g: 0, b: 0, a: 0}
   FlickerDuration: 0

@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 4762725168384308838}
   m_Layer: 0
   m_Name: EnemyShip_Prefab
-  m_TagString: Enemy
+  m_TagString: EnemyShip
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

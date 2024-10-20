@@ -215,7 +215,7 @@ public class PlayerBehaviour : MonoBehaviour
             case "Serpent":
             TakeDamage(other.gameObject.GetComponent<SerpentBehaviour>().damage);
             break;
-            case "Ship":
+            case "EnemyShip":
             TakeDamage(other.gameObject.GetComponent<EnemyShipBehaviour>().damage);
             break;
             case "CanonBall":
