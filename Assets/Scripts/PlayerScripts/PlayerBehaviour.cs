@@ -284,6 +284,7 @@ public class PlayerBehaviour : MonoBehaviour
         float dist = 5.0f;
         Debug.DrawRay(transform.position, Vector3.forward * dist, Color.red);
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.up, dist, gorundLayer);
+        
         if (hit.collider != null)
         {
             Debug.Log("Player is on the ground");

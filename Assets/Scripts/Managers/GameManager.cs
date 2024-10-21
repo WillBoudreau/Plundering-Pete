@@ -4,6 +4,8 @@ using UnityEngine;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using TMPro;
+using UnityEngine.UI;
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
@@ -21,6 +23,7 @@ public class GameManager : MonoBehaviour
     [Header("Variables")]
     public bool PlayerEnabled;
     public Transform playerSpawnPoint;
+    public Button loadButton;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +37,7 @@ public class GameManager : MonoBehaviour
         uiManager.currentGameState = UIManager.GameState.MainMenu;
         DisablePlayer();
         DisableCamera();
+        DisableLoadButton();
     }
 
     // Update is called once per frame
@@ -48,20 +52,24 @@ public class GameManager : MonoBehaviour
             //PlacePlayer(); 
             EnablePlayer();
             EnableCamera();
+            EnableLoadButton();
             Time.timeScale = 1;
         }
         else if(uiManager.currentGameState == UIManager.GameState.Pause | uiManager.currentGameState == UIManager.GameState.GameOver)
         {
             Time.timeScale = 0;
             DisablePlayer();
+            DisableCamera();
         }
         else if(uiManager.currentGameState == UIManager.GameState.GameOver)
         {
             DisablePlayer();
+            DisableCamera();
         }
         else
         {
             DisablePlayer();
+            DisableCamera();
         }
     }
    
@@ -109,6 +117,14 @@ public class GameManager : MonoBehaviour
         PlayerEnabled = false;
         player.GetComponent<PlayerBehaviour>().enabled = false;
         player.GetComponentInChildren<SpriteRenderer>().enabled = false;
+    }
+    void EnableLoadButton()
+    {
+        loadButton.interactable = true;
+    }
+    void DisableLoadButton()
+    {
+        loadButton.interactable = false;
     }
     public void Save()
     {
