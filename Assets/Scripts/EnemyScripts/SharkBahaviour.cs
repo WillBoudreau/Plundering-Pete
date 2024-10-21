@@ -10,7 +10,7 @@ public class SharkBahaviour : Enemy
     public float stoppingDistance;
     public float detectionDistance;
     public float maxHealth;
-    float bottomY = -15f;
+    float bottomY = -140f;
     public GameObject doubloonPrefab;
 
     private PlayerBehaviour player;
@@ -29,7 +29,7 @@ public class SharkBahaviour : Enemy
         renderer = GetComponent<Renderer>();
         Gold = GameObject.FindGameObjectWithTag("Gold");
         originalColor = renderer.material.color;
-        speed = 2;
+        speed = 5;
         health = 2;
         maxHealth = 2;
         damage = 1;
