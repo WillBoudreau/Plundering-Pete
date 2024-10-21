@@ -125,23 +125,29 @@ public class WaveManger : MonoBehaviour
             if (spawnTime <= 0 && FirstCheckpoint)
             {
                 //Debug.Log("Spawning Sharks");
-                SpawnEnemyGroup(SharkPrefab, 1, SpawnPoints1, ref SharkSpawnIndex);
+                SpawnEnemy(SharkPrefab, SpawnPoints1, ref SharkSpawnIndex);
                 spawnTime = 5f;
                 if (SecondCheckpoint)
                 {
                     // Spawn 5 sharks before each serpent
                     for (int i = 0; i < 5; i++)
                     {
-                        SpawnEnemyGroup(SharkPrefab, 1, SpawnPoints2, ref SerpentSpawnIndex);
+                        SpawnEnemy(SharkPrefab, SpawnPoints2, ref SerpentSpawnIndex);
                     }
-                    SpawnEnemyGroup(SerpentPrefab, 1, SpawnPoints2, ref SerpentSpawnIndex);
+                    SpawnEnemy(SerpentPrefab, SpawnPoints2, ref SerpentSpawnIndex);
                     spawnTime = 5f;
                 }
                 if (ThirdCheckpoint)
                 {
-                    SpawnEnemyGroup(ShipPrefab, 1, SpawnPoints3, ref ShipSpawnIndex);
-                    SpawnEnemyGroup(SharkPrefab, 10, SpawnPoints2, ref SerpentSpawnIndex);
-                    SpawnEnemyGroup(SerpentPrefab, 5, SpawnPoints2, ref SerpentSpawnIndex);
+                    for(int i = 0; i < 10; i++)
+                    {
+                        SpawnEnemy(SharkPrefab, SpawnPoints3, ref SharkSpawnIndex);
+                    }
+                    for(int i = 0; i < 5; i++)
+                    {
+                        SpawnEnemy(SerpentPrefab, SpawnPoints3, ref SerpentSpawnIndex);
+                    }
+                    SpawnEnemy(ShipPrefab, SpawnPoints3, ref ShipSpawnIndex);
                     spawnTime = 5f;
                 }
             }
@@ -149,17 +155,44 @@ public class WaveManger : MonoBehaviour
         }
     }
 
-    void SpawnEnemyGroup(GameObject enemyPrefab, int numEnemies, GameObject[] spawnPoints, ref int currentSpawnPointIndex)
+void SpawnEnemy(GameObject enemyPrefab, GameObject[] spawnPoints, ref int currentSpawnPointIndex)
+{
+    bool spawnSuccessful = false;
+    int attempts = 0;
+
+    while (!spawnSuccessful && attempts < spawnPoints.Length)
     {
-        for (int i = 0; i < numEnemies; i++)
+        Vector3 spawnPos = spawnPoints[currentSpawnPointIndex].transform.position;
+        spawnPos.z = -2;
+
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(spawnPos, 5f); 
+        bool isOccupied = false;
+
+        foreach (Collider2D col in colliders)
         {
-            Vector3 spawnpos = spawnPoints[currentSpawnPointIndex].transform.position;
-            spawnpos.z = -2;
-            GameObject enemy = Instantiate(enemyPrefab, spawnpos, Quaternion.identity);
-            Enemies.Add(enemy);
-            currentSpawnPointIndex = (currentSpawnPointIndex + 1) % spawnPoints.Length;
+            if (col.gameObject.CompareTag("Enemy")) 
+            {
+                isOccupied = true;
+                break;
+            }
         }
+
+        if (!isOccupied)
+        {
+            GameObject enemy = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
+            Enemies.Add(enemy);
+            spawnSuccessful = true; 
+        }
+
+        currentSpawnPointIndex = (currentSpawnPointIndex + 1) % spawnPoints.Length;
+        attempts++;
     }
+
+    if (!spawnSuccessful)
+    {
+        Debug.LogWarning("All spawn points are occupied. Enemy could not spawn.");
+    }
+}
 
     public void UpdateCheckpointStatus(int checkpointIndex, bool status)
     {
