@@ -24,7 +24,7 @@ public class PlayerBehaviour : MonoBehaviour
     public float magnet;
     public float bulletVelocity;
     public int checkpoint;
-    public LayerMask gorundLayer;
+    public LayerMask groundLayer;
     public bool Win;
     public bool IsLevel2;
     public bool IsLevel3; 
@@ -224,23 +224,8 @@ public class PlayerBehaviour : MonoBehaviour
             TakeDamage(other.gameObject.GetComponent<EnemyShipBehaviour>().damage);
             Destroy(other.gameObject);
             break;
-            // case "Checkpoint":
-            // checkpoint += 1;
-            // waveManager.UpdateCheckpointStatus(checkpoint, true);
-            // break;
         }
     }
-    void OnTriggerExit2D(Collider2D other)
-    {
-        switch(other.gameObject.tag)
-        {
-            case "Checkpoint":
-            checkpoint += 1;
-            waveManager.UpdateCheckpointStatus(checkpoint, true);
-            break;
-        }
-    }
-
     public void Death()
     {
         if (playerHealth <= 0)
@@ -266,7 +251,7 @@ public class PlayerBehaviour : MonoBehaviour
         healthManager.health = playerHealth;
         healthManager.IsDead = false;
     }
-    //Flicker for damaage
+    //Flicker for damage
     IEnumerator Flicker()
     {
         for(int i = 0; i < FlickerCount; i++)
@@ -282,12 +267,29 @@ public class PlayerBehaviour : MonoBehaviour
     public void GetPlayerLayerMask()
     {
         float dist = 5.0f;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position,Vector3.forward,dist,groundLayer);
         Debug.DrawRay(transform.position, Vector3.forward * dist, Color.red);
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.up, dist, gorundLayer);
-        
-        if (hit.collider != null)
+        Debug.Log(hit.collider);
+        if(hit.collider != null)
         {
-            Debug.Log("Player is on the ground");
+            Debug.Log("Hit Object: " + hit.collider.gameObject.name);
+            switch(hit.collider.gameObject.name)
+            {
+                case "MedLevel":
+                    if(IsLevel2 == false | IsLevel3 == false)
+                    {
+                        Debug.Log("Ship is too weak");
+                        TakeDamage(0.1f);
+                    }
+                    break;
+                case " ":
+                    break;
+            }
         }
+        //if (Physics2D.Raycast(transform.position,Vector2.up,dist, out RaycastHit2D hit,20,groundLayer.value))
+        //{
+        //    Debug.Log("Player is on the ground");
+        //}
+        //Debug.DrawRay(transform.position, Vector3.forward * dist, Color.red);
     }
 }
