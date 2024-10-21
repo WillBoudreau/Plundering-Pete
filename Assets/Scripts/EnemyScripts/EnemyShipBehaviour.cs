@@ -67,14 +67,17 @@ public class EnemyShipBehaviour : Enemy
     {
         if (fireRate <= 0)
         {
-            float bulletSpawnDist = 1.0f;
-            Vector3 CanonBallSpawnPos = CanonFirePoint.position + (CanonFirePoint.forward * bulletSpawnDist);
-            CanonBallSpawnPos.z = -2;
-            GameObject CannonBall = Instantiate(CanonBall, CanonBallSpawnPos, Quaternion.identity);
-            //Vector2 shootdirection = (mouseWorldPOS - (Vector2)transform.position).normalized;
-            CannonBall.GetComponent<Rigidbody2D>().velocity = Vector2.up * CanonVelocity;
-            Destroy(CannonBall, 5.0f);
-            fireRate = 5f;
+            for (int i = 0; i < 3; i++)
+            {
+                float bulletSpawnDist = 1.0f;
+                Vector3 CanonBallSpawnPos = CanonFirePoint.position + (CanonFirePoint.forward * bulletSpawnDist);
+                CanonBallSpawnPos.z = -2;
+                GameObject CannonBall = Instantiate(CanonBall, CanonBallSpawnPos, Quaternion.identity);
+                CannonBall.GetComponent<Rigidbody2D>().velocity = Vector2.up * CanonVelocity;
+                Destroy(CannonBall, 5.0f);
+                fireRate = 5f;
+            }
+
         }
     }
 

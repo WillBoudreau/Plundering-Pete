@@ -36,7 +36,6 @@ public class SharkBahaviour : Enemy
         stoppingDistance = 2;
         detectionDistance = 10;
         player = GameObject.Find("Player").GetComponent<PlayerBehaviour>();
-        //bottomY = Camera.main.ViewportToWorldPoint(new Vector3(0,0,0)).y;
     }
 
     // Update is called once per frame
