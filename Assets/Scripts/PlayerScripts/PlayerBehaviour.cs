@@ -279,7 +279,14 @@ public class PlayerBehaviour : MonoBehaviour
                     if(IsLevel2 == false | IsLevel3 == false)
                     {
                         Debug.Log("Ship is too weak");
-                        TakeDamage(0.1f);
+                        float time = 5f;
+                        time -= Time.deltaTime;
+                        Debug.Log(time);
+                        if(time <= 1)
+                        {
+                            TakeDamage(1f);
+                            time = 5f;
+                        }
                     }
                     break;
                 case " ":
