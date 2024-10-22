@@ -21,27 +21,30 @@ public class MusicChanger : MonoBehaviour
         effects[0] = Resources.Load<AudioClip>("CanonShot_");
         effects[1] = Resources.Load<AudioClip>("Effect2");
         effects[2] = Resources.Load<AudioClip>("Effect3");
+        PlaySceneTrack("MainMenuScene");
 
-        PlayNextTrack();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void PlaySceneTrack(string sceneName)
     {
-        if (!musicSource.isPlaying)
+        Debug.Log("Playing music for scene: " + sceneName);
+        switch(sceneName)
         {
-            PlayNextTrack();
+            case "GameTestScene":
+                Debug.Log("Playing music for scene 1 : " + sceneName);
+                musicSource.clip = music[1];
+                break;
+            case "MainMenuScene":
+                Debug.Log("Playing music for scene 3 : " + sceneName);
+                musicSource.clip = music[0];
+                break;
+            default:
+                Debug.Log("Playing music for scene 2 : " + sceneName);
+                musicSource.clip = music[0];
+                currentTrackIndex = (currentTrackIndex + 1) % music.Length;
+                break;
         }
-    }
-
-    public void PlayNextTrack()
-    {
-        if (music.Length == 0) return;
-
-        musicSource.clip = music[currentTrackIndex];
         musicSource.Play();
-
-        currentTrackIndex = (currentTrackIndex + 1) % music.Length;
     }
 
     public void PlaySound(int index)

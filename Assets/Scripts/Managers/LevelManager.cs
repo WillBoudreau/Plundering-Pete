@@ -9,7 +9,7 @@ public class LevelManager : MonoBehaviour
     [Header("Level Manager")]
     [Header("Class Calls")]
     public CollectorManager collectorManager;
-    public MusicChanger musicChanger;
+    [SerializeField] private MusicChanger musicChanger;
     public WaveManger waveManager;
     public UIManager uiManager;
     public ObstacleManager obstacleManager;
@@ -37,11 +37,16 @@ public class LevelManager : MonoBehaviour
         Debug.Log("Level load requested for: " + name);
         SceneManager.LoadScene(name);
 
-        if (name == "GameTestScene")
+        if(name == "GameTestScene")
         {
-            // Respawn the objects when the scene is reloaded
             StartCoroutine(WaitForSceneToLoadAndRespawn());
+            musicChanger.PlaySceneTrack(name);
         }
+        else
+        {
+            musicChanger.PlaySceneTrack(name);
+        }
+
     }
 
     public void QuitRequest()
@@ -56,7 +61,7 @@ public class LevelManager : MonoBehaviour
 
         // Rest of the setup
         SpawnObjects();
-        musicChanger.PlayNextTrack();
+        musicChanger.PlaySceneTrack(SceneManager.GetActiveScene().name);
         waveManager.SetAll();
     }   
     void SpawnObjects()
