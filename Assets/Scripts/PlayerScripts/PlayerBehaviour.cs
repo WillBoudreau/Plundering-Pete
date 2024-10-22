@@ -35,6 +35,7 @@ public class PlayerBehaviour : MonoBehaviour
     public Rigidbody2D rb;
     public GameObject bulletPrefab;
     public GameObject level2BulletPrefab;
+    public float time = 5.0f;
     public GameObject level3BulletPrefab;
     [Header("Renderer Calls")]
     public Renderer renderer;
@@ -267,22 +268,23 @@ public class PlayerBehaviour : MonoBehaviour
     public void GetPlayerLayerMask()
     {
         float dist = 5.0f;
-        RaycastHit2D hit = Physics2D.Raycast(transform.position,Vector3.forward,dist,groundLayer);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector3.forward, dist, groundLayer);
         Debug.DrawRay(transform.position, Vector3.forward * dist, Color.red);
         Debug.Log(hit.collider);
-        if(hit.collider != null)
+        if (hit.collider != null)
         {
             Debug.Log("Hit Object: " + hit.collider.gameObject.name);
-            switch(hit.collider.gameObject.name)
+            switch (hit.collider.gameObject.name)
             {
                 case "MedLevel":
-                    if(IsLevel2 == false | IsLevel3 == false)
+                    waveManager.UpdateCheckpointStatus(0, false);
+                    waveManager.UpdateCheckpointStatus(1, true);
+                    if (!IsLevel2 && !IsLevel3)
                     {
                         Debug.Log("Ship is too weak");
-                        float time = 5f;
                         time -= Time.deltaTime;
                         Debug.Log(time);
-                        if(time <= 1)
+                        if (time <= 1)
                         {
                             TakeDamage(1f);
                             time = 5f;
@@ -293,10 +295,5 @@ public class PlayerBehaviour : MonoBehaviour
                     break;
             }
         }
-        //if (Physics2D.Raycast(transform.position,Vector2.up,dist, out RaycastHit2D hit,20,groundLayer.value))
-        //{
-        //    Debug.Log("Player is on the ground");
-        //}
-        //Debug.DrawRay(transform.position, Vector3.forward * dist, Color.red);
     }
 }

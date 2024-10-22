@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     public bool PlayerEnabled;
     public Transform playerSpawnPoint;
     public Button loadButton;
+    public bool PlayerPlaced = false;
 
     // Start is called before the first frame update
     void Start()
@@ -48,8 +49,11 @@ public class GameManager : MonoBehaviour
         if (levelManager.levelName == "GameTestScene" && uiManager.currentGameState == UIManager.GameState.GamePlay)
         {
             playerSpawnPoint = GameObject.Find("PlayerSpawnPoint").transform;
-
-            //PlacePlayer(); 
+            if (PlayerPlaced == false)
+            {
+                PlacePlayer();
+                PlayerPlaced = true;
+            }
             EnablePlayer();
             EnableCamera();
             EnableLoadButton();
@@ -72,7 +76,16 @@ public class GameManager : MonoBehaviour
             DisableCamera();
         }
     }
-   
+void PlacePlayer()
+{
+    Vector3 playerPosition = playerSpawnPoint.position;
+    playerPosition.z = -2;
+    player.transform.position = playerPosition;
+
+    Vector3 cameraPosition = playerSpawnPoint.position;
+    cameraPosition.z = -30;
+    Camera.transform.position = cameraPosition;
+}
 
     void Pause()
     {
@@ -89,13 +102,6 @@ public class GameManager : MonoBehaviour
             {
                 uiManager.currentGameState = UIManager.GameState.GamePlay;
             }
-        }
-    }
-    void PlacePlayer()
-    {
-        if (playerSpawnPoint != null)
-        {
-            player.transform.position = playerSpawnPoint.position;
         }
     }
     void EnableCamera()

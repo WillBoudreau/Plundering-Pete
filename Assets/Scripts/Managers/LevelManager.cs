@@ -62,8 +62,10 @@ public class LevelManager : MonoBehaviour
     void SpawnObjects()
     {
         //Spawn Doubloons
+        collectorManager.hasSpawnedDoubloons = false;
         collectorManager.SpawnDoubloons(player.transform, safeDistance);
         //Spawn Rocks
+        obstacleManager.hasSpawnedRocks = false;
         obstacleManager.spawnRocks(player.transform, safeDistance);
     }
 
