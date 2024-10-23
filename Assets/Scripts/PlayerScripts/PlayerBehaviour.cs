@@ -59,7 +59,6 @@ public class PlayerBehaviour : MonoBehaviour
         originalColor = GetComponentInChildren<Renderer>().material.color;
         rb = GetComponent<Rigidbody2D>();
         SetValues();
-        Level = 1;
     }
 
     // Update is called once per frame
@@ -86,9 +85,10 @@ public class PlayerBehaviour : MonoBehaviour
     void SetValues()
     {
         //Set starting values
+        Level = 1;
         startHealth = 5;
         startdamage = 1;
-        StartSpeed = 10;
+        StartSpeed = 6;
         startFireRate = 2;
         bulletVelocity = 25f;
         healthManager.health = playerHealth;

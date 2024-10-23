@@ -72,6 +72,12 @@ public class LevelManager : MonoBehaviour
         //Spawn Rocks
         obstacleManager.hasSpawnedRocks = false;
         obstacleManager.spawnRocks(player.transform, safeDistance);
+        //Spawn Icebergs
+        obstacleManager.hasSpawnedIcebergs = false;
+        obstacleManager.spawnIceBergs(player.transform, safeDistance);
+        //Spawn Debris
+        obstacleManager.hasSpawnedDebris = false;
+        obstacleManager.SpawnDebris(player.transform, safeDistance);
     }
 
     public Vector3 SetPlayerSpawnPoint()
