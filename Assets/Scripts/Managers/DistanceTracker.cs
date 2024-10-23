@@ -15,8 +15,8 @@ public class DistanceTracker : MonoBehaviour
     public float Checkpoint1;
     public float Checkpoint2;
     public float Checkpoint3;
-
     public Transform startPosition;
+    public float playerDistance; 
     public Transform endPosition;
     [Header("UI elements")]
     public Slider distanceTracker;
@@ -31,6 +31,7 @@ public class DistanceTracker : MonoBehaviour
         SetValues();
         TrackDist();
         Checkpoint();
+        playerDistance = Vector3.Distance(startPosition.position, playerBehaviour.transform.position);
     }
 
     void FindPositions()
@@ -66,7 +67,6 @@ public class DistanceTracker : MonoBehaviour
     {
         if (startPosition != null && playerBehaviour != null)
         {
-            float playerDistance = Vector3.Distance(startPosition.position, playerBehaviour.transform.position);
             distanceTracker.value = playerDistance;
         }
     }

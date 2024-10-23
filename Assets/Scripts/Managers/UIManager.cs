@@ -24,6 +24,7 @@ public class UIManager : MonoBehaviour
     public PlayerBehaviour player;
     public LevelManager levelManager;
     public InventoryManager inventoryManager;
+    public DistanceTracker distanceTracker;
     [Header("UI GameObjects")]
     public GameObject mainMenu;
     public GameObject optionsMenu;
@@ -40,6 +41,8 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI playerSharkKills;
     public TextMeshProUGUI playerSerpentKills;
     public TextMeshProUGUI playerShipKills;
+    public TextMeshProUGUI playerDistance;
+    public TextMeshProUGUI playerCheckpoint;
     [Header("Loading Bar")]
     public CanvasGroup loadingScreenCanvasGroup;
     public float fadeTime = 0.5f;
@@ -122,6 +125,7 @@ public class UIManager : MonoBehaviour
         playerSharkKills.text = "Sharks Killed: " + player.SharkKills.ToString();
         playerSerpentKills.text = "Serpents Killed: " + player.SerpentKills.ToString();
         playerShipKills.text = "Ships Sunk: " + player.ShipKills.ToString();
+        playerDistance.text = "Distance Travelled: " + distanceTracker.playerDistance.ToString();
     }
     public void SetGameState(string state)
     { 
