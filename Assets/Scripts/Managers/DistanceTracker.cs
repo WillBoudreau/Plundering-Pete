@@ -20,7 +20,11 @@ public class DistanceTracker : MonoBehaviour
     public Transform endPosition;
     [Header("UI elements")]
     public Slider distanceTracker;
-
+    public TextMeshProUGUI WarningText;
+    void Start()
+    {
+        WarningText.gameObject.SetActive(false);
+    }
     // Update is called once per frame
     void Update()
     {
@@ -31,6 +35,8 @@ public class DistanceTracker : MonoBehaviour
         SetValues();
         TrackDist();
         Checkpoint();
+        DisplayWarning();
+        Debug.Log(playerDistance);
         playerDistance = Vector3.Distance(startPosition.position, playerBehaviour.transform.position);
     }
 
@@ -53,7 +59,7 @@ public class DistanceTracker : MonoBehaviour
     void SetValues()
     {
         Checkpoint1 = 0;
-        Checkpoint2 = 100;
+        Checkpoint2 = 25;
         Checkpoint3 = 200;
         // Set all starting values
         if (startPosition != null && endPosition != null)
@@ -86,6 +92,15 @@ public class DistanceTracker : MonoBehaviour
             {
                 waveManger.UpdateCheckpointStatus(2, true);
             }
+        }
+    }
+    void DisplayWarning()
+    {
+        if(playerBehaviour.IsLevel2 == false && playerBehaviour.transform.position.y >= Checkpoint2)
+        {
+            // Display warning
+            WarningText.gameObject.SetActive(true);
+            WarningText.text = "YAARRR! Ye is about to enter dangerous waters! Your ship is not ready!";
         }
     }
 }
