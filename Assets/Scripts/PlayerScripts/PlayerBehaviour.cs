@@ -30,7 +30,7 @@ public class PlayerBehaviour : MonoBehaviour
     public bool IsLevel3; 
     public TextMeshProUGUI DoubloonText;
     public Transform firePoint;
-
+    public int Level;
     public Camera mainCamera;
     public Rigidbody2D rb;
     public GameObject bulletPrefab;
@@ -59,6 +59,7 @@ public class PlayerBehaviour : MonoBehaviour
         originalColor = GetComponentInChildren<Renderer>().material.color;
         rb = GetComponent<Rigidbody2D>();
         SetValues();
+        Level = 1;
     }
 
     // Update is called once per frame
