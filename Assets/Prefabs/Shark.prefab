@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 1441aadca9931c14bb3c701965ad3f5e, type: 3}
+  m_Sprite: {fileID: 3688507004059169533, guid: a8a79cb238b017e43b347a979475ce00, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -102,6 +102,7 @@ MonoBehaviour:
   health: 0
   speed: 0
   damage: 0
+  Gold: {fileID: 0}
   renderer: {fileID: 0}
   originalColor: {r: 0, g: 0, b: 0, a: 0}
   FlickerDuration: 0.1
@@ -110,6 +111,7 @@ MonoBehaviour:
   stoppingDistance: 0
   detectionDistance: 0
   maxHealth: 0
+  doubloonPrefab: {fileID: 0}
 --- !u!61 &8339142492698101944
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -145,8 +147,8 @@ BoxCollider2D:
   m_Offset: {x: -0.031856418, y: 0.067782044}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 6.4, y: 6.4}
+    pivot: {x: 0.5, y: -0.3414634}
+    oldSize: {x: 2.4, y: 4.1}
     newSize: {x: 0.16, y: 0.16}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -190,8 +192,8 @@ BoxCollider2D:
   m_Offset: {x: -0.11573601, y: 0.15721154}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 6.4, y: 6.4}
+    pivot: {x: 0.5, y: -0.3414634}
+    oldSize: {x: 2.4, y: 4.1}
     newSize: {x: 0.16, y: 0.16}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
