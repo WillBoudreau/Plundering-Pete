@@ -29,6 +29,7 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        playerSpawnPoint = GameObject.Find("PlayerSpawn").transform;
         levelName = SceneManager.GetActiveScene().name;
     }
 

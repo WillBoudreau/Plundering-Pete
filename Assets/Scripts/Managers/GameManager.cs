@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     public bool PlayerEnabled;
     public Transform playerSpawnPoint;
     public Button loadButton;
-    public bool PlayerPlaced = false;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -49,10 +49,10 @@ public class GameManager : MonoBehaviour
         if (levelManager.levelName == "GameTestScene" && uiManager.currentGameState == UIManager.GameState.GamePlay)
         {
             playerSpawnPoint = GameObject.Find("PlayerSpawnPoint").transform;
-            if (PlayerPlaced == false)
+            if (playerBehaviour.PlayerPlaced == false)
             {
                 PlacePlayer();
-                PlayerPlaced = true;
+                playerBehaviour.PlayerPlaced = true;
             }
             EnablePlayer();
             EnableCamera();

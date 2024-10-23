@@ -37,6 +37,7 @@ public class PlayerBehaviour : MonoBehaviour
     public GameObject level2BulletPrefab;
     public float time = 5.0f;
     public GameObject level3BulletPrefab;
+    public bool PlayerPlaced = false;
     [Header("Renderer Calls")]
     public Renderer renderer;
     private Color originalColor;
@@ -234,13 +235,16 @@ public class PlayerBehaviour : MonoBehaviour
         {
             healthManager.IsDead = true;
             playerHealth = 0;
-            //gameObject.SetActive(false);
             uIManager.SetGameState("GameOver");
-            transform.position = levelManager.SetPlayerSpawnPoint();
-            ResetHealth();
+            Respawn();
         }
     }
-
+    void Respawn()
+    {
+        PlayerPlaced = false;
+        transform.position = levelManager.SetPlayerSpawnPoint();
+        ResetHealth();
+    }
     public void TakeDamage(float damage)
     {
         StartCoroutine(Flicker());
