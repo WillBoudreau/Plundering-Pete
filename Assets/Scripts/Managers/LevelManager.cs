@@ -74,13 +74,14 @@ public class LevelManager : MonoBehaviour
         obstacleManager.spawnRocks(player.transform, safeDistance);
     }
 
-    private void SetPlayerSpawnPoint()
+    public Vector3 SetPlayerSpawnPoint()
     {
         GameObject player = GameObject.FindWithTag("Player");
         if (player != null && playerSpawnPoint != null)
         {
             player.transform.position = playerSpawnPoint.position;
         }
+        return player.transform.position;
     }
 
     private IEnumerator WaitForScreenLoad(string sceneName)

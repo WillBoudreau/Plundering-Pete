@@ -235,6 +235,7 @@ public class PlayerBehaviour : MonoBehaviour
             playerHealth = 0;
             //gameObject.SetActive(false);
             uIManager.SetGameState("GameOver");
+            transform.position = levelManager.SetPlayerSpawnPoint();
             ResetHealth();
         }
     }
@@ -290,8 +291,6 @@ public class PlayerBehaviour : MonoBehaviour
                             time = 5f;
                         }
                     }
-                    break;
-                case " ":
                     break;
             }
         }
