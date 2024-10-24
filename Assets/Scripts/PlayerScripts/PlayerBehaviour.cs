@@ -93,7 +93,7 @@ public class PlayerBehaviour : MonoBehaviour
         startFireRate = 2;
         bulletVelocity = 25f;
         healthManager.health = playerHealth;
-        magnet = 2f;
+        magnet = 3f;
         //Assign values to be the starting values
         playerHealth = startHealth;
         speed = StartSpeed;

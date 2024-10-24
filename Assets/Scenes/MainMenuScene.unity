@@ -7079,6 +7079,7 @@ MonoBehaviour:
   - {fileID: 1080032331}
   - {fileID: 1080032330}
   - {fileID: 1080032333}
+  - {fileID: 1080032334}
   inventory: {fileID: 1039502979}
   NumberCoinsText: {fileID: 387048878}
   ShipCost: 0

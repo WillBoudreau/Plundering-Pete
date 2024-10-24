@@ -31,7 +31,7 @@ public class FireRateUpgrade : Upgrade
     // Update is called once per frame
     void Update()
     {
-       FireRateText.text = "Fire Rate: " + player.fireRate + " Cost: " + cost;
+       FireRateText.text = "Fire Rate: " + player.startFireRate + " Cost: " + cost;
     }
 
     public override void CostCheck()
@@ -56,7 +56,8 @@ public class FireRateUpgrade : Upgrade
         {
             Debug.Log("Upgrading Player Fire Rate");
             player.fireRate ++;
-            Debug.Log("Player Magnet: " + player.fireRate);
+            player.startFireRate ++;
+            Debug.Log("Player FireRate: " + player.fireRate);
         }
         else
         {

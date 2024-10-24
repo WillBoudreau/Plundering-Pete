@@ -36,7 +36,6 @@ public class DistanceTracker : MonoBehaviour
         TrackDist();
         Checkpoint();
         DisplayWarning();
-        Debug.Log(playerDistance);
         playerDistance = Vector3.Distance(startPosition.position, playerBehaviour.transform.position);
     }
 
