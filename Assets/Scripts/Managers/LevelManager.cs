@@ -8,18 +8,22 @@ public class LevelManager : MonoBehaviour
 {
     [Header("Level Manager")]
     [Header("Class Calls")]
-    public CollectorManager collectorManager;
+    [SerializeField] private CollectorManager collectorManager;
     [SerializeField] private MusicChanger musicChanger;
-    public WaveManger waveManager;
-    public UIManager uiManager;
-    public ObstacleManager obstacleManager;
-    public PlayerBehaviour player;
+    [SerializeField] private WaveManger waveManager;
+    [SerializeField] private UIManager uiManager;
+    [SerializeField] private ObstacleManager obstacleManager;
+    [SerializeField] private PlayerBehaviour player;
     [Header("Loading Screen")]
     public List<AsyncOperation> scenesToLoad = new List<AsyncOperation>();
     [Header("Level Variables")]
     public string levelName;
     public Transform playerSpawnPoint; 
     public float safeDistance = 5f;
+    public bool hasSpawnedZone1Obstacles;
+    public bool hasSpawnedZone2Obstacles;
+    public bool hasSpawnedZone3Obstacles;
+
 
     void Start()
     {
@@ -29,10 +33,8 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        playerSpawnPoint = GameObject.Find("PlayerSpawn").transform;
         levelName = SceneManager.GetActiveScene().name;
     }
-
     public void LoadLevel(string name)
     {
         Debug.Log("Level load requested for: " + name);
@@ -40,6 +42,7 @@ public class LevelManager : MonoBehaviour
 
         if(name == "GameTestScene")
         {
+            waveManager.UpdateCheckpointStatus(0,true);
             StartCoroutine(WaitForSceneToLoadAndRespawn());
             musicChanger.PlaySceneTrack(name);
         }
@@ -61,24 +64,58 @@ public class LevelManager : MonoBehaviour
         yield return new WaitForSeconds(uiManager.fadeTime); // Adjust timing if needed
 
         // Rest of the setup
-        SpawnObjects();
+        UpdateObjects();
         musicChanger.PlaySceneTrack(SceneManager.GetActiveScene().name);
         waveManager.SetAll();
     }   
     void SpawnObjects()
     {
-        //Spawn Doubloons
+        Debug.Log("Spawning Objects");  
+            if(waveManager.FirstCheckpoint == true && !collectorManager.hasSpawnedDoubloons && !obstacleManager.hasSpawnedRocks)
+            {
+                //Spawn Doubloons
+                collectorManager.SpawnDoubloons(player.transform, safeDistance);
+                //Spawn Rocks
+                obstacleManager.spawnZone1Obstacles(obstacleManager.zone1Xnegative,obstacleManager.zone1Xpositive,obstacleManager.zone1Ynegative,obstacleManager.zone1Ypositive,player.transform, safeDistance);
+            }
+            else if(waveManager.SecondCheckpoint == true && !obstacleManager.hasSpawnedRocks && !obstacleManager.hasSpawnedIcebergs && !hasSpawnedZone2Obstacles)
+            {
+                //Spawn Icebergs
+                obstacleManager.spawnZone2Obstacles(obstacleManager.zone2Xnegative,obstacleManager.zone2Xpositive,obstacleManager.zone2Ynegative,obstacleManager.zone2Ypositive,player.transform, safeDistance);
+            }
+            else if(waveManager.ThirdCheckpoint == true && !collectorManager.hasSpawnedDoubloons && !obstacleManager.hasSpawnedRocks && !obstacleManager.hasSpawnedIcebergs && !obstacleManager.hasSpawnedDebris && !hasSpawnedZone3Obstacles)
+            {
+                //Spawn Debris
+                obstacleManager.spawnZone3Obstacles(obstacleManager.zone3Xnegative,obstacleManager.zone3Xpositive,obstacleManager.zone3Ynegative,obstacleManager.zone3Ypositive,player.transform, safeDistance);
+            }
+    }
+    public void UpdateObjects()
+    {
+        SetFalse();
+        Debug.Log("Updating Objects");
+        if(waveManager.FirstCheckpoint == true)
+        {
+            SpawnObjects();
+            hasSpawnedZone1Obstacles = true;
+        }
+        else if (waveManager.SecondCheckpoint == true)
+        {
+            SpawnObjects();
+            hasSpawnedZone2Obstacles = true;
+        }
+        else if (waveManager.ThirdCheckpoint == true)
+        {
+            SpawnObjects();
+            hasSpawnedZone3Obstacles = true;
+        }
+    }
+    public void SetFalse()
+    {
+        Debug.Log("Setting False");
         collectorManager.hasSpawnedDoubloons = false;
-        collectorManager.SpawnDoubloons(player.transform, safeDistance);
-        //Spawn Rocks
         obstacleManager.hasSpawnedRocks = false;
-        obstacleManager.spawnRocks(player.transform, safeDistance);
-        //Spawn Icebergs
         obstacleManager.hasSpawnedIcebergs = false;
-        obstacleManager.spawnIceBergs(player.transform, safeDistance);
-        //Spawn Debris
         obstacleManager.hasSpawnedDebris = false;
-        obstacleManager.SpawnDebris(player.transform, safeDistance);
     }
 
     public Vector3 SetPlayerSpawnPoint()
@@ -117,5 +154,11 @@ public class LevelManager : MonoBehaviour
     {
         Debug.Log("Scene Loaded");
         scenesToLoad.Remove(operation);
+    }
+    public void SetLocationFalse()
+    {
+        hasSpawnedZone1Obstacles = false;
+        hasSpawnedZone2Obstacles = false;
+        hasSpawnedZone3Obstacles = false;
     }
 }

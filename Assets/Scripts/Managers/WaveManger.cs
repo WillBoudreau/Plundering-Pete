@@ -7,6 +7,8 @@ public class WaveManger : MonoBehaviour
     //Class calls
     [Header("Classes")]
     public DistanceTracker distanceTracker;
+    public ObstacleManager obstacleManager;
+    public LevelManager levelManager;
     [Header("Variables")]
     //List of all the enemy objects
     public List<GameObject> Sharks;
@@ -42,7 +44,8 @@ public class WaveManger : MonoBehaviour
     public List<GameObject> Enemies = new List<GameObject>();
     void Start()
     {
-        UpdateCheckpointStatus(0, true);
+        Debug.Log("Wave Manager Started");
+        //UpdateCheckpointStatus(0, true);
     }
     public void SetAll()
     {
@@ -54,7 +57,6 @@ public class WaveManger : MonoBehaviour
         StartCoroutine(SpawnEnemies());
         Timer();
         FillArrays();
-        //UpdateCheckpoints();
     }
     void Timer()
     {
@@ -127,7 +129,8 @@ public class WaveManger : MonoBehaviour
                 //Debug.Log("Spawning Sharks");
                 SpawnEnemy(SharkPrefab, SpawnPoints1, ref SharkSpawnIndex);
                 spawnTime = 5f;
-                if (SecondCheckpoint)
+            }
+                if (spawnTime <= 0 && SecondCheckpoint)
                 {
                     // Spawn 5 sharks before each serpent
                     for (int i = 0; i < 5; i++)
@@ -137,7 +140,7 @@ public class WaveManger : MonoBehaviour
                     SpawnEnemy(SerpentPrefab, SpawnPoints2, ref SerpentSpawnIndex);
                     spawnTime = 5f;
                 }
-                if (ThirdCheckpoint)
+                if (spawnTime <= 0 && ThirdCheckpoint)
                 {
                     for(int i = 0; i < 10; i++)
                     {
@@ -150,7 +153,6 @@ public class WaveManger : MonoBehaviour
                     SpawnEnemy(ShipPrefab, SpawnPoints3, ref ShipSpawnIndex);
                     spawnTime = 5f;
                 }
-            }
             yield return new WaitForSeconds(2f);
         }
     }
@@ -200,16 +202,28 @@ void SpawnEnemy(GameObject enemyPrefab, GameObject[] spawnPoints, ref int curren
         {
             case 0:
                 FirstCheckpoint = status;
+                levelManager.UpdateObjects();
+                Debug.Log("First Checkpoint: " + FirstCheckpoint);
                 break;
             case 1:
                 SecondCheckpoint = status;
+                levelManager.UpdateObjects();
+                Debug.Log("Second Checkpoint: " + SecondCheckpoint);
                 break;
             case 2:
                 ThirdCheckpoint = status;
+                levelManager.UpdateObjects();
+                Debug.Log("Third Checkpoint: " + ThirdCheckpoint);
                 break;
             default:
                 Debug.LogWarning("Invalid checkpoint index");
                 break;
         }
+    }
+    public void SetFalse()
+    {
+        FirstCheckpoint = false;
+        SecondCheckpoint = false;
+        ThirdCheckpoint = false;
     }
 }

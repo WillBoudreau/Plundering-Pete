@@ -65,6 +65,11 @@ public class FireRateUpgrade : Upgrade
             FireRateText.text = "Max Fire Rate Reached";
         }
     }
+    void UpgradeStat()
+    {
+        player.fireRate++;
+        player.startFireRate++;
+    }
     public override void Reset()
     {
         foreach (var upgrade in FRUpgrade)

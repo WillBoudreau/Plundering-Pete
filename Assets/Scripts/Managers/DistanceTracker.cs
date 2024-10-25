@@ -9,6 +9,7 @@ public class DistanceTracker : MonoBehaviour
     [Header("Class calls")]
     public PlayerBehaviour playerBehaviour;
     public WaveManger waveManger;
+    public LevelManager levelManager;
     [Header("Variables")]
     public float Distance;
     public float GameTimer;
@@ -18,6 +19,9 @@ public class DistanceTracker : MonoBehaviour
     public Transform startPosition;
     public float playerDistance; 
     public Transform endPosition;
+    public bool spawnlevel1;
+    public bool spawnlevel2;
+    public bool spawnlevel3;
     [Header("UI elements")]
     public Slider distanceTracker;
     public TextMeshProUGUI WarningText;
@@ -57,7 +61,7 @@ public class DistanceTracker : MonoBehaviour
 
     void SetValues()
     {
-        Checkpoint1 = 0;
+        Checkpoint1 = -150;
         Checkpoint2 = 25;
         Checkpoint3 = 200;
         // Set all starting values
@@ -77,10 +81,11 @@ public class DistanceTracker : MonoBehaviour
     }
     void Checkpoint()
     {
-        if (playerBehaviour != null)
+        if (playerBehaviour != null && levelManager.levelName == "GameTestScene")
         {
-            if (playerBehaviour.transform.position.y >= Checkpoint1)
+            if (playerBehaviour.transform.position.y >= Checkpoint1 && !spawnlevel1)
             {
+                spawnlevel1 = true;
                 waveManger.UpdateCheckpointStatus(0, true);
             }
             if (playerBehaviour.transform.position.y >= Checkpoint2)
@@ -95,11 +100,17 @@ public class DistanceTracker : MonoBehaviour
     }
     void DisplayWarning()
     {
+        WarningText.gameObject.SetActive(false);
         if(playerBehaviour.IsLevel2 == false && playerBehaviour.transform.position.y >= Checkpoint2)
         {
             // Display warning
             WarningText.gameObject.SetActive(true);
             WarningText.text = "YAARRR! Ye is about to enter dangerous waters! Your ship is not ready!";
         }
+    }
+    public void SetFalse()
+    {
+        spawnlevel2 = false;
+        spawnlevel3 = false;
     }
 }

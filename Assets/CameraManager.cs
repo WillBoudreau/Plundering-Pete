@@ -5,20 +5,29 @@ using UnityEngine;
 public class CameraManager : MonoBehaviour
 {
     [Header("Variables")]
-    public float moveSpeed;
+    [SerializeField] float moveSpeed = 5f;
     [Header("Class Calls")]
     public PlayerBehaviour playerBehaviour;
+    public GameObject player;
+
+    private Vector3 offset;
 
     // Start is called before the first frame update
     void Start()
     {
         playerBehaviour = GameObject.Find("Player").GetComponent<PlayerBehaviour>();
+        offset = transform.position - player.transform.position;
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
-        moveSpeed = playerBehaviour.speed;
-        transform.Translate(Vector3.up * moveSpeed * Time.deltaTime);
+        MoveWithPlayer();
+    }
+
+    void MoveWithPlayer()
+    {
+        Vector3 targetPOS = player.transform.position + offset;
+        transform.position = Vector3.Lerp(transform.position, targetPOS, moveSpeed * Time.deltaTime);
     }
 }

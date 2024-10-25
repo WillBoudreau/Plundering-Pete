@@ -34,7 +34,7 @@ public class SharkBahaviour : Enemy
         maxHealth = 2;
         damage = 1;
         stoppingDistance = 2;
-        detectionDistance = 10;
+        detectionDistance = 6;
         player = GameObject.Find("Player").GetComponent<PlayerBehaviour>();
     }
 

@@ -52,6 +52,7 @@ public class PlayerBehaviour : MonoBehaviour
     public HealthManager healthManager;
     public MusicChanger musicManager;
     public WaveManger waveManager;
+    public DistanceTracker distanceTracker;
 
     // Start is called before the first frame update
     void Start()
@@ -224,8 +225,12 @@ public class PlayerBehaviour : MonoBehaviour
             TakeDamage(other.gameObject.GetComponent<EnemyShipBehaviour>().damage);
             break;
             case "CanonBall":
-            TakeDamage(other.gameObject.GetComponent<EnemyShipBehaviour>().damage);
-            Destroy(other.gameObject);
+            var enemyShip = other.gameObject.GetComponent<EnemyShipBehaviour>();
+            if (enemyShip != null)
+            {
+                TakeDamage(enemyShip.damage);
+                Destroy(other.gameObject);
+            }
             break;
         }
     }
@@ -236,6 +241,10 @@ public class PlayerBehaviour : MonoBehaviour
             healthManager.IsDead = true;
             playerHealth = 0;
             uIManager.SetGameState("GameOver");
+            levelManager.SetFalse();
+            levelManager.SetLocationFalse();
+            waveManager.SetFalse();
+            distanceTracker.SetFalse();
             Respawn();
         }
     }
@@ -276,7 +285,6 @@ public class PlayerBehaviour : MonoBehaviour
         float dist = 5.0f;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector3.forward, dist, groundLayer);
         Debug.DrawRay(transform.position, Vector3.forward * dist, Color.red);
-        Debug.Log(hit.collider);
         if (hit.collider != null)
         {
             Debug.Log("Hit Object: " + hit.collider.gameObject.name);
