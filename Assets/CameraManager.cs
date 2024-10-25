@@ -6,6 +6,7 @@ public class CameraManager : MonoBehaviour
 {
     [Header("Variables")]
     [SerializeField] float moveSpeed = 5f;
+    [SerializeField] float upwardSpeed = 2f;
     [Header("Class Calls")]
     public PlayerBehaviour playerBehaviour;
     public GameObject player;
@@ -28,6 +29,7 @@ public class CameraManager : MonoBehaviour
     void MoveWithPlayer()
     {
         Vector3 targetPOS = player.transform.position + offset;
+        targetPOS.y += upwardSpeed * Time.deltaTime;
         transform.position = Vector3.Lerp(transform.position, targetPOS, moveSpeed * Time.deltaTime);
     }
 }
