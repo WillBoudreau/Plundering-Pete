@@ -1488,7 +1488,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  upwardSpeed: 2
   playerBehaviour: {fileID: 551069647}
   player: {fileID: 551069641}
 --- !u!1 &232086087
@@ -13085,10 +13084,6 @@ PrefabInstance:
       propertyPath: healthManager
       value: 
       objectReference: {fileID: 734893757}
-    - target: {fileID: 3116806254861534645, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
-      propertyPath: distanceTracker
-      value: 
-      objectReference: {fileID: 1556131826}
     - target: {fileID: 3116806254861534645, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
       propertyPath: inventoryManager
       value: 
