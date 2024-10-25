@@ -5,29 +5,28 @@ using UnityEngine;
 public class CameraManager : MonoBehaviour
 {
     [Header("Variables")]
-    [SerializeField] float moveSpeed = 5f;
+    [SerializeField] float moveSpeed;
+    [SerializeField] Vector3 startPosition;
     [Header("Class Calls")]
-    public PlayerBehaviour playerBehaviour;
-    public GameObject player;
-
-    private Vector3 offset;
+    [SerializeField] private PlayerBehaviour playerBehaviour;
 
     // Start is called before the first frame update
     void Start()
     {
-        playerBehaviour = GameObject.Find("Player").GetComponent<PlayerBehaviour>();
-        offset = transform.position - player.transform.position;
+        // moveSpeed = playerBehaviour.speed;
     }
 
     // Update is called once per frame
-    void LateUpdate()
+    void FixedUpdate()
     {
         MoveWithPlayer();
     }
 
     void MoveWithPlayer()
     {
-        Vector3 targetPOS = player.transform.position + offset;
-        transform.position = Vector3.Lerp(transform.position, targetPOS, moveSpeed * Time.deltaTime);
+        if(playerBehaviour.IsMoving == true)
+        {
+            transform.Translate(Vector3.up * moveSpeed * Time.deltaTime);
+        }
     }
 }

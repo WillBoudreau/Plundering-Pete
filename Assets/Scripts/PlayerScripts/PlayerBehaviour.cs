@@ -28,6 +28,7 @@ public class PlayerBehaviour : MonoBehaviour
     public bool Win;
     public bool IsLevel2;
     public bool IsLevel3; 
+    public bool IsMoving;
     public TextMeshProUGUI DoubloonText;
     public Transform firePoint;
     public int Level;
@@ -170,6 +171,15 @@ public class PlayerBehaviour : MonoBehaviour
 
         Vector2 movement = new Vector2(moveHorizontal, moveVertical) * speed;
         rb.velocity = movement;
+        if(rb.velocity.magnitude > 0)
+        {
+            IsMoving = true;
+            Debug.Log("Player is moving");
+        }
+        else
+        {
+            IsMoving = false;
+        }
     }
     void StaywithinBounds()
     {
