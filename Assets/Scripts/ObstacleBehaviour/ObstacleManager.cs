@@ -79,13 +79,11 @@ public class ObstacleManager : MonoBehaviour
     //Spawn Rocks dependent on how many in the array
     public void spawnZone1Obstacles(float XNeg,float XPos,float YNeg,float YPos,Transform playerTransform, float safeDistance)
     {
-        Debug.Log("Spawning Rocks");
         if (levelManager.levelName == "GameTestScene" && !hasSpawnedRocks)
         {
             for (int i = 0; i < obstacle_Rock_Count; i++)
             {
                 Vector3 spawnPosition = GetSafeSpawnPos(XNeg, XPos, YNeg, YPos, playerTransform.position, safeDistance);
-                Debug.Log("Spawning Rocks");
                 Instantiate(obstacle_Rock[i], spawnPosition, Quaternion.identity);
             }
             hasSpawnedRocks = true; 
@@ -93,20 +91,17 @@ public class ObstacleManager : MonoBehaviour
     }
     public void spawnZone2Obstacles(float XNeg,float XPos,float YNeg,float YPos,Transform playerTransform, float safeDistance)
     {
-        Debug.Log("Spawning Rocks2");
         //Spawn Icebergs
         if (levelManager.levelName == "GameTestScene" && !hasSpawnedIcebergs)
         {
             for(int i = 0; i < obstacle_Rock_Count; i++)
             {
                 Vector3 spawnPosition = GetSafeSpawnPos(XNeg, XPos, YNeg, YPos, playerTransform.position, safeDistance);
-                Debug.Log("Spawning Rocks2");
                 Instantiate(obstacle_Rock[i], spawnPosition, Quaternion.identity);
             }
             for (int i = 0; i < obstacle_Iceberg_Count; i++)
             {
                 Vector3 spawnPosition = GetSafeSpawnPos(XNeg, XPos, YNeg, YPos, playerTransform.position, safeDistance);
-                Debug.Log("Spawning Icebergs");
                 Instantiate(obstacle_Iceberg[i], spawnPosition, Quaternion.identity);
             }
             hasSpawnedIcebergs = true;
@@ -115,14 +110,12 @@ public class ObstacleManager : MonoBehaviour
     }
     public void spawnZone3Obstacles(float XNeg,float XPos,float YNeg, float YPos,Transform playerTransform, float safeDistance)
     {
-        Debug.Log("Spawning Rocks3");
         //Spawn Debris
         if (levelManager.levelName == "GameTestScene" && !hasSpawnedDebris)
         {
             for (int i = 0; i < obstacle_Debris_Count; i++)
             {
                 Vector3 spawnPosition = GetSafeSpawnPos(XNeg, XPos, YNeg, YPos, playerTransform.position, safeDistance);
-                Debug.Log("Spawning Debris");
                 Instantiate(obstacle_Debris[i], spawnPosition, Quaternion.identity);
             }
             hasSpawnedDebris = true;

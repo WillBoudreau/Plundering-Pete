@@ -83,7 +83,6 @@ public class PlayerBehaviour : MonoBehaviour
         HandleShooting();
         UpdateCounter();
         HandleMagnit();
-        Death();
     }
     void SetValues()
     {
@@ -174,7 +173,6 @@ public class PlayerBehaviour : MonoBehaviour
         if(rb.velocity.magnitude > 0)
         {
             IsMoving = true;
-            Debug.Log("Player is moving");
         }
         else
         {
@@ -248,8 +246,9 @@ public class PlayerBehaviour : MonoBehaviour
     {
         if (playerHealth <= 0)
         {
-            healthManager.IsDead = true;
+            // healthManager.IsDead = true;
             playerHealth = 0;
+            ResetHealth();
             uIManager.SetGameState("GameOver");
             levelManager.SetFalse();
             levelManager.SetLocationFalse();
@@ -260,9 +259,16 @@ public class PlayerBehaviour : MonoBehaviour
     }
     void Respawn()
     {
+        Debug.Log("Respawning Player");
         PlayerPlaced = false;
         transform.position = levelManager.SetPlayerSpawnPoint();
-        ResetHealth();
+    }
+    private void ResetHealth()
+    {
+        Debug.Log("Resetting Health");
+        playerHealth = startHealth;
+        healthManager.health = playerHealth;
+        healthManager.IsDead = false;
     }
     public void TakeDamage(float damage)
     {
@@ -271,12 +277,6 @@ public class PlayerBehaviour : MonoBehaviour
         Death();
     }
 
-    private void ResetHealth()
-    {
-        playerHealth = startHealth;
-        healthManager.health = playerHealth;
-        healthManager.IsDead = false;
-    }
     //Flicker for damage
     IEnumerator Flicker()
     {

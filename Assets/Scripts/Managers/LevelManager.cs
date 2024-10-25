@@ -14,6 +14,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private UIManager uiManager;
     [SerializeField] private ObstacleManager obstacleManager;
     [SerializeField] private PlayerBehaviour player;
+    [SerializeField] private CameraManager cameraManager;
     [Header("Loading Screen")]
     public List<AsyncOperation> scenesToLoad = new List<AsyncOperation>();
     [Header("Level Variables")]
@@ -34,6 +35,7 @@ public class LevelManager : MonoBehaviour
     void Update()
     {
         levelName = SceneManager.GetActiveScene().name;
+        playerSpawnPoint = GameObject.Find("PlayerSpawnPoint").transform;
     }
     public void LoadLevel(string name)
     {
@@ -42,6 +44,7 @@ public class LevelManager : MonoBehaviour
 
         if(name == "GameTestScene")
         {
+            SetPlayerSpawnPoint();
             waveManager.UpdateCheckpointStatus(0,true);
             StartCoroutine(WaitForSceneToLoadAndRespawn());
             musicChanger.PlaySceneTrack(name);
@@ -64,7 +67,7 @@ public class LevelManager : MonoBehaviour
         yield return new WaitForSeconds(uiManager.fadeTime); // Adjust timing if needed
 
         // Rest of the setup
-        UpdateObjects();
+        // UpdateObjects();
         musicChanger.PlaySceneTrack(SceneManager.GetActiveScene().name);
         waveManager.SetAll();
     }   
@@ -92,7 +95,6 @@ public class LevelManager : MonoBehaviour
     public void UpdateObjects()
     {
         SetFalse();
-        Debug.Log("Updating Objects");
         if(waveManager.FirstCheckpoint == true)
         {
             SpawnObjects();
@@ -111,7 +113,6 @@ public class LevelManager : MonoBehaviour
     }
     public void SetFalse()
     {
-        Debug.Log("Setting False");
         collectorManager.hasSpawnedDoubloons = false;
         obstacleManager.hasSpawnedRocks = false;
         obstacleManager.hasSpawnedIcebergs = false;
@@ -124,6 +125,8 @@ public class LevelManager : MonoBehaviour
         if (player != null && playerSpawnPoint != null)
         {
             player.transform.position = playerSpawnPoint.position;
+            cameraManager.transform.position = playerSpawnPoint.position;
+            cameraManager.transform.position = new Vector3(cameraManager.transform.position.x, cameraManager.transform.position.y, -30);
         }
         return player.transform.position;
     }

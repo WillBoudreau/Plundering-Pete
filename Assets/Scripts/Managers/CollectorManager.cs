@@ -19,7 +19,7 @@ public class CollectorManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        numofDoubloons = 50;
+        numofDoubloons = 10;
         AddDoubloonsToList();
         levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
     }
