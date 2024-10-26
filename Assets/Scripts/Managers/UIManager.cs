@@ -42,7 +42,6 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI playerSerpentKills;
     public TextMeshProUGUI playerShipKills;
     public TextMeshProUGUI playerDistance;
-    public TextMeshProUGUI playerCheckpoint;
     [Header("Loading Bar")]
     public CanvasGroup loadingScreenCanvasGroup;
     public float fadeTime = 0.5f;
@@ -126,6 +125,8 @@ public class UIManager : MonoBehaviour
         playerSerpentKills.text = "Serpents Killed: " + player.SerpentKills.ToString();
         playerShipKills.text = "Ships Sunk: " + player.ShipKills.ToString();
         playerDistance.text = "Distance Travelled: " + distanceTracker.playerDistance.ToString();
+        levelManager.SetFalse();
+
     }
     public void SetGameState(string state)
     { 

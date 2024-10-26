@@ -67,7 +67,7 @@ public class LevelManager : MonoBehaviour
         yield return new WaitForSeconds(uiManager.fadeTime); // Adjust timing if needed
 
         // Rest of the setup
-        // UpdateObjects();
+        UpdateObjects();
         musicChanger.PlaySceneTrack(SceneManager.GetActiveScene().name);
         waveManager.SetAll();
     }   
@@ -86,7 +86,7 @@ public class LevelManager : MonoBehaviour
                 //Spawn Icebergs
                 obstacleManager.spawnZone2Obstacles(obstacleManager.zone2Xnegative,obstacleManager.zone2Xpositive,obstacleManager.zone2Ynegative,obstacleManager.zone2Ypositive,player.transform, safeDistance);
             }
-            else if(waveManager.ThirdCheckpoint == true && !collectorManager.hasSpawnedDoubloons && !obstacleManager.hasSpawnedRocks && !obstacleManager.hasSpawnedIcebergs && !obstacleManager.hasSpawnedDebris && !hasSpawnedZone3Obstacles)
+            else if(waveManager.ThirdCheckpoint == true && !obstacleManager.hasSpawnedRocks && !obstacleManager.hasSpawnedIcebergs && !obstacleManager.hasSpawnedDebris && !hasSpawnedZone3Obstacles)
             {
                 //Spawn Debris
                 obstacleManager.spawnZone3Obstacles(obstacleManager.zone3Xnegative,obstacleManager.zone3Xpositive,obstacleManager.zone3Ynegative,obstacleManager.zone3Ypositive,player.transform, safeDistance);

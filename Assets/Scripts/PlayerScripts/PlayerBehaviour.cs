@@ -148,9 +148,12 @@ public class PlayerBehaviour : MonoBehaviour
             }
             else if(IsLevel3)
             {
-                GameObject bullet2 = Instantiate(level3BulletPrefab, bulletSpawnPos, Quaternion.identity);
-                bullet2.GetComponent<Rigidbody2D>().velocity = Vector2.up * bulletVelocity;
-                Destroy(bullet2, 2.0f);
+                for(int i = 0; i < 3; i++)
+                {
+                    GameObject bullet2 = Instantiate(level3BulletPrefab, bulletSpawnPos, Quaternion.identity);
+                    bullet2.GetComponent<Rigidbody2D>().velocity = Vector2.up * bulletVelocity;
+                    Destroy(bullet2, 2.0f);
+                }
             }
             else
             {

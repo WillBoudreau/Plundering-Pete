@@ -118,7 +118,19 @@ public class ObstacleManager : MonoBehaviour
                 Vector3 spawnPosition = GetSafeSpawnPos(XNeg, XPos, YNeg, YPos, playerTransform.position, safeDistance);
                 Instantiate(obstacle_Debris[i], spawnPosition, Quaternion.identity);
             }
+            for (int i = 0; i < obstacle_Rock_Count; i++)
+            {
+                Vector3 spawnPosition = GetSafeSpawnPos(XNeg, XPos, YNeg, YPos, playerTransform.position, safeDistance);
+                Instantiate(obstacle_Rock[i], spawnPosition, Quaternion.identity);
+            }
+            for (int i = 0; i < obstacle_Iceberg_Count; i++)
+            {
+                Vector3 spawnPosition = GetSafeSpawnPos(XNeg, XPos, YNeg, YPos, playerTransform.position, safeDistance);
+                Instantiate(obstacle_Iceberg[i], spawnPosition, Quaternion.identity);
+            }
             hasSpawnedDebris = true;
+            hasSpawnedRocks = true;
+            hasSpawnedIcebergs = true;
         }
     }
     //Get the spawn position for the obstacles
