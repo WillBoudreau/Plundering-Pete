@@ -220,6 +220,18 @@ public class PlayerBehaviour : MonoBehaviour
                 magnet = 0;
             }
             break;
+            case "CoinBag":
+            if(inventoryManager.IsMax == false)
+            {
+                inventoryManager.coinCount += 5;
+                other.gameObject.SetActive(false);
+            }
+            else
+            {
+                other.gameObject.SetActive(true);
+                magnet = 0;
+            }
+            break;
             case "Obstacle":
             TakeDamage(other.gameObject.GetComponent<Obstacle>().damage);
             break;

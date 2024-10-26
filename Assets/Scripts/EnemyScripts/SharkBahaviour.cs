@@ -27,7 +27,7 @@ public class SharkBahaviour : Enemy
     void Start()
     {
         renderer = GetComponent<Renderer>();
-        Gold = GameObject.FindGameObjectWithTag("Gold");
+        Gold = GameObject.FindGameObjectWithTag("CoinBag");
         originalColor = renderer.material.color;
         speed = 5;
         health = 2;
@@ -44,7 +44,7 @@ public class SharkBahaviour : Enemy
         Move();
         if(Gold == null)
         {
-            Gold = GameObject.FindGameObjectWithTag("Gold");
+            Gold = GameObject.FindGameObjectWithTag("CoinBag");
         }
     }
 

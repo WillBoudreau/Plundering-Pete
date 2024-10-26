@@ -7077,6 +7077,7 @@ MonoBehaviour:
   uiManager: {fileID: 1728282020}
   obstacleManager: {fileID: 1683598818}
   player: {fileID: 551069647}
+  cameraManager: {fileID: 177806785}
   levelName: 
   playerSpawnPoint: {fileID: 0}
   safeDistance: 5
@@ -15102,5 +15103,5 @@ RectTransform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1547232562}
   - {fileID: 1348394688}
+  - {fileID: 1547232562}

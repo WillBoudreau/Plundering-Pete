@@ -19,6 +19,7 @@ TagManager:
   - CanonBall
   - EnemyShip
   - Serpent
+  - CoinBag
   layers:
   - Default
   - TransparentFX
