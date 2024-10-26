@@ -90,6 +90,7 @@ public class LevelManager : MonoBehaviour
             {
                 //Spawn Debris
                 obstacleManager.spawnZone3Obstacles(obstacleManager.zone3Xnegative,obstacleManager.zone3Xpositive,obstacleManager.zone3Ynegative,obstacleManager.zone3Ypositive,player.transform, safeDistance);
+                hasSpawnedZone3Obstacles = true;
             }
     }
     public void UpdateObjects()

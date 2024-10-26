@@ -9,13 +9,13 @@ public class FireRateUpgrade : Upgrade
     [Header("Upgrade Values")]
     public TextMeshProUGUI FireRateText;
     public TextMeshProUGUI costText;
-    public int MaxFireRate;
+    public float MaxFireRate;
     public List<GameObject> FRUpgrade= new List<GameObject>();
     private int currentUpgradeIndex = 0;
 
     void Start()
     {
-        MaxFireRate = 3;
+        MaxFireRate = player.fireRate - 0.45f;
         cost = 10;
         // Initialize the damageUpgrade images to white
         foreach (var upgrade in FRUpgrade)
@@ -41,7 +41,6 @@ public class FireRateUpgrade : Upgrade
         {
             inventory.coinCount -= cost;
             UpgradePlayer();
-            UpdateUpgradeDisplay();
         }
         else
         {
@@ -52,23 +51,20 @@ public class FireRateUpgrade : Upgrade
 
     public override void UpgradePlayer()
     {
-        if (player.fireRate < MaxFireRate)
+        if (player.fireRate >= MaxFireRate)
         {
             Debug.Log("Upgrading Player Fire Rate");
-            player.fireRate ++;
-            player.startFireRate ++;
+            player.fireRate -= 0.15f;
+            player.startFireRate -= 0.15f;
             Debug.Log("Player FireRate: " + player.fireRate);
+            UpdateUpgradeDisplay();
         }
         else
         {
+            inventory.coinCount += cost;
             Debug.Log("Max fire rate Reached");
             FireRateText.text = "Max Fire Rate Reached";
         }
-    }
-    void UpgradeStat()
-    {
-        player.fireRate++;
-        player.startFireRate++;
     }
     public override void Reset()
     {

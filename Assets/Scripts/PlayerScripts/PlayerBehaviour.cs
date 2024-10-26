@@ -113,6 +113,7 @@ public class PlayerBehaviour : MonoBehaviour
         }
         else if(IsLevel3)
         {
+            PlayerLevels[0].SetActive(false);
             PlayerLevels[1].SetActive(false);
             PlayerLevels[2].SetActive(true);
         }

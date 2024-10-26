@@ -15,7 +15,7 @@ public class HealthUpgrade : Upgrade
 
     void Start()
     {
-        MaxHeatlh = 3;
+        MaxHeatlh = 8;
         cost = 10;
         // Initialize the damageUpgrade images to white
         foreach (var upgrade in healthUpgrade)
@@ -52,7 +52,7 @@ public class HealthUpgrade : Upgrade
 
     public override void UpgradePlayer()
     {
-        if (player.damage < MaxHeatlh)
+        if (player.playerHealth < MaxHeatlh)
         {
             Debug.Log("Upgrading Player Health");
             player.playerHealth ++;
@@ -60,6 +60,7 @@ public class HealthUpgrade : Upgrade
         }
         else
         {
+            inventory.coinCount += cost;
             Debug.Log("Max health Reached");
             healthText.text = "Max health Reached";
         }

@@ -8,13 +8,13 @@ public class DamageUpgrade : Upgrade
     [Header("Upgrade Values")]
     public TextMeshProUGUI damageText;
     public TextMeshProUGUI costText;
-    public int MaxDamage;
+    public float MaxDamage;
     public List<GameObject> damageUpgrade = new List<GameObject>();
     private int currentUpgradeIndex = 0;
 
     void Start()
     {
-        MaxDamage = 3;
+        MaxDamage = player.damage + 3;
         cost = 10;
         // Initialize the damageUpgrade images to white
         foreach (var upgrade in damageUpgrade)
@@ -59,6 +59,7 @@ public class DamageUpgrade : Upgrade
         }
         else
         {
+            inventory.coinCount += cost;
             Debug.Log("Max Damage Reached");
             damageText.text = "Max Damage Reached";
         }

@@ -33,7 +33,7 @@ public class UpgradeManager : MonoBehaviour
     }
     void SetText()
     {
-        NumberCoinsText.text = "Doubloons " + inventory.coinCount;
+        NumberCoinsText.text = "Doubloons " + inventory.coinCount + "/" + inventory.maxCoins;
     }
     //Set the variable values at the start of the game
     void SetValues()

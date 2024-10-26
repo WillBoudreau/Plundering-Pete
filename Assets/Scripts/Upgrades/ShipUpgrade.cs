@@ -55,10 +55,14 @@ public class ShipUpgrade : Upgrade
         {
             Debug.Log("Upgrading Player Ship");
             player.Level ++;
+            player.damage += 10;
+            player.playerHealth += 10;
+            player.speed += 10;
             Debug.Log("Player Ship: " + player.Level);
         }
         else
         {
+            inventory.coinCount += cost;
             Debug.Log("Max Ship Reached");
             ShipText.text = "Max Ship Reached";
         }

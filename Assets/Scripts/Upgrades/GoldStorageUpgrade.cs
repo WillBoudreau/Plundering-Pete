@@ -15,7 +15,7 @@ public class GoldStorageUpgrade : Upgrade
 
     void Start()
     {
-        MaxCargo = inventory.maxCoins;
+        MaxCargo = inventory.maxCoins + 10;
         cost = 10;
         // Initialize the damageUpgrade images to white
         foreach (var upgrade in CargoUpgrade)
@@ -52,7 +52,7 @@ public class GoldStorageUpgrade : Upgrade
 
     public override void UpgradePlayer()
     {
-        if (inventory.maxCoins <= MaxCargo)
+        if (inventory.maxCoins < MaxCargo)
         {
             Debug.Log("Upgrading Player Cargo");
             inventory.maxCoins += 10;
@@ -60,6 +60,7 @@ public class GoldStorageUpgrade : Upgrade
         }
         else
         {
+            inventory.coinCount += cost;
             Debug.Log("Max Cargo Reached");
             CargoText.text = "Max Cargo Reached";
         }

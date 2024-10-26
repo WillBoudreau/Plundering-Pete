@@ -9,13 +9,13 @@ public class MFGUpgrade : Upgrade
     [Header("Upgrade Values")]
     public TextMeshProUGUI MFGText;
     public TextMeshProUGUI costText;
-    public int MaxMagnet;
+    public float MaxMagnet;
     public List<GameObject> BFMUpgrade= new List<GameObject>();
     private int currentUpgradeIndex = 0;
 
     void Start()
     {
-        MaxMagnet = 3;
+        MaxMagnet = player.magnet + 3;
         cost = 10;
         // Initialize the damageUpgrade images to white
         foreach (var upgrade in BFMUpgrade)
@@ -60,6 +60,7 @@ public class MFGUpgrade : Upgrade
         }
         else
         {
+            inventory.coinCount += cost;
             Debug.Log("Max Magnet Reached");
             MFGText.text = "Max Magnet Reached";
         }

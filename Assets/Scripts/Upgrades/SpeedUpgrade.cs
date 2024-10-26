@@ -9,13 +9,13 @@ public class SpeedUpgrade : Upgrade
     [Header("Upgrade Values")]
     public TextMeshProUGUI speedText;
     public TextMeshProUGUI costText;
-    public int MaxSpeed;
+    public float MaxSpeed;
     public List<GameObject> speedUpgrade = new List<GameObject>();
     private int currentUpgradeIndex = 0;
 
     void Start()
     {
-        MaxSpeed = 3;
+        MaxSpeed = player.speed + 3.0f;
         cost = 10;
         // Initialize the damageUpgrade images to white
         foreach (var upgrade in speedUpgrade)
@@ -36,7 +36,7 @@ public class SpeedUpgrade : Upgrade
 
     public override void CostCheck()
     {
-        Debug.Log("Checking Cost for Damage Upgrade");
+        Debug.Log("Checking Cost for Speed Upgrade");
         if (inventory.coinCount >= cost)
         {
             inventory.coinCount -= cost;
@@ -52,15 +52,16 @@ public class SpeedUpgrade : Upgrade
 
     public override void UpgradePlayer()
     {
-        if (player.damage < MaxSpeed)
+        if (player.speed < MaxSpeed)
         {
             Debug.Log("Upgrading Player Speed");
             player.speed ++;
-            Debug.Log("Player Damage: " + player.speed);
+            Debug.Log("Player Speed: " + player.speed);
         }
         else
         {
-            Debug.Log("Max Damage Reached");
+            inventory.coinCount += cost;
+            Debug.Log("Max Speed Reached");
             speedText.text = "Max Speed Reached";
         }
     }
