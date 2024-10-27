@@ -80,17 +80,17 @@ public class LevelManager : MonoBehaviour
                 //Spawn Doubloons
                 collectorManager.SpawnDoubloons(player.transform, safeDistance);
                 //Spawn Rocks
-                obstacleManager.SpawnObstaclesInZone(obstacleManager.zone1,obstacleManager.obstacle_Rock,player.transform,safeDistance);
+                obstacleManager.SpawnObstaclesInZone(obstacleManager.zone1,obstacleManager.Zone1Obstacles,player.transform,safeDistance);
             }
             else if(waveManager.SecondCheckpoint == true && !obstacleManager.hasSpawnedRocks && !obstacleManager.hasSpawnedIcebergs && !hasSpawnedZone2Obstacles)
             {
                 //Spawn Icebergs
-                obstacleManager.SpawnObstaclesInZone(obstacleManager.zone2,obstacleManager.obstacle_Iceberg,player.transform,safeDistance);
+                obstacleManager.SpawnObstaclesInZone(obstacleManager.zone2,obstacleManager.Zone2Obstacles,player.transform,safeDistance);
             }
             else if(waveManager.ThirdCheckpoint == true && !obstacleManager.hasSpawnedRocks && !obstacleManager.hasSpawnedIcebergs && !obstacleManager.hasSpawnedDebris && !hasSpawnedZone3Obstacles)
             {
                 //Spawn Debris
-                obstacleManager.SpawnObstaclesInZone(obstacleManager.zone3,obstacleManager.obstacle_Debris,player.transform,safeDistance);
+                obstacleManager.SpawnObstaclesInZone(obstacleManager.zone3,obstacleManager.Zone3Obstacles,player.transform,safeDistance);
                 hasSpawnedZone3Obstacles = true;
             }
     }

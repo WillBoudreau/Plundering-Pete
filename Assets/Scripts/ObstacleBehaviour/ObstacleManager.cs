@@ -34,9 +34,9 @@ public class ObstacleManager : MonoBehaviour
     public float zone3Xpositive = 45;
     public float zone3Ynegative = -45;
     public float zone3Ypositive = 45;
-    public List<GameObject> obstacle_Rock = new List<GameObject>();
-    public List<GameObject> obstacle_Iceberg = new List<GameObject>();
-    public List<GameObject> obstacle_Debris = new List<GameObject>();
+    public List<GameObject> Zone1Obstacles = new List<GameObject>();
+    public List<GameObject> Zone2Obstacles = new List<GameObject>();
+    public List<GameObject> Zone3Obstacles = new List<GameObject>();
     public int obstacle_Rock_Count;
     public int obstacle_Iceberg_Count;
     public int obstacle_Debris_Count;
@@ -62,25 +62,37 @@ public class ObstacleManager : MonoBehaviour
 
     void AddObstaclesToList()
     {
-        if (obstacle_Rock.Count <= 0)
+        if (Zone1Obstacles.Count <= 0)
         {
             for (int i = 0; i < obstacle_Rock_Count; i++)
             {
-                obstacle_Rock.Add(Rock);
+                Zone1Obstacles.Add(Rock);
             }
         }
-        if(obstacle_Iceberg.Count <= 0)
+        if(Zone2Obstacles.Count <= 0)
         {
+            for(int i = 0; i < obstacle_Rock_Count; i++)
+            {
+                Zone2Obstacles.Add(Rock);
+            }
             for (int i = 0; i < obstacle_Iceberg_Count; i++)
             {
-                obstacle_Iceberg.Add(Iceberg);
+                Zone2Obstacles.Add(Iceberg);
             }
         }
-        if(obstacle_Debris.Count <= 0)
+        if(Zone3Obstacles.Count <= 0)
         {
+            for (int i = 0; i < obstacle_Rock_Count; i++)
+            {
+                Zone3Obstacles.Add(Rock);
+            }
+            for (int i = 0; i < obstacle_Iceberg_Count; i++)
+            {
+                Zone3Obstacles.Add(Iceberg);
+            }
             for (int i = 0; i < obstacle_Debris_Count; i++)
             {
-                obstacle_Debris.Add(Debris);
+                Zone3Obstacles.Add(Debris);
             }
         }
     }
