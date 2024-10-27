@@ -10,12 +10,11 @@ public class LevelManager : MonoBehaviour
     [Header("Class Calls")]
     [SerializeField] private CollectorManager collectorManager;
     [SerializeField] private MusicChanger musicChanger;
-    //[SerializeField] private WaveManger waveManager;
     [SerializeField] private CheckpointManager checkpointManager;  
     [SerializeField] private UIManager uiManager;
     [SerializeField] private ObstacleManager obstacleManager;
     [SerializeField] private PlayerBehaviour player;
-    [SerializeField] private CameraManager cameraManager;
+    [SerializeField] private GameObject Camera;
     [Header("Loading Screen")]
     public List<AsyncOperation> scenesToLoad = new List<AsyncOperation>();
     [Header("Level Variables")]
@@ -44,9 +43,9 @@ public class LevelManager : MonoBehaviour
         Debug.Log("Level load requested for: " + name);
         SceneManager.LoadScene(name);
 
+        //PlacePlayer();
         if(name == "GameTestScene")
         {
-            SetPlayerSpawnPoint();
             StartCoroutine(WaitForSceneToLoadAndRespawn());
             musicChanger.PlaySceneTrack(name);
         }
@@ -70,7 +69,6 @@ public class LevelManager : MonoBehaviour
         // Rest of the setup
         UpdateObjects();
         musicChanger.PlaySceneTrack(SceneManager.GetActiveScene().name);
-        //waveManager.SetAll();
     }   
     void SpawnObjects()
     {
@@ -120,18 +118,27 @@ public class LevelManager : MonoBehaviour
         obstacleManager.hasSpawnedIcebergs = false;
         obstacleManager.hasSpawnedDebris = false;
     }
-
-    public Vector3 SetPlayerSpawnPoint()
+    public void PlacePlayer()
     {
-        GameObject player = GameObject.FindWithTag("Player");
-        if (player != null && playerSpawnPoint != null)
-        {
-            player.transform.position = playerSpawnPoint.position;
-            cameraManager.transform.position = playerSpawnPoint.position;
-            cameraManager.transform.position = new Vector3(cameraManager.transform.position.x, cameraManager.transform.position.y, -30);
-        }
-        return player.transform.position;
+        Vector3 playerPosition = playerSpawnPoint.position;
+        playerPosition.z = -2;
+        player.transform.position = playerPosition;
+
+        Vector3 cameraPosition = playerSpawnPoint.position;
+        cameraPosition.z = -30;
+        Camera.transform.position = cameraPosition;
     }
+    // public Vector3 SetPlayerSpawnPoint()
+    // {
+    //     GameObject player = GameObject.FindWithTag("Player");
+    //     if (player != null && playerSpawnPoint != null)
+    //     {
+    //         player.transform.position = playerSpawnPoint.position;
+    //         cameraManager.transform.position = playerSpawnPoint.position;
+    //         cameraManager.transform.position = new Vector3(cameraManager.transform.position.x, cameraManager.transform.position.y, -30);
+    //     }
+    //     return player.transform.position;
+    // }
 
     private IEnumerator WaitForScreenLoad(string sceneName)
     {

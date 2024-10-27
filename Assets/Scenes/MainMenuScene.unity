@@ -7039,7 +7039,7 @@ MonoBehaviour:
   uiManager: {fileID: 1728282020}
   obstacleManager: {fileID: 1683598818}
   player: {fileID: 551069647}
-  cameraManager: {fileID: 177806785}
+  Camera: {fileID: 177806781}
   levelName: 
   playerSpawnPoint: {fileID: 0}
   safeDistance: 5
@@ -9727,15 +9727,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiManager: {fileID: 1728282020}
-  healthManager: {fileID: 734893757}
   levelManager: {fileID: 1051185688}
   player: {fileID: 551069641}
   Camera: {fileID: 177806781}
   playerBehaviour: {fileID: 551069647}
-  collectorManager: {fileID: 1826889079}
-  obstacleManager: {fileID: 1683598818}
   inventoryManager: {fileID: 1039502979}
-  cameraManager: {fileID: 177806785}
   PlayerEnabled: 0
   playerSpawnPoint: {fileID: 0}
   loadButton: {fileID: 1368000655}
@@ -9797,7 +9793,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerBehaviour: {fileID: 551069647}
   checkpointManager: {fileID: 324095957}
-  levelManager: {fileID: 1051185688}
   Distance: 0
   startPosition: {fileID: 0}
   playerDistance: 0

@@ -277,7 +277,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         Debug.Log("Respawning Player");
         PlayerPlaced = false;
-        transform.position = levelManager.SetPlayerSpawnPoint();
+        levelManager.PlacePlayer();
     }
     private void ResetHealth()
     {

@@ -19,7 +19,6 @@ public class UIManager : MonoBehaviour
         Win
     }
     public GameState currentGameState;
-    public static UIManager instance;
     [Header("Class calls")]
     public PlayerBehaviour player;
     public LevelManager levelManager;

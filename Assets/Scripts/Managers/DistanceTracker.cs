@@ -9,7 +9,6 @@ public class DistanceTracker : MonoBehaviour
     [Header("Class calls")]
     public PlayerBehaviour playerBehaviour;
     public CheckpointManager checkpointManager;
-    public LevelManager levelManager;
     [Header("Variables")]
     public float Distance;
     public Transform startPosition;

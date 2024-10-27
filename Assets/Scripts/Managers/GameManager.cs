@@ -8,18 +8,13 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
     [Header("Class Calls")]
     public UIManager uiManager;
-    public HealthManager healthManager;
     public LevelManager levelManager;
     public GameObject player;
     public GameObject Camera;
     public PlayerBehaviour playerBehaviour;
-    public CollectorManager collectorManager;
-    public ObstacleManager obstacleManager;
     public InventoryManager inventoryManager;
-    public CameraManager cameraManager;
     [Header("Variables")]
     public bool PlayerEnabled;
     public Transform playerSpawnPoint;
@@ -31,10 +26,7 @@ public class GameManager : MonoBehaviour
     {
         uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
         playerBehaviour = GameObject.Find("Player").GetComponent<PlayerBehaviour>();
-        collectorManager = GameObject.Find("CollectorManager").GetComponent<CollectorManager>();
-        obstacleManager = GameObject.Find("ObstacleManager").GetComponent<ObstacleManager>();
         inventoryManager = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
-        cameraManager = GameObject.Find("Camera").GetComponent<CameraManager>();
         uiManager.currentGameState = UIManager.GameState.MainMenu;
         DisablePlayer();
         DisableCamera();
@@ -51,7 +43,7 @@ public class GameManager : MonoBehaviour
             playerSpawnPoint = GameObject.Find("PlayerSpawnPoint").transform;
             if (playerBehaviour.PlayerPlaced == false)
             {
-                PlacePlayer();
+                levelManager.PlacePlayer();
                 playerBehaviour.PlayerPlaced = true;
             }
             EnablePlayer();
@@ -76,16 +68,7 @@ public class GameManager : MonoBehaviour
             DisableCamera();
         }
     }
-void PlacePlayer()
-{
-    Vector3 playerPosition = playerSpawnPoint.position;
-    playerPosition.z = -2;
-    player.transform.position = playerPosition;
 
-    Vector3 cameraPosition = playerSpawnPoint.position;
-    cameraPosition.z = -30;
-    Camera.transform.position = cameraPosition;
-}
 
     void Pause()
     {
