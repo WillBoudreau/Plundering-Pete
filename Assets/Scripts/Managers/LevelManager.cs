@@ -21,7 +21,6 @@ public class LevelManager : MonoBehaviour
     public string levelName;
     public Transform playerSpawnPoint; 
     public float safeDistance = 5f;
-    public bool[] spawnZones = new bool[3];
     public bool hasSpawnedZone1Obstacles;
     public bool hasSpawnedZone2Obstacles;
     public bool hasSpawnedZone3Obstacles;
@@ -73,6 +72,8 @@ public class LevelManager : MonoBehaviour
     void SpawnObjects()
     {
         Debug.Log("Spawning Objects");  
+        if(levelName == "GameTestScene")
+        {
             if(checkpointManager.FirstCheckpoint == true && !collectorManager.hasSpawnedDoubloons && !obstacleManager.hasSpawnedRocks)
             {
                 //Spawn Doubloons
@@ -85,12 +86,13 @@ public class LevelManager : MonoBehaviour
                 //Spawn Icebergs
                 obstacleManager.SpawnObstaclesInZone(obstacleManager.zone2,obstacleManager.Zone2Obstacles,player.transform,safeDistance);
             }
-            else if(checkpointManager.ThirdCheckpoint == true && !obstacleManager.hasSpawnedRocks && !obstacleManager.hasSpawnedIcebergs && !obstacleManager.hasSpawnedDebris && !hasSpawnedZone3Obstacles)
+            else if(checkpointManager.ThirdCheckpoint == true && !obstacleManager.hasSpawnedRocks && !obstacleManager.hasSpawnedIcebergs && !obstacleManager.hasSpawnedDebris)
             {
                 //Spawn Debris
                 obstacleManager.SpawnObstaclesInZone(obstacleManager.zone3,obstacleManager.Zone3Obstacles,player.transform,safeDistance);
-                hasSpawnedZone3Obstacles = true;
+                Debug.Log("Spawning Debris");
             }
+        }
     }
     public void UpdateObjects()
     {

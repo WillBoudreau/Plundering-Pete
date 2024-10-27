@@ -83,8 +83,9 @@ public class DistanceTracker : MonoBehaviour
             {
                 checkpointManager.UpdateCheckpointStatus(1, true);
             }
-            if (playerBehaviour.transform.position.y >= checkpointManager.Checkpoint3)
+            if (playerBehaviour.transform.position.y >= checkpointManager.Checkpoint3 && !spawnlevel3)
             {
+                spawnlevel3 = true;
                 checkpointManager.UpdateCheckpointStatus(2, true);
             }
     }

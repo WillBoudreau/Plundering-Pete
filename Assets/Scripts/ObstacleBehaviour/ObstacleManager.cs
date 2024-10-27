@@ -16,6 +16,7 @@ public class ObstacleManager : MonoBehaviour
     public GameObject Rock;
     public GameObject Iceberg;
     public GameObject Debris;
+    public float takenPOS = 1.0f;
     [Header("Obstacle Zones")]
     [Header("Zone 1")]
     public float zone1Xnegative = -15;
@@ -122,7 +123,7 @@ public class ObstacleManager : MonoBehaviour
     {
         foreach (Vector3 usedPosition in usedPositions)
         {
-            if (Vector3.Distance(position, usedPosition) < 1.0f) // Adjust the distance threshold as needed
+            if (Vector3.Distance(position, usedPosition) < takenPOS) 
             {
                 return true;
             }
