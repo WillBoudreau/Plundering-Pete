@@ -289,6 +289,7 @@ public class PlayerBehaviour : MonoBehaviour
     public void TakeDamage(float damage)
     {
         StartCoroutine(Flicker());
+        musicManager.PlaySound(2);
         playerHealth -= damage;
         Death();
     }

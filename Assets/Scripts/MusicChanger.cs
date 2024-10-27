@@ -19,8 +19,8 @@ public class MusicChanger : MonoBehaviour
         music[2] = Resources.Load<AudioClip>("Music3");
         effects = new AudioClip[3];
         effects[0] = Resources.Load<AudioClip>("CanonShot_");
-        effects[1] = Resources.Load<AudioClip>("Effect2");
-        effects[2] = Resources.Load<AudioClip>("Effect3");
+        effects[1] = Resources.Load<AudioClip>("GoldCoin");
+        effects[2] = Resources.Load<AudioClip>("Plunder'inPeteDamage 1");
         PlaySceneTrack("MainMenuScene");
 
     }
