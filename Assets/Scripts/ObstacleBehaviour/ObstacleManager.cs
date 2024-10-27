@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class ObstacleManager : MonoBehaviour
 {
+    public struct ObstacleZone
+    {
+        public float Xnegative;
+        public float Xpositive;
+        public float Ynegative;
+        public float Ypositive;
+    }
+    public ObstacleZone zone1, zone2, zone3;
     [Header("Class Calls")]
     public LevelManager levelManager;
     [Header("Variables")]
@@ -36,22 +44,22 @@ public class ObstacleManager : MonoBehaviour
     public bool hasSpawnedIcebergs;
     public bool hasSpawnedDebris;
 
-    // Start is called before the first frame update
+    private List<Vector3> usedPositions = new List<Vector3>();
+
     void Start()
     {
-        // obstacle_Rock_Count = 3;
-        // obstacle_Iceberg_Count = 3;
-        // obstacle_Debris_Count = 3;
         levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         AddObstaclesToList();
+        zone1 = new ObstacleZone{Xnegative = zone1Xnegative, Xpositive = zone1Xpositive, Ynegative = zone1Ynegative, Ypositive = zone1Ypositive};
+        zone2 = new ObstacleZone{Xnegative = zone2Xnegative, Xpositive = zone2Xpositive, Ynegative = zone2Ynegative, Ypositive = zone2Ypositive};
+        zone3 = new ObstacleZone{Xnegative = zone3Xnegative, Xpositive = zone3Xpositive, Ynegative = zone3Ynegative, Ypositive = zone3Ypositive};
     }
 
-    // Update is called once per frame
     void Update()
     {
         AddObstaclesToList();
     }
-    //Add the Rocks to a list
+
     void AddObstaclesToList()
     {
         if (obstacle_Rock.Count <= 0)
@@ -76,78 +84,40 @@ public class ObstacleManager : MonoBehaviour
             }
         }
     }
-    //Spawn Rocks dependent on how many in the array
-    public void spawnZone1Obstacles(float XNeg,float XPos,float YNeg,float YPos,Transform playerTransform, float safeDistance)
+    public void SpawnObstaclesInZone(ObstacleZone zone,List<GameObject> obstacles,Transform playerTransform, float safeDistance)
     {
-        if (levelManager.levelName == "GameTestScene" && !hasSpawnedRocks)
+        for (int i = 0; i < obstacles.Count; i++)
         {
-            for (int i = 0; i < obstacle_Rock_Count; i++)
-            {
-                Vector3 spawnPosition = GetSafeSpawnPos(XNeg, XPos, YNeg, YPos, playerTransform.position, safeDistance);
-                Instantiate(obstacle_Rock[i], spawnPosition, Quaternion.identity);
-            }
-            hasSpawnedRocks = true; 
+            Vector3 spawnPosition = GetSafeSpawnPos(zone.Xnegative, zone.Xpositive, zone.Ynegative, zone.Ypositive, playerTransform.position, safeDistance);
+            Instantiate(obstacles[i], spawnPosition, Quaternion.identity);
+            usedPositions.Add(spawnPosition);
         }
     }
-    public void spawnZone2Obstacles(float XNeg,float XPos,float YNeg,float YPos,Transform playerTransform, float safeDistance)
-    {
-        //Spawn Icebergs
-        if (levelManager.levelName == "GameTestScene" && !hasSpawnedIcebergs)
-        {
-            for(int i = 0; i < obstacle_Rock_Count; i++)
-            {
-                Vector3 spawnPosition = GetSafeSpawnPos(XNeg, XPos, YNeg, YPos, playerTransform.position, safeDistance);
-                Instantiate(obstacle_Rock[i], spawnPosition, Quaternion.identity);
-            }
-            for (int i = 0; i < obstacle_Iceberg_Count; i++)
-            {
-                Vector3 spawnPosition = GetSafeSpawnPos(XNeg, XPos, YNeg, YPos, playerTransform.position, safeDistance);
-                Instantiate(obstacle_Iceberg[i], spawnPosition, Quaternion.identity);
-            }
-            hasSpawnedIcebergs = true;
-            hasSpawnedRocks = true;
-        }
-    }
-    public void spawnZone3Obstacles(float XNeg,float XPos,float YNeg, float YPos,Transform playerTransform, float safeDistance)
-    {
-        //Spawn Debris
-        if (levelManager.levelName == "GameTestScene" && !hasSpawnedDebris)
-        {
-            for (int i = 0; i < obstacle_Debris_Count; i++)
-            {
-                Vector3 spawnPosition = GetSafeSpawnPos(XNeg, XPos, YNeg, YPos, playerTransform.position, safeDistance);
-                Instantiate(obstacle_Debris[i], spawnPosition, Quaternion.identity);
-            }
-            for (int i = 0; i < obstacle_Rock_Count; i++)
-            {
-                Vector3 spawnPosition = GetSafeSpawnPos(XNeg, XPos, YNeg, YPos, playerTransform.position, safeDistance);
-                Instantiate(obstacle_Rock[i], spawnPosition, Quaternion.identity);
-            }
-            for (int i = 0; i < obstacle_Iceberg_Count; i++)
-            {
-                Vector3 spawnPosition = GetSafeSpawnPos(XNeg, XPos, YNeg, YPos, playerTransform.position, safeDistance);
-                Instantiate(obstacle_Iceberg[i], spawnPosition, Quaternion.identity);
-            }
-            hasSpawnedDebris = true;
-            hasSpawnedRocks = true;
-            hasSpawnedIcebergs = true;
-        }
-    }
-    //Get the spawn position for the obstacles
     public Vector3 GetSpawnPos(float XNeg,float XPos,float YNeg,float YPos)
     {
         Vector3 spawnPos = new Vector3(Random.Range(XNeg, XPos), Random.Range(YNeg, YPos), -2);
         return spawnPos;
     }
 
-    // Get a safe spawn position that is not too close to the player
     public Vector3 GetSafeSpawnPos(float XNeg, float XPos, float YNeg, float YPos, Vector3 playerPosition, float safeDistance)
     {
         Vector3 spawnPosition;
         do
         {
             spawnPosition = GetSpawnPos(XNeg, XPos, YNeg, YPos);
-        } while (Vector3.Distance(spawnPosition, playerPosition) < safeDistance);
+        } while (Vector3.Distance(spawnPosition, playerPosition) < safeDistance || IsPositionUsed(spawnPosition));
         return spawnPosition;
+    }
+
+    private bool IsPositionUsed(Vector3 position)
+    {
+        foreach (Vector3 usedPosition in usedPositions)
+        {
+            if (Vector3.Distance(position, usedPosition) < 1.0f) // Adjust the distance threshold as needed
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }

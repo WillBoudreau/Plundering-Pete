@@ -21,6 +21,7 @@ public class LevelManager : MonoBehaviour
     public string levelName;
     public Transform playerSpawnPoint; 
     public float safeDistance = 5f;
+    public bool[] spawnZones = new bool[3];
     public bool hasSpawnedZone1Obstacles;
     public bool hasSpawnedZone2Obstacles;
     public bool hasSpawnedZone3Obstacles;
@@ -64,7 +65,7 @@ public class LevelManager : MonoBehaviour
 
     private IEnumerator WaitForSceneToLoadAndRespawn()
     {
-        yield return new WaitForSeconds(uiManager.fadeTime); // Adjust timing if needed
+        yield return new WaitForSeconds(uiManager.fadeTime);
 
         // Rest of the setup
         UpdateObjects();
@@ -79,17 +80,17 @@ public class LevelManager : MonoBehaviour
                 //Spawn Doubloons
                 collectorManager.SpawnDoubloons(player.transform, safeDistance);
                 //Spawn Rocks
-                obstacleManager.spawnZone1Obstacles(obstacleManager.zone1Xnegative,obstacleManager.zone1Xpositive,obstacleManager.zone1Ynegative,obstacleManager.zone1Ypositive,player.transform, safeDistance);
+                obstacleManager.SpawnObstaclesInZone(obstacleManager.zone1,obstacleManager.obstacle_Rock,player.transform,safeDistance);
             }
             else if(waveManager.SecondCheckpoint == true && !obstacleManager.hasSpawnedRocks && !obstacleManager.hasSpawnedIcebergs && !hasSpawnedZone2Obstacles)
             {
                 //Spawn Icebergs
-                obstacleManager.spawnZone2Obstacles(obstacleManager.zone2Xnegative,obstacleManager.zone2Xpositive,obstacleManager.zone2Ynegative,obstacleManager.zone2Ypositive,player.transform, safeDistance);
+                obstacleManager.SpawnObstaclesInZone(obstacleManager.zone2,obstacleManager.obstacle_Iceberg,player.transform,safeDistance);
             }
             else if(waveManager.ThirdCheckpoint == true && !obstacleManager.hasSpawnedRocks && !obstacleManager.hasSpawnedIcebergs && !obstacleManager.hasSpawnedDebris && !hasSpawnedZone3Obstacles)
             {
                 //Spawn Debris
-                obstacleManager.spawnZone3Obstacles(obstacleManager.zone3Xnegative,obstacleManager.zone3Xpositive,obstacleManager.zone3Ynegative,obstacleManager.zone3Ypositive,player.transform, safeDistance);
+                obstacleManager.SpawnObstaclesInZone(obstacleManager.zone3,obstacleManager.obstacle_Debris,player.transform,safeDistance);
                 hasSpawnedZone3Obstacles = true;
             }
     }

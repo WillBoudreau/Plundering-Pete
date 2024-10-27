@@ -215,7 +215,7 @@ public class PlayerBehaviour : MonoBehaviour
             case "Gold":
             if(inventoryManager.IsMax == false)
             {
-                inventoryManager.coinCount += 1;
+                inventoryManager.coinCount ++;
                 other.gameObject.SetActive(false);
             }
             else
