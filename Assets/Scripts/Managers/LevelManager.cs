@@ -10,7 +10,8 @@ public class LevelManager : MonoBehaviour
     [Header("Class Calls")]
     [SerializeField] private CollectorManager collectorManager;
     [SerializeField] private MusicChanger musicChanger;
-    [SerializeField] private WaveManger waveManager;
+    //[SerializeField] private WaveManger waveManager;
+    [SerializeField] private CheckpointManager checkpointManager;  
     [SerializeField] private UIManager uiManager;
     [SerializeField] private ObstacleManager obstacleManager;
     [SerializeField] private PlayerBehaviour player;
@@ -46,7 +47,6 @@ public class LevelManager : MonoBehaviour
         if(name == "GameTestScene")
         {
             SetPlayerSpawnPoint();
-            waveManager.UpdateCheckpointStatus(0,true);
             StartCoroutine(WaitForSceneToLoadAndRespawn());
             musicChanger.PlaySceneTrack(name);
         }
@@ -70,24 +70,24 @@ public class LevelManager : MonoBehaviour
         // Rest of the setup
         UpdateObjects();
         musicChanger.PlaySceneTrack(SceneManager.GetActiveScene().name);
-        waveManager.SetAll();
+        //waveManager.SetAll();
     }   
     void SpawnObjects()
     {
         Debug.Log("Spawning Objects");  
-            if(waveManager.FirstCheckpoint == true && !collectorManager.hasSpawnedDoubloons && !obstacleManager.hasSpawnedRocks)
+            if(checkpointManager.FirstCheckpoint == true && !collectorManager.hasSpawnedDoubloons && !obstacleManager.hasSpawnedRocks)
             {
                 //Spawn Doubloons
                 collectorManager.SpawnDoubloons(player.transform, safeDistance);
                 //Spawn Rocks
                 obstacleManager.SpawnObstaclesInZone(obstacleManager.zone1,obstacleManager.Zone1Obstacles,player.transform,safeDistance);
             }
-            else if(waveManager.SecondCheckpoint == true && !obstacleManager.hasSpawnedRocks && !obstacleManager.hasSpawnedIcebergs && !hasSpawnedZone2Obstacles)
+            else if(checkpointManager.SecondCheckpoint == true && !obstacleManager.hasSpawnedRocks && !obstacleManager.hasSpawnedIcebergs && !hasSpawnedZone2Obstacles)
             {
                 //Spawn Icebergs
                 obstacleManager.SpawnObstaclesInZone(obstacleManager.zone2,obstacleManager.Zone2Obstacles,player.transform,safeDistance);
             }
-            else if(waveManager.ThirdCheckpoint == true && !obstacleManager.hasSpawnedRocks && !obstacleManager.hasSpawnedIcebergs && !obstacleManager.hasSpawnedDebris && !hasSpawnedZone3Obstacles)
+            else if(checkpointManager.ThirdCheckpoint == true && !obstacleManager.hasSpawnedRocks && !obstacleManager.hasSpawnedIcebergs && !obstacleManager.hasSpawnedDebris && !hasSpawnedZone3Obstacles)
             {
                 //Spawn Debris
                 obstacleManager.SpawnObstaclesInZone(obstacleManager.zone3,obstacleManager.Zone3Obstacles,player.transform,safeDistance);
@@ -97,17 +97,17 @@ public class LevelManager : MonoBehaviour
     public void UpdateObjects()
     {
         SetFalse();
-        if(waveManager.FirstCheckpoint == true)
+        if(checkpointManager.FirstCheckpoint == true)
         {
             SpawnObjects();
             hasSpawnedZone1Obstacles = true;
         }
-        else if (waveManager.SecondCheckpoint == true)
+        else if (checkpointManager.SecondCheckpoint == true)
         {
             SpawnObjects();
             hasSpawnedZone2Obstacles = true;
         }
-        else if (waveManager.ThirdCheckpoint == true)
+        else if (checkpointManager.ThirdCheckpoint == true)
         {
             SpawnObjects();
             hasSpawnedZone3Obstacles = true;

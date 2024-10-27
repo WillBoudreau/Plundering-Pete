@@ -2160,6 +2160,57 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &324095955
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 324095956}
+  - component: {fileID: 324095957}
+  m_Layer: 0
+  m_Name: CheckPointManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &324095956
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 324095955}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1612513595}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &324095957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 324095955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f133149bc3d55048a59b65a5f865f50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelManager: {fileID: 1051185688}
+  FirstCheckpoint: 0
+  SecondCheckpoint: 0
+  ThirdCheckpoint: 0
+  Checkpoint1: 0
+  Checkpoint2: 0
+  Checkpoint3: 0
 --- !u!1 &362043387
 GameObject:
   m_ObjectHideFlags: 0
@@ -6984,7 +7035,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collectorManager: {fileID: 1826889079}
   musicChanger: {fileID: 2083907201}
-  waveManager: {fileID: 1713031254}
+  checkpointManager: {fileID: 324095957}
   uiManager: {fileID: 1728282020}
   obstacleManager: {fileID: 1683598818}
   player: {fileID: 551069647}
@@ -6992,6 +7043,7 @@ MonoBehaviour:
   levelName: 
   playerSpawnPoint: {fileID: 0}
   safeDistance: 5
+  spawnZones: 000000
   hasSpawnedZone1Obstacles: 0
   hasSpawnedZone2Obstacles: 0
   hasSpawnedZone3Obstacles: 0
@@ -9744,13 +9796,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerBehaviour: {fileID: 551069647}
-  waveManger: {fileID: 1713031254}
+  checkpointManager: {fileID: 324095957}
   levelManager: {fileID: 1051185688}
   Distance: 0
-  GameTimer: 0
-  Checkpoint1: 0
-  Checkpoint2: 0
-  Checkpoint3: 0
   startPosition: {fileID: 0}
   playerDistance: 0
   endPosition: {fileID: 0}
@@ -10051,6 +10099,7 @@ Transform:
   - {fileID: 729927824}
   - {fileID: 1713031253}
   - {fileID: 1556131825}
+  - {fileID: 324095956}
   m_Father: {fileID: 1547232562}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1613720157
@@ -10881,7 +10930,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb6c6962b94f7e84d845fa63478f8071, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelManager: {fileID: 1051185688}
   Rock: {fileID: 3600233302650675057, guid: eb50ad4c55b86d849b7d005a469850e3, type: 3}
   Iceberg: {fileID: 8951899304849922272, guid: 1da721168e4fcea4b96b6c5582c929b1, type: 3}
   Debris: {fileID: 8951899304849922272, guid: 60e159277ab1693428d34dcd836a49d7, type: 3}
@@ -10897,9 +10945,9 @@ MonoBehaviour:
   zone3Xpositive: 15
   zone3Ynegative: 300
   zone3Ypositive: 400
-  obstacle_Rock: []
-  obstacle_Iceberg: []
-  obstacle_Debris: []
+  Zone1Obstacles: []
+  Zone2Obstacles: []
+  Zone3Obstacles: []
   obstacle_Rock_Count: 10
   obstacle_Iceberg_Count: 10
   obstacle_Debris_Count: 10
@@ -11089,9 +11137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37f8474392495e64e86e5db000e1cdaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceTracker: {fileID: 1556131826}
-  obstacleManager: {fileID: 1683598818}
-  levelManager: {fileID: 1051185688}
+  checkpointManager: {fileID: 324095957}
   Sharks: []
   Serpents: []
   Ships: []
@@ -11105,9 +11151,6 @@ MonoBehaviour:
   SharkSpawnIndex: 0
   SerpentSpawnIndex: 0
   ShipSpawnIndex: 0
-  FirstCheckpoint: 0
-  SecondCheckpoint: 0
-  ThirdCheckpoint: 0
   SpawnPoints1:
   - {fileID: 0}
   - {fileID: 0}
@@ -13002,6 +13045,10 @@ PrefabInstance:
       propertyPath: inventoryManager
       value: 
       objectReference: {fileID: 1039502979}
+    - target: {fileID: 3116806254861534645, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: checkpointManager
+      value: 
+      objectReference: {fileID: 324095957}
     - target: {fileID: 3116806254861534645, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
       propertyPath: gorundLayer.m_Bits
       value: 8

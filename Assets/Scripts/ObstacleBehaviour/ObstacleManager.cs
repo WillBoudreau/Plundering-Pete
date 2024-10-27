@@ -12,8 +12,6 @@ public class ObstacleManager : MonoBehaviour
         public float Ypositive;
     }
     public ObstacleZone zone1, zone2, zone3;
-    [Header("Class Calls")]
-    public LevelManager levelManager;
     [Header("Variables")]
     public GameObject Rock;
     public GameObject Iceberg;
@@ -48,7 +46,6 @@ public class ObstacleManager : MonoBehaviour
 
     void Start()
     {
-        levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         AddObstaclesToList();
         zone1 = new ObstacleZone{Xnegative = zone1Xnegative, Xpositive = zone1Xpositive, Ynegative = zone1Ynegative, Ypositive = zone1Ypositive};
         zone2 = new ObstacleZone{Xnegative = zone2Xnegative, Xpositive = zone2Xpositive, Ynegative = zone2Ynegative, Ypositive = zone2Ypositive};

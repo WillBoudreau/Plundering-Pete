@@ -52,7 +52,7 @@ public class PlayerBehaviour : MonoBehaviour
     public UIManager uIManager;
     public HealthManager healthManager;
     public MusicChanger musicManager;
-    public WaveManger waveManager;
+    public CheckpointManager checkpointManager;
     public DistanceTracker distanceTracker;
 
     // Start is called before the first frame update
@@ -268,7 +268,7 @@ public class PlayerBehaviour : MonoBehaviour
             uIManager.SetGameState("GameOver");
             levelManager.SetFalse();
             levelManager.SetLocationFalse();
-            waveManager.SetFalse();
+            checkpointManager.SetFalse();
             distanceTracker.SetFalse();
             Respawn();
         }
@@ -317,8 +317,8 @@ public class PlayerBehaviour : MonoBehaviour
             switch (hit.collider.gameObject.name)
             {
                 case "MedLevel":
-                    waveManager.UpdateCheckpointStatus(0, false);
-                    waveManager.UpdateCheckpointStatus(1, true);
+                    checkpointManager.UpdateCheckpointStatus(0, false);
+                    checkpointManager.UpdateCheckpointStatus(1, true);
                     if (!IsLevel2 && !IsLevel3)
                     {
                         Debug.Log("Ship is too weak");

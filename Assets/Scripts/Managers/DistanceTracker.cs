@@ -8,14 +8,10 @@ public class DistanceTracker : MonoBehaviour
 {
     [Header("Class calls")]
     public PlayerBehaviour playerBehaviour;
-    public WaveManger waveManger;
+    public CheckpointManager checkpointManager;
     public LevelManager levelManager;
     [Header("Variables")]
     public float Distance;
-    public float GameTimer;
-    public float Checkpoint1;
-    public float Checkpoint2;
-    public float Checkpoint3;
     public Transform startPosition;
     public float playerDistance; 
     public Transform endPosition;
@@ -36,6 +32,7 @@ public class DistanceTracker : MonoBehaviour
         {
             FindPositions();
         }
+        checkpointManager.SetValues();
         SetValues();
         TrackDist();
         Checkpoint();
@@ -61,9 +58,6 @@ public class DistanceTracker : MonoBehaviour
 
     void SetValues()
     {
-        Checkpoint1 = -150;
-        Checkpoint2 = 25;
-        Checkpoint3 = 200;
         // Set all starting values
         if (startPosition != null && endPosition != null)
         {
@@ -81,27 +75,30 @@ public class DistanceTracker : MonoBehaviour
     }
     void Checkpoint()
     {
-        if (playerBehaviour != null && levelManager.levelName == "GameTestScene")
-        {
-            if (playerBehaviour.transform.position.y >= Checkpoint1 && !spawnlevel1)
+            if (playerBehaviour.transform.position.y >=  checkpointManager.Checkpoint1 && !spawnlevel1)
             {
                 spawnlevel1 = true;
-                waveManger.UpdateCheckpointStatus(0, true);
+                checkpointManager.UpdateCheckpointStatus(0, true);
             }
-            if (playerBehaviour.transform.position.y >= Checkpoint2)
+            if (playerBehaviour.transform.position.y >= checkpointManager.Checkpoint2)
             {
-                waveManger.UpdateCheckpointStatus(1, true);
+                checkpointManager.UpdateCheckpointStatus(1, true);
             }
-            if (playerBehaviour.transform.position.y >= Checkpoint3)
+            if (playerBehaviour.transform.position.y >= checkpointManager.Checkpoint3)
             {
-                waveManger.UpdateCheckpointStatus(2, true);
+                checkpointManager.UpdateCheckpointStatus(2, true);
             }
-        }
     }
     void DisplayWarning()
     {
         WarningText.gameObject.SetActive(false);
-        if(playerBehaviour.IsLevel2 == false && playerBehaviour.transform.position.y >= Checkpoint2)
+        if(playerBehaviour.IsLevel2 == false && playerBehaviour.transform.position.y >= checkpointManager.Checkpoint2)
+        {
+            // Display warning
+            WarningText.gameObject.SetActive(true);
+            WarningText.text = "YAARRR! Ye is about to enter dangerous waters! Your ship is not ready!";
+        }
+        else if(playerBehaviour.IsLevel3 == false && playerBehaviour.transform.position.y >= checkpointManager.Checkpoint3)
         {
             // Display warning
             WarningText.gameObject.SetActive(true);
@@ -110,6 +107,7 @@ public class DistanceTracker : MonoBehaviour
     }
     public void SetFalse()
     {
+        spawnlevel1 = false;
         spawnlevel2 = false;
         spawnlevel3 = false;
     }
