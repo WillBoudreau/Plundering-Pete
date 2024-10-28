@@ -42,6 +42,8 @@ public class UpgradeManager : MonoBehaviour
     }
     public void UpgradeShip()
     {
+        if(inventory.coinCount >= ShipCost)
+        {
             if(player.IsLevel2 == false)
             {
                 player.IsLevel2 = true;
@@ -53,6 +55,7 @@ public class UpgradeManager : MonoBehaviour
                 player.IsLevel3 = true;
                 Reset();
             }
+        }
     }
     public void Reset()
     {

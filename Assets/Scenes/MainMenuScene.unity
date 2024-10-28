@@ -6117,7 +6117,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &884719223
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6729,7 +6729,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1007322668
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10927,6 +10927,9 @@ MonoBehaviour:
   Rock: {fileID: 3600233302650675057, guid: eb50ad4c55b86d849b7d005a469850e3, type: 3}
   Iceberg: {fileID: 8951899304849922272, guid: 1da721168e4fcea4b96b6c5582c929b1, type: 3}
   Debris: {fileID: 8951899304849922272, guid: 60e159277ab1693428d34dcd836a49d7, type: 3}
+  hasSpawnedRocks: 0
+  hasSpawnedIcebergs: 0
+  hasSpawnedDebris: 0
   takenPOS: 1
   zone1Xnegative: -15
   zone1Xpositive: 15
@@ -10946,9 +10949,6 @@ MonoBehaviour:
   obstacle_Rock_Count: 10
   obstacle_Iceberg_Count: 10
   obstacle_Debris_Count: 10
-  hasSpawnedRocks: 0
-  hasSpawnedIcebergs: 0
-  hasSpawnedDebris: 0
 --- !u!1 &1700754824
 GameObject:
   m_ObjectHideFlags: 0
