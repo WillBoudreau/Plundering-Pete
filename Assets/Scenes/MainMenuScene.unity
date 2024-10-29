@@ -392,6 +392,18 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 680488652813836912, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 680488652813836912, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 930173489370739859, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 5712087345936687884, guid: ac1920af918603e42a820cc858f308c0, type: 3}
     - target: {fileID: 1745737824268037150, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_Name
       value: SpeedSlot
@@ -3329,6 +3341,18 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 680488652813836912, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 680488652813836912, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 930173489370739859, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 7925287018543452153, guid: 05fe89e47f3ac8947a3bf35cbbb95a2f, type: 3}
     - target: {fileID: 1745737824268037150, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_Name
       value: HealthSlot
@@ -6462,7 +6486,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1007322668
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8397,6 +8421,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 930173489370739859, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -2117781088348411129, guid: 50bdfcf13c834c242a61eeb79f6eed16, type: 3}
     - target: {fileID: 1745737824268037150, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_Name
       value: CargoHoldUpgradeSlot
@@ -8993,6 +9021,18 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 680488652813836912, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 680488652813836912, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 930173489370739859, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -285726114300568492, guid: fd2ae7c91f192cd4396ec26f125afd69, type: 3}
     - target: {fileID: 1745737824268037150, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_Name
       value: MagnetSlot
@@ -10218,6 +10258,18 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 680488652813836912, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 680488652813836912, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 930173489370739859, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 3937690432889472821, guid: dc152f938dda44a44be505532561310e, type: 3}
     - target: {fileID: 1745737824268037150, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_Name
       value: FireRateSlot
@@ -14739,6 +14791,18 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 680488652813836912, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 680488652813836912, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 930173489370739859, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 7069419354094609397, guid: dbb1eaeabc6fe504eb708091fb4fd797, type: 3}
     - target: {fileID: 1745737824268037150, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_Name
       value: DamageSlot

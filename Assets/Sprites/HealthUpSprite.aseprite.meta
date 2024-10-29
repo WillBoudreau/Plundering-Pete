@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: dc152f938dda44a44be505532561310e
+guid: 05fe89e47f3ac8947a3bf35cbbb95a2f
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,7 +97,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 638658135157135511
+  platformSettingsDirtyTick: 638658135423029643
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -121,18 +121,18 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: FireRate
+  - name: HealthUpSprite
     originalName: 
-    pivot: {x: 0.4827586, y: -0.12}
+    pivot: {x: 0.5151515, y: -0.21739131}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 29
-      height: 25
-    spriteID: 55cd863dfa6657d44888e7d136c4e6bf
+      width: 33
+      height: 23
+    spriteID: abc21f4375d302843a8b1226a8b959d0
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -140,25 +140,25 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 2, y: 1}
+    uvTransform: {x: 4, y: -1}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: -1246948328
-    name: FireRate
+    guid: 2044620736
+    name: HealthUpSprite
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: FireRate
+    - name: HealthUpSprite
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 0
+        x: -1
         y: 0
-        width: 32
+        width: 33
         height: 32
-      spriteId: 55cd863dfa6657d44888e7d136c4e6bf
+      spriteId: abc21f4375d302843a8b1226a8b959d0
     linkedCells: []
     parentIndex: -1
   platformSettings:
