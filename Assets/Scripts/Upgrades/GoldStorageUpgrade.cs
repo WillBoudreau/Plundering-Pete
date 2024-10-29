@@ -10,12 +10,14 @@ public class GoldStorageUpgrade : Upgrade
     public TextMeshProUGUI CargoText;
     public TextMeshProUGUI costText;
     public int MaxCargo;
+    public int MaxNum;
     public List<GameObject> CargoUpgrade= new List<GameObject>();
     private int currentUpgradeIndex = 0;
 
     void Start()
     {
         MaxCargo = inventory.maxCoins + 10;
+
         cost = 10;
         // Initialize the damageUpgrade images to white
         foreach (var upgrade in CargoUpgrade)
@@ -40,6 +42,7 @@ public class GoldStorageUpgrade : Upgrade
         if (inventory.coinCount >= cost)
         {
             inventory.coinCount -= cost;
+            Debug.Log("Inventory Max " + inventory.maxCoins + " Max Cargo " + MaxCargo);
             UpgradePlayer();
             UpdateUpgradeDisplay();
         }
@@ -52,17 +55,18 @@ public class GoldStorageUpgrade : Upgrade
 
     public override void UpgradePlayer()
     {
-        if (inventory.maxCoins < MaxCargo)
+        if (inventory.maxCoins <= MaxCargo && currentUpgradeIndex != 3)
         {
             Debug.Log("Upgrading Player Cargo");
             inventory.maxCoins += 10;
+            MaxCargo = inventory.maxCoins + 10;
             Debug.Log("Player Cargo: " + inventory.maxCoins);
         }
         else
         {
             inventory.coinCount += cost;
             Debug.Log("Max Cargo Reached");
-            CargoText.text = "Max Cargo Reached";
+            costText.text = "Max Cargo Reached";
         }
     }
 
