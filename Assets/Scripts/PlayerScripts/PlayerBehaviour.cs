@@ -106,13 +106,20 @@ public class PlayerBehaviour : MonoBehaviour
     }
     public void LevelUp()
     {
-        if(IsLevel2)
+        if(Level == 1)
         {
+            Level = 1;
+            PlayerLevels[0].SetActive(true);
+        }
+        else if(Level == 2 || IsLevel2)
+        {
+            Level ++;
             PlayerLevels[0].SetActive(false);
             PlayerLevels[1].SetActive(true);
         }
-        else if(IsLevel3)
+        else if(Level == 3 || IsLevel3)
         {
+            Level = 3;
             PlayerLevels[0].SetActive(false);
             PlayerLevels[1].SetActive(false);
             PlayerLevels[2].SetActive(true);

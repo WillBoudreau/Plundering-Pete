@@ -125,6 +125,13 @@ public class GameManager : MonoBehaviour
         data.health = playerBehaviour.playerHealth;
         data.speed = playerBehaviour.speed;
         data.Gold = inventoryManager.coinCount;
+        data.Level = playerBehaviour.Level;
+        Debug.Log("Game Saved");
+        Debug.Log("Player Health: " + data.health);
+        Debug.Log("Player Damage: " + data.damage);
+        Debug.Log("Player Speed: " + data.speed);
+        Debug.Log("Player Gold: " + data.Gold);
+        Debug.Log("Player Level: " + data.Level);
 
         bf.Serialize(file, data);
         file.Close();
@@ -142,6 +149,13 @@ public class GameManager : MonoBehaviour
             playerBehaviour.damage = data.damage;
             playerBehaviour.speed = data.speed;
             inventoryManager.coinCount = data.Gold;
+            playerBehaviour.Level = data.Level;
+            Debug.Log("Game Loaded");
+            Debug.Log("Player Health: " + data.health);
+            Debug.Log("Player Damage: " + data.damage);
+            Debug.Log("Player Speed: " + data.speed);
+            Debug.Log("Player Gold: " + data.Gold);
+            Debug.Log("Player Level: " + data.Level);
          }
     }
     [System.Serializable]
@@ -151,5 +165,6 @@ public class GameManager : MonoBehaviour
         public float damage;
         public float speed;
         public int Gold;
+        public int Level;
     }
 }
