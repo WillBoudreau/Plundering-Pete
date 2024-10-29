@@ -11,7 +11,6 @@ public class SharkBahaviour : Enemy
     public float detectionDistance;
     public float maxHealth;
     float bottomY = -140f;
-    public GameObject doubloonPrefab;
 
     private PlayerBehaviour player;
     private Renderer renderer;
@@ -85,6 +84,7 @@ public class SharkBahaviour : Enemy
     {
         StartCoroutine(Flicker());
         health -= damage;
+        Debug.Log("Shark Health: " + health);
         if(health <= 0)
         {
             Death();
@@ -105,7 +105,9 @@ public class SharkBahaviour : Enemy
 
     void Death()
     {
+        Debug.Log("Shark Dead");
         Instantiate(Gold, transform.position, Quaternion.identity);
+        Debug.Log("Gold Dropped");
         Destroy(gameObject);
         Debug.Log("Shark Kills" + player.SharkKills);
         player.SharkKills += 1;

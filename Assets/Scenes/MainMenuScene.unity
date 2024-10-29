@@ -12996,6 +12996,10 @@ PrefabInstance:
       propertyPath: PlayerLevels.Array.data[2]
       value: 
       objectReference: {fileID: 1586149740}
+    - target: {fileID: 3363071617419404085, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4289566359749055770, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
       propertyPath: orthographic
       value: 1
