@@ -22,7 +22,7 @@ public class DamageUpgrade : Upgrade
             var image = upgrade.GetComponent<UnityEngine.UI.Image>();
             if (image != null)
             {
-                image.color = Color.green;
+                image.color = Color.red;
             }
         }
     }
@@ -71,7 +71,7 @@ public class DamageUpgrade : Upgrade
             var image = upgrade.GetComponent<UnityEngine.UI.Image>();
             if (image != null)
             {
-                image.color = Color.green;
+                image.color = Color.red;
             }
         }
         currentUpgradeIndex = 0;
@@ -86,7 +86,7 @@ public class DamageUpgrade : Upgrade
             var image = damageUpgrade[currentUpgradeIndex].GetComponent<UnityEngine.UI.Image>();
             if (image != null)
             {
-                image.color = Color.red;
+                image.color = Color.green;
             }
             currentUpgradeIndex++;
         }

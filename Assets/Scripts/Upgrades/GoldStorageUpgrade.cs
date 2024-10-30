@@ -10,13 +10,13 @@ public class GoldStorageUpgrade : Upgrade
     public TextMeshProUGUI CargoText;
     public TextMeshProUGUI costText;
     public int MaxCargo;
-    public int MaxNum;
+    public int MaxNumberOfCoins = 100;
     public List<GameObject> CargoUpgrade= new List<GameObject>();
     private int currentUpgradeIndex = 0;
 
     void Start()
     {
-        MaxCargo = inventory.maxCoins + 10;
+        MaxCargo = inventory.maxCoins + MaxNumberOfCoins;
 
         cost = 10;
         // Initialize the damageUpgrade images to white
@@ -25,7 +25,7 @@ public class GoldStorageUpgrade : Upgrade
             var image = upgrade.GetComponent<UnityEngine.UI.Image>();
             if (image != null)
             {
-                image.color = Color.green;
+                image.color = Color.red;
             }
         }
     }
@@ -77,7 +77,7 @@ public class GoldStorageUpgrade : Upgrade
             var image = CargoUpgrade[currentUpgradeIndex].GetComponent<UnityEngine.UI.Image>();
             if (image != null)
             {
-                image.color = Color.red;
+                image.color = Color.green;
             }
             currentUpgradeIndex++;
         }
@@ -89,7 +89,7 @@ public class GoldStorageUpgrade : Upgrade
             var image = upgrade.GetComponent<UnityEngine.UI.Image>();
             if (image != null)
             {
-                image.color = Color.green;
+                image.color = Color.red;
             }
         }
         currentUpgradeIndex = 0;

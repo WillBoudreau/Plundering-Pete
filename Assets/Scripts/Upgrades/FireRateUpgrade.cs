@@ -10,12 +10,12 @@ public class FireRateUpgrade : Upgrade
     public TextMeshProUGUI FireRateText;
     public TextMeshProUGUI costText;
     public float MaxFireRate;
-    public List<GameObject> FRUpgrade= new List<GameObject>();
+    public List<GameObject> FRUpgrade = new List<GameObject>();
     private int currentUpgradeIndex = 0;
 
     void Start()
     {
-        MaxFireRate = player.fireRate - 0.45f;
+        MaxFireRate = player.fireRate - 0.2f * FRUpgrade.Count;
         cost = 10;
         // Initialize the damageUpgrade images to white
         foreach (var upgrade in FRUpgrade)
@@ -23,7 +23,7 @@ public class FireRateUpgrade : Upgrade
             var image = upgrade.GetComponent<UnityEngine.UI.Image>();
             if (image != null)
             {
-                image.color = Color.green;
+                image.color = Color.red;
             }
         }
     }
@@ -31,7 +31,7 @@ public class FireRateUpgrade : Upgrade
     // Update is called once per frame
     void Update()
     {
-       FireRateText.text = "Fire Rate: " + player.startFireRate + " Cost: " + cost;
+        FireRateText.text = "Fire Rate: " + player.startFireRate + " Cost: " + cost;
     }
 
     public override void CostCheck()
@@ -51,11 +51,11 @@ public class FireRateUpgrade : Upgrade
 
     public override void UpgradePlayer()
     {
-        if (player.fireRate >= MaxFireRate)
+        if (player.fireRate > MaxFireRate)
         {
             Debug.Log("Upgrading Player Fire Rate");
-            player.fireRate -= 0.15f;
-            player.startFireRate -= 0.15f;
+            player.fireRate -= 0.2f;
+            player.startFireRate -= 0.2f;
             Debug.Log("Player FireRate: " + player.fireRate);
             UpdateUpgradeDisplay();
         }
@@ -66,6 +66,7 @@ public class FireRateUpgrade : Upgrade
             FireRateText.text = "Max Fire Rate Reached";
         }
     }
+
     public override void Reset()
     {
         foreach (var upgrade in FRUpgrade)
@@ -73,12 +74,12 @@ public class FireRateUpgrade : Upgrade
             var image = upgrade.GetComponent<UnityEngine.UI.Image>();
             if (image != null)
             {
-                image.color = Color.green;
+                image.color = Color.red;
             }
         }
         currentUpgradeIndex = 0;
-        MaxFireRate += 3;
-        cost += 10;
+        MaxFireRate = player.fireRate - 0.2f * FRUpgrade.Count;
+        cost = 10;
     }
 
     void UpdateUpgradeDisplay()
@@ -88,7 +89,7 @@ public class FireRateUpgrade : Upgrade
             var image = FRUpgrade[currentUpgradeIndex].GetComponent<UnityEngine.UI.Image>();
             if (image != null)
             {
-                image.color = Color.red;
+                image.color = Color.green;
             }
             currentUpgradeIndex++;
         }
