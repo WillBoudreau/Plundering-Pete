@@ -86,10 +86,11 @@ public class LevelManager : MonoBehaviour
                 //Spawn Icebergs
                 obstacleManager.SpawnObstaclesInZone(obstacleManager.zone2,obstacleManager.Zone2Obstacles,player.transform,safeDistance);
             }
-            else if(checkpointManager.ThirdCheckpoint == true && !obstacleManager.hasSpawnedRocks && !obstacleManager.hasSpawnedIcebergs && !obstacleManager.hasSpawnedDebris)
+            else if(checkpointManager.ThirdCheckpoint == true && !obstacleManager.hasSpawnedRocks && !obstacleManager.hasSpawnedIcebergs && !obstacleManager.hasSpawnedDebris && !hasSpawnedZone3Obstacles)
             {
                 //Spawn Debris
                 obstacleManager.SpawnObstaclesInZone(obstacleManager.zone3,obstacleManager.Zone3Obstacles,player.transform,safeDistance);
+                hasSpawnedZone3Obstacles = true;
                 Debug.Log("Spawning Debris");
             }
         }
