@@ -7474,7 +7474,7 @@ MonoBehaviour:
   CargoText: {fileID: 1526153278}
   costText: {fileID: 1151608682}
   MaxCargo: 0
-  MaxNum: 30
+  MaxNumberOfCoins: 100
   CargoUpgrade:
   - {fileID: 1135685405}
   - {fileID: 1431269637}
@@ -8968,6 +8968,10 @@ PrefabInstance:
     - target: {fileID: 7001577010587437497, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7458618460828365315, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+      propertyPath: m_text
+      value: 'Cargo Hold: 25 Cost: 10'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

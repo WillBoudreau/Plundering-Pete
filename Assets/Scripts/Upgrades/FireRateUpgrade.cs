@@ -51,7 +51,7 @@ public class FireRateUpgrade : Upgrade
 
     public override void UpgradePlayer()
     {
-        if (player.fireRate > MaxFireRate)
+        if (player.fireRate >= MaxFireRate)
         {
             Debug.Log("Upgrading Player Fire Rate");
             player.fireRate -= 0.2f;

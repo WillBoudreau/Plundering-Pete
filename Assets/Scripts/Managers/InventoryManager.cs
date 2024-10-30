@@ -19,7 +19,7 @@ public class InventoryManager : MonoBehaviour
     {
         coins = new List<GameObject>();
         originalColor = coinText.color;
-        maxCoins = 15;
+        maxCoins = 25;
     }
 
     // Update is called once per frame

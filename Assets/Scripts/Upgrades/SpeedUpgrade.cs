@@ -31,7 +31,7 @@ public class SpeedUpgrade : Upgrade
     // Update is called once per frame
     void Update()
     {
-        speedText.text = "Speed" + player.speed + " Cost: " + cost;
+        speedText.text = "Speed: " + player.speed + " Cost: " + cost;
     }
 
     public override void CostCheck()
