@@ -33,7 +33,7 @@ public class GoldStorageUpgrade : Upgrade
     // Update is called once per frame
     void Update()
     {
-      CargoText.text = "Cargo: " + inventory.maxCoins + "Cost: " + cost;
+      CargoText.text = "Cargo Hold: " + inventory.maxCoins + " Cost: " + cost;
     }
 
     public override void CostCheck()
