@@ -29,17 +29,14 @@ public class CheckpointManager : MonoBehaviour
             case 0:
                 FirstCheckpoint = status;
                 levelManager.UpdateObjects();
-                Debug.Log("First Checkpoint: " + FirstCheckpoint);
                 break;
             case 1:
                 SecondCheckpoint = status;
                 levelManager.UpdateObjects();
-                Debug.Log("Second Checkpoint: " + SecondCheckpoint);
                 break;
             case 2:
                 ThirdCheckpoint = status;
                 levelManager.UpdateObjects();
-                Debug.Log("Third Checkpoint: " + ThirdCheckpoint);
                 break;
             default:
                 Debug.LogWarning("Invalid checkpoint index");

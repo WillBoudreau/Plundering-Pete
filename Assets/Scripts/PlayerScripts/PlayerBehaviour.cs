@@ -74,6 +74,7 @@ public class PlayerBehaviour : MonoBehaviour
         DoubloonText = GameObject.Find("DoubloonsText").GetComponent<TextMeshProUGUI>();
         levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         healthManager.playerhealth.value = playerHealth;
+
         //SetValues();
     }
     void HandlePlayer()
@@ -97,6 +98,7 @@ public class PlayerBehaviour : MonoBehaviour
         magnet = 3f;
         //Assign values to be the starting values
         playerHealth = startHealth;
+        healthManager.playerhealth.maxValue = playerHealth;
         speed = StartSpeed;
         damage = startdamage;
         fireRate = startFireRate;
@@ -114,12 +116,28 @@ public class PlayerBehaviour : MonoBehaviour
         else if(Level == 2 || IsLevel2)
         {
             Level ++;
+            if(Level == 2)
+            {
+                IsLevel2 = true;
+            }
+            else if(Level >= 2)
+            {
+                Level = 2;
+            }
             PlayerLevels[0].SetActive(false);
             PlayerLevels[1].SetActive(true);
         }
         else if(Level == 3 || IsLevel3)
         {
             Level = 3;
+            if(Level == 3)
+            {
+                IsLevel3 = true;
+            }
+            else if(Level >= 3)
+            {
+                Level = 3;
+            }
             PlayerLevels[0].SetActive(false);
             PlayerLevels[1].SetActive(false);
             PlayerLevels[2].SetActive(true);
@@ -328,6 +346,22 @@ public class PlayerBehaviour : MonoBehaviour
                     checkpointManager.UpdateCheckpointStatus(0, false);
                     checkpointManager.UpdateCheckpointStatus(1, true);
                     if (!IsLevel2 && !IsLevel3)
+                    {
+                        Debug.Log("Ship is too weak");
+                        time -= Time.deltaTime;
+                        Debug.Log(time);
+                        if (time <= 1)
+                        {
+                            TakeDamage(1f);
+                            time = 5f;
+                        }
+                    }
+                    break;
+                case "HardLevel":
+                    Debug.Log("Hard Level");
+                    checkpointManager.UpdateCheckpointStatus(1, false);
+                    checkpointManager.UpdateCheckpointStatus(2, true);
+                    if (!IsLevel3)
                     {
                         Debug.Log("Ship is too weak");
                         time -= Time.deltaTime;

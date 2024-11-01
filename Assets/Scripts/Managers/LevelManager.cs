@@ -71,7 +71,6 @@ public class LevelManager : MonoBehaviour
     }   
     void SpawnObjects()
     {
-        Debug.Log("Spawning Objects");  
         if(levelName == "GameTestScene")
         {
             if(checkpointManager.FirstCheckpoint == true && !collectorManager.hasSpawnedDoubloons && !obstacleManager.hasSpawnedRocks)
@@ -91,7 +90,6 @@ public class LevelManager : MonoBehaviour
                 //Spawn Debris
                 obstacleManager.SpawnObstaclesInZone(obstacleManager.zone3,obstacleManager.Zone3Obstacles,player.transform,safeDistance);
                 hasSpawnedZone3Obstacles = true;
-                Debug.Log("Spawning Debris");
             }
         }
     }

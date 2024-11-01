@@ -7538,7 +7538,6 @@ MonoBehaviour:
   costText: {fileID: 1151608682}
   MaxLevel: 3
   UpgradeDisplay:
-  - {fileID: 1289169750}
   - {fileID: 870627760}
   - {fileID: 438817818}
 --- !u!1 &1088758525
@@ -8540,11 +8539,6 @@ CanvasRenderer:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1744041394810459262, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
   m_PrefabInstance: {fileID: 1336965473}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1289169750 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5338968883979651826, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
-  m_PrefabInstance: {fileID: 1949566348}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1296462014
 GameObject:
@@ -13741,6 +13735,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 236544021785635074, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -29
+      objectReference: {fileID: 0}
     - target: {fileID: 1745737824268037150, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_Name
       value: UpgradeShipSlot
@@ -13833,8 +13831,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7697679587727400027, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 39
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5338968883979651826, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
