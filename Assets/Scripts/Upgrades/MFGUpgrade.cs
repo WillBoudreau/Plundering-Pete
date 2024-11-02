@@ -9,6 +9,7 @@ public class MFGUpgrade : Upgrade
     [Header("Upgrade Values")]
     public TextMeshProUGUI MFGText;
     public TextMeshProUGUI costText;
+    public TextMeshProUGUI ButtonText;
     public float MaxMagnet;
     public List<GameObject> BFMUpgrade= new List<GameObject>();
     private int currentUpgradeIndex = 0;
@@ -31,7 +32,8 @@ public class MFGUpgrade : Upgrade
     // Update is called once per frame
     void Update()
     {
-       MFGText.text = "Magnet: " + player.magnet + " Cost: " + cost;
+       MFGText.text = "Magnet: " + player.magnet;
+       ButtonText.text = "Cost: " + cost;
     }
 
     public override void CostCheck()

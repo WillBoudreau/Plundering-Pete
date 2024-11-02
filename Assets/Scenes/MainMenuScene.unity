@@ -1768,6 +1768,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 267346149}
   m_CullTransparentMesh: 1
+--- !u!114 &270739950 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3586894560033511549, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+  m_PrefabInstance: {fileID: 1336965473}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &274829499
 GameObject:
   m_ObjectHideFlags: 0
@@ -2849,6 +2860,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 424658875}
   m_CullTransparentMesh: 1
+--- !u!114 &426572399 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3586894560033511549, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+  m_PrefabInstance: {fileID: 1444767382}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &431684031 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8829330189392537515, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
@@ -4550,6 +4572,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 619225774}
   m_CullTransparentMesh: 1
+--- !u!114 &652544198 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3586894560033511549, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+  m_PrefabInstance: {fileID: 478942378}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &660696813
 GameObject:
   m_ObjectHideFlags: 0
@@ -4683,6 +4716,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 660696813}
   m_CullTransparentMesh: 1
+--- !u!114 &676467911 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3586894560033511549, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+  m_PrefabInstance: {fileID: 108716511}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &701879430
 GameObject:
   m_ObjectHideFlags: 0
@@ -6067,6 +6111,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 887945055}
   m_CullTransparentMesh: 1
+--- !u!114 &888159595 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3586894560033511549, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+  m_PrefabInstance: {fileID: 1949566348}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &900754622 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8829330189392537515, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
@@ -6988,6 +7043,7 @@ MonoBehaviour:
   cost: 0
   damageText: {fileID: 1779852602}
   costText: {fileID: 1151608682}
+  ButtonText: {fileID: 1435416348}
   MaxDamage: 0
   damageUpgrade:
   - {fileID: 1452840230}
@@ -7025,6 +7081,7 @@ MonoBehaviour:
   cost: 0
   healthText: {fileID: 1077516791}
   costText: {fileID: 1151608682}
+  ButtonText: {fileID: 652544198}
   MaxHeatlh: 0
   healthUpgrade:
   - {fileID: 1189057694}
@@ -7047,6 +7104,7 @@ MonoBehaviour:
   cost: 0
   CargoText: {fileID: 1526153278}
   costText: {fileID: 1151608682}
+  ButtonText: {fileID: 270739950}
   MaxCargo: 0
   MaxNumberOfCoins: 100
   CargoUpgrade:
@@ -7070,6 +7128,7 @@ MonoBehaviour:
   cost: 0
   MFGText: {fileID: 786514658}
   costText: {fileID: 1151608682}
+  ButtonText: {fileID: 426572399}
   MaxMagnet: 0
   BFMUpgrade:
   - {fileID: 86777432}
@@ -7092,6 +7151,7 @@ MonoBehaviour:
   cost: 0
   speedText: {fileID: 1461656693}
   costText: {fileID: 1151608682}
+  ButtonText: {fileID: 676467911}
   MaxSpeed: 0
   speedUpgrade:
   - {fileID: 2997848}
@@ -7114,6 +7174,7 @@ MonoBehaviour:
   cost: 0
   FireRateText: {fileID: 411883205}
   costText: {fileID: 1151608682}
+  ButtonText: {fileID: 2048126258}
   MaxFireRate: 0
   FRUpgrade:
   - {fileID: 1542909941}
@@ -7136,6 +7197,7 @@ MonoBehaviour:
   cost: 10
   ShipText: {fileID: 2103557183}
   costText: {fileID: 1151608682}
+  ButtonText: {fileID: 888159595}
   MaxLevel: 3
   UpgradeDisplay:
   - {fileID: 870627760}
@@ -8824,6 +8886,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8829330189392537515, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
   m_PrefabInstance: {fileID: 1336965473}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1435416348 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3586894560033511549, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+  m_PrefabInstance: {fileID: 2941383977895402374}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1438943765
 GameObject:
   m_ObjectHideFlags: 0
@@ -14150,6 +14223,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2048037280}
   m_CullTransparentMesh: 1
+--- !u!114 &2048126258 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3586894560033511549, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+  m_PrefabInstance: {fileID: 1641570941}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2064994871
 GameObject:
   m_ObjectHideFlags: 0

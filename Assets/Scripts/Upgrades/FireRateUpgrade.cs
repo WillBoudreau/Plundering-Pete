@@ -9,6 +9,7 @@ public class FireRateUpgrade : Upgrade
     [Header("Upgrade Values")]
     public TextMeshProUGUI FireRateText;
     public TextMeshProUGUI costText;
+    public TextMeshProUGUI ButtonText;
     public float MaxFireRate;
     public List<GameObject> FRUpgrade = new List<GameObject>();
     private int currentUpgradeIndex = 0;
@@ -31,7 +32,8 @@ public class FireRateUpgrade : Upgrade
     // Update is called once per frame
     void Update()
     {
-        FireRateText.text = "Fire Rate: " + player.startFireRate + " Cost: " + cost;
+        FireRateText.text = "Fire Rate: " + player.startFireRate;
+        ButtonText.text = "Cost: " + cost;
     }
 
     public override void CostCheck()

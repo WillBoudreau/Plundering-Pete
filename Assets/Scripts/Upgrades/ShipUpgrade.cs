@@ -8,6 +8,7 @@ public class ShipUpgrade : Upgrade
     [Header("Upgrade Values")]
     public TextMeshProUGUI ShipText;
     public TextMeshProUGUI costText;
+    public TextMeshProUGUI ButtonText;
     public int MaxLevel;
     public List<GameObject> UpgradeDisplay = new List<GameObject>();
     private int currentUpgradeIndex = 0;
@@ -30,7 +31,8 @@ public class ShipUpgrade : Upgrade
     // Update is called once per frame
     void Update()
     {
-       ShipText.text = "Ship Level " + player.Level + " Cost: " + cost;
+       ShipText.text = "Ship Level " + player.Level;
+       ButtonText.text = "Cost: " + cost; 
     }
 
     public override void CostCheck()

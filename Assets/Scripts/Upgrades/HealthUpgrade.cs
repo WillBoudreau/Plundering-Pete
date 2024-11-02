@@ -9,6 +9,7 @@ public class HealthUpgrade : Upgrade
     [Header("Upgrade Values")]
     public TextMeshProUGUI healthText;
     public TextMeshProUGUI costText;
+    public TextMeshProUGUI ButtonText;
     public int MaxHeatlh;
     public List<GameObject> healthUpgrade = new List<GameObject>();
     private int currentUpgradeIndex = 0;
@@ -31,7 +32,8 @@ public class HealthUpgrade : Upgrade
     // Update is called once per frame
     void Update()
     {
-        healthText.text = "Health: " + player.playerHealth + " Cost: " + cost;
+        healthText.text = "Health: " + player.playerHealth;
+        ButtonText.text = "Cost: " + cost;
     }
 
     public override void CostCheck()

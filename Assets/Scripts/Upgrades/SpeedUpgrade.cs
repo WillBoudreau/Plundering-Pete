@@ -9,6 +9,7 @@ public class SpeedUpgrade : Upgrade
     [Header("Upgrade Values")]
     public TextMeshProUGUI speedText;
     public TextMeshProUGUI costText;
+    public TextMeshProUGUI ButtonText;
     public float MaxSpeed;
     public List<GameObject> speedUpgrade = new List<GameObject>();
     private int currentUpgradeIndex = 0;
@@ -31,7 +32,8 @@ public class SpeedUpgrade : Upgrade
     // Update is called once per frame
     void Update()
     {
-        speedText.text = "Speed: " + player.speed + " Cost: " + cost;
+        speedText.text = "Speed: " + player.speed;
+        ButtonText.text = "Cost: " + cost;
     }
 
     public override void CostCheck()

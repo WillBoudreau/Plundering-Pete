@@ -9,6 +9,7 @@ public class GoldStorageUpgrade : Upgrade
     [Header("Upgrade Values")]
     public TextMeshProUGUI CargoText;
     public TextMeshProUGUI costText;
+    public TextMeshProUGUI ButtonText;
     public int MaxCargo;
     public int MaxNumberOfCoins = 100;
     public List<GameObject> CargoUpgrade= new List<GameObject>();
@@ -33,7 +34,8 @@ public class GoldStorageUpgrade : Upgrade
     // Update is called once per frame
     void Update()
     {
-      CargoText.text = "Cargo Hold: " + inventory.maxCoins + " Cost: " + cost;
+      CargoText.text = "Cargo Hold: " + inventory.maxCoins;
+      ButtonText.text = "Cost: " + cost;
     }
 
     public override void CostCheck()

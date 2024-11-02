@@ -8,6 +8,7 @@ public class DamageUpgrade : Upgrade
     [Header("Upgrade Values")]
     public TextMeshProUGUI damageText;
     public TextMeshProUGUI costText;
+    public TextMeshProUGUI ButtonText;
     public float MaxDamage;
     public List<GameObject> damageUpgrade = new List<GameObject>();
     private int currentUpgradeIndex = 0;
@@ -30,7 +31,8 @@ public class DamageUpgrade : Upgrade
     // Update is called once per frame
     void Update()
     {
-        damageText.text = "Damage: " + player.damage + " Cost: " + cost;
+        damageText.text = "Damage: " + player.damage;
+        ButtonText.text = "Cost: " + cost;
     }
 
     public override void CostCheck()
