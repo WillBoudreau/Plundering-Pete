@@ -32,7 +32,7 @@ public class FireRateUpgrade : Upgrade
     // Update is called once per frame
     void Update()
     {
-        FireRateText.text = "Fire Rate: " + player.startFireRate;
+        FireRateText.text = "Fire Rate: " + player.startFireRate.ToString("F2");
         ButtonText.text = "Cost: " + cost;
     }
 
@@ -58,7 +58,7 @@ public class FireRateUpgrade : Upgrade
             Debug.Log("Upgrading Player Fire Rate");
             player.fireRate -= 0.2f;
             player.startFireRate -= 0.2f;
-            Debug.Log("Player FireRate: " + player.fireRate);
+            Debug.Log("Player FireRate: " + player.fireRate.ToString("F2"));
             UpdateUpgradeDisplay();
         }
         else

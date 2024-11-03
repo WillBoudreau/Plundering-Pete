@@ -6496,7 +6496,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1007322668
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7050,6 +7050,7 @@ MonoBehaviour:
   - {fileID: 1452840230}
   - {fileID: 1732322558}
   - {fileID: 1679824561}
+  IsReset: 0
 --- !u!114 &1080032328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7088,6 +7089,7 @@ MonoBehaviour:
   - {fileID: 1189057694}
   - {fileID: 431684031}
   - {fileID: 1055681760}
+  IsReset: 0
 --- !u!114 &1080032330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7112,6 +7114,7 @@ MonoBehaviour:
   - {fileID: 1135685405}
   - {fileID: 1431269637}
   - {fileID: 1260723178}
+  IsReset: 0
 --- !u!114 &1080032331
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7135,6 +7138,7 @@ MonoBehaviour:
   - {fileID: 86777432}
   - {fileID: 1788299820}
   - {fileID: 1139992408}
+  IsReset: 0
 --- !u!114 &1080032332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7158,6 +7162,7 @@ MonoBehaviour:
   - {fileID: 2997848}
   - {fileID: 900754622}
   - {fileID: 517402562}
+  IsReset: 0
 --- !u!114 &1080032333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10360,7 +10365,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6756319946861893356, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_text
-      value: Fire rate(-0.15s to Fire rate)
+      value: Fire rate(-0.20s to Fire rate)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6756319946861893356, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+      propertyPath: m_margin.x
+      value: 21.130379
       objectReference: {fileID: 0}
     - target: {fileID: 6756319946861893356, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_margin.z

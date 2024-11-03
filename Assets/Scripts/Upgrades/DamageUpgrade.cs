@@ -37,6 +37,7 @@ public class DamageUpgrade : Upgrade
         if(IsReset == true)
         {
             MaxDamage = player.damage + 3;
+            IsReset = false;
         }
     }
 
@@ -91,7 +92,6 @@ public class DamageUpgrade : Upgrade
         cost += 10;
         Debug.Log("Resetting Damage Upgrade");
         Debug.Log("Player Damage: " + player.damage + " Max Damage: " + MaxDamage);
-        IsReset = false;
     }
 
     void UpdateUpgradeDisplay()

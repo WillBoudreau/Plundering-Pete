@@ -14,6 +14,7 @@ public class GoldStorageUpgrade : Upgrade
     public int MaxNumberOfCoins = 100;
     public List<GameObject> CargoUpgrade= new List<GameObject>();
     private int currentUpgradeIndex = 0;
+    public bool IsReset = false;
 
     void Start()
     {
@@ -36,6 +37,11 @@ public class GoldStorageUpgrade : Upgrade
     {
       CargoText.text = "Cargo Hold: " + inventory.maxCoins;
       ButtonText.text = "Cost: " + cost;
+        if(IsReset == true)
+        {
+            MaxCargo = inventory.maxCoins + MaxNumberOfCoins;
+            IsReset = false;
+        }
     }
 
     public override void CostCheck()
@@ -86,6 +92,7 @@ public class GoldStorageUpgrade : Upgrade
     }
     public override void Reset()
     {
+        IsReset = true;
         Debug.Log("Resetting Cargo Upgrade");
         foreach (var upgrade in CargoUpgrade)
         {

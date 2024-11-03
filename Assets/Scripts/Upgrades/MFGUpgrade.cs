@@ -13,6 +13,7 @@ public class MFGUpgrade : Upgrade
     public float MaxMagnet;
     public List<GameObject> BFMUpgrade= new List<GameObject>();
     private int currentUpgradeIndex = 0;
+    public bool IsReset = false;
 
     void Start()
     {
@@ -34,6 +35,11 @@ public class MFGUpgrade : Upgrade
     {
        MFGText.text = "Magnet: " + player.magnet;
        ButtonText.text = "Cost: " + cost;
+         if(IsReset == true)
+         {
+              MaxMagnet = player.magnet + 3;
+              IsReset = false;
+         }
     }
 
     public override void CostCheck()
@@ -69,6 +75,7 @@ public class MFGUpgrade : Upgrade
     }
     public override void Reset()
     {
+        IsReset = true;
         foreach (var upgrade in BFMUpgrade)
         {
             var image = upgrade.GetComponent<UnityEngine.UI.Image>();

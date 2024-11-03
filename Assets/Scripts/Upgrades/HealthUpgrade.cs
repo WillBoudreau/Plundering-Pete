@@ -13,6 +13,7 @@ public class HealthUpgrade : Upgrade
     public float MaxHeatlh;
     public List<GameObject> healthUpgrade = new List<GameObject>();
     private int currentUpgradeIndex = 0;
+    public bool IsReset = false;
 
     void Start()
     {
@@ -34,6 +35,11 @@ public class HealthUpgrade : Upgrade
     {
         healthText.text = "Health: " + player.playerHealth;
         ButtonText.text = "Cost: " + cost;
+        if(IsReset == true)
+        {
+            MaxHeatlh = player.playerHealth + 3;
+            IsReset = false;
+        }
     }
 
     public override void CostCheck()
@@ -70,6 +76,7 @@ public class HealthUpgrade : Upgrade
     }
     public override void Reset()
     {
+        IsReset = true;
         foreach (var upgrade in healthUpgrade)
         {
             var image = upgrade.GetComponent<UnityEngine.UI.Image>();

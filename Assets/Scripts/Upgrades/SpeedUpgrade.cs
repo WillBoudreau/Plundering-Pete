@@ -13,6 +13,7 @@ public class SpeedUpgrade : Upgrade
     public float MaxSpeed;
     public List<GameObject> speedUpgrade = new List<GameObject>();
     private int currentUpgradeIndex = 0;
+    public bool IsReset = false;
 
     void Start()
     {
@@ -34,6 +35,11 @@ public class SpeedUpgrade : Upgrade
     {
         speedText.text = "Speed: " + player.speed;
         ButtonText.text = "Cost: " + cost;
+        if(IsReset == true)
+        {
+            MaxSpeed = player.speed + 3.0f;
+            IsReset = false;
+        }
     }
 
     public override void CostCheck()
@@ -69,6 +75,7 @@ public class SpeedUpgrade : Upgrade
     }
     public override void Reset()
     {
+        IsReset = true;
         foreach (var upgrade in speedUpgrade)
         {
             var image = upgrade.GetComponent<UnityEngine.UI.Image>();
