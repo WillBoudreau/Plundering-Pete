@@ -66,6 +66,7 @@ public class ShipUpgrade : Upgrade
         }
         else
         {
+            ButtonText.text = "Max Ship Reached";
             inventory.coinCount += cost;
             Debug.Log("Max Ship Reached");
             ShipText.text = "Max Ship Reached";
