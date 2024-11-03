@@ -42,6 +42,7 @@ public class CollectorManager : MonoBehaviour
     //Spawn Doubloons from list
     public void SpawnDoubloons(Transform playerTransform, float safeDistance)
     {
+        Debug.Log("Spawning Doubloons");
         if (levelManager.levelName == "GameTestScene" && !hasSpawnedDoubloons)
         {
             for (int i = 0; i < numofDoubloons; i++)

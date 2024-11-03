@@ -63,8 +63,10 @@ public class LevelManager : MonoBehaviour
 
     private IEnumerator WaitForSceneToLoadAndRespawn()
     {
+        Debug.Log("Waiting for scene to load");
+        Debug.Log(uiManager.fadeTime);
         yield return new WaitForSeconds(uiManager.fadeTime);
-
+        Debug.Log("Loading Scene Starting");
         // Rest of the setup
         UpdateObjects();
         musicChanger.PlaySceneTrack(SceneManager.GetActiveScene().name);
@@ -75,6 +77,7 @@ public class LevelManager : MonoBehaviour
         {
             if(checkpointManager.FirstCheckpoint == true && !collectorManager.hasSpawnedDoubloons && !obstacleManager.hasSpawnedRocks)
             {
+                Debug.Log("Spawning Objects");
                 //Spawn Doubloons
                 collectorManager.SpawnDoubloons(player.transform, safeDistance);
                 //Spawn Rocks
@@ -91,6 +94,12 @@ public class LevelManager : MonoBehaviour
                 obstacleManager.SpawnObstaclesInZone(obstacleManager.zone3,obstacleManager.Zone3Obstacles,player.transform,safeDistance);
                 hasSpawnedZone3Obstacles = true;
             }
+        }
+        else if(levelName == "MainMenuScene")
+        {
+            obstacleManager.Zone1Obstacles.Clear();
+            obstacleManager.Zone2Obstacles.Clear();
+            obstacleManager.Zone3Obstacles.Clear();
         }
     }
     public void UpdateObjects()
@@ -129,17 +138,6 @@ public class LevelManager : MonoBehaviour
         cameraPosition.z = -30;
         Camera.transform.position = cameraPosition;
     }
-    // public Vector3 SetPlayerSpawnPoint()
-    // {
-    //     GameObject player = GameObject.FindWithTag("Player");
-    //     if (player != null && playerSpawnPoint != null)
-    //     {
-    //         player.transform.position = playerSpawnPoint.position;
-    //         cameraManager.transform.position = playerSpawnPoint.position;
-    //         cameraManager.transform.position = new Vector3(cameraManager.transform.position.x, cameraManager.transform.position.y, -30);
-    //     }
-    //     return player.transform.position;
-    // }
 
     private IEnumerator WaitForScreenLoad(string sceneName)
     {

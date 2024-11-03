@@ -34,7 +34,6 @@ public class FireRateUpgrade : Upgrade
     {
         FireRateText.text = "Fire Rate: " + player.startFireRate.ToString("F2");
         ButtonText.text = "Cost: " + cost;
-        Debug.Log("Player FireRate: " + player.fireRate + " Max Fire Rate: " + MaxFireRate);
     }
 
     public override void CostCheck()
