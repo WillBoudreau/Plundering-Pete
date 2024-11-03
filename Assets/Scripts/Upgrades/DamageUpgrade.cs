@@ -40,6 +40,7 @@ public class DamageUpgrade : Upgrade
         Debug.Log("Checking Cost for Damage Upgrade");
         if (inventory.coinCount >= cost)
         {
+            Debug.Log("Upgrading Player Damage");
             inventory.coinCount -= cost;
             UpgradePlayer();
             UpdateUpgradeDisplay();
@@ -56,6 +57,7 @@ public class DamageUpgrade : Upgrade
         if (player.damage < MaxDamage)
         {
             Debug.Log("Upgrading Player Damage");
+            Debug.Log("Player Damage: " + player.damage + " Max Damage: " + MaxDamage);
             player.damage ++;
             Debug.Log("Player Damage: " + player.damage);
         }
@@ -64,6 +66,8 @@ public class DamageUpgrade : Upgrade
             inventory.coinCount += cost;
             Debug.Log("Max Damage Reached");
             damageText.text = "Max Damage Reached";
+            Debug.Log("Max Damage Reached");
+            Debug.Log("Player Damage: " + player.damage + " Max Damage: " + MaxDamage);
         }
     }
     public override void Reset()
@@ -77,8 +81,10 @@ public class DamageUpgrade : Upgrade
             }
         }
         currentUpgradeIndex = 0;
-        MaxDamage += 3;
+        MaxDamage = player.damage + 3;
         cost += 10;
+        Debug.Log("Resetting Damage Upgrade");
+        Debug.Log("Player Damage: " + player.damage + " Max Damage: " + MaxDamage);
     }
 
     void UpdateUpgradeDisplay()

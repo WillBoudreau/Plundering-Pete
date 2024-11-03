@@ -11084,13 +11084,13 @@ MonoBehaviour:
   hasSpawnedRocks: 0
   hasSpawnedIcebergs: 0
   hasSpawnedDebris: 0
-  takenPOS: 1
+  takenPOS: 5
   zone1Xnegative: -15
   zone1Xpositive: 15
   zone1Ynegative: -25
   zone1Ypositive: 15
-  zone2Xnegative: -10
-  zone2Xpositive: 10
+  zone2Xnegative: -15
+  zone2Xpositive: 15
   zone2Ynegative: 15
   zone2Ypositive: 50
   zone3Xnegative: -15
@@ -11100,9 +11100,9 @@ MonoBehaviour:
   Zone1Obstacles: []
   Zone2Obstacles: []
   Zone3Obstacles: []
-  obstacle_Rock_Count: 10
-  obstacle_Iceberg_Count: 10
-  obstacle_Debris_Count: 10
+  obstacle_Rock_Count: 5
+  obstacle_Iceberg_Count: 5
+  obstacle_Debris_Count: 5
 --- !u!1 &1700754824
 GameObject:
   m_ObjectHideFlags: 0

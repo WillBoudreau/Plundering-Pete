@@ -19,7 +19,7 @@ public class ObstacleManager : MonoBehaviour
     public bool hasSpawnedRocks;
     public bool hasSpawnedIcebergs;
     public bool hasSpawnedDebris;
-    public float takenPOS = 1.0f;
+    public float takenPOS = 5.0f;
     [Header("Obstacle Zones")]
     [Header("Zone 1")]
     public float zone1Xnegative = -15;

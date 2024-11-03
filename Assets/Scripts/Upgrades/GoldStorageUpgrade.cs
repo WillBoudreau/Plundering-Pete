@@ -95,6 +95,7 @@ public class GoldStorageUpgrade : Upgrade
                 image.color = Color.red;
             }
         }
+        MaxCargo = inventory.maxCoins + MaxNumberOfCoins;
         currentUpgradeIndex = 0;
         cost += 10;
     }

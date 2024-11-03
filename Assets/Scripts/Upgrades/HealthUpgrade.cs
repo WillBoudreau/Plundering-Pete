@@ -10,7 +10,7 @@ public class HealthUpgrade : Upgrade
     public TextMeshProUGUI healthText;
     public TextMeshProUGUI costText;
     public TextMeshProUGUI ButtonText;
-    public int MaxHeatlh;
+    public float MaxHeatlh;
     public List<GameObject> healthUpgrade = new List<GameObject>();
     private int currentUpgradeIndex = 0;
 
@@ -78,7 +78,7 @@ public class HealthUpgrade : Upgrade
             }
         }
         currentUpgradeIndex = 0;
-        MaxHeatlh += 3;
+        MaxHeatlh = player.playerHealth + 3;
         cost += 10;
     }
 

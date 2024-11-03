@@ -78,7 +78,7 @@ public class SpeedUpgrade : Upgrade
             }
         }
         currentUpgradeIndex = 0;
-        MaxSpeed += 3;
+        MaxSpeed = player.speed + 3.0f;
         cost += 10;
     }
 

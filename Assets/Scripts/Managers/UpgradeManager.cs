@@ -43,10 +43,12 @@ public class UpgradeManager : MonoBehaviour
     }
     public void UpgradeShip()
     {
-        if(inventory.coinCount >= ShipCost)
+        if(inventory.coinCount >= ShipCost && player.IsLevel3 == false)
         {
+            Debug.Log("Upgrading Ship from manager");
             if(player.IsLevel2 == false)
             {
+                Debug.Log("Level 2");
                 player.IsLevel2 = true;
                 Reset();
             }
