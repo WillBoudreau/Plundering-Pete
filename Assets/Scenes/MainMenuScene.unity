@@ -343,7 +343,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6756319946861893356, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_text
-      value: Rudder
+      value: Rudder(+1 speed)
       objectReference: {fileID: 0}
     - target: {fileID: 7001577010587437497, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_Pivot.x
@@ -1345,8 +1345,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 213861766}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 4.7499924, y: 4.4999814}
   m_SizeDelta: {x: 21.8903, y: 13.9525}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1726,7 +1726,7 @@ RectTransform:
   m_Father: {fileID: 1912446170}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2140,7 +2140,7 @@ RectTransform:
   m_Father: {fileID: 1098192710}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3345,7 +3345,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6756319946861893356, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_text
-      value: Integrity
+      value: Integrity (+10 health)
       objectReference: {fileID: 0}
     - target: {fileID: 7001577010587437497, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_Pivot.x
@@ -6143,7 +6143,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &902718852
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6496,7 +6496,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1007322668
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8459,7 +8459,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6756319946861893356, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_text
-      value: Cargo Hold
+      value: Cargo Hold(+10 max gold)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6756319946861893356, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+      propertyPath: m_margin.x
+      value: 16.084633
       objectReference: {fileID: 0}
     - target: {fileID: 7001577010587437497, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_Pivot.x
@@ -9102,7 +9106,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6756319946861893356, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_text
-      value: THE B.F.M
+      value: THE B.F.M(+1 to magnet)
       objectReference: {fileID: 0}
     - target: {fileID: 7001577010587437497, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_Pivot.x
@@ -10356,7 +10360,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6756319946861893356, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_text
-      value: Fire rate
+      value: Fire rate(-0.15s to Fire rate)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6756319946861893356, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+      propertyPath: m_margin.z
+      value: 14.867004
       objectReference: {fileID: 0}
     - target: {fileID: 7001577010587437497, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_Pivot.x
@@ -13457,7 +13465,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6756319946861893356, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_text
-      value: Upgrade yer Ship
+      value: Upgrade yer Ship(+1 Level)
       objectReference: {fileID: 0}
     - target: {fileID: 7001577010587437497, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_Pivot.x
@@ -13991,7 +13999,7 @@ RectTransform:
   m_Father: {fileID: 485279118}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: -3.2300034, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
