@@ -12,6 +12,7 @@ public class DamageUpgrade : Upgrade
     public float MaxDamage;
     public List<GameObject> damageUpgrade = new List<GameObject>();
     private int currentUpgradeIndex = 0;
+    public bool IsReset = false;
 
     void Start()
     {
@@ -33,6 +34,10 @@ public class DamageUpgrade : Upgrade
     {
         damageText.text = "Damage: " + player.damage;
         ButtonText.text = "Cost: " + cost;
+        if(IsReset == true)
+        {
+            MaxDamage = player.damage + 3;
+        }
     }
 
     public override void CostCheck()
@@ -72,6 +77,7 @@ public class DamageUpgrade : Upgrade
     }
     public override void Reset()
     {
+        IsReset = true;
         foreach (var upgrade in damageUpgrade)
         {
             var image = upgrade.GetComponent<UnityEngine.UI.Image>();
@@ -85,6 +91,7 @@ public class DamageUpgrade : Upgrade
         cost += 10;
         Debug.Log("Resetting Damage Upgrade");
         Debug.Log("Player Damage: " + player.damage + " Max Damage: " + MaxDamage);
+        IsReset = false;
     }
 
     void UpdateUpgradeDisplay()

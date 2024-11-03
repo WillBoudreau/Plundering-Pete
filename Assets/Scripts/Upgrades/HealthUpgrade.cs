@@ -62,6 +62,7 @@ public class HealthUpgrade : Upgrade
         }
         else
         {
+            Debug.Log("Player Health: " + player.playerHealth + " Max Health: " + MaxHeatlh);
             inventory.coinCount += cost;
             Debug.Log("Max health Reached");
             healthText.text = "Max health Reached";
