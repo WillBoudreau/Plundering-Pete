@@ -203,10 +203,10 @@ public class PlayerBehaviour : MonoBehaviour
         {
             IsMoving = true;
         }
-        else if (Input.GetKeyDown(KeyCode.E))
-        {
-            TakeDamage(damage);
-        }
+        // else if (Input.GetKeyDown(KeyCode.E))
+        // {
+        //     TakeDamage(damage);
+        // }
         else
         {
             IsMoving = false;
