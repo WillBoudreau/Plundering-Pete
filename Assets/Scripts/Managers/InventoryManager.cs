@@ -52,7 +52,7 @@ public class InventoryManager : MonoBehaviour
     {
         isFlashing = true;
         int flashCount = 0;
-        int maxFlashes = 10;
+        int maxFlashes = 3;
 
         while (IsMax && flashCount < maxFlashes)
         {

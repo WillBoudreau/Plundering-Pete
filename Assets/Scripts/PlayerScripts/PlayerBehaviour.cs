@@ -203,6 +203,10 @@ public class PlayerBehaviour : MonoBehaviour
         {
             IsMoving = true;
         }
+        else if (Input.GetKeyDown(KeyCode.E))
+        {
+            TakeDamage(damage);
+        }
         else
         {
             IsMoving = false;
@@ -289,27 +293,31 @@ public class PlayerBehaviour : MonoBehaviour
         {
             // healthManager.IsDead = true;
             playerHealth = 0;
-            ResetHealth();
             uIManager.SetGameState("GameOver");
+            ResetHealth();
+            Debug.Log("Player is Dead");
             levelManager.SetFalse();
-            levelManager.SetLocationFalse();
+            levelManager.ClearScene();
+            Debug.Log("Setting levelMan False");
             checkpointManager.SetFalse();
+            Debug.Log("Setting Checkpoint False");
             distanceTracker.SetFalse();
+            Debug.Log("Setting Distance False");
             Respawn();
         }
     }
     void Respawn()
     {
-        Debug.Log("Respawning Player");
-        PlayerPlaced = false;
         levelManager.PlacePlayer();
+        healthManager.IsDead = false;
     }
     private void ResetHealth()
     {
         Debug.Log("Resetting Health");
         playerHealth = startHealth;
+        Debug.Log("Player Health: " + playerHealth);
         healthManager.health = playerHealth;
-        healthManager.IsDead = false;
+        Debug.Log("Health Manager Health: " + healthManager.health);
     }
     public void TakeDamage(float damage)
     {
@@ -328,6 +336,7 @@ public class PlayerBehaviour : MonoBehaviour
             yield return new WaitForSeconds(FlickerDuration);
             GetComponentInChildren<Renderer>().material.color = originalColor;
             yield return new WaitForSeconds(FlickerDuration);
+            i++;
         }
         GetComponentInChildren<Renderer>().material.color = originalColor;
     }

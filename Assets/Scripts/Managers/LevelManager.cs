@@ -45,8 +45,15 @@ public class LevelManager : MonoBehaviour
         //PlacePlayer();
         if(name == "GameTestScene")
         {
+            obstacleManager.AddObstaclesToList();
             StartCoroutine(WaitForSceneToLoadAndRespawn());
             musicChanger.PlaySceneTrack(name);
+        }
+        else if(name == "MainMenuScene")
+        {
+            obstacleManager.Zone1Obstacles.Clear();
+            obstacleManager.Zone2Obstacles.Clear();
+            obstacleManager.Zone3Obstacles.Clear();
         }
         else
         {
@@ -95,12 +102,6 @@ public class LevelManager : MonoBehaviour
                 hasSpawnedZone3Obstacles = true;
             }
         }
-        else if(levelName == "MainMenuScene")
-        {
-            obstacleManager.Zone1Obstacles.Clear();
-            obstacleManager.Zone2Obstacles.Clear();
-            obstacleManager.Zone3Obstacles.Clear();
-        }
     }
     public void UpdateObjects()
     {
@@ -127,6 +128,12 @@ public class LevelManager : MonoBehaviour
         obstacleManager.hasSpawnedRocks = false;
         obstacleManager.hasSpawnedIcebergs = false;
         obstacleManager.hasSpawnedDebris = false;
+    }
+    public void ClearScene()
+    {
+        obstacleManager.Zone1Obstacles.Clear();
+        obstacleManager.Zone2Obstacles.Clear();
+        obstacleManager.Zone3Obstacles.Clear();
     }
     public void PlacePlayer()
     {

@@ -48,18 +48,12 @@ public class ObstacleManager : MonoBehaviour
 
     void Start()
     {
-        AddObstaclesToList();
         zone1 = new ObstacleZone{Xnegative = zone1Xnegative, Xpositive = zone1Xpositive, Ynegative = zone1Ynegative, Ypositive = zone1Ypositive};
         zone2 = new ObstacleZone{Xnegative = zone2Xnegative, Xpositive = zone2Xpositive, Ynegative = zone2Ynegative, Ypositive = zone2Ypositive};
         zone3 = new ObstacleZone{Xnegative = zone3Xnegative, Xpositive = zone3Xpositive, Ynegative = zone3Ynegative, Ypositive = zone3Ypositive};
     }
-
-    void Update()
-    {
-        AddObstaclesToList();
-    }
     //Adding obstacles to their respective lists
-    void AddObstaclesToList()
+    public void AddObstaclesToList()
     {
         //Spawns rocks in zone 1
         if (Zone1Obstacles.Count <= 0)
