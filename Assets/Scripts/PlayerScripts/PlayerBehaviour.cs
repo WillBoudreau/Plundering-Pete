@@ -187,7 +187,7 @@ public class PlayerBehaviour : MonoBehaviour
                 bullet.GetComponent<Rigidbody2D>().velocity = Vector2.up * bulletVelocity;
                 Destroy(bullet, 2.0f);
             }
-            fireRate = 2f;
+            fireRate = startFireRate;
         }
     }
     //Handle the player movement
