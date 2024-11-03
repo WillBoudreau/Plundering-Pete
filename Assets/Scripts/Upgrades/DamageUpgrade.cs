@@ -17,7 +17,7 @@ public class DamageUpgrade : Upgrade
     {
         MaxDamage = player.damage + 3;
         cost = 10;
-        // Initialize the damageUpgrade images to white
+        // Initialize the damageUpgrade images to white red 
         foreach (var upgrade in damageUpgrade)
         {
             var image = upgrade.GetComponent<UnityEngine.UI.Image>();

@@ -16,7 +16,7 @@ public class ShipUpgrade : Upgrade
     void Start()
     {
         MaxLevel = 3;
-        cost = 100;
+        cost = 55;
         // Initialize the damageUpgrade images to white
         foreach (var upgrade in UpgradeDisplay)
         {

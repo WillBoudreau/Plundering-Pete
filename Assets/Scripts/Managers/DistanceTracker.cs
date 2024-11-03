@@ -9,6 +9,7 @@ public class DistanceTracker : MonoBehaviour
     [Header("Class calls")]
     public PlayerBehaviour playerBehaviour;
     public CheckpointManager checkpointManager;
+    public LevelManager levelManager;
     [Header("Variables")]
     public float Distance;
     public Transform startPosition;
@@ -41,18 +42,35 @@ public class DistanceTracker : MonoBehaviour
 
     void FindPositions()
     {
-        GameObject startObj = GameObject.Find("StartPos");
-        GameObject endObj = GameObject.Find("EndPOS");
-
-        if (startObj != null)
+        if(levelManager.levelName == "GameTestScene")
         {
-            startPosition = startObj.transform;
-        }
+            startPosition = GameObject.Find("StartPos").transform;
+            endPosition = GameObject.Find("EndPOS").transform;
+            GameObject startObj = GameObject.Find("StartPos");
+            GameObject endObj = GameObject.Find("EndPOS");
 
-        if (endObj != null)
-        {
-            endPosition = endObj.transform;
+            if (startObj != null)
+            {
+                startPosition = startObj.transform;
+            }
+
+            if (endObj != null)
+            {
+                endPosition = endObj.transform;
+            }
         }
+        // GameObject startObj = GameObject.Find("StartPos");
+        // GameObject endObj = GameObject.Find("EndPOS");
+
+        // if (startObj != null)
+        // {
+        //     startPosition = startObj.transform;
+        // }
+
+        // if (endObj != null)
+        // {
+        //     endPosition = endObj.transform;
+        // }
     }
 
     void SetValues()
