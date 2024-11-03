@@ -60,6 +60,7 @@ public class ShipUpgrade : Upgrade
             player.damage += 10;
             player.playerHealth += 10;
             player.speed += 10;
+            cost += 30;
             player.healthManager.playerhealth.maxValue = player.playerHealth;
             Debug.Log("Player Ship: " + player.Level);
         }

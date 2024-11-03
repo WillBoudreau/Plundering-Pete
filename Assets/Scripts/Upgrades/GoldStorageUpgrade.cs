@@ -86,6 +86,7 @@ public class GoldStorageUpgrade : Upgrade
     }
     public override void Reset()
     {
+        Debug.Log("Resetting Cargo Upgrade");
         foreach (var upgrade in CargoUpgrade)
         {
             var image = upgrade.GetComponent<UnityEngine.UI.Image>();

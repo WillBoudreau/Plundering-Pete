@@ -8,6 +8,7 @@ public class UpgradeManager : MonoBehaviour
     [Header("Class calls")]
     //Player reference  
     public PlayerBehaviour player;
+    public ShipUpgrade shipUpgrade;
     public List<Upgrade> upgrades = new List<Upgrade>();
     //InventoryManager reference
     public InventoryManager inventory;
@@ -38,7 +39,7 @@ public class UpgradeManager : MonoBehaviour
     //Set the variable values at the start of the game
     void SetValues()
     {
-        ShipCost = 100;
+        ShipCost = shipUpgrade.cost;
     }
     public void UpgradeShip()
     {

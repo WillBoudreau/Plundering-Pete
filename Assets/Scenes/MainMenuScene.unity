@@ -7016,6 +7016,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 551069647}
+  shipUpgrade: {fileID: 1080032334}
   upgrades:
   - {fileID: 1080032327}
   - {fileID: 1080032329}
