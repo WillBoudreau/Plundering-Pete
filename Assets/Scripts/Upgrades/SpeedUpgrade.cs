@@ -17,7 +17,7 @@ public class SpeedUpgrade : Upgrade
 
     void Start()
     {
-        MaxSpeed = player.speed + 3.0f;
+        MaxSpeed = playerStats.speed + 3.0f;
         cost = 10;
         // Initialize the damageUpgrade images to white
         foreach (var upgrade in speedUpgrade)
@@ -33,11 +33,11 @@ public class SpeedUpgrade : Upgrade
     // Update is called once per frame
     void Update()
     {
-        speedText.text = "Speed: " + player.speed;
+        speedText.text = "Speed: " + playerStats.speed;
         ButtonText.text = "Cost: " + cost;
         if(IsReset == true)
         {
-            MaxSpeed = player.speed + 3.0f;
+            MaxSpeed = playerStats.speed + 3.0f;
             IsReset = false;
         }
     }
@@ -60,11 +60,11 @@ public class SpeedUpgrade : Upgrade
 
     public override void UpgradePlayer()
     {
-        if (player.speed < MaxSpeed)
+        if (playerStats.speed < MaxSpeed)
         {
             Debug.Log("Upgrading Player Speed");
-            player.speed ++;
-            Debug.Log("Player Speed: " + player.speed);
+            playerStats.speed ++;
+            Debug.Log("Player Speed: " + playerStats.speed);
         }
         else
         {
@@ -85,7 +85,7 @@ public class SpeedUpgrade : Upgrade
             }
         }
         currentUpgradeIndex = 0;
-        MaxSpeed = player.speed + 3.0f;
+        MaxSpeed = playerStats.speed + 3.0f;
         cost += 10;
     }
 

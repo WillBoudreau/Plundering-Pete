@@ -31,7 +31,7 @@ public class ShipUpgrade : Upgrade
     // Update is called once per frame
     void Update()
     {
-       ShipText.text = "Ship Level " + player.Level;
+       ShipText.text = "Ship Level " + playerStats.Level;
        ButtonText.text = "Cost: " + cost; 
     }
 
@@ -53,18 +53,18 @@ public class ShipUpgrade : Upgrade
 
     public override void UpgradePlayer()
     {
-        if (player.Level < MaxLevel)
+        if (playerStats.Level < MaxLevel)
         {
             Debug.Log("Upgrading Player Ship");
-            player.Level ++;
-            player.damage += 10;
-            player.playerHealth += 10;
-            player.startHealth += 10;
-            player.speed += 10;
-            player.magnet += 3;
+            playerStats.Level ++;
+            playerStats.damage += 10;
+            playerStats.playerHealth += 10;
+            playerStats.startHealth += 10;
+            playerStats.speed += 10;
+            playerStats.magnet += 3;
             cost += 30;
-            player.healthManager.playerhealth.maxValue = player.playerHealth;
-            Debug.Log("Player Ship: " + player.Level);
+            playerStats.healthManager.playerhealth.maxValue = playerStats.playerHealth;
+            Debug.Log("Player Ship: " + playerStats.Level);
         }
         else
         {

@@ -8,6 +8,7 @@ public class DistanceTracker : MonoBehaviour
 {
     [Header("Class calls")]
     public PlayerBehaviour playerBehaviour;
+    public PlayerStats playerStats;
     public CheckpointManager checkpointManager;
     public LevelManager levelManager;
     [Header("Variables")]
@@ -110,13 +111,13 @@ public class DistanceTracker : MonoBehaviour
     void DisplayWarning()
     {
         WarningText.gameObject.SetActive(false);
-        if(playerBehaviour.IsLevel2 == false && playerBehaviour.transform.position.y >= checkpointManager.Checkpoint2)
+        if(playerStats.IsLevel2 == false && playerStats.transform.position.y >= checkpointManager.Checkpoint2)
         {
             // Display warning
             WarningText.gameObject.SetActive(true);
             WarningText.text = "YAARRR! Ye is about to enter dangerous waters! Your ship is not ready!";
         }
-        else if(playerBehaviour.IsLevel3 == false && playerBehaviour.transform.position.y >= checkpointManager.Checkpoint3)
+        else if(playerStats.IsLevel3 == false && playerStats.transform.position.y >= checkpointManager.Checkpoint3)
         {
             // Display warning
             WarningText.gameObject.SetActive(true);

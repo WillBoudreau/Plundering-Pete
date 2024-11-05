@@ -1,5 +1,67 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &638218195071938194
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5104510970616099564}
+  m_Layer: 0
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5104510970616099564
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 638218195071938194}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.03, y: 8.6, z: -0.0146102905}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2539373535196076664}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1820096618316296324
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2727624755013639253}
+  m_Layer: 0
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2727624755013639253
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1820096618316296324}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.081630945, y: 5.35, z: -0.0146102905}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8614607219531627448}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3363071617419404085
 GameObject:
   m_ObjectHideFlags: 0
@@ -31,7 +93,8 @@ Transform:
   m_LocalPosition: {x: -1.64, y: -7.77, z: -0.010036707}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 5104510970616099564}
   m_Father: {fileID: 7877370497691118326}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7131713020333591697
@@ -189,6 +252,8 @@ GameObject:
   - component: {fileID: 6613851258276622460}
   - component: {fileID: 3246469996780949601}
   - component: {fileID: 2285652677014323481}
+  - component: {fileID: 4098233298752386087}
+  - component: {fileID: 216527445050619400}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -224,48 +289,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74892e19cde21ef4fae1ec724c9db5bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SharkKills: 0
-  SerpentKills: 0
-  ShipKills: 0
-  startHealth: 0
-  startdamage: 0
-  StartSpeed: 0
-  startFireRate: 0
-  speed: 0
-  fireRate: 0
-  damage: 0
-  playerHealth: 0
-  magnet: 0
-  bulletVelocity: 0
-  checkpoint: 0
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  Win: 0
-  IsLevel2: 0
-  IsLevel3: 0
-  IsMoving: 0
+  playerStats: {fileID: 0}
+  playerMovementHandler: {fileID: 0}
   DoubloonText: {fileID: 0}
-  firePoint: {fileID: 0}
-  Level: 0
-  mainCamera: {fileID: 0}
-  rb: {fileID: 6613851258276622460}
-  bulletPrefab: {fileID: 7112107127442301048, guid: f02f163f8e234174bbe061f2bec20ad8, type: 3}
-  level2BulletPrefab: {fileID: 0}
   time: 5
-  level3BulletPrefab: {fileID: 0}
-  PlayerPlaced: 0
-  renderer: {fileID: 0}
-  FlickerDuration: 0.1
-  FlickerCount: 5
-  PlayerLevels: []
   inventoryManager: {fileID: 0}
   levelManager: {fileID: 0}
   uIManager: {fileID: 0}
-  healthManager: {fileID: 0}
-  musicManager: {fileID: 0}
   checkpointManager: {fileID: 0}
-  distanceTracker: {fileID: 0}
 --- !u!50 &6613851258276622460
 Rigidbody2D:
   serializedVersion: 4
@@ -383,6 +414,74 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.2189964, y: 0.39603764}
   m_EdgeRadius: 0
+--- !u!114 &4098233298752386087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4680544976309677066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9824869660779f84792acfd09746ea86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerStats: {fileID: 0}
+  musicManager: {fileID: 0}
+  speed: 5
+  startFireRate: 0.5
+  bulletVelocity: 10
+  bulletPrefab: {fileID: 0}
+  level2BulletPrefab: {fileID: 0}
+  level3BulletPrefab: {fileID: 0}
+  mainCamera: {fileID: 0}
+  IsMoving: 0
+  rb: {fileID: 0}
+--- !u!114 &216527445050619400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4680544976309677066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97c5eef97b4500a4caf52200ee147650, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthManager: {fileID: 0}
+  uIManager: {fileID: 0}
+  musicManager: {fileID: 0}
+  levelManager: {fileID: 0}
+  checkpointManager: {fileID: 0}
+  distanceTracker: {fileID: 0}
+  SharkKills: 0
+  SerpentKills: 0
+  ShipKills: 0
+  startHealth: 0
+  startdamage: 0
+  StartSpeed: 0
+  startFireRate: 0
+  speed: 0
+  fireRate: 0
+  damage: 0
+  playerHealth: 0
+  magnet: 0
+  bulletVelocity: 0
+  checkpoint: 0
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  Win: 0
+  firePoint: {fileID: 0}
+  PlayerPlaced: 0
+  IsLevel2: 0
+  IsLevel3: 0
+  Level: 0
+  PlayerLevels: []
+  renderer: {fileID: 0}
+  FlickerDuration: 0.1
+  FlickerCount: 5
 --- !u!1 &5303248446735832164
 GameObject:
   m_ObjectHideFlags: 0
@@ -414,7 +513,8 @@ Transform:
   m_LocalPosition: {x: -1.96, y: -3.94, z: -0.010036707}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2727624755013639253}
   m_Father: {fileID: 7877370497691118326}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5852076031836035847
@@ -590,7 +690,8 @@ Transform:
   m_LocalPosition: {x: -2.13, y: -4.31, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4580928763189458361}
   m_Father: {fileID: 7877370497691118326}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7195185382139675242
@@ -735,6 +836,37 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.7557235, y: 6.51149}
   m_EdgeRadius: 0
+--- !u!1 &5747765554910861601
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4580928763189458361}
+  m_Layer: 0
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4580928763189458361
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5747765554910861601}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.08836913, y: 6.45, z: -0.024646997}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 586798737938438208}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8501782850704957342
 GameObject:
   m_ObjectHideFlags: 0

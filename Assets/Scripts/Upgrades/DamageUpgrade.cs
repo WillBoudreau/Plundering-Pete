@@ -16,7 +16,7 @@ public class DamageUpgrade : Upgrade
 
     void Start()
     {
-        MaxDamage = player.damage + 3;
+        MaxDamage = playerStats.damage + 3;
         cost = 10;
         // Initialize the damageUpgrade images to white red 
         foreach (var upgrade in damageUpgrade)
@@ -32,11 +32,11 @@ public class DamageUpgrade : Upgrade
     // Update is called once per frame
     void Update()
     {
-        damageText.text = "Damage: " + player.damage;
+        damageText.text = "Damage: " + playerStats.damage;
         ButtonText.text = "Cost: " + cost;
         if(IsReset == true)
         {
-            MaxDamage = player.damage + 3;
+            MaxDamage = playerStats.damage + 3;
             IsReset = false;
         }
     }
@@ -60,12 +60,12 @@ public class DamageUpgrade : Upgrade
 
     public override void UpgradePlayer()
     {
-        if (player.damage < MaxDamage)
+        if (playerStats.damage < MaxDamage)
         {
             Debug.Log("Upgrading Player Damage");
-            Debug.Log("Player Damage: " + player.damage + " Max Damage: " + MaxDamage);
-            player.damage ++;
-            Debug.Log("Player Damage: " + player.damage);
+            Debug.Log("Player Damage: " + playerStats.damage + " Max Damage: " + MaxDamage);
+            playerStats.damage ++;
+            Debug.Log("Player Damage: " + playerStats.damage);
         }
         else
         {
@@ -73,7 +73,7 @@ public class DamageUpgrade : Upgrade
             Debug.Log("Max Damage Reached");
             damageText.text = "Max Damage Reached";
             Debug.Log("Max Damage Reached");
-            Debug.Log("Player Damage: " + player.damage + " Max Damage: " + MaxDamage);
+            Debug.Log("Player Damage: " + playerStats.damage + " Max Damage: " + MaxDamage);
         }
     }
     public override void Reset()
@@ -88,10 +88,10 @@ public class DamageUpgrade : Upgrade
             }
         }
         currentUpgradeIndex = 0;
-        MaxDamage = player.damage + 3;
+        MaxDamage = playerStats.damage + 3;
         cost += 10;
         Debug.Log("Resetting Damage Upgrade");
-        Debug.Log("Player Damage: " + player.damage + " Max Damage: " + MaxDamage);
+        Debug.Log("Player Damage: " + playerStats.damage + " Max Damage: " + MaxDamage);
     }
 
     void UpdateUpgradeDisplay()

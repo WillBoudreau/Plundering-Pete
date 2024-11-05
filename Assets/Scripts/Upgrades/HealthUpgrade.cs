@@ -33,11 +33,11 @@ public class HealthUpgrade : Upgrade
     // Update is called once per frame
     void Update()
     {
-        healthText.text = "Health: " + player.playerHealth;
+        healthText.text = "Health: " + playerStats.playerHealth;
         ButtonText.text = "Cost: " + cost;
         if(IsReset == true)
         {
-            MaxHeatlh = player.playerHealth + 3;
+            MaxHeatlh = playerStats.playerHealth + 3;
             IsReset = false;
         }
     }
@@ -60,17 +60,17 @@ public class HealthUpgrade : Upgrade
 
     public override void UpgradePlayer()
     {
-        if (player.playerHealth < MaxHeatlh)
+        if (playerStats.playerHealth < MaxHeatlh)
         {
             Debug.Log("Upgrading Player Health");
-            player.playerHealth ++;
-            player.startHealth += 1;
-            player.healthManager.playerhealth.maxValue += 1;
-            Debug.Log("Player Health: " + player.playerHealth);
+            playerStats.playerHealth ++;
+            playerStats.startHealth += 1;
+            playerStats.healthManager.playerhealth.maxValue += 1;
+            Debug.Log("Player Health: " + playerStats.playerHealth);
         }
         else
         {
-            Debug.Log("Player Health: " + player.playerHealth + " Max Health: " + MaxHeatlh);
+            Debug.Log("Player Health: " + playerStats.playerHealth + " Max Health: " + MaxHeatlh);
             inventory.coinCount += cost;
             Debug.Log("Max health Reached");
             healthText.text = "Max health Reached";
@@ -88,7 +88,7 @@ public class HealthUpgrade : Upgrade
             }
         }
         currentUpgradeIndex = 0;
-        MaxHeatlh = player.playerHealth + 3;
+        MaxHeatlh = playerStats.playerHealth + 3;
         cost += 10;
     }
 

@@ -8,14 +8,7 @@ public class CameraManager : MonoBehaviour
     [SerializeField] float moveSpeed;
     [SerializeField] Vector3 startPosition;
     [Header("Class Calls")]
-    [SerializeField] private PlayerBehaviour playerBehaviour;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        // moveSpeed = playerBehaviour.speed;
-    }
-
+    [SerializeField] private PlayerMovementHandler playerMovementHandler;
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -24,7 +17,7 @@ public class CameraManager : MonoBehaviour
 
     void MoveWithPlayer()
     {
-        if(playerBehaviour.IsMoving == true)
+        if(playerMovementHandler.IsMoving == true)
         {
             transform.Translate(Vector3.up * moveSpeed * Time.deltaTime);
         }

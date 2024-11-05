@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     public GameObject Camera;
     public PlayerBehaviour playerBehaviour;
+    [SerializeField] private PlayerStats playerStats;
     public InventoryManager inventoryManager;
     [Header("Variables")]
     public bool PlayerEnabled;
@@ -41,10 +42,10 @@ public class GameManager : MonoBehaviour
         if (levelManager.levelName == "GameTestScene" && uiManager.currentGameState == UIManager.GameState.GamePlay)
         {
             playerSpawnPoint = GameObject.Find("PlayerSpawnPoint").transform;
-            if (playerBehaviour.PlayerPlaced == false)
+            if (playerStats.PlayerPlaced == false)
             {
                 levelManager.PlacePlayer();
-                playerBehaviour.PlayerPlaced = true;
+                playerStats.PlayerPlaced = true;
             }
             EnablePlayer();
             EnableCamera();
@@ -121,17 +122,12 @@ public class GameManager : MonoBehaviour
         FileStream file = File.Open(Application.persistentDataPath + "/playerInfo.dat", FileMode.Create);
 
         PlayerData data = new PlayerData();
-        data.damage = playerBehaviour.damage;
-        data.health = playerBehaviour.playerHealth;
-        data.speed = playerBehaviour.speed;
+        data.damage = playerStats.damage;
+        data.health = playerStats.playerHealth;
+        data.speed = playerStats.speed;
         data.Gold = inventoryManager.coinCount;
-        data.Level = playerBehaviour.Level;
+        data.Level = playerStats.Level;
         Debug.Log("Game Saved");
-        Debug.Log("Player Health: " + data.health);
-        Debug.Log("Player Damage: " + data.damage);
-        Debug.Log("Player Speed: " + data.speed);
-        Debug.Log("Player Gold: " + data.Gold);
-        Debug.Log("Player Level: " + data.Level);
 
         bf.Serialize(file, data);
         file.Close();
@@ -145,17 +141,12 @@ public class GameManager : MonoBehaviour
             PlayerData data = (PlayerData)bf.Deserialize(file);
             file.Close();
 
-            playerBehaviour.playerHealth = data.health;
-            playerBehaviour.damage = data.damage;
-            playerBehaviour.speed = data.speed;
+            playerStats.playerHealth = data.health;
+            playerStats.damage = data.damage;
+            playerStats.speed = data.speed;
             inventoryManager.coinCount = data.Gold;
-            playerBehaviour.Level = data.Level;
+            playerStats.Level = data.Level;
             Debug.Log("Game Loaded");
-            Debug.Log("Player Health: " + data.health);
-            Debug.Log("Player Damage: " + data.damage);
-            Debug.Log("Player Speed: " + data.speed);
-            Debug.Log("Player Gold: " + data.Gold);
-            Debug.Log("Player Level: " + data.Level);
          }
     }
     [System.Serializable]

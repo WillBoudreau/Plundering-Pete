@@ -1312,7 +1312,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   startPosition: {x: 0, y: 0, z: 0}
-  playerBehaviour: {fileID: 551069647}
+  playerMovementHandler: {fileID: 551069651}
 --- !u!1 &187799260
 GameObject:
   m_ObjectHideFlags: 0
@@ -1345,8 +1345,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 213861766}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 4.7499924, y: 4.4999814}
   m_SizeDelta: {x: 21.8903, y: 13.9525}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1726,7 +1726,7 @@ RectTransform:
   m_Father: {fileID: 1912446170}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2140,7 +2140,7 @@ RectTransform:
   m_Father: {fileID: 1098192710}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3925,6 +3925,28 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.19035259, y: 0.38473853}
   m_EdgeRadius: 0
+--- !u!114 &551069651 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4098233298752386087, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+  m_PrefabInstance: {fileID: 1893215411}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 551069641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9824869660779f84792acfd09746ea86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &551069652 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 216527445050619400, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+  m_PrefabInstance: {fileID: 1893215411}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 551069641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97c5eef97b4500a4caf52200ee147650, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &552503269
 GameObject:
   m_ObjectHideFlags: 0
@@ -5910,7 +5932,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &884719223
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6143,7 +6165,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &902718852
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6496,7 +6518,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1007322668
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7015,7 +7037,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a3d9910b6f761942a88462385aa6bee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 551069647}
+  player: {fileID: 551069652}
   shipUpgrade: {fileID: 1080032334}
   upgrades:
   - {fileID: 1080032327}
@@ -7040,7 +7062,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 1039502979}
-  player: {fileID: 551069647}
+  playerBehaviour: {fileID: 551069647}
+  playerStats: {fileID: 551069652}
+  playerMovementHandler: {fileID: 551069651}
   cost: 0
   damageText: {fileID: 1779852602}
   costText: {fileID: 1151608682}
@@ -7064,7 +7088,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 1039502979}
-  player: {fileID: 551069647}
+  playerBehaviour: {fileID: 551069647}
+  playerStats: {fileID: 551069652}
+  playerMovementHandler: {fileID: 551069651}
   cost: 0
 --- !u!114 &1080032329
 MonoBehaviour:
@@ -7079,7 +7105,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 1039502979}
-  player: {fileID: 551069647}
+  playerBehaviour: {fileID: 551069647}
+  playerStats: {fileID: 551069652}
+  playerMovementHandler: {fileID: 551069651}
   cost: 0
   healthText: {fileID: 1077516791}
   costText: {fileID: 1151608682}
@@ -7103,7 +7131,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 1039502979}
-  player: {fileID: 551069647}
+  playerBehaviour: {fileID: 551069647}
+  playerStats: {fileID: 551069652}
+  playerMovementHandler: {fileID: 551069651}
   cost: 0
   CargoText: {fileID: 1526153278}
   costText: {fileID: 1151608682}
@@ -7128,7 +7158,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 1039502979}
-  player: {fileID: 551069647}
+  playerBehaviour: {fileID: 551069647}
+  playerStats: {fileID: 551069652}
+  playerMovementHandler: {fileID: 551069651}
   cost: 0
   MFGText: {fileID: 786514658}
   costText: {fileID: 1151608682}
@@ -7152,7 +7184,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 1039502979}
-  player: {fileID: 551069647}
+  playerBehaviour: {fileID: 551069647}
+  playerStats: {fileID: 551069652}
+  playerMovementHandler: {fileID: 551069651}
   cost: 0
   speedText: {fileID: 1461656693}
   costText: {fileID: 1151608682}
@@ -7176,7 +7210,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 1039502979}
-  player: {fileID: 551069647}
+  playerBehaviour: {fileID: 551069647}
+  playerStats: {fileID: 551069652}
+  playerMovementHandler: {fileID: 551069651}
   cost: 0
   FireRateText: {fileID: 411883205}
   costText: {fileID: 1151608682}
@@ -7199,7 +7235,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 1039502979}
-  player: {fileID: 551069647}
+  playerBehaviour: {fileID: 551069647}
+  playerStats: {fileID: 551069652}
+  playerMovementHandler: {fileID: 551069651}
   cost: 10
   ShipText: {fileID: 2103557183}
   costText: {fileID: 1151608682}
@@ -7378,6 +7416,11 @@ RectTransform:
   m_AnchoredPosition: {x: -5, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!4 &1107478806 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2727624755013639253, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+  m_PrefabInstance: {fileID: 1893215411}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1134395747
 GameObject:
   m_ObjectHideFlags: 0
@@ -9726,6 +9769,7 @@ MonoBehaviour:
   player: {fileID: 551069641}
   Camera: {fileID: 177806781}
   playerBehaviour: {fileID: 551069647}
+  playerStats: {fileID: 551069652}
   inventoryManager: {fileID: 1039502979}
   PlayerEnabled: 0
   playerSpawnPoint: {fileID: 0}
@@ -9787,6 +9831,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerBehaviour: {fileID: 551069647}
+  playerStats: {fileID: 551069652}
   checkpointManager: {fileID: 324095957}
   levelManager: {fileID: 1051185688}
   Distance: 0
@@ -11371,6 +11416,7 @@ MonoBehaviour:
   levelManager: {fileID: 1051185688}
   inventoryManager: {fileID: 1039502979}
   distanceTracker: {fileID: 1556131826}
+  playerStats: {fileID: 551069652}
   mainMenu: {fileID: 884719222}
   optionsMenu: {fileID: 1440979893}
   gamePlay: {fileID: 902718851}
@@ -11793,14 +11839,14 @@ RectTransform:
   m_GameObject: {fileID: 1819685364}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 884719223}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -300}
+  m_AnchoredPosition: {x: 0, y: -283}
   m_SizeDelta: {x: 80, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1819685366
@@ -13009,6 +13055,38 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1547232562}
     m_Modifications:
+    - target: {fileID: 216527445050619400, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: firePoint
+      value: 
+      objectReference: {fileID: 1107478806}
+    - target: {fileID: 216527445050619400, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: uIManager
+      value: 
+      objectReference: {fileID: 1728282020}
+    - target: {fileID: 216527445050619400, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: levelManager
+      value: 
+      objectReference: {fileID: 1051185688}
+    - target: {fileID: 216527445050619400, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: musicManager
+      value: 
+      objectReference: {fileID: 2083907201}
+    - target: {fileID: 216527445050619400, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: healthManager
+      value: 
+      objectReference: {fileID: 734893757}
+    - target: {fileID: 216527445050619400, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: distanceTracker
+      value: 
+      objectReference: {fileID: 1556131826}
+    - target: {fileID: 216527445050619400, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: checkpointManager
+      value: 
+      objectReference: {fileID: 324095957}
+    - target: {fileID: 216527445050619400, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 192
+      objectReference: {fileID: 0}
     - target: {fileID: 1806202154656914932, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.33
@@ -13070,6 +13148,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 177806784}
     - target: {fileID: 3116806254861534645, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: playerStats
+      value: 
+      objectReference: {fileID: 551069652}
+    - target: {fileID: 3116806254861534645, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
       propertyPath: waveManager
       value: 
       objectReference: {fileID: 1713031254}
@@ -13122,6 +13204,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7112107127442301048, guid: f02f163f8e234174bbe061f2bec20ad8, type: 3}
     - target: {fileID: 3116806254861534645, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: playerMovementHandler
+      value: 
+      objectReference: {fileID: 551069651}
+    - target: {fileID: 3116806254861534645, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
       propertyPath: PlayerLevels.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -13141,6 +13227,34 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4098233298752386087, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: rb
+      value: 
+      objectReference: {fileID: 551069649}
+    - target: {fileID: 4098233298752386087, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 177806784}
+    - target: {fileID: 4098233298752386087, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: playerStats
+      value: 
+      objectReference: {fileID: 551069652}
+    - target: {fileID: 4098233298752386087, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: bulletPrefab
+      value: 
+      objectReference: {fileID: 7112107127442301048, guid: f02f163f8e234174bbe061f2bec20ad8, type: 3}
+    - target: {fileID: 4098233298752386087, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: musicManager
+      value: 
+      objectReference: {fileID: 2083907201}
+    - target: {fileID: 4098233298752386087, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: level2BulletPrefab
+      value: 
+      objectReference: {fileID: 7112107127442301048, guid: f02f163f8e234174bbe061f2bec20ad8, type: 3}
+    - target: {fileID: 4098233298752386087, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: level3BulletPrefab
+      value: 
+      objectReference: {fileID: 7112107127442301048, guid: f02f163f8e234174bbe061f2bec20ad8, type: 3}
     - target: {fileID: 4289566359749055770, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
       propertyPath: orthographic
       value: 1
@@ -14008,7 +14122,7 @@ RectTransform:
   m_Father: {fileID: 485279118}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: -3.2300034, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

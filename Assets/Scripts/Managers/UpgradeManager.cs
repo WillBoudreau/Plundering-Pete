@@ -7,7 +7,7 @@ public class UpgradeManager : MonoBehaviour
 {
     [Header("Class calls")]
     //Player reference  
-    public PlayerBehaviour player;
+    public PlayerStats player;
     public ShipUpgrade shipUpgrade;
     public List<Upgrade> upgrades = new List<Upgrade>();
     //InventoryManager reference
@@ -17,13 +17,12 @@ public class UpgradeManager : MonoBehaviour
     public TextMeshProUGUI NumberCoinsText;
     [Header("Variables")]
     //Values and their max values
-
     //Start Cost and Cost for the upgrades
     public int ShipCost;
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.Find("Player").GetComponent<PlayerBehaviour>();
+        player = GameObject.Find("Player").GetComponent<PlayerStats>();
         SetValues();
     }
     // Update is called once per frame

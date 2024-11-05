@@ -27,7 +27,8 @@ public class SerpentBehaviour : Enemy
     // Update is called once per frame
     void Update()
     {
-        player = GameObject.Find("Player").GetComponent<PlayerBehaviour>();
+        player = GameObject.Find("Player");
+        playerStats = GameObject.Find("Player").GetComponent<PlayerStats>();
         Move();
     }
     public override void Move()
@@ -80,12 +81,12 @@ public class SerpentBehaviour : Enemy
     {
         if(collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<PlayerBehaviour>().TakeDamage(damage);
+            collision.gameObject.GetComponent<PlayerStats>().TakeDamage(damage);
         }
         if(collision.gameObject.tag == "Bullet")
         {
             Destroy(collision.gameObject);
-            TakeDamage(player.damage);
+            TakeDamage(playerStats.damage);
         }
     }
 }

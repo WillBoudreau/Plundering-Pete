@@ -12,7 +12,7 @@ public class SharkBahaviour : Enemy
     public float maxHealth;
     float bottomY = -140f;
 
-    private PlayerBehaviour player;
+    private PlayerStats player;
     private Renderer renderer;
     private GameObject Gold;
     private Color originalColor;
@@ -34,13 +34,14 @@ public class SharkBahaviour : Enemy
         damage = 1;
         stoppingDistance = 2;
         detectionDistance = 6;
-        player = GameObject.Find("Player").GetComponent<PlayerBehaviour>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        player = GameObject.Find("Player").GetComponent<PlayerStats>();
         Move();
+        playerStats = GameObject.Find("Player").GetComponent<PlayerStats>();
         if(Gold == null)
         {
             Gold = GameObject.FindGameObjectWithTag("CoinBag");
@@ -71,11 +72,11 @@ public class SharkBahaviour : Enemy
     {
         if(collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<PlayerBehaviour>().TakeDamage(damage);
+            collision.gameObject.GetComponent<PlayerStats>().TakeDamage(damage);
         }
         if(collision.gameObject.tag == "Bullet")
         {
-            TakeDamage(player.damage);
+            TakeDamage(playerStats.damage);
             Destroy(collision.gameObject);
         }
     }
@@ -110,6 +111,6 @@ public class SharkBahaviour : Enemy
         Debug.Log("Gold Dropped");
         Destroy(gameObject);
         Debug.Log("Shark Kills" + player.SharkKills);
-        player.SharkKills += 1;
+        playerStats.SharkKills += 1;
     }
 }

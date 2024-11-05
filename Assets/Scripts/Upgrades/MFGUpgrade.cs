@@ -17,7 +17,7 @@ public class MFGUpgrade : Upgrade
 
     void Start()
     {
-        MaxMagnet = player.magnet + 3;
+        MaxMagnet = playerStats.magnet + 3;
         cost = 10;
         // Initialize the damageUpgrade images to white
         foreach (var upgrade in BFMUpgrade)
@@ -33,11 +33,11 @@ public class MFGUpgrade : Upgrade
     // Update is called once per frame
     void Update()
     {
-       MFGText.text = "Magnet: " + player.magnet;
+       MFGText.text = "Magnet: " + playerStats.magnet;
        ButtonText.text = "Cost: " + cost;
          if(IsReset == true)
          {
-              MaxMagnet = player.magnet + 3;
+              MaxMagnet = playerStats.magnet + 3;
               IsReset = false;
          }
     }
@@ -60,11 +60,11 @@ public class MFGUpgrade : Upgrade
 
     public override void UpgradePlayer()
     {
-        if (player.magnet < MaxMagnet)
+        if (playerStats.magnet < MaxMagnet)
         {
             Debug.Log("Upgrading Player Magnet");
-            player.magnet ++;
-            Debug.Log("Player Magnet: " + player.magnet);
+            playerStats.magnet ++;
+            Debug.Log("Player Magnet: " + playerStats.magnet);
         }
         else
         {

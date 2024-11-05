@@ -37,8 +37,8 @@ public class EnemyShipBehaviour : Enemy
     // Update is called once per frame
     void Update()
     {
-        fireRate -= Time.deltaTime;
-        player = GameObject.Find("Player").GetComponent<PlayerBehaviour>();
+        playerStats.fireRate -= Time.deltaTime;
+        // player = GameObject.Find("Player").GetComponent<PlayerStats>();
         Move();
         HandleShooting();
     }
@@ -107,11 +107,11 @@ public class EnemyShipBehaviour : Enemy
     {
         if (collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<PlayerBehaviour>().TakeDamage(damage);
+            collision.gameObject.GetComponent<PlayerStats>().TakeDamage(damage);
         }
         if (collision.gameObject.tag == "Bullet")
         {
-            TakeDamage(player.damage);
+            TakeDamage(playerStats.damage);
         }
     }
 

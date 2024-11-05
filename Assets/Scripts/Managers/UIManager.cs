@@ -24,6 +24,7 @@ public class UIManager : MonoBehaviour
     public LevelManager levelManager;
     public InventoryManager inventoryManager;
     public DistanceTracker distanceTracker;
+    public PlayerStats playerStats;
     [Header("UI GameObjects")]
     public GameObject mainMenu;
     public GameObject optionsMenu;
@@ -120,9 +121,9 @@ public class UIManager : MonoBehaviour
     {
         //Set the texts in the Game Over screen
         playerCoins.text = "Coins Collected: " + inventoryManager.coinCount.ToString();
-        playerSharkKills.text = "Sharks Killed: " + player.SharkKills.ToString();
-        playerSerpentKills.text = "Serpents Killed: " + player.SerpentKills.ToString();
-        playerShipKills.text = "Ships Sunk: " + player.ShipKills.ToString();
+        playerSharkKills.text = "Sharks Killed: " + playerStats.SharkKills.ToString();
+        playerSerpentKills.text = "Serpents Killed: " + playerStats.SerpentKills.ToString();
+        playerShipKills.text = "Ships Sunk: " + playerStats.ShipKills.ToString();
         playerDistance.text = "Distance Travelled: " + distanceTracker.playerDistance.ToString();
         levelManager.SetFalse();
 

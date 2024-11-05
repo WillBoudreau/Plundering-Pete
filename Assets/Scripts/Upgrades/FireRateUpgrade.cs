@@ -16,7 +16,7 @@ public class FireRateUpgrade : Upgrade
 
     void Start()
     {
-        MaxFireRate = player.fireRate - 0.2f * FRUpgrade.Count;
+        MaxFireRate = playerStats.fireRate - 0.2f * FRUpgrade.Count;
         cost = 10;
         // Initialize the damageUpgrade images to white
         foreach (var upgrade in FRUpgrade)
@@ -32,7 +32,7 @@ public class FireRateUpgrade : Upgrade
     // Update is called once per frame
     void Update()
     {
-        FireRateText.text = "Fire Rate: " + player.startFireRate.ToString("F2");
+        FireRateText.text = "Fire Rate: " + playerStats.startFireRate.ToString("F2");
         ButtonText.text = "Cost: " + cost;
     }
 
@@ -53,12 +53,12 @@ public class FireRateUpgrade : Upgrade
 
     public override void UpgradePlayer()
     {
-        if (player.startFireRate > MaxFireRate)
+        if (playerStats.startFireRate > MaxFireRate)
         {
             Debug.Log("Upgrading Player Fire Rate");
-            player.fireRate -= 0.2f;
-            player.startFireRate -= 0.2f;
-            Debug.Log("Player FireRate: " + player.fireRate.ToString("F2"));
+            playerStats.fireRate -= 0.2f;
+            playerStats.startFireRate -= 0.2f;
+            Debug.Log("Player FireRate: " + playerStats.fireRate.ToString("F2"));
             UpdateUpgradeDisplay();
         }
         else
@@ -80,7 +80,7 @@ public class FireRateUpgrade : Upgrade
             }
         }
         currentUpgradeIndex = 0;
-        MaxFireRate = player.fireRate - 0.2f * FRUpgrade.Count;
+        MaxFireRate = playerStats.fireRate - 0.2f * FRUpgrade.Count;
         cost = 10;
     }
 
