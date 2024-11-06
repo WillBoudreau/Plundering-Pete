@@ -14,8 +14,11 @@ public abstract class Enemy : MonoBehaviour
     public Color originalColor;
     public float FlickerDuration;
     public int FlickerCount;
+    [Header("Player")]
     //Get a refernce to the player
-    public PlayerBehaviour player;
+    // public PlayerBehaviour player;
+    public GameObject player;
+    public PlayerStats playerStats;
     //Base Enemy functions
     public abstract void Move();
     public abstract void TakeDamage(float damage);

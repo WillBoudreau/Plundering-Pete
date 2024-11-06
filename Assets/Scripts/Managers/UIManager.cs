@@ -13,16 +13,18 @@ public class UIManager : MonoBehaviour
         GamePlay,
         Instructions,
         Pause,
+        Credits,
         GameOver,
         Upgrades,
         Win
     }
     public GameState currentGameState;
-    public static UIManager instance;
     [Header("Class calls")]
     public PlayerBehaviour player;
     public LevelManager levelManager;
     public InventoryManager inventoryManager;
+    public DistanceTracker distanceTracker;
+    public PlayerStats playerStats;
     [Header("UI GameObjects")]
     public GameObject mainMenu;
     public GameObject optionsMenu;
@@ -33,11 +35,13 @@ public class UIManager : MonoBehaviour
     public GameObject upgradesMenu;
     public GameObject InstructionsScreen;
     public GameObject LoadingScreen;
+    public GameObject CreditsScreen;
     [Header("Texts")]
     public TextMeshProUGUI playerCoins;
     public TextMeshProUGUI playerSharkKills;
     public TextMeshProUGUI playerSerpentKills;
     public TextMeshProUGUI playerShipKills;
+    public TextMeshProUGUI playerDistance;
     [Header("Loading Bar")]
     public CanvasGroup loadingScreenCanvasGroup;
     public float fadeTime = 0.5f;
@@ -80,6 +84,10 @@ public class UIManager : MonoBehaviour
                 DeactivateAllUI();
                 InstructionsScreen.SetActive(true);
                 break;
+            case GameState.Credits:
+                DeactivateAllUI();
+                CreditsScreen.SetActive(true);
+                break;
             default:
                 break;
             
@@ -95,6 +103,7 @@ public class UIManager : MonoBehaviour
         winMenu.SetActive(true);
         upgradesMenu.SetActive(true);
         InstructionsScreen.SetActive(true);
+        CreditsScreen.SetActive(true);
     }
     void DeactivateAllUI()
     {
@@ -106,14 +115,18 @@ public class UIManager : MonoBehaviour
         winMenu.SetActive(false);
         upgradesMenu.SetActive(false);
         InstructionsScreen.SetActive(false);
+        CreditsScreen.SetActive(false);
     }
     void UpdateGameOver()
     {
         //Set the texts in the Game Over screen
         playerCoins.text = "Coins Collected: " + inventoryManager.coinCount.ToString();
-        playerSharkKills.text = "Sharks Killed: " + player.SharkKills.ToString();
-        playerSerpentKills.text = "Serpents Killed: " + player.SerpentKills.ToString();
-        playerShipKills.text = "Ships Sunk: " + player.ShipKills.ToString();
+        playerSharkKills.text = "Sharks Killed: " + playerStats.SharkKills.ToString();
+        playerSerpentKills.text = "Serpents Killed: " + playerStats.SerpentKills.ToString();
+        playerShipKills.text = "Ships Sunk: " + playerStats.ShipKills.ToString();
+        playerDistance.text = "Distance Travelled: " + distanceTracker.playerDistance.ToString();
+        levelManager.SetFalse();
+
     }
     public void SetGameState(string state)
     { 
@@ -143,6 +156,9 @@ public class UIManager : MonoBehaviour
                 break;
             case "Instructions":
                 currentGameState = GameState.Instructions;
+                break;
+            case "Credits":
+                currentGameState = GameState.Credits;
                 break;
             default:
                 currentGameState = GameState.MainMenu;

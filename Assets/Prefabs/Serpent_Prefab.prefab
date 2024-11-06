@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 9074038438388678436}
   m_Layer: 0
   m_Name: Serpent_Prefab
-  m_TagString: Enemy
+  m_TagString: Serpent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -67,18 +67,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.008975163, y: -0.002237454}
+  m_Offset: {x: 0.00810051, y: 5.2741404}
   m_SpriteTilingProperty:
-    border: {x: 0.049999997, y: 0.049999997, z: 0.049999997, w: 0.049999997}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.16, y: 0.16}
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: -0.22222224}
+    oldSize: {x: 2, y: 7.2}
     newSize: {x: 0.2, y: 0.2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.18149498, y: 0.19899836}
+  m_Size: {x: 2.2988768, y: 7.3707733}
   m_EdgeRadius: 0
 --- !u!61 &6348835627842735111
 BoxCollider2D:
@@ -112,18 +112,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0052255094, y: -0.004274145}
+  m_Offset: {x: 0.040642977, y: 5.156358}
   m_SpriteTilingProperty:
-    border: {x: 0.049999997, y: 0.049999997, z: 0.049999997, w: 0.049999997}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.16, y: 0.16}
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: -0.22222224}
+    oldSize: {x: 2, y: 7.2}
     newSize: {x: 0.2, y: 0.2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.27770275, y: 0.2940562}
+  m_Size: {x: 4.386577, y: 8.827002}
   m_EdgeRadius: 0
 --- !u!114 &3913901237078168414
 MonoBehaviour:
@@ -140,6 +140,7 @@ MonoBehaviour:
   health: 0
   speed: 0
   damage: 0
+  Gold: {fileID: 0}
   renderer: {fileID: 0}
   originalColor: {r: 0, g: 0, b: 0, a: 0}
   FlickerDuration: 0
@@ -189,7 +190,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: -2453230387444521404, guid: bacceebcc4114b94096d0bd5c300ae9f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

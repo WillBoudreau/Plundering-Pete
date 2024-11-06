@@ -37,8 +37,8 @@ public class EnemyShipBehaviour : Enemy
     // Update is called once per frame
     void Update()
     {
-        fireRate -= Time.deltaTime;
-        player = GameObject.Find("Player").GetComponent<PlayerBehaviour>();
+        playerStats.fireRate -= Time.deltaTime;
+        // player = GameObject.Find("Player").GetComponent<PlayerStats>();
         Move();
         HandleShooting();
     }
@@ -67,16 +67,17 @@ public class EnemyShipBehaviour : Enemy
     {
         if (fireRate <= 0)
         {
-            float bulletSpawnDist = 1.0f;
-            Vector3 CanonBallSpawnPos = CanonFirePoint.position + (CanonFirePoint.forward * bulletSpawnDist);
-            CanonBallSpawnPos.z = -2;
+            for (int i = 0; i < 3; i++)
+            {
+                float bulletSpawnDist = 1.0f;
+                Vector3 CanonBallSpawnPos = CanonFirePoint.position + (CanonFirePoint.forward * bulletSpawnDist);
+                CanonBallSpawnPos.z = -2;
+                GameObject CannonBall = Instantiate(CanonBall, CanonBallSpawnPos, Quaternion.identity);
+                CannonBall.GetComponent<Rigidbody2D>().velocity = Vector2.up * CanonVelocity;
+                Destroy(CannonBall, 5.0f);
+                fireRate = 5f;
+            }
 
-            //musicManager.PlaySound(0);
-            GameObject CannonBall = Instantiate(CanonBall, CanonBallSpawnPos, Quaternion.identity);
-            //Vector2 shootdirection = (mouseWorldPOS - (Vector2)transform.position).normalized;
-            CannonBall.GetComponent<Rigidbody2D>().velocity = Vector2.up * CanonVelocity;
-            Destroy(CannonBall, 5.0f);
-            fireRate = 5f;
         }
     }
 
@@ -106,11 +107,11 @@ public class EnemyShipBehaviour : Enemy
     {
         if (collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<PlayerBehaviour>().TakeDamage(damage);
+            collision.gameObject.GetComponent<PlayerStats>().TakeDamage(damage);
         }
         if (collision.gameObject.tag == "Bullet")
         {
-            TakeDamage(player.damage);
+            TakeDamage(playerStats.damage);
         }
     }
 

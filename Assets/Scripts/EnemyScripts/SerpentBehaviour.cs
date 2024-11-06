@@ -16,18 +16,19 @@ public class SerpentBehaviour : Enemy
     {
         renderer = GetComponent<Renderer>();
         originalColor = renderer.material.color;
-        speed = 2;
+        speed = 8;
         health = 2;
         damage = 1;
         stoppingDistance = 2;
-        detectionDistance = 10;
+        detectionDistance = 20;
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        player = GameObject.Find("Player").GetComponent<PlayerBehaviour>();
+        player = GameObject.Find("Player");
+        playerStats = GameObject.Find("Player").GetComponent<PlayerStats>();
         Move();
     }
     public override void Move()
@@ -41,13 +42,12 @@ public class SerpentBehaviour : Enemy
         {
             Vector3 targetPosition = new Vector3(transform.position.x, bottomY, transform.position.z);
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
-        }
-        else if (Vector2.Distance(transform.position, player.transform.position) < detectionDistance)
-        {
-
-            Vector3 targetPosition = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
-            targetPosition.z = -2;
-            transform.position = targetPosition;
+            if (Vector2.Distance(transform.position, player.transform.position) < detectionDistance)
+            {
+                targetPosition = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+                targetPosition.z = -2;
+                transform.position = targetPosition;
+            }
         }
     }
     public override void TakeDamage(float damage)
@@ -81,12 +81,12 @@ public class SerpentBehaviour : Enemy
     {
         if(collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<PlayerBehaviour>().TakeDamage(damage);
+            collision.gameObject.GetComponent<PlayerStats>().TakeDamage(damage);
         }
         if(collision.gameObject.tag == "Bullet")
         {
             Destroy(collision.gameObject);
-            TakeDamage(player.damage);
+            TakeDamage(playerStats.damage);
         }
     }
 }

@@ -7,7 +7,8 @@ public class UpgradeManager : MonoBehaviour
 {
     [Header("Class calls")]
     //Player reference  
-    public PlayerBehaviour player;
+    public PlayerStats player;
+    public ShipUpgrade shipUpgrade;
     public List<Upgrade> upgrades = new List<Upgrade>();
     //InventoryManager reference
     public InventoryManager inventory;
@@ -16,13 +17,12 @@ public class UpgradeManager : MonoBehaviour
     public TextMeshProUGUI NumberCoinsText;
     [Header("Variables")]
     //Values and their max values
-
     //Start Cost and Cost for the upgrades
     public int ShipCost;
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.Find("Player").GetComponent<PlayerBehaviour>();
+        player = GameObject.Find("Player").GetComponent<PlayerStats>();
         SetValues();
     }
     // Update is called once per frame
@@ -33,21 +33,21 @@ public class UpgradeManager : MonoBehaviour
     }
     void SetText()
     {
-        NumberCoinsText.text = "Doubloons " + inventory.coinCount;
+        NumberCoinsText.text = "Doubloons " + inventory.coinCount + "/" + inventory.maxCoins;
     }
     //Set the variable values at the start of the game
     void SetValues()
     {
-        ShipCost = 100;
+        ShipCost = shipUpgrade.cost;
     }
     public void UpgradeShip()
     {
-        if (inventory.coinCount >= ShipCost)
+        if(inventory.coinCount >= ShipCost && player.IsLevel3 == false)
         {
-            inventory.coinCount -= ShipCost;
-            Debug.Log("You have enough coins");
+            Debug.Log("Upgrading Ship from manager");
             if(player.IsLevel2 == false)
             {
+                Debug.Log("Level 2");
                 player.IsLevel2 = true;
                 Reset();
             }

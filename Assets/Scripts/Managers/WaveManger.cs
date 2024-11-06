@@ -6,7 +6,7 @@ public class WaveManger : MonoBehaviour
 {
     //Class calls
     [Header("Classes")]
-    public DistanceTracker distanceTracker;
+    public CheckpointManager checkpointManager;
     [Header("Variables")]
     //List of all the enemy objects
     public List<GameObject> Sharks;
@@ -23,23 +23,22 @@ public class WaveManger : MonoBehaviour
     public int numSerpents;
     public int numShips;
     //Spawn Values
-    public float spawnTime = 5f;
-
-    [Header("Bools")]
-    //Bools for checkpoints
-    public bool FirstCheckpoint;
-    public bool SecondCheckpoint;
-    public bool ThirdCheckpoint;
+    public float spawnTime = 0f;
+    private int currentSpawnPointIndex = 0;
+    public int SharkSpawnIndex;
+    public int SerpentSpawnIndex;
+    public int ShipSpawnIndex;
     [Header("Arrays")]
     //List of Spawn points
     public GameObject[] SpawnPoints1;
     public GameObject[] SpawnPoints2;
     public GameObject[] SpawnPoints3;
-    public List<GameObject> Allenemies;
-    private int currentSpawnPointIndex = 0;
+    public List<GameObject> Enemies = new List<GameObject>();
     void Start()
     {
-        UpdateCheckpointStatus(0, true);
+        Debug.Log("Wave Manager Started");
+        SetAll();
+        //UpdateCheckpointStatus(0, true);
     }
     public void SetAll()
     {
@@ -48,10 +47,9 @@ public class WaveManger : MonoBehaviour
     }
     void FixedUpdate()
     {
+        StartCoroutine(SpawnEnemies());
         Timer();
         FillArrays();
-        //UpdateCheckpoints();
-        StartCoroutine(SpawnEnemies());
     }
     void Timer()
     {
@@ -73,7 +71,6 @@ public class WaveManger : MonoBehaviour
         SpawnPoints1 = new GameObject[3];
         SpawnPoints2 = new GameObject[3];
         SpawnPoints3 = new GameObject[3];
-        Allenemies = new List<GameObject>();
     }
 
     void UpdateLists()
@@ -120,54 +117,75 @@ public class WaveManger : MonoBehaviour
     {
         while (true)
         {
-            if (spawnTime <= 0 && FirstCheckpoint)
+            if (spawnTime <= 0 && checkpointManager.FirstCheckpoint)
             {
-                SpawnEnemyGroup(SharkPrefab, 1, SpawnPoints1); // Only spawn one shark at a time
-                spawnTime = 5f; 
-            }
-            if(spawnTime <= 0 && SecondCheckpoint)
-            {
-                SpawnEnemyGroup(SerpentPrefab, 1, SpawnPoints2);
+                //Debug.Log("Spawning Sharks");
+                SpawnEnemy(SharkPrefab, SpawnPoints1, ref SharkSpawnIndex);
                 spawnTime = 5f;
             }
-            if(spawnTime <= 0 && ThirdCheckpoint)
-            {
-                SpawnEnemyGroup(ShipPrefab, 1, SpawnPoints3);
-                spawnTime = 5f;
-            }
-            yield return new WaitForSeconds(1f);
+                if (spawnTime <= 0 && checkpointManager.SecondCheckpoint)
+                {
+                    // Spawn 5 sharks before each serpent
+                    for (int i = 0; i < 5; i++)
+                    {
+                        SpawnEnemy(SharkPrefab, SpawnPoints2, ref SerpentSpawnIndex);
+                    }
+                    SpawnEnemy(SerpentPrefab, SpawnPoints2, ref SerpentSpawnIndex);
+                    spawnTime = 5f;
+                }
+                if (spawnTime <= 0 && checkpointManager.ThirdCheckpoint)
+                {
+                    for(int i = 0; i < 10; i++)
+                    {
+                        SpawnEnemy(SharkPrefab, SpawnPoints3, ref SharkSpawnIndex);
+                    }
+                    for(int i = 0; i < 5; i++)
+                    {
+                        SpawnEnemy(SerpentPrefab, SpawnPoints3, ref SerpentSpawnIndex);
+                    }
+                    SpawnEnemy(ShipPrefab, SpawnPoints3, ref ShipSpawnIndex);
+                    spawnTime = 5f;
+                }
+            yield return new WaitForSeconds(2f);
         }
     }
 
-    void SpawnEnemyGroup(GameObject enemyPrefab, int numEnemies, GameObject[] spawnPoints)
+void SpawnEnemy(GameObject enemyPrefab, GameObject[] spawnPoints, ref int currentSpawnPointIndex)
+{
+    bool spawnSuccessful = false;
+    int attempts = 0;
+
+    while (!spawnSuccessful && attempts < spawnPoints.Length)
     {
-        for (int i = 0; i < numEnemies; i++)
+        Vector3 spawnPos = spawnPoints[currentSpawnPointIndex].transform.position;
+        spawnPos.z = -2;
+
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(spawnPos, 5f); 
+        bool isOccupied = false;
+
+        foreach (Collider2D col in colliders)
         {
-            Vector3 spawnpos = spawnPoints[currentSpawnPointIndex].transform.position;
-            spawnpos.z = -2;
-            GameObject newEnemy = Instantiate(enemyPrefab, spawnpos, Quaternion.identity);
-            Allenemies.Add(newEnemy);
-            currentSpawnPointIndex = (currentSpawnPointIndex + 1) % spawnPoints.Length;
+            if (col.gameObject.CompareTag("Enemy")) 
+            {
+                isOccupied = true;
+                break;
+            }
         }
+
+        if (!isOccupied)
+        {
+            GameObject enemy = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
+            Enemies.Add(enemy);
+            spawnSuccessful = true; 
+        }
+
+        currentSpawnPointIndex = (currentSpawnPointIndex + 1) % spawnPoints.Length;
+        attempts++;
     }
 
-    public void UpdateCheckpointStatus(int checkpointIndex, bool status)
+    if (!spawnSuccessful)
     {
-        Debug.Log("Checkpoint " + checkpointIndex + " status: " + status);
-        switch (checkpointIndex)
-        {
-            case 0:
-                FirstCheckpoint = status;
-                break;
-            case 1:
-                SecondCheckpoint = status;
-                break;
-            case 2:
-                ThirdCheckpoint = status;
-                break;
-            default:
-                Debug.LogWarning("Invalid checkpoint index");
-                break;
-        }
+        Debug.LogWarning("All spawn points are occupied. Enemy could not spawn.");
     }
+}
 }
