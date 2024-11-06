@@ -8,15 +8,24 @@ public class DistanceTracker : MonoBehaviour
 {
     [Header("Class calls")]
     public PlayerBehaviour playerBehaviour;
-    public WaveManger waveManger;
+    public PlayerStats playerStats;
+    public CheckpointManager checkpointManager;
+    public LevelManager levelManager;
     [Header("Variables")]
     public float Distance;
-    public float GameTimer;
     public Transform startPosition;
+    public float playerDistance; 
     public Transform endPosition;
+    public bool spawnlevel1;
+    public bool spawnlevel2;
+    public bool spawnlevel3;
     [Header("UI elements")]
     public Slider distanceTracker;
-
+    public TextMeshProUGUI WarningText;
+    void Start()
+    {
+        WarningText.gameObject.SetActive(false);
+    }
     // Update is called once per frame
     void Update()
     {
@@ -24,24 +33,45 @@ public class DistanceTracker : MonoBehaviour
         {
             FindPositions();
         }
+        checkpointManager.SetValues();
         SetValues();
         TrackDist();
+        Checkpoint();
+        DisplayWarning();
+        playerDistance = Vector3.Distance(startPosition.position, playerBehaviour.transform.position);
     }
 
     void FindPositions()
     {
-        GameObject startObj = GameObject.Find("StartPos");
-        GameObject endObj = GameObject.Find("EndPOS");
-
-        if (startObj != null)
+        if(levelManager.levelName == "GameTestScene")
         {
-            startPosition = startObj.transform;
-        }
+            startPosition = GameObject.Find("StartPos").transform;
+            endPosition = GameObject.Find("EndPOS").transform;
+            GameObject startObj = GameObject.Find("StartPos");
+            GameObject endObj = GameObject.Find("EndPOS");
 
-        if (endObj != null)
-        {
-            endPosition = endObj.transform;
+            if (startObj != null)
+            {
+                startPosition = startObj.transform;
+            }
+
+            if (endObj != null)
+            {
+                endPosition = endObj.transform;
+            }
         }
+        // GameObject startObj = GameObject.Find("StartPos");
+        // GameObject endObj = GameObject.Find("EndPOS");
+
+        // if (startObj != null)
+        // {
+        //     startPosition = startObj.transform;
+        // }
+
+        // if (endObj != null)
+        // {
+        //     endPosition = endObj.transform;
+        // }
     }
 
     void SetValues()
@@ -58,8 +88,46 @@ public class DistanceTracker : MonoBehaviour
     {
         if (startPosition != null && playerBehaviour != null)
         {
-            float playerDistance = Vector3.Distance(startPosition.position, playerBehaviour.transform.position);
             distanceTracker.value = playerDistance;
         }
+    }
+    void Checkpoint()
+    {
+            if (playerBehaviour.transform.position.y >=  checkpointManager.Checkpoint1 && !spawnlevel1)
+            {
+                spawnlevel1 = true;
+                checkpointManager.UpdateCheckpointStatus(0, true);
+            }
+            if (playerBehaviour.transform.position.y >= checkpointManager.Checkpoint2)
+            {
+                checkpointManager.UpdateCheckpointStatus(1, true);
+            }
+            if (playerBehaviour.transform.position.y >= checkpointManager.Checkpoint3 && !spawnlevel3)
+            {
+                spawnlevel3 = true;
+                checkpointManager.UpdateCheckpointStatus(2, true);
+            }
+    }
+    void DisplayWarning()
+    {
+        WarningText.gameObject.SetActive(false);
+        if(playerStats.IsLevel2 == false && playerStats.transform.position.y >= checkpointManager.Checkpoint2)
+        {
+            // Display warning
+            WarningText.gameObject.SetActive(true);
+            WarningText.text = "YAARRR! Ye is about to enter dangerous waters! Your ship is not ready!";
+        }
+        else if(playerStats.IsLevel3 == false && playerStats.transform.position.y >= checkpointManager.Checkpoint3)
+        {
+            // Display warning
+            WarningText.gameObject.SetActive(true);
+            WarningText.text = "YAARRR! Ye is about to enter dangerous waters! Your ship is not ready!";
+        }
+    }
+    public void SetFalse()
+    {
+        spawnlevel1 = false;
+        spawnlevel2 = false;
+        spawnlevel3 = false;
     }
 }

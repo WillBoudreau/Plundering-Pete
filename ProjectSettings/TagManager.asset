@@ -16,15 +16,19 @@ TagManager:
   - Shark
   - SpawnPoint2
   - SpawnPoint3
+  - CanonBall
+  - EnemyShip
+  - Serpent
+  - CoinBag
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - EasyLevel
   - Water
   - UI
-  - 
-  - 
+  - MedLevel
+  - HardLevel
   - 
   - 
   - 

@@ -19,7 +19,7 @@ public class InventoryManager : MonoBehaviour
     {
         coins = new List<GameObject>();
         originalColor = coinText.color;
-        maxCoins = 15;
+        maxCoins = 25;
     }
 
     // Update is called once per frame
@@ -34,6 +34,7 @@ public class InventoryManager : MonoBehaviour
         {
             coinCount = maxCoins;
             IsMax = true;
+            Debug.Log("Max Coins Reached"); 
             if (!isFlashing)
             {
                 StartCoroutine(FlashRed());
@@ -51,7 +52,7 @@ public class InventoryManager : MonoBehaviour
     {
         isFlashing = true;
         int flashCount = 0;
-        int maxFlashes = 10;
+        int maxFlashes = 3;
 
         while (IsMax && flashCount < maxFlashes)
         {

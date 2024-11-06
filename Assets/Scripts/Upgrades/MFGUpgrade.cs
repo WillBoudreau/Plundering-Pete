@@ -9,13 +9,15 @@ public class MFGUpgrade : Upgrade
     [Header("Upgrade Values")]
     public TextMeshProUGUI MFGText;
     public TextMeshProUGUI costText;
-    public int MaxMagnet;
+    public TextMeshProUGUI ButtonText;
+    public float MaxMagnet;
     public List<GameObject> BFMUpgrade= new List<GameObject>();
     private int currentUpgradeIndex = 0;
+    public bool IsReset = false;
 
     void Start()
     {
-        MaxMagnet = 3;
+        MaxMagnet = playerStats.magnet + 3;
         cost = 10;
         // Initialize the damageUpgrade images to white
         foreach (var upgrade in BFMUpgrade)
@@ -23,7 +25,7 @@ public class MFGUpgrade : Upgrade
             var image = upgrade.GetComponent<UnityEngine.UI.Image>();
             if (image != null)
             {
-                image.color = Color.green;
+                image.color = Color.red;
             }
         }
     }
@@ -31,7 +33,13 @@ public class MFGUpgrade : Upgrade
     // Update is called once per frame
     void Update()
     {
-       MFGText.text = "Magnet: " + player.magnet + " Cost: " + cost;
+       MFGText.text = "Magnet: " + playerStats.magnet;
+       ButtonText.text = "Cost: " + cost;
+         if(IsReset == true)
+         {
+              MaxMagnet = playerStats.magnet + 3;
+              IsReset = false;
+         }
     }
 
     public override void CostCheck()
@@ -52,26 +60,28 @@ public class MFGUpgrade : Upgrade
 
     public override void UpgradePlayer()
     {
-        if (player.magnet < MaxMagnet)
+        if (playerStats.magnet < MaxMagnet)
         {
             Debug.Log("Upgrading Player Magnet");
-            player.magnet ++;
-            Debug.Log("Player Magnet: " + player.magnet);
+            playerStats.magnet ++;
+            Debug.Log("Player Magnet: " + playerStats.magnet);
         }
         else
         {
+            inventory.coinCount += cost;
             Debug.Log("Max Magnet Reached");
             MFGText.text = "Max Magnet Reached";
         }
     }
     public override void Reset()
     {
+        IsReset = true;
         foreach (var upgrade in BFMUpgrade)
         {
             var image = upgrade.GetComponent<UnityEngine.UI.Image>();
             if (image != null)
             {
-                image.color = Color.green;
+                image.color = Color.red;
             }
         }
         currentUpgradeIndex = 0;
@@ -86,7 +96,7 @@ public class MFGUpgrade : Upgrade
             var image = BFMUpgrade[currentUpgradeIndex].GetComponent<UnityEngine.UI.Image>();
             if (image != null)
             {
-                image.color = Color.red;
+                image.color = Color.green;
             }
             currentUpgradeIndex++;
         }

@@ -9,13 +9,17 @@ public class GoldStorageUpgrade : Upgrade
     [Header("Upgrade Values")]
     public TextMeshProUGUI CargoText;
     public TextMeshProUGUI costText;
+    public TextMeshProUGUI ButtonText;
     public int MaxCargo;
+    public int MaxNumberOfCoins = 100;
     public List<GameObject> CargoUpgrade= new List<GameObject>();
     private int currentUpgradeIndex = 0;
+    public bool IsReset = false;
 
     void Start()
     {
-        MaxCargo = 3;
+        MaxCargo = inventory.maxCoins + MaxNumberOfCoins;
+
         cost = 10;
         // Initialize the damageUpgrade images to white
         foreach (var upgrade in CargoUpgrade)
@@ -23,7 +27,7 @@ public class GoldStorageUpgrade : Upgrade
             var image = upgrade.GetComponent<UnityEngine.UI.Image>();
             if (image != null)
             {
-                image.color = Color.green;
+                image.color = Color.red;
             }
         }
     }
@@ -31,15 +35,22 @@ public class GoldStorageUpgrade : Upgrade
     // Update is called once per frame
     void Update()
     {
-      CargoText.text = "Cargo: " + inventory.maxCoins + "Cost: " + cost;
+      CargoText.text = "Cargo Hold: " + inventory.maxCoins;
+      ButtonText.text = "Cost: " + cost;
+        if(IsReset == true)
+        {
+            MaxCargo = inventory.maxCoins + MaxNumberOfCoins;
+            IsReset = false;
+        }
     }
 
     public override void CostCheck()
     {
-        Debug.Log("Checking Cost for Magnet Upgrade");
+        Debug.Log("Checking Cost for cargo Upgrade");
         if (inventory.coinCount >= cost)
         {
             inventory.coinCount -= cost;
+            Debug.Log("Inventory Max " + inventory.maxCoins + " Max Cargo " + MaxCargo);
             UpgradePlayer();
             UpdateUpgradeDisplay();
         }
@@ -52,31 +63,19 @@ public class GoldStorageUpgrade : Upgrade
 
     public override void UpgradePlayer()
     {
-        if (inventory.maxCoins < MaxCargo)
+        if (inventory.maxCoins <= MaxCargo && currentUpgradeIndex != 3)
         {
             Debug.Log("Upgrading Player Cargo");
             inventory.maxCoins += 10;
+            MaxCargo = inventory.maxCoins + 10;
             Debug.Log("Player Cargo: " + inventory.maxCoins);
         }
         else
         {
+            inventory.coinCount += cost;
             Debug.Log("Max Cargo Reached");
-            CargoText.text = "Max Cargo Reached";
+            costText.text = "Max Cargo Reached";
         }
-    }
-    public override void Reset()
-    {
-        foreach (var upgrade in CargoUpgrade)
-        {
-            var image = upgrade.GetComponent<UnityEngine.UI.Image>();
-            if (image != null)
-            {
-                image.color = Color.green;
-            }
-        }
-        currentUpgradeIndex = 0;
-        MaxCargo += 3;
-        cost += 10;
     }
 
     void UpdateUpgradeDisplay()
@@ -86,9 +85,25 @@ public class GoldStorageUpgrade : Upgrade
             var image = CargoUpgrade[currentUpgradeIndex].GetComponent<UnityEngine.UI.Image>();
             if (image != null)
             {
-                image.color = Color.red;
+                image.color = Color.green;
             }
             currentUpgradeIndex++;
         }
+    }
+    public override void Reset()
+    {
+        IsReset = true;
+        Debug.Log("Resetting Cargo Upgrade");
+        foreach (var upgrade in CargoUpgrade)
+        {
+            var image = upgrade.GetComponent<UnityEngine.UI.Image>();
+            if (image != null)
+            {
+                image.color = Color.red;
+            }
+        }
+        MaxCargo = inventory.maxCoins + MaxNumberOfCoins;
+        currentUpgradeIndex = 0;
+        cost += 10;
     }
 }

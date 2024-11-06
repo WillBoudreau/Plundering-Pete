@@ -6,7 +6,9 @@ public class Upgrade : MonoBehaviour
 {
     // Start is called before the first frame update
     public InventoryManager inventory;
-    public PlayerBehaviour player;
+    public PlayerBehaviour playerBehaviour;
+    public PlayerStats playerStats;
+    public PlayerMovementHandler playerMovementHandler;
     public int cost;
     void Start()
     {

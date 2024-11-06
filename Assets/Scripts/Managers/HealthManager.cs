@@ -20,7 +20,10 @@ public class HealthManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if(health <= 0)
+        {
+            health = 0;
+        }
     }
     public virtual void TakeDamage(float damage)
     {

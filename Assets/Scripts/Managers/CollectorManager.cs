@@ -6,20 +6,20 @@ using UnityEngine.SceneManagement;
 public class CollectorManager : MonoBehaviour
 {
     [Header("Class calls")]
-    public LevelManager levelManager;
+    [SerializeField] private LevelManager levelManager;
     [Header("Variables")]
-    public GameObject Doubloon;
-    public List<GameObject> Doubloons = new List<GameObject>();
-    public int numofDoubloons;
-    public int numofCoins;
+    [SerializeField] private GameObject Doubloon;
+    [SerializeField] private List<GameObject> Doubloons = new List<GameObject>();
+
+    [SerializeField] private int  numofDoubloons;
     public bool hasSpawnedDoubloons; 
-    public Vector2 mapMinBounds;
-    public Vector2 mapMaxBounds;
+    [SerializeField] private Vector2 mapMinBounds;
+    [SerializeField] private Vector2 mapMaxBounds;
 
     // Start is called before the first frame update
     void Start()
     {
-        numofDoubloons = 15;
+        numofDoubloons = 10;
         AddDoubloonsToList();
         levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
     }
@@ -42,6 +42,7 @@ public class CollectorManager : MonoBehaviour
     //Spawn Doubloons from list
     public void SpawnDoubloons(Transform playerTransform, float safeDistance)
     {
+        Debug.Log("Spawning Doubloons");
         if (levelManager.levelName == "GameTestScene" && !hasSpawnedDoubloons)
         {
             for (int i = 0; i < numofDoubloons; i++)

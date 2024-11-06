@@ -4,17 +4,22 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
-    public float moveSpeed = 5f;
-
-    // Start is called before the first frame update
-    void Start()
+    [Header("Variables")]
+    [SerializeField] float moveSpeed;
+    [SerializeField] Vector3 startPosition;
+    [Header("Class Calls")]
+    [SerializeField] private PlayerMovementHandler playerMovementHandler;
+    // Update is called once per frame
+    void FixedUpdate()
     {
-        
+        MoveWithPlayer();
     }
 
-    // Update is called once per frame
-    void Update()
+    void MoveWithPlayer()
     {
-        transform.Translate(Vector3.up * moveSpeed * Time.deltaTime);
+        if(playerMovementHandler.IsMoving == true)
+        {
+            transform.Translate(Vector3.up * moveSpeed * Time.deltaTime);
+        }
     }
 }
