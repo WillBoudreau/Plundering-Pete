@@ -58,8 +58,10 @@ public class PlayerStats : MonoBehaviour
     }
     void HandleHealthBar()
     {
+        Debug.Log("Player Health: " + playerHealth);
         healthManager.health = playerHealth;
-        healthManager.playerhealth.maxValue = playerHealth;
+        healthManager.playerhealth.maxValue = startHealth;
+        healthManager.playerhealth.value = playerHealth;
     }
     void SetValues()
     {
@@ -134,6 +136,8 @@ public class PlayerStats : MonoBehaviour
         StartCoroutine(Flicker());
         musicManager.PlaySound(2);
         playerHealth -= damage;
+
+        HandleHealthBar();
         Death();
     }
     //Flicker for damage

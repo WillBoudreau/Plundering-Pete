@@ -1345,8 +1345,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 213861766}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 4.7499924, y: 4.4999814}
   m_SizeDelta: {x: 21.8903, y: 13.9525}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1726,7 +1726,7 @@ RectTransform:
   m_Father: {fileID: 1912446170}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2140,7 +2140,7 @@ RectTransform:
   m_Father: {fileID: 1098192710}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -5932,7 +5932,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &884719223
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6165,7 +6165,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &902718852
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13087,6 +13087,22 @@ PrefabInstance:
       propertyPath: groundLayer.m_Bits
       value: 192
       objectReference: {fileID: 0}
+    - target: {fileID: 216527445050619400, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: PlayerLevels.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 216527445050619400, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: PlayerLevels.Array.data[0]
+      value: 
+      objectReference: {fileID: 930547294}
+    - target: {fileID: 216527445050619400, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: PlayerLevels.Array.data[1]
+      value: 
+      objectReference: {fileID: 314052749}
+    - target: {fileID: 216527445050619400, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: PlayerLevels.Array.data[2]
+      value: 
+      objectReference: {fileID: 1586149740}
     - target: {fileID: 1806202154656914932, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.33
@@ -13231,6 +13247,10 @@ PrefabInstance:
       propertyPath: rb
       value: 
       objectReference: {fileID: 551069649}
+    - target: {fileID: 4098233298752386087, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: speed
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4098233298752386087, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
       propertyPath: mainCamera
       value: 
@@ -14122,7 +14142,7 @@ RectTransform:
   m_Father: {fileID: 485279118}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: -3.2300034, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
