@@ -36,6 +36,22 @@ public class LevelManager : MonoBehaviour
     {
         levelName = SceneManager.GetActiveScene().name;
         playerSpawnPoint = GameObject.Find("PlayerSpawnPoint").transform;
+        UpdateBools();
+    }
+    void UpdateBools()
+    {
+        if(checkpointManager.FirstCheckpoint == false)
+        {
+            hasSpawnedZone1Obstacles = false;
+        }
+        else if(checkpointManager.SecondCheckpoint == false)
+        {
+            hasSpawnedZone2Obstacles = false;
+        }
+        else if(checkpointManager.ThirdCheckpoint == false)
+        {
+            hasSpawnedZone3Obstacles = false;
+        }
     }
     public void LoadLevel(string name)
     {
