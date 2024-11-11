@@ -125,8 +125,6 @@ public class UIManager : MonoBehaviour
         playerSerpentKills.text = "Serpents Killed: " + playerStats.SerpentKills.ToString();
         playerShipKills.text = "Ships Sunk: " + playerStats.ShipKills.ToString();
         playerDistance.text = "Distance Travelled: " + distanceTracker.playerDistance.ToString();
-        levelManager.SetFalse();
-
     }
     public void SetGameState(string state)
     { 

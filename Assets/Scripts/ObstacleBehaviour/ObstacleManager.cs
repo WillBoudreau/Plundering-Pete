@@ -16,9 +16,6 @@ public class ObstacleManager : MonoBehaviour
     public GameObject Rock;
     public GameObject Iceberg;
     public GameObject Debris;
-    public bool hasSpawnedRocks;
-    public bool hasSpawnedIcebergs;
-    public bool hasSpawnedDebris;
     public float takenPOS = 3.0f;
     [Header("Obstacle Zones")]
     [Header("Zone 1")]
@@ -40,11 +37,11 @@ public class ObstacleManager : MonoBehaviour
     public List<GameObject> Zone1Obstacles = new List<GameObject>();
     public List<GameObject> Zone2Obstacles = new List<GameObject>();
     public List<GameObject> Zone3Obstacles = new List<GameObject>();
+    private List<Vector3> usedPositions = new List<Vector3>();
     public int obstacle_Rock_Count;
     public int obstacle_Iceberg_Count;
     public int obstacle_Debris_Count;
     //List of occupied positions
-    private List<Vector3> usedPositions = new List<Vector3>();
 
     void Start()
     {

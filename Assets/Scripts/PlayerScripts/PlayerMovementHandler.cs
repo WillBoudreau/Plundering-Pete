@@ -17,19 +17,25 @@ public class PlayerMovementHandler : MonoBehaviour
     public Camera mainCamera;
     public bool IsMoving;
     public Rigidbody2D rb;
+    public bool IsFiring;
+    public float cooldownTimer = 0f;
     public void HandlePlayerMovement()
     {
         HandleMovement();
         HandleShooting();
         StaywithinBounds();
+        cooldownTimer -= Time.deltaTime;
     }
     //Handle the players shooting
      void HandleShooting()
     {
         //Handle player shooting by tracking the mouse pos
         playerStats.fireRate -= Time.deltaTime;
+    
         if (Input.GetKeyDown(KeyCode.Mouse0) && playerStats.fireRate <= 0)
         {
+            IsFiring = true;
+            cooldownTimer = playerStats.fireRate;
             playerStats.fireRate = 0;
             Vector2 mouseWorldPOS = mainCamera.ScreenToWorldPoint(Input.mousePosition);
             Vector2 direction = (mouseWorldPOS - (Vector2)transform.position).normalized;
@@ -75,6 +81,10 @@ public class PlayerMovementHandler : MonoBehaviour
 
         Vector2 movement = new Vector2(moveHorizontal, moveVertical) * speed;
         rb.velocity = movement;
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            playerStats.TakeDamage(1);
+        }
         if(rb.velocity.magnitude > 0)
         {
             IsMoving = true;

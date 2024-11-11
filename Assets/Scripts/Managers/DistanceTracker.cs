@@ -16,9 +16,6 @@ public class DistanceTracker : MonoBehaviour
     public Transform startPosition;
     public float playerDistance; 
     public Transform endPosition;
-    public bool spawnlevel1;
-    public bool spawnlevel2;
-    public bool spawnlevel3;
     [Header("UI elements")]
     public Slider distanceTracker;
     public TextMeshProUGUI WarningText;
@@ -60,18 +57,6 @@ public class DistanceTracker : MonoBehaviour
                 endPosition = endObj.transform;
             }
         }
-        // GameObject startObj = GameObject.Find("StartPos");
-        // GameObject endObj = GameObject.Find("EndPOS");
-
-        // if (startObj != null)
-        // {
-        //     startPosition = startObj.transform;
-        // }
-
-        // if (endObj != null)
-        // {
-        //     endPosition = endObj.transform;
-        // }
     }
 
     void SetValues()
@@ -93,18 +78,16 @@ public class DistanceTracker : MonoBehaviour
     }
     void Checkpoint()
     {
-            if (playerBehaviour.transform.position.y >=  checkpointManager.Checkpoint1 && !spawnlevel1)
+            if (playerBehaviour.transform.position.y >=  checkpointManager.Checkpoint1)
             {
-                spawnlevel1 = true;
                 checkpointManager.UpdateCheckpointStatus(0, true);
             }
             if (playerBehaviour.transform.position.y >= checkpointManager.Checkpoint2)
             {
                 checkpointManager.UpdateCheckpointStatus(1, true);
             }
-            if (playerBehaviour.transform.position.y >= checkpointManager.Checkpoint3 && !spawnlevel3)
+            if (playerBehaviour.transform.position.y >= checkpointManager.Checkpoint3)
             {
-                spawnlevel3 = true;
                 checkpointManager.UpdateCheckpointStatus(2, true);
             }
     }
@@ -123,11 +106,5 @@ public class DistanceTracker : MonoBehaviour
             WarningText.gameObject.SetActive(true);
             WarningText.text = "YAARRR! Ye is about to enter dangerous waters! Your ship is not ready!";
         }
-    }
-    public void SetFalse()
-    {
-        spawnlevel1 = false;
-        spawnlevel2 = false;
-        spawnlevel3 = false;
     }
 }

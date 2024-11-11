@@ -162,12 +162,9 @@ public class PlayerStats : MonoBehaviour
             uIManager.SetGameState("GameOver");
             ResetHealth();
             Debug.Log("Player is Dead");
-            levelManager.SetFalse();
-            levelManager.ClearScene();
             Debug.Log("Setting levelMan False");
             checkpointManager.SetFalse();
             Debug.Log("Setting Checkpoint False");
-            distanceTracker.SetFalse();
             Debug.Log("Setting Distance False");
             Respawn();
         }

@@ -6,6 +6,9 @@ public class CheckpointManager : MonoBehaviour
 {
     [Header("Class calls")]
     public LevelManager levelManager;
+    public InventoryManager inventoryManager;
+    [Header("Variables")]
+    public int checkpointbonus = 5;
     [Header("Bools")]
     //Bools for checkpoints
     public bool FirstCheckpoint;
@@ -18,13 +21,15 @@ public class CheckpointManager : MonoBehaviour
     public float Checkpoint3;
     public void SetValues()
     {
-        Checkpoint1 = -150;
+        Checkpoint1 = -120;
         Checkpoint2 = 25;
         Checkpoint3 = 200;
     }
     public void UpdateCheckpointStatus(int checkpointIndex, bool status)
     {
-        switch (checkpointIndex)
+        if(levelManager.levelName == "GameTestScene")
+        {
+            switch (checkpointIndex)
         {
             case 0:
                 FirstCheckpoint = status;
@@ -41,6 +46,7 @@ public class CheckpointManager : MonoBehaviour
             default:
                 Debug.LogWarning("Invalid checkpoint index");
                 break;
+        }
         }
     }
     public void SetFalse()
