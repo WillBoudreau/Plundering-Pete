@@ -20,8 +20,6 @@ public class UIManager : MonoBehaviour
     }
     public GameState currentGameState;
     [Header("Class calls")]
-    public PlayerBehaviour player;
-    public LevelManager levelManager;
     public InventoryManager inventoryManager;
     public DistanceTracker distanceTracker;
     public PlayerStats playerStats;
@@ -162,71 +160,5 @@ public class UIManager : MonoBehaviour
                 currentGameState = GameState.MainMenu;
                 break;
         }
-    }
-    public void UILoadingScreen(GameObject uiPanel)
-    {
-        StartCoroutine(LoadingUIFadeIN());
-        StartCoroutine(DelayedSwitchUIPanel(fadeTime, uiPanel));
-    }
-    private IEnumerator LoadingUIFadeOut()
-    {
-        Debug.Log("Starting Fadeout");
-
-        float timer = 0;
-
-        while (timer < fadeTime)
-        {
-            loadingScreenCanvasGroup.alpha = Mathf.Lerp(1, 0, timer/fadeTime);
-            timer += Time.deltaTime;
-            yield return null;
-        }
-
-        loadingScreenCanvasGroup.alpha = 0;
-        LoadingScreen.SetActive(false);
-
-        Debug.Log("Ending Fadeout");
-    }
-    private IEnumerator LoadingUIFadeIN()
-    {
-        Debug.Log("Starting Fadein");
-        float timer = 0;
-        LoadingScreen.SetActive(true);
-
-        while (timer < fadeTime)
-        {
-            loadingScreenCanvasGroup.alpha = Mathf.Lerp(0, 1, timer / fadeTime);
-            timer += Time.deltaTime;
-            yield return null;
-        }
-
-        loadingScreenCanvasGroup.alpha = 1;
-
-        Debug.Log("Ending Fadein");
-        StartCoroutine(LoadingBarProgress());
-    }
-   private IEnumerator LoadingBarProgress()
-    {
-        Debug.Log("Starting Progress Bar");
-        while (levelManager.scenesToLoad.Count <= 0)
-        {
-            //waiting for loading to begin
-            yield return null;
-        }
-        while (levelManager.scenesToLoad.Count > 0)
-        {
-            loadingBar.fillAmount = levelManager.GetLoadingProgress();
-            yield return null;
-        }
-        yield return new WaitForEndOfFrame();
-        Debug.Log("Ending Progress Bar");
-        StartCoroutine(LoadingUIFadeOut());
-        loadingBar.fillAmount = 0;
-    }
-    private IEnumerator DelayedSwitchUIPanel(float time, GameObject uiPanel)
-    {
-        yield return new WaitForSeconds(time);
-        DeactivateAllUI();
-        LoadingScreen.SetActive(true);
-        uiPanel.SetActive(true);
     }
 }

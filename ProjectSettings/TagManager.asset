@@ -20,6 +20,7 @@ TagManager:
   - EnemyShip
   - Serpent
   - CoinBag
+  - Level2
   layers:
   - Default
   - TransparentFX

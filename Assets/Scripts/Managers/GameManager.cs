@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     [Header("Class Calls")]
     public UIManager uiManager;
     public LevelManager levelManager;
+
+    public SpawnManager spawnManager;
     public GameObject player;
     public GameObject Camera;
     public PlayerBehaviour playerBehaviour;
@@ -18,7 +20,6 @@ public class GameManager : MonoBehaviour
     public InventoryManager inventoryManager;
     [Header("Variables")]
     public bool PlayerEnabled;
-    public Transform playerSpawnPoint;
     public Button loadButton;
     
 
@@ -41,10 +42,9 @@ public class GameManager : MonoBehaviour
         uiManager.UpdateUI();
         if (levelManager.levelName == "GameTestScene" && uiManager.currentGameState == UIManager.GameState.GamePlay)
         {
-            playerSpawnPoint = GameObject.Find("PlayerSpawnPoint").transform;
             if (playerStats.PlayerPlaced == false)
             {
-                levelManager.PlacePlayer();
+                spawnManager.PlacePlayerAtSpawn();
                 playerStats.PlayerPlaced = true;
             }
             EnablePlayer();
@@ -60,6 +60,7 @@ public class GameManager : MonoBehaviour
         }
         else if(uiManager.currentGameState == UIManager.GameState.GameOver)
         {
+
             DisablePlayer();
             DisableCamera();
         }

@@ -12,16 +12,6 @@ public class SharkBahaviour : Enemy
     public float maxHealth;
     float bottomY = -140f;
 
-    private PlayerStats player;
-    private Renderer renderer;
-    private GameObject Gold;
-    private Color originalColor;
-    private float speed;
-    private float health;
-    private float damage;
-    private int FlickerCount = 3;
-    private float FlickerDuration = 0.1f;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -34,12 +24,14 @@ public class SharkBahaviour : Enemy
         damage = 1;
         stoppingDistance = 2;
         detectionDistance = 6;
+        FlickerCount = 3;
+        FlickerDuration = 0.1f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        player = GameObject.Find("Player").GetComponent<PlayerStats>();
+        player = GameObject.Find("Player");
         Move();
         playerStats = GameObject.Find("Player").GetComponent<PlayerStats>();
         if(Gold == null)
@@ -110,7 +102,7 @@ public class SharkBahaviour : Enemy
         Instantiate(Gold, transform.position, Quaternion.identity);
         Debug.Log("Gold Dropped");
         Destroy(gameObject);
-        Debug.Log("Shark Kills" + player.SharkKills);
+        Debug.Log("Shark Kills" + playerStats.SharkKills);
         playerStats.SharkKills += 1;
     }
 }

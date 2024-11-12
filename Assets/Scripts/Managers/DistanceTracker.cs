@@ -8,6 +8,7 @@ public class DistanceTracker : MonoBehaviour
 {
     [Header("Class calls")]
     public PlayerBehaviour playerBehaviour;
+    public PlayerMovementHandler playerMovementHandler;
     public PlayerStats playerStats;
     public CheckpointManager checkpointManager;
     public LevelManager levelManager;
@@ -26,6 +27,7 @@ public class DistanceTracker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Checkpoint();
         if (startPosition == null || endPosition == null)
         {
             FindPositions();
@@ -33,9 +35,7 @@ public class DistanceTracker : MonoBehaviour
         checkpointManager.SetValues();
         SetValues();
         TrackDist();
-        Checkpoint();
         DisplayWarning();
-        playerDistance = Vector3.Distance(startPosition.position, playerBehaviour.transform.position);
     }
 
     void FindPositions()
@@ -71,26 +71,16 @@ public class DistanceTracker : MonoBehaviour
 
     void TrackDist()
     {
-        if (startPosition != null && playerBehaviour != null)
+        if(playerMovementHandler.IsMoving)
         {
-            distanceTracker.value = playerDistance;
+            playerDistance = Vector3.Distance(startPosition.position, playerBehaviour.transform.position);
+            if (startPosition != null && playerBehaviour != null)
+            {
+                distanceTracker.value = playerDistance;
+            }
         }
     }
-    void Checkpoint()
-    {
-            if (playerBehaviour.transform.position.y >=  checkpointManager.Checkpoint1)
-            {
-                checkpointManager.UpdateCheckpointStatus(0, true);
-            }
-            if (playerBehaviour.transform.position.y >= checkpointManager.Checkpoint2)
-            {
-                checkpointManager.UpdateCheckpointStatus(1, true);
-            }
-            if (playerBehaviour.transform.position.y >= checkpointManager.Checkpoint3)
-            {
-                checkpointManager.UpdateCheckpointStatus(2, true);
-            }
-    }
+
     void DisplayWarning()
     {
         WarningText.gameObject.SetActive(false);

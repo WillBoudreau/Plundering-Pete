@@ -58,9 +58,9 @@ public class WaveManger : MonoBehaviour
     void SetStartValues()
     {
         //Set the number of starting enemies
-        numSharks = 50;
-        numSerpents = 50;
-        numShips = 50;
+        numSharks = 3;
+        numSerpents = 3;
+        numShips = 3;
         
         //Update Lists after initiating the values
         UpdateLists();
@@ -117,15 +117,16 @@ public class WaveManger : MonoBehaviour
     {
         while (true)
         {
-            if (spawnTime <= 0 && checkpointManager.FirstCheckpoint)
+            if (spawnTime <= 0 && checkpointManager.FirstCheckpoint && checkpointManager.SecondCheckpoint == false)
             {
                 //Debug.Log("Spawning Sharks");
                 SpawnEnemy(SharkPrefab, SpawnPoints1, ref SharkSpawnIndex);
                 spawnTime = 5f;
             }
-                if (spawnTime <= 0 && checkpointManager.SecondCheckpoint)
+                if (spawnTime <= 0 && checkpointManager.SecondCheckpoint && checkpointManager.ThirdCheckpoint == false)
                 {
                     // Spawn 5 sharks before each serpent
+                    checkpointManager.FirstCheckpoint = false;
                     for (int i = 0; i < 5; i++)
                     {
                         SpawnEnemy(SharkPrefab, SpawnPoints2, ref SerpentSpawnIndex);
@@ -135,10 +136,13 @@ public class WaveManger : MonoBehaviour
                 }
                 if (spawnTime <= 0 && checkpointManager.ThirdCheckpoint)
                 {
+                    checkpointManager.SecondCheckpoint = false;
+                    // Spawn 10 sharks before each serpent
                     for(int i = 0; i < 10; i++)
                     {
                         SpawnEnemy(SharkPrefab, SpawnPoints3, ref SharkSpawnIndex);
                     }
+                    // Spawn 5 serpents before each ship
                     for(int i = 0; i < 5; i++)
                     {
                         SpawnEnemy(SerpentPrefab, SpawnPoints3, ref SerpentSpawnIndex);

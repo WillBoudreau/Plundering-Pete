@@ -11,57 +11,40 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private CollectorManager collectorManager;
     [SerializeField] private MusicChanger musicChanger;
     [SerializeField] private CheckpointManager checkpointManager;  
-    [SerializeField] private UIManager uiManager;
     [SerializeField] private ObstacleManager obstacleManager;
     [SerializeField] private PlayerBehaviour player;
-    [SerializeField] private GameObject Camera;
+    [SerializeField] private SpawnManager spawnManager;
     [Header("Loading Screen")]
     public List<AsyncOperation> scenesToLoad = new List<AsyncOperation>();
     [Header("Level Variables")]
     public string levelName;
-    public Transform playerSpawnPoint; 
+ 
     public float safeDistance = 5f;
-    private bool[] hasSpawnedZone = new bool[3];
-    private const float PlayerZPOS = -2f;
-    private const float CameraZPOS = -30f;
+    [SerializeField] private bool[] hasSpawnedZone = new bool[3];
 
-
-    void Start()
-    {
-        player = GameObject.Find("Player").GetComponent<PlayerBehaviour>();
-    }
 
     // Update is called once per frame
     void Update()
     {
         levelName = SceneManager.GetActiveScene().name;
-        playerSpawnPoint = GameObject.Find("PlayerSpawnPoint").transform;
-        UpdateZoneObstacles();
     }
-    void UpdateZoneObstacles()
+
+    public void UpdateZoneObstacles()
     {
         hasSpawnedZone[0] = checkpointManager.FirstCheckpoint;
         hasSpawnedZone[1] = checkpointManager.SecondCheckpoint;
         hasSpawnedZone[2] = checkpointManager.ThirdCheckpoint;
     }
+
     public void LoadLevel(string name)
     {
-        Debug.Log("Level load requested for: " + name);
-        SceneManager.LoadScene(name);
-
-        //PlacePlayer();
-        if(name == "GameTestScene")
-        {
-            obstacleManager.AddObstaclesToList();
-            StartCoroutine(WaitForSceneToLoadAndRespawn());
-            musicChanger.PlaySceneTrack(name);
-        }
-        else
-        {
-            musicChanger.PlaySceneTrack(name);
-
-        }
-
+        StartCoroutine(WaitForSceneToLoadAndRespawn(name));
+    }
+    void ResetLevel()
+    {
+        checkpointManager.SetFalse();
+        // UpdateZoneObstacles();
+        collectorManager.hasSpawnedDoubloons = false;
     }
 
     public void QuitRequest()
@@ -70,100 +53,65 @@ public class LevelManager : MonoBehaviour
         Application.Quit();
     }
 
-    private IEnumerator WaitForSceneToLoadAndRespawn()
+    private IEnumerator WaitForSceneToLoadAndRespawn(string SceneName)
     {
-        Debug.Log("Waiting for scene to load");
-        Debug.Log(uiManager.fadeTime);
-        yield return new WaitForSeconds(uiManager.fadeTime);
-        Debug.Log("Loading Scene Starting");
-        // Rest of the setup
-        UpdateObjects();
+        AsyncOperation operation = SceneManager.LoadSceneAsync(SceneName);
+        yield return new WaitUntil(() => operation.isDone);
+        ClearObstacles();
+        ResetLevel();
+        UpdateZoneObstacles();
+        //UpdateObjects();
+        spawnManager.PlacePlayerAtSpawn();
         musicChanger.PlaySceneTrack(SceneManager.GetActiveScene().name);
     }   
     void SpawnObjects()
     {
         if(levelName == "GameTestScene")
         {
-            if(checkpointManager.FirstCheckpoint == true && !hasSpawnedZone[0])
+            obstacleManager.AddObstaclesToList();
+            if(checkpointManager.FirstCheckpoint == true)
             {
-                Debug.Log("Spawning Objects");
-                collectorManager.hasSpawnedDoubloons = false;
-                //Spawn Doubloons
+                //Spawn Doubloons and obstacles for the first part of the level
                 collectorManager.SpawnDoubloons(player.transform, safeDistance);
-                //Spawn Rocks
-                SpawnObstaclesInZone(obstacleManager.zone1,obstacleManager.Zone1Obstacles,0);
+                SpawnObstaclesInZone(obstacleManager.zone1,obstacleManager.Zone1Obstacles);
                 hasSpawnedZone[0] = true;
             }
             else if(checkpointManager.SecondCheckpoint == true && !hasSpawnedZone[1])
             {
-                //Spawn Icebergs
-                SpawnObstaclesInZone(obstacleManager.zone2,obstacleManager.Zone2Obstacles,1);
+                //Spawn Obstacles for the second part of the level
+                SpawnObstaclesInZone(obstacleManager.zone2,obstacleManager.Zone2Obstacles);
                 hasSpawnedZone[1] = true;
             }
             else if(checkpointManager.ThirdCheckpoint == true && !hasSpawnedZone[2])
             {
-                //Spawn Debris
-                SpawnObstaclesInZone(obstacleManager.zone3,obstacleManager.Zone3Obstacles,2);
+                //Spawn obstacles for the third part of the level
+                SpawnObstaclesInZone(obstacleManager.zone3,obstacleManager.Zone3Obstacles);
                 hasSpawnedZone[2] = true;
             }
         }
     }
-    void SpawnObstaclesInZone(ObstacleManager.ObstacleZone zone, List<GameObject> obstacles,int zoneIndex)
+
+    void SpawnObstaclesInZone(ObstacleManager.ObstacleZone zone, List<GameObject> obstacles)
     {
+        //Spawn obstacles in the appropriate zone
         obstacleManager.SpawnObstaclesInZone(zone,obstacles,player.transform,safeDistance);
     }
+
     public void UpdateObjects()
     {
-        if(checkpointManager.FirstCheckpoint == true)
+        //Update the objects in the scene
+        if(checkpointManager.FirstCheckpoint == true && !hasSpawnedZone[0])
         {
             SpawnObjects();
         }
-        else if (checkpointManager.SecondCheckpoint == true)
+        else if (checkpointManager.SecondCheckpoint == true && !hasSpawnedZone[1])
         {
             SpawnObjects();
         }
-        else if (checkpointManager.ThirdCheckpoint == true)
+        else if (checkpointManager.ThirdCheckpoint == true && !hasSpawnedZone[2])
         {
             SpawnObjects();
         }
-    }
-    public void PlacePlayer()
-    {
-        Vector3 playerPosition = playerSpawnPoint.position;
-        playerPosition.z = PlayerZPOS;
-        player.transform.position = playerPosition;
-
-        Vector3 cameraPosition = playerSpawnPoint.position;
-        cameraPosition.z =  CameraZPOS;
-        Camera.transform.position = cameraPosition;
-    }
-
-    private IEnumerator WaitForScreenLoad(string sceneName)
-    {
-        yield return new WaitForSeconds(uiManager.fadeTime);
-        Debug.Log("Loading Scene Starting");
-
-        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
-        operation.completed += OperationCompleted;
-        scenesToLoad.Add(operation);
-    }
-
-    public float GetLoadingProgress()
-    {
-        float totalprogress = 0;
-
-        foreach (AsyncOperation operation in scenesToLoad)
-        {
-            totalprogress += operation.progress;
-        }
-
-        return totalprogress / scenesToLoad.Count;
-    }
-
-    private void OperationCompleted(AsyncOperation operation)
-    {
-        Debug.Log("Scene Loaded");
-        scenesToLoad.Remove(operation);
     }
     void ClearObstacles()
     {

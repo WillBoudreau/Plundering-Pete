@@ -27,7 +27,7 @@ public class PlayerBehaviour : MonoBehaviour
     void Update()
     {
         HandlePlayer();
-        GetPlayerLayerMask();
+        //GetPlayerLayerMask();
         inventoryManager = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
         DoubloonText = GameObject.Find("DoubloonsText").GetComponent<TextMeshProUGUI>();
         levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
@@ -97,48 +97,25 @@ public class PlayerBehaviour : MonoBehaviour
             break;
         }
     }
-    public void GetPlayerLayerMask()
+    void OnTriggerStay2D(Collider2D other)
     {
-        float dist = 5.0f;
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector3.forward, dist, playerStats.groundLayer);
-        Debug.DrawRay(transform.position, Vector3.forward * dist, Color.red);
-        if (hit.collider != null)
+        switch (other.gameObject.tag)
         {
-            Debug.Log("Hit Object: " + hit.collider.gameObject.name);
-            switch (hit.collider.gameObject.name)
+            case "Level2":
+            Debug.Log("Level 2");
+            checkpointManager.UpdateCheckpointStatus(0, false);
+            checkpointManager.UpdateCheckpointStatus(1, true);
+            if(playerStats.IsLevel2 == false)
             {
-                case "MedLevel":
-                    checkpointManager.UpdateCheckpointStatus(0, false);
-                    checkpointManager.UpdateCheckpointStatus(1, true);
-                    if (!playerStats.IsLevel2 && !playerStats.IsLevel3)
-                    {
-                        Debug.Log("Ship is too weak");
-                        time -= Time.deltaTime;
-                        Debug.Log(time);
-                        if (time <= 1)
-                        {
-                            playerStats.TakeDamage(1f);
-                            time = 5f;
-                        }
-                    }
-                    break;
-                case "HardLevel":
-                    Debug.Log("Hard Level");
-                    checkpointManager.UpdateCheckpointStatus(1, false);
-                    checkpointManager.UpdateCheckpointStatus(2, true);
-                    if (!playerStats.IsLevel3)
-                    {
-                        Debug.Log("Ship is too weak");
-                        time -= Time.deltaTime;
-                        Debug.Log(time);
-                        if (time <= 1)
-                        {
-                            playerStats.TakeDamage(1f);
-                            time = 5f;
-                        }
-                    }
-                    break;
+                time -= Time.deltaTime;
+                Debug.Log(time);
+                if (time <= 1)
+                {
+                    playerStats.TakeDamage(1f);
+                    time = 5f;
+                }
             }
+            break;
         }
     }
 }

@@ -1345,8 +1345,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 213861766}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 4.7499924, y: 4.4999814}
   m_SizeDelta: {x: 21.8903, y: 13.9525}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1726,7 +1726,7 @@ RectTransform:
   m_Father: {fileID: 1912446170}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2101,7 +2101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelManager: {fileID: 1051185688}
-  inventoryManager: {fileID: 0}
+  playerBehaviour: {fileID: 551069647}
   checkpointbonus: 5
   FirstCheckpoint: 0
   SecondCheckpoint: 0
@@ -2142,7 +2142,7 @@ RectTransform:
   m_Father: {fileID: 1098192710}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2707,7 +2707,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &392818793
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3824,7 +3824,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 551069641}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3b9a3ea51961a75428bbb4c91d33cabb, type: 3}
   m_Name: 
@@ -6062,7 +6062,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &902718852
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6721,13 +6721,12 @@ MonoBehaviour:
   collectorManager: {fileID: 1826889079}
   musicChanger: {fileID: 2083907201}
   checkpointManager: {fileID: 324095957}
-  uiManager: {fileID: 1728282020}
   obstacleManager: {fileID: 1683598818}
   player: {fileID: 551069647}
-  Camera: {fileID: 177806781}
+  spawnManager: {fileID: 1626319226}
   levelName: 
-  playerSpawnPoint: {fileID: 0}
   safeDistance: 5
+  hasSpawnedZone: 000000
 --- !u!1 &1055681760 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1744041394810459262, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
@@ -6853,7 +6852,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: -98.89847, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -9734,13 +9733,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiManager: {fileID: 1728282020}
   levelManager: {fileID: 1051185688}
+  spawnManager: {fileID: 1626319226}
   player: {fileID: 551069641}
   Camera: {fileID: 177806781}
   playerBehaviour: {fileID: 551069647}
   playerStats: {fileID: 551069652}
   inventoryManager: {fileID: 1039502979}
   PlayerEnabled: 0
-  playerSpawnPoint: {fileID: 0}
   loadButton: {fileID: 1368000655}
 --- !u!114 &1547232564
 MonoBehaviour:
@@ -9799,6 +9798,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerBehaviour: {fileID: 551069647}
+  playerMovementHandler: {fileID: 551069651}
   playerStats: {fileID: 551069652}
   checkpointManager: {fileID: 324095957}
   levelManager: {fileID: 1051185688}
@@ -10101,6 +10101,7 @@ Transform:
   - {fileID: 1713031253}
   - {fileID: 1556131825}
   - {fileID: 324095956}
+  - {fileID: 1626319225}
   m_Father: {fileID: 1547232562}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1613720157
@@ -10317,6 +10318,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1618810377}
   m_CullTransparentMesh: 1
+--- !u!1 &1626319224
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1626319225}
+  - component: {fileID: 1626319226}
+  m_Layer: 0
+  m_Name: SpawnManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1626319225
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1626319224}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -361.4133, y: -243.92055, z: -0.92022634}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1612513595}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1626319226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1626319224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5325dbeebef9b24e85be826093115a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelManager: {fileID: 1051185688}
+  Camera: {fileID: 177806781}
+  playerSpawnPoint: {fileID: 0}
+  player: {fileID: 551069641}
 --- !u!1001 &1641570941
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11101,6 +11150,7 @@ MonoBehaviour:
   Iceberg: {fileID: 8951899304849922272, guid: 1da721168e4fcea4b96b6c5582c929b1, type: 3}
   Debris: {fileID: 8951899304849922272, guid: 60e159277ab1693428d34dcd836a49d7, type: 3}
   takenPOS: 5
+  safeDistance: 5
   zone1Xnegative: -15
   zone1Xpositive: 15
   zone1Ynegative: -25
@@ -11374,8 +11424,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentGameState: 0
-  player: {fileID: 551069647}
-  levelManager: {fileID: 1051185688}
   inventoryManager: {fileID: 1039502979}
   distanceTracker: {fileID: 1556131826}
   playerStats: {fileID: 551069652}
@@ -12902,6 +12950,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2083907201}
     - target: {fileID: 216527445050619400, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: spawnManager
+      value: 
+      objectReference: {fileID: 1626319226}
+    - target: {fileID: 216527445050619400, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
       propertyPath: healthManager
       value: 
       objectReference: {fileID: 734893757}
@@ -13975,7 +14027,7 @@ RectTransform:
   m_Father: {fileID: 485279118}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: -3.2300034, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

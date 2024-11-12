@@ -8,9 +8,8 @@ public class PlayerStats : MonoBehaviour
     public HealthManager healthManager;
     [SerializeField] private UIManager uIManager;
     [SerializeField] private MusicChanger musicManager;
-    [SerializeField] private LevelManager levelManager;
     [SerializeField] private CheckpointManager checkpointManager;
-    [SerializeField] private DistanceTracker distanceTracker;
+    [SerializeField] private SpawnManager spawnManager;
     [Header("Number of Kills")]
     public int SharkKills;
     public int SerpentKills;
@@ -29,9 +28,8 @@ public class PlayerStats : MonoBehaviour
     public float playerHealth;
     public float magnet;
     public float bulletVelocity;
-    public int checkpoint;
-    public LayerMask groundLayer;
     public bool Win;
+    public LayerMask groundLayer;
     public Transform firePoint;
     public bool PlayerPlaced;
     [Header("Player Levels")]
@@ -58,7 +56,6 @@ public class PlayerStats : MonoBehaviour
     }
     void HandleHealthBar()
     {
-        Debug.Log("Player Health: " + playerHealth);
         healthManager.health = playerHealth;
         healthManager.playerhealth.maxValue = startHealth;
         healthManager.playerhealth.value = playerHealth;
@@ -157,29 +154,23 @@ public class PlayerStats : MonoBehaviour
     {
         if (playerHealth <= 0)
         {
-            // healthManager.IsDead = true;
             playerHealth = 0;
             uIManager.SetGameState("GameOver");
             ResetHealth();
-            Debug.Log("Player is Dead");
-            Debug.Log("Setting levelMan False");
-            checkpointManager.SetFalse();
-            Debug.Log("Setting Checkpoint False");
-            Debug.Log("Setting Distance False");
             Respawn();
+            checkpointManager.SetFalse();
         }
     }
+
     void Respawn()
     {
-        levelManager.PlacePlayer();
+        spawnManager.PlacePlayer();
         healthManager.IsDead = false;
     }
+
     private void ResetHealth()
     {
-        Debug.Log("Resetting Health");
         playerHealth = startHealth;
-        Debug.Log("Player Health: " + playerHealth);
         healthManager.health = playerHealth;
-        Debug.Log("Health Manager Health: " + healthManager.health);
     }
 }
