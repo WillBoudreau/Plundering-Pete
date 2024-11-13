@@ -118,6 +118,7 @@ public class ObstacleManager : MonoBehaviour
             spawnPosition = GetSpawnPos(XNeg, XPos, YNeg, YPos);
             attempts++;
         } while (Vector3.Distance(spawnPosition, playerPosition) < safeDistance || IsPositionUsed(spawnPosition) && attempts < maxAttempts);
+        Debug.Log("Attempts: " + attempts);
         return spawnPosition;
     }
     //For if the position is occupied pick another
