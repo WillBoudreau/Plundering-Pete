@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class Enemy : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public abstract class Enemy : MonoBehaviour
     public Color originalColor;
     public float FlickerDuration;
     public int FlickerCount;
+    public Slider healthBar;
     [Header("Player")]
     //Get a refernce to the player
     // public PlayerBehaviour player;
