@@ -26,6 +26,7 @@ public class SharkBahaviour : Enemy
         detectionDistance = 6;
         FlickerCount = 3;
         FlickerDuration = 0.1f;
+        AdhustHealthBar();
     }
 
     // Update is called once per frame
@@ -86,6 +87,7 @@ public class SharkBahaviour : Enemy
     }
     void AdhustHealthBar()
     {
+        healthBar.maxValue = maxHealth;
         healthBar.value = health;
     }
 
