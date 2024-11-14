@@ -16,7 +16,8 @@ public class UIManager : MonoBehaviour
         Credits,
         GameOver,
         Upgrades,
-        Win
+        Win,
+        Results
     }
     public GameState currentGameState;
     [Header("Class calls")]
@@ -34,6 +35,7 @@ public class UIManager : MonoBehaviour
     public GameObject InstructionsScreen;
     public GameObject LoadingScreen;
     public GameObject CreditsScreen;
+    public GameObject results;
     [Header("Texts")]
     public TextMeshProUGUI playerCoins;
     public TextMeshProUGUI playerSharkKills;
@@ -86,6 +88,10 @@ public class UIManager : MonoBehaviour
                 DeactivateAllUI();
                 CreditsScreen.SetActive(true);
                 break;
+            case GameState.Results:
+                DeactivateAllUI();
+                results.SetActive(true);
+                break;
             default:
                 break;
             
@@ -102,6 +108,7 @@ public class UIManager : MonoBehaviour
         upgradesMenu.SetActive(true);
         InstructionsScreen.SetActive(true);
         CreditsScreen.SetActive(true);
+        results.SetActive(true);
     }
     void DeactivateAllUI()
     {
@@ -114,6 +121,7 @@ public class UIManager : MonoBehaviour
         upgradesMenu.SetActive(false);
         InstructionsScreen.SetActive(false);
         CreditsScreen.SetActive(false);
+        results.SetActive(false);
     }
     void UpdateGameOver()
     {
@@ -155,6 +163,9 @@ public class UIManager : MonoBehaviour
                 break;
             case "Credits":
                 currentGameState = GameState.Credits;
+                break;
+            case "Results":
+                currentGameState = GameState.Results;
                 break;
             default:
                 currentGameState = GameState.MainMenu;
