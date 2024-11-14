@@ -1,19 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class CheckpointManager : MonoBehaviour
 {
     [Header("Class calls")]
     [SerializeField] private LevelManager levelManager;
+    [SerializeField] private InventoryManager inventoryManager;
     [SerializeField] private PlayerBehaviour playerBehaviour;
     [Header("Variables")]
     public int checkpointbonus = 5;
+    public TextMeshProUGUI checkpointText;
     [Header("Bools")]
     //Bools for checkpoints
     public bool FirstCheckpoint;
     public bool SecondCheckpoint;
     public bool ThirdCheckpoint;
+    //Bool for checkpoint bonus
+    public bool CheckpointBonus2;
+    public bool CheckpointBonus3;
     [Header("Checkpoints")]
     //Checkpoints
     public float Checkpoint1;
@@ -29,6 +35,12 @@ public class CheckpointManager : MonoBehaviour
     void Update()
     {
         Checkpoint();
+    }
+    IEnumerator UpdateText()
+    {
+        checkpointText.text = "Checkpoint Bonus!: " + checkpointbonus;
+        yield return new WaitForSeconds(5);
+        checkpointText.text = "";
     }
     void Checkpoint()
     {
@@ -58,16 +70,37 @@ public class CheckpointManager : MonoBehaviour
                 break;
                 case 1:
                     SecondCheckpoint = status;
+                    if(!CheckpointBonus2 && status)
+                    {
+                        StartCoroutine(UpdateText());
+                        CheckpointBonus(checkpointbonus, status);
+                        CheckpointBonus2 = true;
+                    }
                     levelManager.UpdateObjects();
                 break;
                 case 2:
                     ThirdCheckpoint = status;
+                    if(!CheckpointBonus3 && status)
+                    {
+                        StartCoroutine(UpdateText());
+                        CheckpointBonus(checkpointbonus, status);
+                        CheckpointBonus3 = true;
+                    }
                     levelManager.UpdateObjects();
                 break;
                 default:
                     Debug.LogWarning("Invalid checkpoint index");
                 break;
             }
+        }
+    }
+
+    void CheckpointBonus(int checkpointbonus, bool status)
+    {
+        if(status)
+        {
+            status = false;
+            inventoryManager.coinCount += checkpointbonus;
         }
     }
 
