@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SerpentBehaviour : Enemy
 {
@@ -21,7 +22,7 @@ public class SerpentBehaviour : Enemy
         damage = 1;
         stoppingDistance = 2;
         detectionDistance = 20;
-
+        AdhustHealthBar();
     }
 
     // Update is called once per frame
@@ -54,10 +55,15 @@ public class SerpentBehaviour : Enemy
     {
         StartCoroutine(Flicker());
         health -= damage;
+        AdhustHealthBar();
         if(health <= 0)
         {
             Death();
         }
+    }
+    void AdhustHealthBar()
+    {
+        healthBar.value = health / maxHealth;
     }
     public override IEnumerator Flicker()
     {

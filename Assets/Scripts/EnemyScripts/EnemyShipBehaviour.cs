@@ -32,6 +32,7 @@ public class EnemyShipBehaviour : Enemy
         CanonVelocity = 25f;
         fireRate = 5f;
         startPosition = transform.position;
+        AdhustHealthBar();
     }
 
     // Update is called once per frame
@@ -85,12 +86,17 @@ public class EnemyShipBehaviour : Enemy
     {
         StartCoroutine(Flicker());
         health -= damage;
+        AdhustHealthBar();
         if (health <= 0)
         {
             Death();
         }
     }
 
+    void AdhustHealthBar()
+    {
+        healthBar.value = health / maxHealth;
+    }
     public override IEnumerator Flicker()
     {
         for (int i = 0; i < FlickerCount; i++)
