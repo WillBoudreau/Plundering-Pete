@@ -49,6 +49,10 @@ public class PlayerStats : MonoBehaviour
         renderer = GetComponentInChildren<Renderer>();
         originalColor = GetComponentInChildren<Renderer>().material.color;
     }
+    // void Update()
+    // {
+    //     HandlePlayer();
+    // }
     public void HandlePlayer()
     {
         HandleHealthBar();
@@ -82,39 +86,20 @@ public class PlayerStats : MonoBehaviour
     }
     public void LevelUp()
     {
-        if(Level == 1)
+        if(Level < PlayerLevels.Count)
         {
-            Level = 1;
-            PlayerLevels[0].SetActive(true);
+            Level++;
+            for(int i = 0; i < PlayerLevels.Count; i++)
+            {
+                PlayerLevels[i].SetActive( i == Level - 1);
+            }
+            IsLevel2 = (Level == 2);
+            IsLevel3 = (Level == 3);
         }
-        else if(Level == 2 || IsLevel2)
+        else
         {
-            Level ++;
-            if(Level == 2)
-            {
-                IsLevel2 = true;
-            }
-            else if(Level >= 2)
-            {
-                Level = 2;
-            }
-            PlayerLevels[0].SetActive(false);
-            PlayerLevels[1].SetActive(true);
-        }
-        else if(Level == 3 || IsLevel3)
-        {
-            Level = 3;
-            if(Level == 3)
-            {
-                IsLevel3 = true;
-            }
-            else if(Level >= 3)
-            {
-                Level = 3;
-            }
-            PlayerLevels[0].SetActive(false);
-            PlayerLevels[1].SetActive(false);
-            PlayerLevels[2].SetActive(true);
+            Level = PlayerLevels.Count;
+            Debug.Log("Max Level Reached");
         }
     }
     void HandleMagnit()

@@ -7549,7 +7549,7 @@ MonoBehaviour:
   playerBehaviour: {fileID: 551069647}
   playerStats: {fileID: 551069652}
   playerMovementHandler: {fileID: 551069651}
-  cost: 10
+  cost: 0
   ShipText: {fileID: 2103557183}
   costText: {fileID: 1151608682}
   ButtonText: {fileID: 888159595}

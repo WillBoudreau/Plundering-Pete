@@ -15,15 +15,10 @@ public class UpgradeManager : MonoBehaviour
     [Header("Text Slots")]
     //Text for the slots
     public TextMeshProUGUI NumberCoinsText;
-    [Header("Variables")]
-    //Values and their max values
-    //Start Cost and Cost for the upgrades
-    public int ShipCost;
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player").GetComponent<PlayerStats>();
-        SetValues();
     }
     // Update is called once per frame
     void Update()
@@ -36,27 +31,28 @@ public class UpgradeManager : MonoBehaviour
         NumberCoinsText.text = "Doubloons " + inventory.coinCount + "/" + inventory.maxCoins;
     }
     //Set the variable values at the start of the game
-    void SetValues()
-    {
-        ShipCost = shipUpgrade.cost;
-    }
     public void UpgradeShip()
     {
-        if(inventory.coinCount >= ShipCost && player.IsLevel3 == false)
+        Debug.Log("Doubloons: " + inventory.coinCount);
+        Debug.Log("Cost: " + shipUpgrade.cost);
+        Debug.Log("Checking Cost for Ship Upgrade");
+        if(inventory.coinCount >= shipUpgrade.cost)
         {
-            Debug.Log("Upgrading Ship from manager");
-            if(player.IsLevel2 == false)
+            Reset();
+            Debug.Log("Upgrading Player Ship");
+            if(!player.IsLevel2)
             {
-                Debug.Log("Level 2");
                 player.IsLevel2 = true;
-                Reset();
             }
-            else if(player.IsLevel2 == true && player.IsLevel3 == false)
+            else if(!player.IsLevel3)
             {
-                player.IsLevel2 = false;
                 player.IsLevel3 = true;
-                Reset();
+                player.IsLevel2 = false;
             }
+        }
+        else
+        {
+            shipUpgrade.costText.text = "Not enough coins";
         }
     }
     public void Reset()

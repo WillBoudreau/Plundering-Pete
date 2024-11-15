@@ -47,27 +47,11 @@ public class GameManager : MonoBehaviour
                 spawnManager.PlacePlayerAtSpawn();
                 playerStats.PlayerPlaced = true;
             }
-            EnablePlayer();
-            EnableCamera();
-            EnableLoadButton();
-            Time.timeScale = 1;
+            EnableGameplay();
         }
-        else if(uiManager.currentGameState == UIManager.GameState.Pause | uiManager.currentGameState == UIManager.GameState.GameOver)
+        else if(uiManager.currentGameState == UIManager.GameState.Pause || uiManager.currentGameState == UIManager.GameState.GameOver)
         {
-            Time.timeScale = 0;
-            DisablePlayer();
-            DisableCamera();
-        }
-        else if(uiManager.currentGameState == UIManager.GameState.GameOver)
-        {
-
-            DisablePlayer();
-            DisableCamera();
-        }
-        else
-        {
-            DisablePlayer();
-            DisableCamera();
+            DisableGameplay();
         }
     }
 
@@ -88,6 +72,20 @@ public class GameManager : MonoBehaviour
                 uiManager.currentGameState = UIManager.GameState.GamePlay;
             }
         }
+    }
+    void EnableGameplay()
+    {
+        EnableCamera();
+        EnablePlayer();
+        EnableLoadButton();
+        Time.timeScale = 1;
+    }
+    void DisableGameplay()
+    {
+        DisablePlayer();
+        DisableCamera();
+        DisableLoadButton();
+        Time.timeScale = 0;
     }
     void EnableCamera()
     {

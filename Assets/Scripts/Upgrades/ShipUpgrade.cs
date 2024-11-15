@@ -56,7 +56,8 @@ public class ShipUpgrade : Upgrade
         if (playerStats.Level < MaxLevel)
         {
             Debug.Log("Upgrading Player Ship");
-            playerStats.Level ++;
+            playerStats.LevelUp();
+            playerStats.Level++;
             playerStats.damage += 10;
             playerStats.playerHealth += 10;
             playerStats.startHealth += 10;
@@ -76,17 +77,7 @@ public class ShipUpgrade : Upgrade
     }
     public override void Reset()
     {
-        // foreach (var upgrade in UpgradeDisplay)
-        // {
-        //     var image = upgrade.GetComponent<UnityEngine.UI.Image>();
-        //     if (image != null)
-        //     {
-        //         image.color = Color.green;
-        //     }
-        // }
-        // currentUpgradeIndex = 0;
-        // MaxLevel += 3;
-        // cost += 10;
+        
     }
 
     void UpdateUpgradeDisplay()
