@@ -6112,7 +6112,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &884719223
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13872,6 +13872,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4098233298752386087, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: uIManager
+      value: 
+      objectReference: {fileID: 1728282020}
+    - target: {fileID: 4098233298752386087, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 177806784}
@@ -13887,6 +13891,14 @@ PrefabInstance:
       propertyPath: musicManager
       value: 
       objectReference: {fileID: 2083907201}
+    - target: {fileID: 4098233298752386087, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: inventoryManager
+      value: 
+      objectReference: {fileID: 1039502979}
+    - target: {fileID: 4098233298752386087, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: checkpointManager
+      value: 
+      objectReference: {fileID: 324095957}
     - target: {fileID: 4098233298752386087, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
       propertyPath: level2BulletPrefab
       value: 

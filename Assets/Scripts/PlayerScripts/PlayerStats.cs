@@ -42,6 +42,7 @@ public class PlayerStats : MonoBehaviour
     private Color originalColor;
     public float FlickerDuration = 0.1f; 
     public int FlickerCount = 5;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -49,21 +50,23 @@ public class PlayerStats : MonoBehaviour
         renderer = GetComponentInChildren<Renderer>();
         originalColor = GetComponentInChildren<Renderer>().material.color;
     }
-    // void Update()
-    // {
-    //     HandlePlayer();
-    // }
+
+    //Hanlde the player (Called in PlayerBehaviour)
     public void HandlePlayer()
     {
         HandleHealthBar();
         HandleMagnit();
     }
+
+    //Handle the health bar
     void HandleHealthBar()
     {
         healthManager.health = playerHealth;
         healthManager.playerhealth.maxValue = startHealth;
         healthManager.playerhealth.value = playerHealth;
     }
+
+    //Set the starting values for the player
     void SetValues()
     {
         //Set starting values
@@ -84,6 +87,8 @@ public class PlayerStats : MonoBehaviour
         //Set Win Bool
         Win = false;
     }
+
+    //Level up the player(Called in ShipUpgrade)
     public void LevelUp()
     {
         if(Level < PlayerLevels.Count)
@@ -102,6 +107,8 @@ public class PlayerStats : MonoBehaviour
             Debug.Log("Max Level Reached");
         }
     }
+
+    //Handle the magnet power of the ship
     void HandleMagnit()
     {
         //Handle the magnet powerup
@@ -113,6 +120,8 @@ public class PlayerStats : MonoBehaviour
             }
         }
     }
+
+    //Take damage from the player(Called in PlayerBehaviour)
     public void TakeDamage(float damage)
     {
         StartCoroutine(Flicker());
@@ -122,6 +131,7 @@ public class PlayerStats : MonoBehaviour
         HandleHealthBar();
         Death();
     }
+
     //Flicker for damage
     IEnumerator Flicker()
     {
@@ -135,6 +145,8 @@ public class PlayerStats : MonoBehaviour
         }
         GetComponentInChildren<Renderer>().material.color = originalColor;
     }
+
+    //Death of the player
     public void Death()
     {
         if (playerHealth <= 0)
@@ -147,12 +159,14 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
+    //Respawn the player
     void Respawn()
     {
         spawnManager.PlacePlayer();
         healthManager.IsDead = false;
     }
 
+    //Reset the health of the player
     private void ResetHealth()
     {
         playerHealth = startHealth;

@@ -7,6 +7,10 @@ public class PlayerMovementHandler : MonoBehaviour
     [Header("Player Stats")]
     [SerializeField] private PlayerStats playerStats;
     [SerializeField] private MusicChanger musicManager;
+    [SerializeField] private UIManager uIManager;
+    [SerializeField] private InventoryManager inventoryManager;
+    [SerializeField] private CheckpointManager checkpointManager;
+    [SerializeField] private float time = 5.0f;
     [Header("Player Movement")]
     [SerializeField] private float speed = 5.0f;
     [SerializeField] private float startFireRate = 0.5f;
@@ -19,6 +23,8 @@ public class PlayerMovementHandler : MonoBehaviour
     public Rigidbody2D rb;
     public bool IsFiring;
     public float cooldownTimer = 0f;
+
+    // Handle the player movement( Called in PlayerBehaviour)
     public void HandlePlayerMovement()
     {
         HandleMovement();
@@ -26,8 +32,9 @@ public class PlayerMovementHandler : MonoBehaviour
         StaywithinBounds();
         cooldownTimer -= Time.deltaTime;
     }
+
     //Handle the players shooting
-     void HandleShooting()
+    void HandleShooting()
     {
         //Handle player shooting by tracking the mouse pos
         playerStats.fireRate -= Time.deltaTime;
@@ -72,6 +79,7 @@ public class PlayerMovementHandler : MonoBehaviour
             playerStats.fireRate = playerStats.startFireRate;
         }
     }
+
     //Handle the player movement
     public void HandleMovement()
     {
@@ -94,6 +102,8 @@ public class PlayerMovementHandler : MonoBehaviour
             IsMoving = false;
         }
     }
+
+    //Ensure the player remains within the camera bounds
     void StaywithinBounds()
     {
         // Ensure the player remains within the camera bounds
@@ -102,5 +112,97 @@ public class PlayerMovementHandler : MonoBehaviour
         viewportPos.x = Mathf.Clamp(viewportPos.x, 0.05f, 0.95f);
         viewportPos.y = Mathf.Clamp(viewportPos.y, 0.05f, 0.95f);
         transform.position = mainCamera.ViewportToWorldPoint(viewportPos);
+    }
+
+    //Handle the player colliding with objects
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        switch(other.gameObject.tag)
+        {
+            case "WinTrig":
+            playerStats.Win = true;
+            uIManager.SetGameState("Win");
+            break;
+            case "Gold":
+            if(inventoryManager.IsMax == false)
+            {
+                inventoryManager.coinCount ++;
+                other.gameObject.SetActive(false);
+            }
+            else
+            {
+                other.gameObject.SetActive(true);
+                playerStats.magnet = 0;
+            }
+            break;
+            case "CoinBag":
+            if(inventoryManager.IsMax == false)
+            {
+                inventoryManager.coinCount += 5;
+                other.gameObject.SetActive(false);
+            }
+            else
+            {
+                other.gameObject.SetActive(true);
+                playerStats.magnet = 0;
+            }
+            break;
+            case "Obstacle":
+            playerStats.TakeDamage(other.gameObject.GetComponent<Obstacle>().damage);
+            break;
+            case "Shark":
+            playerStats.TakeDamage(other.gameObject.GetComponent<SharkBahaviour>().damage);
+            break;
+            case "Serpent":
+            playerStats.TakeDamage(other.gameObject.GetComponent<SerpentBehaviour>().damage);
+            break;
+            case "EnemyShip":
+            playerStats.TakeDamage(other.gameObject.GetComponent<EnemyShipBehaviour>().damage);
+            break;
+            case "CanonBall":
+            var enemyShip = other.gameObject.GetComponent<EnemyShipBehaviour>();
+            if (enemyShip != null)
+            {
+                playerStats.TakeDamage(enemyShip.damage);
+                Destroy(other.gameObject);
+            }
+            break;
+        }
+    }
+    void OnTriggerStay2D(Collider2D other)
+    {
+        switch (other.gameObject.tag)
+        {
+            case "Level2":
+            Debug.Log("Level 2");
+            checkpointManager.UpdateCheckpointStatus(0, false);
+            checkpointManager.UpdateCheckpointStatus(1, true);
+            if(playerStats.IsLevel2 == false)
+            {
+                time -= Time.deltaTime;
+                Debug.Log(time);
+                if (time <= 1)
+                {
+                    playerStats.TakeDamage(1f);
+                    time = 5f;
+                }
+            }
+            break;
+            case "Level3":
+            Debug.Log("Level 3");
+            checkpointManager.UpdateCheckpointStatus(1, false);
+            checkpointManager.UpdateCheckpointStatus(2, true);
+            if(playerStats.IsLevel3 == false)
+            {
+                time -= Time.deltaTime;
+                Debug.Log(time);
+                if (time <= 1)
+                {
+                    playerStats.TakeDamage(1f);
+                    time = 5f;
+                }
+            }
+            break;
+        }
     }
 }

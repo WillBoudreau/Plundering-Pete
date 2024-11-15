@@ -506,8 +506,8 @@ MonoBehaviour:
   FlickerDuration: 0
   FlickerCount: 0
   healthBar: {fileID: 4840496466267951197}
-  player: {fileID: 0}
-  playerStats: {fileID: 0}
+  player: {fileID: 4680544976309677066, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+  playerStats: {fileID: 216527445050619400, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
   stoppingDistance: 0
   maxHealth: 0
   CanonVelocity: 0
