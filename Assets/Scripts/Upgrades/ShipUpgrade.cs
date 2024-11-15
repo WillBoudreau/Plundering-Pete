@@ -57,7 +57,6 @@ public class ShipUpgrade : Upgrade
         {
             Debug.Log("Upgrading Player Ship");
             UpgradeBonus();
-            cost += 30;
             playerStats.healthManager.playerhealth.maxValue = playerStats.playerHealth;
             Debug.Log("Player Ship: " + playerStats.Level);
         }
@@ -81,6 +80,7 @@ public class ShipUpgrade : Upgrade
         playerStats.startHealth += 10;
         playerStats.speed += 10;
         playerStats.magnet += 3;
+        cost += 30;
     }
 
     void UpdateUpgradeDisplay()

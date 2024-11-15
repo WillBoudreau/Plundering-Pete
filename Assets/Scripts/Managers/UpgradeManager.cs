@@ -26,17 +26,18 @@ public class UpgradeManager : MonoBehaviour
         inventory = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
         SetText();
     }
+    //Set the text for the inventory
     void SetText()
     {
         NumberCoinsText.text = "Doubloons " + inventory.coinCount + "/" + inventory.maxCoins;
     }
-    //Set the variable values at the start of the game
+    //Upgrade the player ship
     public void UpgradeShip()
     {
         Debug.Log("Doubloons: " + inventory.coinCount);
         Debug.Log("Cost: " + shipUpgrade.cost);
         Debug.Log("Checking Cost for Ship Upgrade");
-        if(inventory.coinCount >= shipUpgrade.cost)
+        if(inventory.coinCount >= shipUpgrade.cost && !player.IsLevel3)
         {
             Reset();
             Debug.Log("Upgrading Player Ship");
@@ -55,6 +56,7 @@ public class UpgradeManager : MonoBehaviour
             shipUpgrade.costText.text = "Not enough coins";
         }
     }
+    //Reset the upgrades
     public void Reset()
     {
         foreach (var upgrade in upgrades)
