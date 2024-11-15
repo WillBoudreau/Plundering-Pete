@@ -56,13 +56,7 @@ public class ShipUpgrade : Upgrade
         if (playerStats.Level < MaxLevel)
         {
             Debug.Log("Upgrading Player Ship");
-            playerStats.LevelUp();
-            playerStats.Level++;
-            playerStats.damage += 10;
-            playerStats.playerHealth += 10;
-            playerStats.startHealth += 10;
-            playerStats.speed += 10;
-            playerStats.magnet += 3;
+            UpgradeBonus();
             cost += 30;
             playerStats.healthManager.playerhealth.maxValue = playerStats.playerHealth;
             Debug.Log("Player Ship: " + playerStats.Level);
@@ -78,6 +72,15 @@ public class ShipUpgrade : Upgrade
     public override void Reset()
     {
         
+    }
+    void UpgradeBonus()
+    {
+        playerStats.LevelUp();
+        playerStats.damage += 10;
+        playerStats.playerHealth += 10;
+        playerStats.startHealth += 10;
+        playerStats.speed += 10;
+        playerStats.magnet += 3;
     }
 
     void UpdateUpgradeDisplay()

@@ -21,6 +21,7 @@ TagManager:
   - Serpent
   - CoinBag
   - Level2
+  - Level3
   layers:
   - Default
   - TransparentFX

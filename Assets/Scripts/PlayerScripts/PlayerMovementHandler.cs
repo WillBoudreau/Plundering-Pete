@@ -60,6 +60,7 @@ public class PlayerMovementHandler : MonoBehaviour
             }
             else if(playerStats.IsLevel3)
             {
+                Debug.Log("Firing Level 3");
                 for(int i = 0; i < 3; i++)
                 {
                     GameObject bullet2 = Instantiate(level3BulletPrefab, bulletSpawnPos, Quaternion.identity);

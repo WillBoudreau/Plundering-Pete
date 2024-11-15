@@ -13748,6 +13748,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 1547232562}
     m_Modifications:
     - target: {fileID: 216527445050619400, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: Level
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 216527445050619400, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: IsLevel2
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 216527445050619400, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: IsLevel3
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 216527445050619400, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
       propertyPath: firePoint
       value: 
       objectReference: {fileID: 1107478806}
@@ -13799,6 +13811,22 @@ PrefabInstance:
       propertyPath: PlayerLevels.Array.data[2]
       value: 
       objectReference: {fileID: 1586149740}
+    - target: {fileID: 586798737938438208, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8165863
+      objectReference: {fileID: 0}
+    - target: {fileID: 586798737938438208, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.66555405
+      objectReference: {fileID: 0}
+    - target: {fileID: 586798737938438208, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.9951
+      objectReference: {fileID: 0}
+    - target: {fileID: 586798737938438208, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.8473
+      objectReference: {fileID: 0}
     - target: {fileID: 1806202154656914932, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.33
