@@ -12,19 +12,20 @@ public class CursorCooldown : MonoBehaviour
 
     void Update()
     {
-        SetCostomCursor();
+        //SetCostomCursor();
         //Debug.Log($"Is firing: {playerMovement.IsFiring}, CooldownTime: {playerMovement.cooldownTimer}, FireRate: {playerStats.fireRate}");
-        if(playerMovement.cooldownTimer >= 0f)
+        cursorCooldown.fillAmount = 1f;
+        if(playerMovement.IsFiring)
         {
-            float FillAmount = playerMovement.cooldownTimer/playerStats.fireRate;
-           //Debug.Log(FillAmount);
-            cursorCooldown.fillAmount = FillAmount;
-            //Debug.Log(cursorCooldown.fillAmount);
-            //Debug.Log(FillAmount);
+            Debug.Log("Firing");
+            Debug.Log(playerStats.fireRate);
+            Debug.Log(cursorCooldown.fillAmount);
+            float cooldownTime = playerStats.fireRate;
+            cursorCooldown.fillAmount = cooldownTime;
         }
-        else
+        else 
         {
-            cursorCooldown.fillAmount = 1f;
+            cursorCooldown.fillAmount = 1;
         }
     }
     void SetCostomCursor()
