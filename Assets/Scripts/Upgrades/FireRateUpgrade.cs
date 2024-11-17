@@ -10,14 +10,19 @@ public class FireRateUpgrade : Upgrade
     public TextMeshProUGUI FireRateText;
     public TextMeshProUGUI costText;
     public TextMeshProUGUI ButtonText;
-    public float MaxFireRate;
+    [Header("UI Elements")]
     public List<GameObject> FRUpgrade = new List<GameObject>();
     private int currentUpgradeIndex = 0;
+    [Header("Upgrade Values")]
+    public float MaxFireRate;
+    private const int BaseCost = 10;
+    private const float FireRateIncrement = 0.2f;
 
     void Start()
     {
-        MaxFireRate = playerStats.fireRate - 0.2f * FRUpgrade.Count;
-        cost = 10;
+        // Set the max fire rate to the player's fire rate minus the increment times the number of upgrades
+        MaxFireRate = playerStats.fireRate - FireRateIncrement * FRUpgrade.Count;
+        cost = BaseCost;
         // Initialize the damageUpgrade images to white
         foreach (var upgrade in FRUpgrade)
         {
@@ -36,6 +41,7 @@ public class FireRateUpgrade : Upgrade
         ButtonText.text = "Cost: " + cost;
     }
 
+    // Check the cost of the upgrade
     public override void CostCheck()
     {
         Debug.Log("Checking Cost for Fire Rate Upgrade");
@@ -51,24 +57,23 @@ public class FireRateUpgrade : Upgrade
         }
     }
 
+    // Upgrade the player's fire rate
     public override void UpgradePlayer()
     {
         if (playerStats.startFireRate > MaxFireRate)
         {
-            Debug.Log("Upgrading Player Fire Rate");
-            playerStats.fireRate -= 0.2f;
-            playerStats.startFireRate -= 0.2f;
-            Debug.Log("Player FireRate: " + playerStats.fireRate.ToString("F2"));
+            playerStats.fireRate -= FireRateIncrement;
+            playerStats.startFireRate -= FireRateIncrement;
             UpdateUpgradeDisplay();
         }
         else
         {
             inventory.coinCount += cost;
-            Debug.Log("Max fire rate Reached");
             FireRateText.text = "Max Fire Rate Reached";
         }
     }
-
+    
+    // Reset the upgrade
     public override void Reset()
     {
         foreach (var upgrade in FRUpgrade)
@@ -80,10 +85,11 @@ public class FireRateUpgrade : Upgrade
             }
         }
         currentUpgradeIndex = 0;
-        MaxFireRate = playerStats.fireRate - 0.2f * FRUpgrade.Count;
-        cost = 10;
+        MaxFireRate = playerStats.fireRate - FireRateIncrement * FRUpgrade.Count;
+        cost = BaseCost;
     }
 
+    // Update the upgrade display
     void UpdateUpgradeDisplay()
     {
         if (currentUpgradeIndex < FRUpgrade.Count)

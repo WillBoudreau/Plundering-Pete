@@ -10,15 +10,19 @@ public class HealthUpgrade : Upgrade
     public TextMeshProUGUI healthText;
     public TextMeshProUGUI costText;
     public TextMeshProUGUI ButtonText;
-    public float MaxHeatlh;
+    [Header("UI Elements")]
     public List<GameObject> healthUpgrade = new List<GameObject>();
     private int currentUpgradeIndex = 0;
-    public bool IsReset = false;
+    [Header("Upgrade Values")]
+    float MaxHeatlh;
+    private const int BaseCost = 10;
+    private const float HealthIncrement = 3;
+    bool IsReset = false;
 
     void Start()
     {
-        MaxHeatlh = 8;
-        cost = 10;
+        MaxHeatlh = playerStats.playerHealth + HealthIncrement;
+        cost = BaseCost;
         // Initialize the damageUpgrade images to white
         foreach (var upgrade in healthUpgrade)
         {
@@ -37,7 +41,7 @@ public class HealthUpgrade : Upgrade
         ButtonText.text = "Cost: " + cost;
         if(IsReset == true)
         {
-            MaxHeatlh = playerStats.playerHealth + 3;
+            MaxHeatlh = playerStats.playerHealth + HealthIncrement;
             IsReset = false;
         }
     }
@@ -53,7 +57,6 @@ public class HealthUpgrade : Upgrade
         }
         else
         {
-            Debug.Log("Not enough coins");
             costText.text = "Not enough coins";
         }
     }
@@ -88,8 +91,8 @@ public class HealthUpgrade : Upgrade
             }
         }
         currentUpgradeIndex = 0;
-        MaxHeatlh = playerStats.playerHealth + 3;
-        cost += 10;
+        MaxHeatlh = playerStats.playerHealth + HealthIncrement;
+        cost += BaseCost;
     }
 
     void UpdateUpgradeDisplay()

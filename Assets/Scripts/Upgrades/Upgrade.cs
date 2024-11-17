@@ -10,6 +10,7 @@ public class Upgrade : MonoBehaviour
     public PlayerStats playerStats;
     public PlayerMovementHandler playerMovementHandler;
     public int cost;
+    public int CostIncrement;
     void Start()
     {
         

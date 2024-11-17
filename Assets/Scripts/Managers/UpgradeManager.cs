@@ -10,7 +10,6 @@ public class UpgradeManager : MonoBehaviour
     public PlayerStats player;
     public ShipUpgrade shipUpgrade;
     public List<Upgrade> upgrades = new List<Upgrade>();
-    //InventoryManager reference
     public InventoryManager inventory;
     [Header("Text Slots")]
     //Text for the slots
@@ -19,27 +18,24 @@ public class UpgradeManager : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player").GetComponent<PlayerStats>();
+        inventory = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
     }
     // Update is called once per frame
     void Update()
     {
-        inventory = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
         SetText();
     }
     //Set the text for the inventory
     void SetText()
     {
-        NumberCoinsText.text = "Doubloons " + inventory.coinCount + "/" + inventory.maxCoins;
+        NumberCoinsText.text = $"Doubloons {inventory.coinCount}/{inventory.maxCoins}";
     }
     //Upgrade the player ship
     public void UpgradeShip()
     {
-        Debug.Log("Doubloons: " + inventory.coinCount);
-        Debug.Log("Cost: " + shipUpgrade.cost);
-        Debug.Log("Checking Cost for Ship Upgrade");
         if(inventory.coinCount >= shipUpgrade.cost && !player.IsLevel3)
         {
-            Reset();
+            ResetUpgrades();
             Debug.Log("Upgrading Player Ship");
             if(!player.IsLevel2)
             {
@@ -57,7 +53,7 @@ public class UpgradeManager : MonoBehaviour
         }
     }
     //Reset the upgrades
-    public void Reset()
+    public void ResetUpgrades()
     {
         foreach (var upgrade in upgrades)
         {

@@ -10,17 +10,19 @@ public class GoldStorageUpgrade : Upgrade
     public TextMeshProUGUI CargoText;
     public TextMeshProUGUI costText;
     public TextMeshProUGUI ButtonText;
-    public int MaxCargo;
-    public int MaxNumberOfCoins = 100;
+    [Header("UI Elements")]
     public List<GameObject> CargoUpgrade= new List<GameObject>();
     private int currentUpgradeIndex = 0;
+    [Header("Upgrade Values")]
+    public int MaxCargo;
+    public int MaxNumberOfCoins = 100;
+    private const int BaseCost = 10;
     public bool IsReset = false;
 
     void Start()
     {
         MaxCargo = inventory.maxCoins + MaxNumberOfCoins;
-
-        cost = 10;
+        cost = BaseCost;
         // Initialize the damageUpgrade images to white
         foreach (var upgrade in CargoUpgrade)
         {
@@ -104,6 +106,6 @@ public class GoldStorageUpgrade : Upgrade
         }
         MaxCargo = inventory.maxCoins + MaxNumberOfCoins;
         currentUpgradeIndex = 0;
-        cost += 10;
+        cost += BaseCost;
     }
 }

@@ -9,14 +9,23 @@ public class ShipUpgrade : Upgrade
     public TextMeshProUGUI ShipText;
     public TextMeshProUGUI costText;
     public TextMeshProUGUI ButtonText;
-    public int MaxLevel;
+    [Header("UI Elements")]
     public List<GameObject> UpgradeDisplay = new List<GameObject>();
     private int currentUpgradeIndex = 0;
+    [Header("Upgrade Values")]
+    public int MaxLevel = 3;
+    private const int BaseCost = 55;
+    private const int CostIncrement = 30;
+    private const int DamageIncrement = 10;
+    private const int HealthIncrement = 10;
+    private const int SpeedIncrement = 10;
+    private const int MagnetIncrement = 3;
+
 
     void Start()
     {
         MaxLevel = 3;
-        cost = 55;
+        cost = BaseCost;
         // Initialize the damageUpgrade images to white
         foreach (var upgrade in UpgradeDisplay)
         {
@@ -37,7 +46,6 @@ public class ShipUpgrade : Upgrade
 
     public override void CostCheck()
     {
-        Debug.Log("Checking Cost for Ship Upgrade");
         if (inventory.coinCount >= cost)
         {
             inventory.coinCount -= cost;
@@ -46,7 +54,6 @@ public class ShipUpgrade : Upgrade
         }
         else
         {
-            Debug.Log("Not enough coins");
             costText.text = "Not enough coins";
         }
     }
@@ -55,16 +62,13 @@ public class ShipUpgrade : Upgrade
     {
         if (playerStats.Level < MaxLevel)
         {
-            Debug.Log("Upgrading Player Ship");
             UpgradeBonus();
             playerStats.healthManager.playerhealth.maxValue = playerStats.playerHealth;
-            Debug.Log("Player Ship: " + playerStats.Level);
         }
         else
         {
             ButtonText.text = "Max Ship Reached";
             inventory.coinCount += cost;
-            Debug.Log("Max Ship Reached");
             ShipText.text = "Max Ship Reached";
         }
     }
@@ -75,12 +79,12 @@ public class ShipUpgrade : Upgrade
     void UpgradeBonus()
     {
         playerStats.LevelUp();
-        playerStats.damage += 10;
-        playerStats.playerHealth += 10;
-        playerStats.startHealth += 10;
-        playerStats.speed += 10;
-        playerStats.magnet += 3;
-        cost += 30;
+        playerStats.damage += DamageIncrement;
+        playerStats.playerHealth += HealthIncrement;
+        playerStats.startHealth += HealthIncrement;
+        playerStats.speed += SpeedIncrement;
+        playerStats.magnet += MagnetIncrement;
+        cost += CostIncrement;
     }
 
     void UpdateUpgradeDisplay()

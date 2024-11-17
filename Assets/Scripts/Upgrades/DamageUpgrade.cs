@@ -9,16 +9,24 @@ public class DamageUpgrade : Upgrade
     public TextMeshProUGUI damageText;
     public TextMeshProUGUI costText;
     public TextMeshProUGUI ButtonText;
-    public float MaxDamage;
+
+    [Header("UI Elements")]
+    //UI Elements for the upgrade
     public List<GameObject> damageUpgrade = new List<GameObject>();
     private int currentUpgradeIndex = 0;
+
+    [Header("Upgrade Values")]
+    //Upgrade Values
+    private const int DamageIncrement = 3;
+    private const int BaseCost = 10;
+    public float MaxDamage;
     public bool IsReset = false;
 
     void Start()
     {
-        MaxDamage = playerStats.damage + 3;
-        cost = 10;
-        // Initialize the damageUpgrade images to white red 
+        MaxDamage = playerStats.damage + DamageIncrement;
+        cost = BaseCost;
+        // Initialize the damageUpgrade images to red 
         foreach (var upgrade in damageUpgrade)
         {
             var image = upgrade.GetComponent<UnityEngine.UI.Image>();
@@ -41,41 +49,37 @@ public class DamageUpgrade : Upgrade
         }
     }
 
+    //Check the cost of the upgrade
     public override void CostCheck()
     {
         Debug.Log("Checking Cost for Damage Upgrade");
         if (inventory.coinCount >= cost)
         {
-            Debug.Log("Upgrading Player Damage");
             inventory.coinCount -= cost;
             UpgradePlayer();
             UpdateUpgradeDisplay();
         }
         else
         {
-            Debug.Log("Not enough coins");
             costText.text = "Not enough coins";
         }
     }
 
+    //Upgrade the player damage
     public override void UpgradePlayer()
     {
         if (playerStats.damage < MaxDamage)
         {
-            Debug.Log("Upgrading Player Damage");
-            Debug.Log("Player Damage: " + playerStats.damage + " Max Damage: " + MaxDamage);
             playerStats.damage ++;
-            Debug.Log("Player Damage: " + playerStats.damage);
         }
         else
         {
             inventory.coinCount += cost;
-            Debug.Log("Max Damage Reached");
             damageText.text = "Max Damage Reached";
-            Debug.Log("Max Damage Reached");
-            Debug.Log("Player Damage: " + playerStats.damage + " Max Damage: " + MaxDamage);
         }
     }
+
+    //Reset the upgrade
     public override void Reset()
     {
         IsReset = true;
@@ -88,12 +92,11 @@ public class DamageUpgrade : Upgrade
             }
         }
         currentUpgradeIndex = 0;
-        MaxDamage = playerStats.damage + 3;
-        cost += 10;
-        Debug.Log("Resetting Damage Upgrade");
-        Debug.Log("Player Damage: " + playerStats.damage + " Max Damage: " + MaxDamage);
+        MaxDamage = playerStats.damage + DamageIncrement;
+        cost += BaseCost;
     }
 
+    //Update the upgrade display
     void UpdateUpgradeDisplay()
     {
         if (currentUpgradeIndex < damageUpgrade.Count)
