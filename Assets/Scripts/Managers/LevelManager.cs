@@ -29,6 +29,7 @@ public class LevelManager : MonoBehaviour
         levelName = SceneManager.GetActiveScene().name;
     }
 
+    //Update the zone obstacles
     public void UpdateZoneObstacles()
     {
         hasSpawnedZone[0] = checkpointManager.FirstCheckpoint;
@@ -36,10 +37,13 @@ public class LevelManager : MonoBehaviour
         hasSpawnedZone[2] = checkpointManager.ThirdCheckpoint;
     }
 
+    //Load the level
     public void LoadLevel(string name)
     {
         StartCoroutine(WaitForSceneToLoadAndRespawn(name));
     }
+
+    //Reset the level
     void ResetLevel()
     {
         checkpointManager.SetFalse();
@@ -47,12 +51,14 @@ public class LevelManager : MonoBehaviour
         collectorManager.hasSpawnedDoubloons = false;
     }
 
+    //Quit the game
     public void QuitRequest()
     {
         Debug.Log("Quit requested");
         Application.Quit();
     }
 
+    //Wait for the scene to load and respawn
     private IEnumerator WaitForSceneToLoadAndRespawn(string SceneName)
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(SceneName);
@@ -63,7 +69,9 @@ public class LevelManager : MonoBehaviour
         //UpdateObjects();
         spawnManager.PlacePlayerAtSpawn();
         musicChanger.PlaySceneTrack(SceneManager.GetActiveScene().name);
-    }   
+    } 
+
+    //Spawn the objects in the scene  
     void SpawnObjects()
     {
         if(levelName == "GameTestScene")
@@ -91,12 +99,15 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    //Spawn the obstacles in the zone
     void SpawnObstaclesInZone(ObstacleManager.ObstacleZone zone, List<GameObject> obstacles)
     {
         //Spawn obstacles in the appropriate zone
         obstacleManager.SpawnObstaclesInZone(zone,obstacles,player.transform,safeDistance);
     }
 
+
+    //Update the objects in the scene
     public void UpdateObjects()
     {
         //Update the objects in the scene
@@ -113,6 +124,8 @@ public class LevelManager : MonoBehaviour
             SpawnObjects();
         }
     }
+
+    //Clear the obstacles
     void ClearObstacles()
     {
         obstacleManager.Zone1Obstacles.Clear();
