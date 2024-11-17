@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 507619fa50010bc4284de84ee4d7561a
+guid: 484c077f3f9f8374c9f5444f854fd721
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,7 +97,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 638674653255954607
+  platformSettingsDirtyTick: 0
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -121,18 +121,18 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: HarpersPointIcon
+  - name: PlunderinPeteUIPanels_R
     originalName: 
-    pivot: {x: 0.53846157, y: -0.33333334}
+    pivot: {x: -1.6666667, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 13
-      height: 9
-    spriteID: 6925b97ce2344fa4fb21086a5151a27a
+      width: 90
+      height: 270
+    spriteID: 201ca1a1629e4614787446d63a84e53e
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -140,53 +140,29 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 3, y: 1}
+    uvTransform: {x: 4, y: 4}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: 102449052
-    name: HarpersPointIcon
+    guid: 1438368283
+    name: PlunderinPeteUIPanels_R
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: HarpersPointIcon
+    - name: PlunderinPeteUIPanels_R
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 0
+        x: 390
         y: 0
-        width: 16
-        height: 16
-      spriteId: 6925b97ce2344fa4fb21086a5151a27a
+        width: 90
+        height: 270
+      spriteId: 201ca1a1629e4614787446d63a84e53e
     linkedCells: []
     parentIndex: -1
-  platformSettings:
-  - name: DefaultTexturePlatform
-    overridden: 0
-    ignorePlatformSupport: 0
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    androidETC2FallbackOverride: 0
-  - name: Standalone
-    overridden: 0
-    ignorePlatformSupport: 0
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    androidETC2FallbackOverride: 0
+  platformSettings: []
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 16, y: 16}
+  canvasSize: {x: 480, y: 270}

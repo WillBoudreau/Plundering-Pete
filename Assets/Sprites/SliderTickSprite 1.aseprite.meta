@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 507619fa50010bc4284de84ee4d7561a
+guid: ff41f46ca616cdd47bc0460163765bb1
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,7 +97,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 638674653255954607
+  platformSettingsDirtyTick: 0
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -121,18 +121,18 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: HarpersPointIcon
+  - name: SliderTickSprite 1
     originalName: 
-    pivot: {x: 0.53846157, y: -0.33333334}
+    pivot: {x: 0.5, y: -1.5}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 13
-      height: 9
-    spriteID: 6925b97ce2344fa4fb21086a5151a27a
+      width: 14
+      height: 4
+    spriteID: fbbf9f8f35bfbcb448a10779fdb804c7
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -140,17 +140,17 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 3, y: 1}
+    uvTransform: {x: 3, y: -2}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: 102449052
-    name: HarpersPointIcon
+    guid: 256731368
+    name: SliderTickSprite 1
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: HarpersPointIcon
+    - name: SliderTickSprite 1
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
@@ -158,34 +158,10 @@ ScriptedImporter:
         y: 0
         width: 16
         height: 16
-      spriteId: 6925b97ce2344fa4fb21086a5151a27a
+      spriteId: fbbf9f8f35bfbcb448a10779fdb804c7
     linkedCells: []
     parentIndex: -1
-  platformSettings:
-  - name: DefaultTexturePlatform
-    overridden: 0
-    ignorePlatformSupport: 0
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    androidETC2FallbackOverride: 0
-  - name: Standalone
-    overridden: 0
-    ignorePlatformSupport: 0
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    androidETC2FallbackOverride: 0
+  platformSettings: []
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
