@@ -60,7 +60,6 @@ public class PlayerMovementHandler : MonoBehaviour
             }
             else if(playerStats.IsLevel3)
             {
-                Debug.Log("Firing Level 3");
                 for(int i = 0; i < 3; i++)
                 {
                     GameObject bullet2 = Instantiate(level3BulletPrefab, bulletSpawnPos, Quaternion.identity);
@@ -175,7 +174,7 @@ public class PlayerMovementHandler : MonoBehaviour
             Debug.Log("Level 2");
             checkpointManager.UpdateCheckpointStatus(0, false);
             checkpointManager.UpdateCheckpointStatus(1, true);
-            if(playerStats.IsLevel2 == false)
+            if(playerStats.IsLevel2 == false && playerStats.IsLevel3 == false)
             {
                 time -= Time.deltaTime;
                 Debug.Log(time);
