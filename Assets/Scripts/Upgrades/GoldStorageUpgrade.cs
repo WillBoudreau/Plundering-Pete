@@ -38,7 +38,7 @@ public class GoldStorageUpgrade : Upgrade
     void Update()
     {
       CargoText.text = "Cargo Hold: " + inventory.maxCoins;
-      ButtonText.text = "Cost: " + cost;
+      ButtonText.text = "$" + cost;
         if(IsReset == true)
         {
             MaxCargo = inventory.maxCoins + MaxNumberOfCoins;

@@ -38,7 +38,7 @@ public class FireRateUpgrade : Upgrade
     void Update()
     {
         FireRateText.text = "Fire Rate: " + playerStats.startFireRate.ToString("F2");
-        ButtonText.text = "Cost: " + cost;
+        ButtonText.text = "$" + cost;
     }
 
     // Check the cost of the upgrade

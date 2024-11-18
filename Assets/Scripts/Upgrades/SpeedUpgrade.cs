@@ -38,7 +38,7 @@ public class SpeedUpgrade : Upgrade
     void Update()
     {
         speedText.text = "Speed: " + playerStats.speed;
-        ButtonText.text = "Cost: " + cost;
+        ButtonText.text = "$" + cost;
         if(IsReset == true)
         {
             MaxSpeed = playerStats.speed + SpeedIncrement;

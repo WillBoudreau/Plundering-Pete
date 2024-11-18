@@ -41,7 +41,7 @@ public class DamageUpgrade : Upgrade
     void Update()
     {
         damageText.text = "Damage: " + playerStats.damage;
-        ButtonText.text = "Cost: " + cost;
+        ButtonText.text = "$" + cost;
         if(IsReset == true)
         {
             MaxDamage = playerStats.damage + 3;

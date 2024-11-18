@@ -38,7 +38,7 @@ public class MFGUpgrade : Upgrade
     void Update()
     {
        MFGText.text = "Magnet: " + playerStats.magnet;
-       ButtonText.text = "Cost: " + cost;
+       ButtonText.text = "$" + cost;
          if(IsReset == true)
          {
               MaxMagnet = playerStats.magnet + MagnetIncrement;

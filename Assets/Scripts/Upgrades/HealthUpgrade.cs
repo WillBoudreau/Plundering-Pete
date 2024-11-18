@@ -38,7 +38,7 @@ public class HealthUpgrade : Upgrade
     void Update()
     {
         healthText.text = "Health: " + playerStats.playerHealth;
-        ButtonText.text = "Cost: " + cost;
+        ButtonText.text = "$" + cost;
         if(IsReset == true)
         {
             MaxHeatlh = playerStats.playerHealth + HealthIncrement;

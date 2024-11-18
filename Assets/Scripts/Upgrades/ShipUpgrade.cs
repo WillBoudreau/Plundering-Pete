@@ -41,7 +41,7 @@ public class ShipUpgrade : Upgrade
     void Update()
     {
        ShipText.text = "Ship Level " + playerStats.Level;
-       ButtonText.text = "Cost: " + cost; 
+       ButtonText.text = "$" + cost; 
     }
 
     public override void CostCheck()
