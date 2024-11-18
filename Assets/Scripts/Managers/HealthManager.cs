@@ -39,7 +39,7 @@ public class HealthManager : MonoBehaviour
     }
     void HealthCounter(float health, float maxHealth)
     {
-        healthText.text = health + "/" + maxHealth;
+        healthText.text = "HP: " + health + "/" + maxHealth;
     }
     public virtual void Death()
     {
