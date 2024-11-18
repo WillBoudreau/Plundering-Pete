@@ -84,13 +84,16 @@ public class DistanceTracker : MonoBehaviour
     void DisplayWarning()
     {
         WarningText.gameObject.SetActive(false);
-        if(playerStats.IsLevel2 == false && playerStats.transform.position.y >= checkpointManager.Checkpoint2)
+        float PlayerDist = playerBehaviour.transform.position.y;
+        bool IsLevel2 = playerStats.IsLevel2;
+        bool IsLevel3 = playerStats.IsLevel3;
+        if(!IsLevel2 && !IsLevel3 && PlayerDist >= checkpointManager.Checkpoint2)
         {
             // Display warning
             WarningText.gameObject.SetActive(true);
             WarningText.text = "YAARRR! Ye is about to enter dangerous waters! Your ship is not ready!";
         }
-        else if(playerStats.IsLevel3 == false && playerStats.transform.position.y >= checkpointManager.Checkpoint3)
+        else if(IsLevel3 == false && PlayerDist >= checkpointManager.Checkpoint3)
         {
             // Display warning
             WarningText.gameObject.SetActive(true);
