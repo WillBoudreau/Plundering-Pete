@@ -68,6 +68,7 @@ public class HealthUpgrade : Upgrade
             Debug.Log("Upgrading Player Health");
             playerStats.playerHealth ++;
             playerStats.startHealth += 1;
+            playerStats.healthManager.HandlePlayerHealthBar(playerStats.playerHealth, playerStats.startHealth);
             Debug.Log("Player Health: " + playerStats.playerHealth);
         }
         else
