@@ -11363,7 +11363,7 @@ MonoBehaviour:
   spawnArea3:
     serializedVersion: 2
     x: -10
-    y: 390
+    y: 450
     width: 30
     height: 10
   playerSpawnPoint: {fileID: 0}
@@ -12275,7 +12275,7 @@ MonoBehaviour:
   zone2Xnegative: -15
   zone2Xpositive: 15
   zone2Ynegative: 15
-  zone2Ypositive: 50
+  zone2Ypositive: 200
   zone3Xnegative: -15
   zone3Xpositive: 15
   zone3Ynegative: 300
