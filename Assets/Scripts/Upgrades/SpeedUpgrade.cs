@@ -41,7 +41,7 @@ public class SpeedUpgrade : Upgrade
         ButtonText.text = "Cost: " + cost;
         if(IsReset == true)
         {
-            MaxSpeed = playerStats.speed + 3.0f;
+            MaxSpeed = playerStats.speed + SpeedIncrement;
             IsReset = false;
         }
     }
