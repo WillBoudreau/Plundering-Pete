@@ -17,9 +17,6 @@ public class CursorCooldown : MonoBehaviour
         cursorCooldown.fillAmount = 1f;
         if(playerMovement.IsFiring)
         {
-            Debug.Log("Firing");
-            Debug.Log(playerStats.fireRate);
-            Debug.Log(cursorCooldown.fillAmount);
             float cooldownTime = playerStats.fireRate;
             cursorCooldown.fillAmount = cooldownTime;
         }

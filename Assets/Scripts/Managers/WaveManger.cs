@@ -36,7 +36,6 @@ public class WaveManger : MonoBehaviour
     {
         Timer();
         StartCoroutine(SpawnEnemiesForWave(hasSpawnedEnemies));
-        Debug.Log(Sharks.Count);
     }
 
     //Timer for spawning enemies
