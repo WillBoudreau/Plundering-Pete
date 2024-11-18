@@ -7,14 +7,16 @@ public class HealthManager : MonoBehaviour
 {
     public UIManager uIManager;
     public GameObject player;
-    public Slider playerhealth;
+    public Image playerhealth;
     public float health;
+    public float maxHealth;
     public bool IsDead;
     // Start is called before the first frame update
     void Start()
     {
         IsDead = false;
         uIManager = FindObjectOfType<UIManager>();
+        health = maxHealth;
     }
 
     // Update is called once per frame
@@ -25,9 +27,9 @@ public class HealthManager : MonoBehaviour
             health = 0;
         }
     }
-    public virtual void TakeDamage(float damage)
+    public void HandlePlayerHealthBar(float health, float maxHealth)
     {
-        health -= damage;
+        playerhealth.fillAmount = health / maxHealth;
     }
     public virtual void Death()
     {

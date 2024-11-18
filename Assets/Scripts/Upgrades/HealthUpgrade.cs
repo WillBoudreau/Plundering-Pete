@@ -68,7 +68,6 @@ public class HealthUpgrade : Upgrade
             Debug.Log("Upgrading Player Health");
             playerStats.playerHealth ++;
             playerStats.startHealth += 1;
-            playerStats.healthManager.playerhealth.maxValue += 1;
             Debug.Log("Player Health: " + playerStats.playerHealth);
         }
         else

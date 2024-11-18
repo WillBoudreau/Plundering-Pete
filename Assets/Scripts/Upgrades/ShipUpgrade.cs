@@ -63,7 +63,7 @@ public class ShipUpgrade : Upgrade
         if (playerStats.Level < MaxLevel)
         {
             UpgradeBonus();
-            playerStats.healthManager.playerhealth.maxValue = playerStats.playerHealth;
+            playerStats.healthManager.HandlePlayerHealthBar(playerStats.playerHealth, playerStats.startHealth);
         }
         else
         {

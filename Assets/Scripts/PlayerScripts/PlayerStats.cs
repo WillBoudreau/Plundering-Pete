@@ -54,17 +54,17 @@ public class PlayerStats : MonoBehaviour
     //Hanlde the player (Called in PlayerBehaviour)
     public void HandlePlayer()
     {
-        HandleHealthBar();
+        //HandleHealthBar();
         HandleMagnit();
     }
 
-    //Handle the health bar
-    void HandleHealthBar()
-    {
-        healthManager.health = playerHealth;
-        healthManager.playerhealth.maxValue = startHealth;
-        healthManager.playerhealth.value = playerHealth;
-    }
+    // //Handle the health bar
+    // void HandleHealthBar()
+    // {
+    //     healthManager.health = playerHealth;
+    //     healthManager.playerhealth.value = playerHealth;
+    //     healthManager.playerhealth.maxValue = startHealth;  
+    // }
 
     //Set the starting values for the player
     void SetValues()
@@ -80,7 +80,7 @@ public class PlayerStats : MonoBehaviour
         magnet = 3f;
         //Assign values to be the starting values
         playerHealth = startHealth;
-        healthManager.playerhealth.maxValue = playerHealth;
+        healthManager.playerhealth.fillAmount = playerHealth;
         speed = StartSpeed;
         damage = startdamage;
         fireRate = startFireRate;
@@ -134,7 +134,7 @@ public class PlayerStats : MonoBehaviour
         musicManager.PlaySound(2);
         playerHealth -= damage;
 
-        HandleHealthBar();
+        healthManager.HandlePlayerHealthBar(playerHealth, startHealth);
         Death();
     }
 
@@ -177,5 +177,6 @@ public class PlayerStats : MonoBehaviour
     {
         playerHealth = startHealth;
         healthManager.health = playerHealth;
+        healthManager.HandlePlayerHealthBar(playerHealth, startHealth);
     }
 }
