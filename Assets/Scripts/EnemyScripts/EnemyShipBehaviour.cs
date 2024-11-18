@@ -125,7 +125,9 @@ public class EnemyShipBehaviour : Enemy
     {
         if (health <= 0)
         {
+            Instantiate(GoldBag, transform.position, Quaternion.identity);
             Destroy(gameObject);
+            playerStats.ShipKills++;
         }
     }
 }

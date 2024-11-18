@@ -533,7 +533,8 @@ MonoBehaviour:
   health: 0
   speed: 0
   damage: 0
-  Gold: {fileID: 0}
+  Gold: {fileID: 7112107127442301048, guid: 8c67685f1765d5a4582752a597e62618, type: 3}
+  GoldBag: {fileID: 5750131373629398110, guid: 2b6256c350c52474d9a7b2162de4f5e2, type: 3}
   renderer: {fileID: 0}
   originalColor: {r: 0, g: 0, b: 0, a: 0}
   FlickerDuration: 0

@@ -11,11 +11,13 @@ public abstract class Enemy : MonoBehaviour
     public float speed;
     public float damage;
     public GameObject Gold;
+    public GameObject GoldBag;
     public Renderer renderer;
     public Color originalColor;
     public float FlickerDuration;
     public int FlickerCount;
     public Slider healthBar;
+    public const int StartPOSZ = -2;
     [Header("Player")]
     //Get a refernce to the player
     // public PlayerBehaviour player;

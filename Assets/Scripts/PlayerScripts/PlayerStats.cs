@@ -54,17 +54,8 @@ public class PlayerStats : MonoBehaviour
     //Hanlde the player (Called in PlayerBehaviour)
     public void HandlePlayer()
     {
-        //HandleHealthBar();
         HandleMagnit();
     }
-
-    // //Handle the health bar
-    // void HandleHealthBar()
-    // {
-    //     healthManager.health = playerHealth;
-    //     healthManager.playerhealth.value = playerHealth;
-    //     healthManager.playerhealth.maxValue = startHealth;  
-    // }
 
     //Set the starting values for the player
     void SetValues()

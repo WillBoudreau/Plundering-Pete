@@ -23,6 +23,7 @@ public class SerpentBehaviour : Enemy
         stoppingDistance = 2;
         detectionDistance = 20;
         AdhustHealthBar();
+        GoldBag = GameObject.FindGameObjectWithTag("GoldBag");
     }
 
     // Update is called once per frame
@@ -46,7 +47,7 @@ public class SerpentBehaviour : Enemy
             if (Vector2.Distance(transform.position, player.transform.position) < detectionDistance)
             {
                 targetPosition = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
-                targetPosition.z = -2;
+                targetPosition.z = StartPOSZ;
                 transform.position = targetPosition;
             }
         }
@@ -78,10 +79,9 @@ public class SerpentBehaviour : Enemy
     }
     public void Death()
     {
-        if(health <= 0)
-        {
-            Destroy(gameObject);
-        }
+        Instantiate(GoldBag, transform.position, Quaternion.identity);
+        Destroy(gameObject);
+        playerStats.SerpentKills++;
     }
     public void OnCollisionEnter2D(Collision2D collision)
     {
