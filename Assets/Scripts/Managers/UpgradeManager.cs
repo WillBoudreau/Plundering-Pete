@@ -14,8 +14,10 @@ public class UpgradeManager : MonoBehaviour
     [Header("Text Slots")]
     //Text for the slots
     [SerializeField] private TextMeshProUGUI NumberCoinsText;
+    [SerializeField] private TextMeshProUGUI NumberUpgradesText;
     [Header("Upgrade Limit")]
     [SerializeField] private int totalUpgradesRequired = 9;
+
     public int totalUpgrades = 0;
     public bool CanUpgradeShip = false;
     // Start is called before the first frame update
@@ -23,6 +25,7 @@ public class UpgradeManager : MonoBehaviour
     {
         player = GameObject.Find("Player").GetComponent<PlayerStats>();
         inventory = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
+        UpdateUpgradeText(totalUpgrades);
     }
     void Update()
     {
@@ -35,38 +38,27 @@ public class UpgradeManager : MonoBehaviour
     }
     public void OnUpgradePurchased()
     {
+        shipUpgrade.UpgradeShipDisplay(1);
         totalUpgrades++;
+        UpdateUpgradeText(totalUpgrades);
         if (totalUpgrades >= totalUpgradesRequired)
         {
             CanUpgradeShip = true;
-            shipUpgrade.EnableUpgradeSlot();
+            shipUpgrade.UpgradeShipDisplay(0);
         }
     }
 
-    //Upgrade the player ship
-    public void UpgradeShip()
+    void UpdateUpgradeText(int totalUpgrades)
     {
-        inventory.coinCount -= shipUpgrade.cost;
-        shipUpgrade.UpgradePlayer();
-        ResetUpgrades();
-        Debug.Log("Ship Upgraded");
-        // if(CanUpgradeShip)
-        // {
-        //     if(inventory.coinCount >= shipUpgrade.cost)
-        //     {
-                
-        //     }
-        //     else
-        //     {
-        //         shipUpgrade.messageText.text = "Not enough coins";
-        //     }
-        // }
+        NumberUpgradesText.text = $"Upgrades {totalUpgrades}/{totalUpgradesRequired}";
     }
     //Reset the upgrades
     public void ResetUpgrades()
     {
         Debug.Log("Resetting Upgrades");
         totalUpgrades = 0;
+        shipUpgrade.UpgradeShipDisplay(1);
+        UpdateUpgradeText(totalUpgrades);
         foreach (var upgrade in upgrades)
         {
             upgrade.ResetUpgrade();
