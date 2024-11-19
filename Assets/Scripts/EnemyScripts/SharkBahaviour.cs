@@ -15,7 +15,7 @@ public class SharkBahaviour : Enemy
     // Start is called before the first frame update
     void Start()
     {
-        renderer = GetComponent<Renderer>();
+        renderer = GetComponentInChildren<Renderer>();
         Gold = GameObject.FindGameObjectWithTag("Gold");
         SetStats();
         AdhustHealthBar();

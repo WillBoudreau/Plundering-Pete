@@ -41,7 +41,6 @@ public class ShipUpgrade : Upgrade
             {
                 inventory.coinCount -= cost;
                 UpgradePlayer();
-                upgradeManager.CanUpgradeShip = false;
             }
             else
             {
@@ -56,11 +55,14 @@ public class ShipUpgrade : Upgrade
 
     public override void UpgradePlayer()
     {
+        //inventory.coinCount -= cost;    
         if (playerStats.Level < MaxLevel)
         {
+            Debug.Log("Upgrading Ship and Player");
             UpgradeBonus();
             playerStats.healthManager.HandlePlayerHealthBar(playerStats.playerHealth, playerStats.startHealth);
             UpdateUpgradeDisplay(Color.green);
+            upgradeManager.CanUpgradeShip = false;
         }
         else
         {
@@ -73,7 +75,7 @@ public class ShipUpgrade : Upgrade
     {
 
     }
-    void UpgradeBonus()
+    public void UpgradeBonus()
     {
         playerStats.LevelUp();
         playerStats.damage += DamageIncrement;

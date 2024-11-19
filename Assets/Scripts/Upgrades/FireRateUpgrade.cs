@@ -49,12 +49,12 @@ public class FireRateUpgrade : Upgrade
     // Upgrade the player's fire rate
     public override void UpgradePlayer()
     {
-        upgradeManager.OnUpgradePurchased();
         if (playerStats.startFireRate > MaxFireRate)
         {
             playerStats.fireRate -= FireRateIncrement;
             playerStats.startFireRate -= FireRateIncrement;
             UpdateUpgradeDisplay(Color.green);
+            upgradeManager.OnUpgradePurchased();
         }
         else
         {

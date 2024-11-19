@@ -46,20 +46,27 @@ public class UpgradeManager : MonoBehaviour
     //Upgrade the player ship
     public void UpgradeShip()
     {
-        if(inventory.coinCount >= shipUpgrade.cost && CanUpgradeShip)
-        {
-            totalUpgrades = 0;
-            Debug.Log("Upgrading Player Ship");
-            ResetUpgrades();
-        }
-        else
-        {
-            shipUpgrade.messageText.text = "Not enough coins";
-        }
+        inventory.coinCount -= shipUpgrade.cost;
+        shipUpgrade.UpgradePlayer();
+        ResetUpgrades();
+        Debug.Log("Ship Upgraded");
+        // if(CanUpgradeShip)
+        // {
+        //     if(inventory.coinCount >= shipUpgrade.cost)
+        //     {
+                
+        //     }
+        //     else
+        //     {
+        //         shipUpgrade.messageText.text = "Not enough coins";
+        //     }
+        // }
     }
     //Reset the upgrades
     public void ResetUpgrades()
     {
+        Debug.Log("Resetting Upgrades");
+        totalUpgrades = 0;
         foreach (var upgrade in upgrades)
         {
             upgrade.ResetUpgrade();

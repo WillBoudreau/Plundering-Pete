@@ -46,11 +46,11 @@ public class DamageUpgrade : Upgrade
     //Upgrade the player damage
     public override void UpgradePlayer()
     {
-        upgradeManager.OnUpgradePurchased();
         if (playerStats.damage < MaxDamage)
         {
             playerStats.damage ++;
             UpdateUpgradeDisplay(Color.green);
+            upgradeManager.OnUpgradePurchased();
         }
         else
         {

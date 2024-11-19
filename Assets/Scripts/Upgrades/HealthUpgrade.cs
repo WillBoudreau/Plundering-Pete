@@ -43,11 +43,11 @@ public class HealthUpgrade : Upgrade
 
     public override void UpgradePlayer()
     {   
-        upgradeManager.OnUpgradePurchased();
         if (playerStats.playerHealth < MaxHeatlh)
         {
             playerStats.playerHealth ++;
             playerStats.startHealth += 1;
+            upgradeManager.OnUpgradePurchased();
             playerStats.healthManager.HandlePlayerHealthBar(playerStats.playerHealth, playerStats.startHealth);
             UpdateUpgradeDisplay(Color.green);
         }

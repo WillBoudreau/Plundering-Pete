@@ -43,9 +43,9 @@ public class GoldStorageUpgrade : Upgrade
 
     public override void UpgradePlayer()
     {
-        upgradeManager.OnUpgradePurchased();
         if (inventory.maxCoins <= MaxCargo && currentUpgradeIndex != 3)
         {
+            upgradeManager.OnUpgradePurchased();
             inventory.maxCoins += 10;
             MaxCargo = inventory.maxCoins + 10;
             UpdateUpgradeDisplay(Color.green);

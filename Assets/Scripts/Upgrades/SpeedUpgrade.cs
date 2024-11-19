@@ -44,11 +44,11 @@ public class SpeedUpgrade : Upgrade
 
     public override void UpgradePlayer()
     {
-        upgradeManager.OnUpgradePurchased();
         if (playerStats.speed < MaxSpeed)
         {
             playerStats.speed ++;
             UpdateUpgradeDisplay(Color.green);
+            upgradeManager.OnUpgradePurchased();
         }
         else
         {
