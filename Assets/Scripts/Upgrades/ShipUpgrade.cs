@@ -6,13 +6,7 @@ using TMPro;
 public class ShipUpgrade : Upgrade
 {
     [Header("Upgrade Values")]
-    public TextMeshProUGUI ShipText;
-    public TextMeshProUGUI costText;
-    public TextMeshProUGUI ButtonText;
-    [Header("UI Elements")]
-    public List<GameObject> UpgradeDisplay = new List<GameObject>();
-    private int currentUpgradeIndex = 0;
-    [Header("Upgrade Values")]
+    public GameObject UpgradeSlot;
     public int MaxLevel = 3;
     private const int BaseCost = 55;
     private const int CostIncrement = 30;
@@ -20,41 +14,43 @@ public class ShipUpgrade : Upgrade
     private const int HealthIncrement = 10;
     private const int SpeedIncrement = 10;
     private const int MagnetIncrement = 3;
-
-
     void Start()
     {
         MaxLevel = 3;
         cost = BaseCost;
-        // Initialize the damageUpgrade images to white
-        foreach (var upgrade in UpgradeDisplay)
-        {
-            var image = upgrade.GetComponent<UnityEngine.UI.Image>();
-            if (image != null)
-            {
-                image.color = Color.red;
-            }
-        }
+        ResetIndicator(Color.red);
+        UpgradeSlot.SetActive(false);
     }
-
     // Update is called once per frame
     void Update()
     {
-       ShipText.text = "Ship Level " + playerStats.Level;
-       ButtonText.text = "$" + cost; 
+       SetText();
+    }
+    public override void SetText()
+    {
+        costText.text = "Ship Level " + playerStats.Level;
+        ButtonText.text = "$" + cost;
     }
 
     public override void CostCheck()
     {
-        if (inventory.coinCount >= cost)
+        if(upgradeManager.CanUpgradeShip == true)
         {
-            inventory.coinCount -= cost;
-            UpgradePlayer();
-            UpdateUpgradeDisplay();
+            Debug.Log("Checking Cost for Ship Upgrade");
+            if (inventory.coinCount >= cost)
+            {
+                inventory.coinCount -= cost;
+                UpgradePlayer();
+                upgradeManager.CanUpgradeShip = false;
+            }
+            else
+            {
+                messageText.text = "Not enough coins";
+            }
         }
         else
         {
-            costText.text = "Not enough coins";
+            messageText.text = "Max Ship Reached";
         }
     }
 
@@ -64,17 +60,18 @@ public class ShipUpgrade : Upgrade
         {
             UpgradeBonus();
             playerStats.healthManager.HandlePlayerHealthBar(playerStats.playerHealth, playerStats.startHealth);
+            UpdateUpgradeDisplay(Color.green);
         }
         else
         {
             ButtonText.text = "Max Ship Reached";
             inventory.coinCount += cost;
-            ShipText.text = "Max Ship Reached";
+            messageText.text = "Max Ship Reached";
         }
     }
-    public override void Reset()
+    public override void ResetUpgrade()
     {
-        
+
     }
     void UpgradeBonus()
     {
@@ -86,17 +83,8 @@ public class ShipUpgrade : Upgrade
         playerStats.magnet += MagnetIncrement;
         cost += CostIncrement;
     }
-
-    void UpdateUpgradeDisplay()
+    public void EnableUpgradeSlot()
     {
-        if (currentUpgradeIndex < UpgradeDisplay.Count)
-        {
-            var image = UpgradeDisplay[currentUpgradeIndex].GetComponent<UnityEngine.UI.Image>();
-            if (image != null)
-            {
-                image.color = Color.green;
-            }
-            currentUpgradeIndex++;
-        }
+        UpgradeSlot.SetActive(true);
     }
 }

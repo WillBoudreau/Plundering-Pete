@@ -7,20 +7,23 @@ public class UpgradeManager : MonoBehaviour
 {
     [Header("Class calls")]
     //Player reference  
-    public PlayerStats player;
-    public ShipUpgrade shipUpgrade;
-    public List<Upgrade> upgrades = new List<Upgrade>();
-    public InventoryManager inventory;
+    [SerializeField] private PlayerStats player;
+    [SerializeField] private ShipUpgrade shipUpgrade;
+    [SerializeField] private InventoryManager inventory;
+    [SerializeField] private List<Upgrade> upgrades = new List<Upgrade>();
     [Header("Text Slots")]
     //Text for the slots
-    public TextMeshProUGUI NumberCoinsText;
+    [SerializeField] private TextMeshProUGUI NumberCoinsText;
+    [Header("Upgrade Limit")]
+    [SerializeField] private int totalUpgradesRequired = 9;
+    public int totalUpgrades = 0;
+    public bool CanUpgradeShip = false;
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player").GetComponent<PlayerStats>();
         inventory = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
     }
-    // Update is called once per frame
     void Update()
     {
         SetText();
@@ -30,26 +33,28 @@ public class UpgradeManager : MonoBehaviour
     {
         NumberCoinsText.text = $"Doubloons {inventory.coinCount}/{inventory.maxCoins}";
     }
+    public void OnUpgradePurchased()
+    {
+        totalUpgrades++;
+        if (totalUpgrades >= totalUpgradesRequired)
+        {
+            CanUpgradeShip = true;
+            shipUpgrade.EnableUpgradeSlot();
+        }
+    }
+
     //Upgrade the player ship
     public void UpgradeShip()
     {
-        if(inventory.coinCount >= shipUpgrade.cost && !player.IsLevel3)
+        if(inventory.coinCount >= shipUpgrade.cost && CanUpgradeShip)
         {
-            ResetUpgrades();
+            totalUpgrades = 0;
             Debug.Log("Upgrading Player Ship");
-            if(!player.IsLevel2)
-            {
-                player.IsLevel2 = true;
-            }
-            else if(!player.IsLevel3)
-            {
-                player.IsLevel3 = true;
-                player.IsLevel2 = false;
-            }
+            ResetUpgrades();
         }
         else
         {
-            shipUpgrade.costText.text = "Not enough coins";
+            shipUpgrade.messageText.text = "Not enough coins";
         }
     }
     //Reset the upgrades
@@ -57,7 +62,7 @@ public class UpgradeManager : MonoBehaviour
     {
         foreach (var upgrade in upgrades)
         {
-            upgrade.Reset();
+            upgrade.ResetUpgrade();
         }
     }
 }

@@ -2322,6 +2322,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 312332213}
   m_CullTransparentMesh: 1
+--- !u!1 &312849079 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1745737824268037150, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+  m_PrefabInstance: {fileID: 1949566348}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &314052749 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5466722645970942545, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
@@ -3552,6 +3557,10 @@ PrefabInstance:
     - target: {fileID: 4021600893473882616, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -46.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5338968883979651826, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6346724854784194076, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -7511,7 +7520,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1080032325}
   - component: {fileID: 1080032326}
-  - component: {fileID: 1080032328}
   - component: {fileID: 1080032327}
   - component: {fileID: 1080032329}
   - component: {fileID: 1080032332}
@@ -7555,6 +7563,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 551069652}
   shipUpgrade: {fileID: 1080032334}
+  inventory: {fileID: 1039502979}
   upgrades:
   - {fileID: 1080032327}
   - {fileID: 1080032329}
@@ -7562,8 +7571,10 @@ MonoBehaviour:
   - {fileID: 1080032331}
   - {fileID: 1080032330}
   - {fileID: 1080032333}
-  inventory: {fileID: 1039502979}
   NumberCoinsText: {fileID: 1646935464}
+  totalUpgradesRequired: 9
+  totalUpgrades: 0
+  CanUpgradeShip: 0
 --- !u!114 &1080032327
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7576,39 +7587,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70514b2a1f322114f9921b75b16ae0e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: {fileID: 1039502979}
-  playerBehaviour: {fileID: 551069647}
-  playerStats: {fileID: 551069652}
-  playerMovementHandler: {fileID: 551069651}
-  cost: 0
-  CostIncrement: 0
-  damageText: {fileID: 1779852602}
-  costText: {fileID: 1151608682}
+  costText: {fileID: 1779852602}
   ButtonText: {fileID: 1435416348}
-  damageUpgrade:
+  messageText: {fileID: 1151608682}
+  cost: 0
+  currentUpgradeIndex: 0
+  upgradeIndicators:
   - {fileID: 1452840230}
   - {fileID: 1732322558}
   - {fileID: 1679824561}
-  MaxDamage: 0
-  IsReset: 0
---- !u!114 &1080032328
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1080032324}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef74369c0a99e3b4faa5da2de8eb5ede, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   inventory: {fileID: 1039502979}
   playerBehaviour: {fileID: 551069647}
+  upgradeManager: {fileID: 1080032326}
   playerStats: {fileID: 551069652}
   playerMovementHandler: {fileID: 551069651}
-  cost: 0
   CostIncrement: 0
+  MaxDamage: 0
 --- !u!114 &1080032329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7621,19 +7615,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39ee20128d5b06e4e86bcf286a1a09d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: {fileID: 1039502979}
-  playerBehaviour: {fileID: 551069647}
-  playerStats: {fileID: 551069652}
-  playerMovementHandler: {fileID: 551069651}
-  cost: 0
-  CostIncrement: 0
-  healthText: {fileID: 1077516791}
-  costText: {fileID: 1151608682}
+  costText: {fileID: 1077516791}
   ButtonText: {fileID: 652544198}
-  healthUpgrade:
+  messageText: {fileID: 1151608682}
+  cost: 0
+  currentUpgradeIndex: 0
+  upgradeIndicators:
   - {fileID: 1189057694}
   - {fileID: 431684031}
   - {fileID: 1055681760}
+  inventory: {fileID: 1039502979}
+  playerBehaviour: {fileID: 551069647}
+  upgradeManager: {fileID: 1080032326}
+  playerStats: {fileID: 551069652}
+  playerMovementHandler: {fileID: 551069651}
+  CostIncrement: 0
 --- !u!114 &1080032330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7646,22 +7642,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d8e5ab5013a7ca4bbe2b5090cb651e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: {fileID: 1039502979}
-  playerBehaviour: {fileID: 551069647}
-  playerStats: {fileID: 551069652}
-  playerMovementHandler: {fileID: 551069651}
-  cost: 0
-  CostIncrement: 0
-  CargoText: {fileID: 1526153278}
-  costText: {fileID: 1151608682}
+  costText: {fileID: 1526153278}
   ButtonText: {fileID: 270739950}
-  CargoUpgrade:
+  messageText: {fileID: 1151608682}
+  cost: 0
+  currentUpgradeIndex: 0
+  upgradeIndicators:
   - {fileID: 1135685405}
   - {fileID: 1431269637}
   - {fileID: 1260723178}
+  inventory: {fileID: 1039502979}
+  playerBehaviour: {fileID: 551069647}
+  upgradeManager: {fileID: 1080032326}
+  playerStats: {fileID: 551069652}
+  playerMovementHandler: {fileID: 551069651}
+  CostIncrement: 0
   MaxCargo: 0
   MaxNumberOfCoins: 100
-  IsReset: 0
 --- !u!114 &1080032331
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7674,21 +7671,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfa59a6b3f97bfb41b1acda3e6c15b04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: {fileID: 1039502979}
-  playerBehaviour: {fileID: 551069647}
-  playerStats: {fileID: 551069652}
-  playerMovementHandler: {fileID: 551069651}
-  cost: 0
-  CostIncrement: 0
-  MFGText: {fileID: 786514658}
-  costText: {fileID: 1151608682}
+  costText: {fileID: 786514658}
   ButtonText: {fileID: 426572399}
-  BFMUpgrade:
+  messageText: {fileID: 1151608682}
+  cost: 0
+  currentUpgradeIndex: 0
+  upgradeIndicators:
   - {fileID: 86777432}
   - {fileID: 1788299820}
   - {fileID: 1139992408}
+  inventory: {fileID: 1039502979}
+  playerBehaviour: {fileID: 551069647}
+  upgradeManager: {fileID: 1080032326}
+  playerStats: {fileID: 551069652}
+  playerMovementHandler: {fileID: 551069651}
+  CostIncrement: 0
   MaxMagnet: 0
-  IsReset: 0
 --- !u!114 &1080032332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7701,21 +7699,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e473aac6336a6e4428dc4a836605d176, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: {fileID: 1039502979}
-  playerBehaviour: {fileID: 551069647}
-  playerStats: {fileID: 551069652}
-  playerMovementHandler: {fileID: 551069651}
-  cost: 0
-  CostIncrement: 0
-  speedText: {fileID: 1461656693}
-  costText: {fileID: 1151608682}
+  costText: {fileID: 1461656693}
   ButtonText: {fileID: 676467911}
-  speedUpgrade:
+  messageText: {fileID: 1151608682}
+  cost: 0
+  currentUpgradeIndex: 0
+  upgradeIndicators:
   - {fileID: 2997848}
   - {fileID: 900754622}
   - {fileID: 517402562}
+  inventory: {fileID: 1039502979}
+  playerBehaviour: {fileID: 551069647}
+  upgradeManager: {fileID: 1080032326}
+  playerStats: {fileID: 551069652}
+  playerMovementHandler: {fileID: 551069651}
+  CostIncrement: 0
   MaxSpeed: 0
-  IsReset: 0
 --- !u!114 &1080032333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7728,19 +7727,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f31134aa207fd024a98154d22703e380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: {fileID: 1039502979}
-  playerBehaviour: {fileID: 551069647}
-  playerStats: {fileID: 551069652}
-  playerMovementHandler: {fileID: 551069651}
-  cost: 0
-  CostIncrement: 0
-  FireRateText: {fileID: 411883205}
-  costText: {fileID: 1151608682}
+  costText: {fileID: 411883205}
   ButtonText: {fileID: 2048126258}
-  FRUpgrade:
+  messageText: {fileID: 1151608682}
+  cost: 0
+  currentUpgradeIndex: 0
+  upgradeIndicators:
   - {fileID: 1542909941}
   - {fileID: 1710565628}
   - {fileID: 297331619}
+  inventory: {fileID: 1039502979}
+  playerBehaviour: {fileID: 551069647}
+  upgradeManager: {fileID: 1080032326}
+  playerStats: {fileID: 551069652}
+  playerMovementHandler: {fileID: 551069651}
+  CostIncrement: 0
   MaxFireRate: 0
 --- !u!114 &1080032334
 MonoBehaviour:
@@ -7754,18 +7755,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e48667b44c180f45bdda766bb02524b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: {fileID: 1039502979}
-  playerBehaviour: {fileID: 551069647}
-  playerStats: {fileID: 551069652}
-  playerMovementHandler: {fileID: 551069651}
-  cost: 0
-  CostIncrement: 0
-  ShipText: {fileID: 2103557183}
-  costText: {fileID: 1151608682}
+  costText: {fileID: 2103557183}
   ButtonText: {fileID: 888159595}
-  UpgradeDisplay:
+  messageText: {fileID: 1151608682}
+  cost: 0
+  currentUpgradeIndex: 0
+  upgradeIndicators:
   - {fileID: 870627760}
   - {fileID: 438817818}
+  inventory: {fileID: 1039502979}
+  playerBehaviour: {fileID: 551069647}
+  upgradeManager: {fileID: 1080032326}
+  playerStats: {fileID: 551069652}
+  playerMovementHandler: {fileID: 551069651}
+  CostIncrement: 0
+  UpgradeSlot: {fileID: 312849079}
   MaxLevel: 3
 --- !u!1 &1088758525
 GameObject:
@@ -15271,11 +15275,11 @@ PrefabInstance:
     - target: {fileID: 227171249040155241, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1080032326}
+      objectReference: {fileID: 1080032334}
     - target: {fileID: 227171249040155241, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1080032334}
+      objectReference: {fileID: 1080032326}
     - target: {fileID: 227171249040155241, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -15286,19 +15290,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 227171249040155241, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: UpgradeShip
-      objectReference: {fileID: 0}
-    - target: {fileID: 227171249040155241, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: CostCheck
       objectReference: {fileID: 0}
     - target: {fileID: 227171249040155241, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: ResetUpgrades
+      objectReference: {fileID: 0}
+    - target: {fileID: 227171249040155241, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UpgradeManager, Assembly-CSharp
+      value: ShipUpgrade, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 227171249040155241, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: ShipUpgrade, Assembly-CSharp
+      value: UpgradeManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 227171249040155241, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
