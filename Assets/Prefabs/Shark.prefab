@@ -251,6 +251,7 @@ GameObject:
   - component: {fileID: 8339142492698101944}
   - component: {fileID: 8047425001840047293}
   - component: {fileID: 1465095477336179067}
+  - component: {fileID: -4749652343792368778}
   m_Layer: 0
   m_Name: Shark
   m_TagString: Shark
@@ -470,6 +471,27 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!95 &-4749652343792368778
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4724370820435506893}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 22d4a7fe7b8503e4782ff1a9b2f67443, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6128893763610376585
 GameObject:
   m_ObjectHideFlags: 0
