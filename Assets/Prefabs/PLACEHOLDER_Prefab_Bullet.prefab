@@ -331,3 +331,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d6ced44daaf45440adfb48799f09f50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canonBallType: 0
+  enemyShip: {fileID: 2575576752301967334, guid: 20632af4c2c36e847ac782dddad22a69, type: 3}

@@ -80,11 +80,20 @@ public class SpawnManager : MonoBehaviour
                     isOccupied = true;
                     break;
                 }
+                else if(collider.gameObject.tag == "Serpent")
+                {
+                    isOccupied = true;
+                    break;
+                }
+                else if(collider.gameObject.tag == "Enemy")
+                {
+                    isOccupied = true;
+                    break;
+                }
             }
             if(!isOccupied)
             {
                 GameObject enemy = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
-                // enemies.Add(enemy);
                 spawnSuccessful = true;
             }
             attempts++;

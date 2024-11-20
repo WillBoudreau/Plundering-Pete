@@ -66,7 +66,6 @@ public class LevelManager : MonoBehaviour
         ClearObstacles();
         ResetLevel();
         UpdateZoneObstacles();
-        //UpdateObjects();
         spawnManager.PlacePlayerAtSpawn();
         musicChanger.PlaySceneTrack(SceneManager.GetActiveScene().name);
     } 
