@@ -94,13 +94,10 @@ public class PlayerStats : MonoBehaviour
             else if(Level == 3)
             {
                 IsLevel3 = true;
+                IsLevel2 = false;
                 PlayerLevels[1].SetActive(false);
                 PlayerLevels[2].SetActive(true);
             }
-            // else
-            // {
-            //     Level = 3;
-            // }
             for(int i = 0; i < PlayerLevels.Count; i++)
             {
                 PlayerLevels[i].SetActive( i == Level - 1);

@@ -18,6 +18,7 @@ public abstract class Enemy : MonoBehaviour
     public int FlickerCount;
     public Slider healthBar;
     public const int StartPOSZ = -2;
+    public float AttackTimer;
     [Header("Player")]
     //Get a refernce to the player
     // public PlayerBehaviour player;
@@ -27,5 +28,6 @@ public abstract class Enemy : MonoBehaviour
     public abstract void Move();
     public abstract void TakeDamage(float damage);
     public abstract IEnumerator Flicker();
+    public abstract void Attack();
 }
 

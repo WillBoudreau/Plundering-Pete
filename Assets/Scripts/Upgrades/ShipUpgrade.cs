@@ -6,6 +6,8 @@ using TMPro;
 public class ShipUpgrade : Upgrade
 {
     [Header("Upgrade Values")]
+    [SerializeField] private List<GameObject> shipUpgradeSlots = new List<GameObject>();
+    private int ShipUpgradeSlotIndex = 0;
     public GameObject UpgradeSlot;
     public int MaxLevel = 3;
     private const int BaseCost = 55;
@@ -52,10 +54,22 @@ public class ShipUpgrade : Upgrade
             messageText.text = "Max Ship Reached";
         }
     }
+    public void UpgradeShipDisplay(int index)
+    {
+        if(index == 0)
+        {
+            shipUpgradeSlots[index].SetActive(true);
+            shipUpgradeSlots[index + 1].SetActive(false);
+        }
+        else if(index == 1)
+        {
+            shipUpgradeSlots[index].SetActive(true);
+            shipUpgradeSlots[index - 1].SetActive(false);
+        }
+    }
 
     public override void UpgradePlayer()
-    {
-        //inventory.coinCount -= cost;    
+    {   
         if (playerStats.Level < MaxLevel)
         {
             Debug.Log("Upgrading Ship and Player");
@@ -63,6 +77,7 @@ public class ShipUpgrade : Upgrade
             playerStats.healthManager.HandlePlayerHealthBar(playerStats.playerHealth, playerStats.startHealth);
             UpdateUpgradeDisplay(Color.green);
             upgradeManager.CanUpgradeShip = false;
+            upgradeManager.ResetUpgrades();
         }
         else
         {
@@ -84,9 +99,5 @@ public class ShipUpgrade : Upgrade
         playerStats.speed += SpeedIncrement;
         playerStats.magnet += MagnetIncrement;
         cost += CostIncrement;
-    }
-    public void EnableUpgradeSlot()
-    {
-        UpgradeSlot.SetActive(true);
     }
 }

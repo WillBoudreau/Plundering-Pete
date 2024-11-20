@@ -58,7 +58,7 @@ public class PlayerMovementHandler : MonoBehaviour
                     Destroy(bullet1, 2.0f);
                 }
             }
-            else if(playerStats.IsLevel3)
+            else if(playerStats.IsLevel3 | playerStats.Level == 3)
             {
                 for(int i = 0; i < 3; i++)
                 {
@@ -147,12 +147,6 @@ public class PlayerMovementHandler : MonoBehaviour
             case "Obstacle":
             playerStats.TakeDamage(other.gameObject.GetComponent<Obstacle>().damage);
             break;
-            case "Shark":
-            playerStats.TakeDamage(other.gameObject.GetComponent<SharkBahaviour>().damage);
-            break;
-            case "Serpent":
-            playerStats.TakeDamage(other.gameObject.GetComponent<SerpentBehaviour>().damage);
-            break;
             case "EnemyShip":
             playerStats.TakeDamage(other.gameObject.GetComponent<EnemyShipBehaviour>().damage);
             break;
@@ -171,7 +165,6 @@ public class PlayerMovementHandler : MonoBehaviour
         switch (other.gameObject.tag)
         {
             case "Level2":
-            Debug.Log("Level 2");
             checkpointManager.UpdateCheckpointStatus(0, false);
             checkpointManager.UpdateCheckpointStatus(1, true);
             if(playerStats.IsLevel2 == false && playerStats.IsLevel3 == false)
@@ -186,7 +179,6 @@ public class PlayerMovementHandler : MonoBehaviour
             }
             break;
             case "Level3":
-            Debug.Log("Level 3");
             checkpointManager.UpdateCheckpointStatus(1, false);
             checkpointManager.UpdateCheckpointStatus(2, true);
             if(playerStats.IsLevel3 == false)

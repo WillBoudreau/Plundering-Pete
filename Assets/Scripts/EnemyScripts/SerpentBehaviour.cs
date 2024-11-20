@@ -15,21 +15,23 @@ public class SerpentBehaviour : Enemy
     // Start is called before the first frame update
     void Start()
     {
-        renderer = GetComponent<Renderer>();
+        renderer = GetComponentInChildren<Renderer>();
         originalColor = renderer.material.color;
         speed = 8;
         health = 2;
         damage = 1;
         stoppingDistance = 2;
         detectionDistance = 20;
+        AttackTimer = 2;
         AdhustHealthBar();
-        GoldBag = GameObject.FindGameObjectWithTag("GoldBag");
+        GoldBag = GameObject.FindGameObjectWithTag("CoinBag");
     }
 
     // Update is called once per frame
     void Update()
     {
         player = GameObject.Find("Player");
+        AttackCooldownTimer();
         playerStats = GameObject.Find("Player").GetComponent<PlayerStats>();
         Move();
     }
@@ -49,6 +51,7 @@ public class SerpentBehaviour : Enemy
                 targetPosition = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
                 targetPosition.z = StartPOSZ;
                 transform.position = targetPosition;
+                Attack();
             }
         }
     }
@@ -61,6 +64,21 @@ public class SerpentBehaviour : Enemy
         {
             Death();
         }
+    }
+    public override void Attack()
+    {
+        if(AttackTimer <= 0)
+        {
+            if(Vector2.Distance(transform.position, player.transform.position) < stoppingDistance)
+            {
+                playerStats.TakeDamage(damage);
+                AttackTimer = 2;
+            }
+        }
+    }
+    void AttackCooldownTimer()
+    {
+        AttackTimer -= Time.deltaTime;
     }
     void AdhustHealthBar()
     {

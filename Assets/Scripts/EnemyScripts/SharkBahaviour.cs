@@ -31,6 +31,7 @@ public class SharkBahaviour : Enemy
         detectionDistance = 6;
         FlickerCount = 3;
         FlickerDuration = 0.1f;
+        AttackTimer = 2;
     }
 
     // Update is called once per frame
@@ -38,6 +39,7 @@ public class SharkBahaviour : Enemy
     {
         player = GameObject.Find("Player");
         Move();
+        Timer();
         playerStats = GameObject.Find("Player").GetComponent<PlayerStats>();
         Gold = GameObject.FindGameObjectWithTag("Gold");
     }
@@ -54,12 +56,30 @@ public class SharkBahaviour : Enemy
             Vector3 targetPosition = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
             targetPosition.z = StartPOSZ;
             transform.position = targetPosition;
+            Attack();
         }
         else if (transform.position.y > bottomY)
         {
             Vector3 targetPosition = new Vector3(transform.position.x, bottomY, transform.position.z);
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
         }
+    }
+
+    public override void Attack()
+    {
+        if(AttackTimer <= 0)
+        {
+            if(Vector2.Distance(transform.position, player.transform.position) < stoppingDistance)
+            {
+                playerStats.TakeDamage(damage);
+                AttackTimer = 2;
+            }
+        }
+    }
+
+    void Timer()
+    {
+        AttackTimer -= Time.deltaTime;
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
