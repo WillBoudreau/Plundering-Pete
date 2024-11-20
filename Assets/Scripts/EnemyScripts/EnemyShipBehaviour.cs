@@ -40,8 +40,7 @@ public class EnemyShipBehaviour : Enemy
     void Update()
     {
         Attack();
-        playerStats.fireRate -= Time.deltaTime;
-        // player = GameObject.Find("Player").GetComponent<PlayerStats>();
+        playerStats = GameObject.Find("Player").GetComponent<PlayerStats>();
         Move();
         HandleShooting();
     }
