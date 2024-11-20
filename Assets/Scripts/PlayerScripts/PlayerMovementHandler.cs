@@ -147,12 +147,6 @@ public class PlayerMovementHandler : MonoBehaviour
             case "Obstacle":
             playerStats.TakeDamage(other.gameObject.GetComponent<Obstacle>().damage);
             break;
-            case "Shark":
-            playerStats.TakeDamage(other.gameObject.GetComponent<SharkBahaviour>().damage);
-            break;
-            case "Serpent":
-            playerStats.TakeDamage(other.gameObject.GetComponent<SerpentBehaviour>().damage);
-            break;
             case "EnemyShip":
             playerStats.TakeDamage(other.gameObject.GetComponent<EnemyShipBehaviour>().damage);
             break;

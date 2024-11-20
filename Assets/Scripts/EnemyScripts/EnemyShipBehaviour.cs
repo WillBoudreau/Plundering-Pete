@@ -81,6 +81,10 @@ public class EnemyShipBehaviour : Enemy
 
         }
     }
+    public override void Attack()
+    {
+        
+    }
 
     public override void TakeDamage(float damage)
     {
