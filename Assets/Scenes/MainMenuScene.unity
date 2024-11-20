@@ -9810,7 +9810,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1368000654
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9873,43 +9873,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1368000656}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1547232563}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: Load
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1051185688}
-        m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
-        m_MethodName: LoadLevel
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: GameTestScene
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1728282020}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: SetGameState
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: GamePlay
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1368000656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12516,7 +12480,7 @@ MonoBehaviour:
   zone2Ypositive: 200
   zone3Xnegative: -15
   zone3Xpositive: 15
-  zone3Ynegative: 300
+  zone3Ynegative: 250
   zone3Ypositive: 400
   Zone1Obstacles: []
   Zone2Obstacles: []
@@ -14899,7 +14863,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 216527445050619400, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
       propertyPath: Level
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 216527445050619400, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
       propertyPath: IsLevel2

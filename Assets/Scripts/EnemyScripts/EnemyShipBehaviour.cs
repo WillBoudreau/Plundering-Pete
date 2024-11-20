@@ -33,11 +33,13 @@ public class EnemyShipBehaviour : Enemy
         fireRate = 5f;
         startPosition = transform.position;
         AdhustHealthBar();
+        GoldBag = GameObject.FindGameObjectWithTag("CoinBag");
     }
 
     // Update is called once per frame
     void Update()
     {
+        Attack();
         playerStats.fireRate -= Time.deltaTime;
         // player = GameObject.Find("Player").GetComponent<PlayerStats>();
         Move();
@@ -78,12 +80,11 @@ public class EnemyShipBehaviour : Enemy
                 Destroy(CannonBall, 5.0f);
                 fireRate = 5f;
             }
-
         }
     }
     public override void Attack()
     {
-        
+        fireRate -= Time.deltaTime;
     }
 
     public override void TakeDamage(float damage)
@@ -122,6 +123,7 @@ public class EnemyShipBehaviour : Enemy
         if (collision.gameObject.tag == "Bullet")
         {
             TakeDamage(playerStats.damage);
+            Destroy(collision.gameObject);
         }
     }
 
