@@ -6492,7 +6492,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &884719223
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11568,6 +11568,12 @@ MonoBehaviour:
     y: 450
     width: 30
     height: 10
+  ShipSpawnArea:
+    serializedVersion: 2
+    x: -10
+    y: 400
+    width: 30
+    height: 50
   playerSpawnPoint: {fileID: 0}
   player: {fileID: 551069641}
 --- !u!1001 &1641570941

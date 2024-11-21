@@ -10,6 +10,7 @@ public class SpawnManager : MonoBehaviour
     public Rect spawnArea1;
     public Rect spawnArea2;
     public Rect spawnArea3;
+    public Rect ShipSpawnArea;
     public Transform playerSpawnPoint; 
     public GameObject player;
     private const float PlayerZPOS = -2f;
@@ -70,6 +71,10 @@ public class SpawnManager : MonoBehaviour
         while(!spawnSuccessful && attempts < 10)
         {
             Debug.Log("Spawning enemy");
+            if(enemyPrefab.tag == "EnemyShip")
+            {
+                spawnArea = ShipSpawnArea;
+            }
             Vector3 spawnPos = GetEnemySpawn(spawnArea);
             Collider2D[] colliders = Physics2D.OverlapCircleAll(spawnPos, 1.0f);
             bool isOccupied = false;
@@ -85,7 +90,7 @@ public class SpawnManager : MonoBehaviour
                     isOccupied = true;
                     break;
                 }
-                else if(collider.gameObject.tag == "Enemy")
+                else if(collider.gameObject.tag == "EnemyShip")
                 {
                     isOccupied = true;
                     break;
@@ -111,5 +116,7 @@ public class SpawnManager : MonoBehaviour
         Gizmos.DrawWireCube(new Vector3(spawnArea2.x, spawnArea2.y, 0), new Vector3(spawnArea2.width, spawnArea2.height, 0));
         Gizmos.color = Color.blue;
         Gizmos.DrawWireCube(new Vector3(spawnArea3.x, spawnArea3.y, 0), new Vector3(spawnArea3.width, spawnArea3.height, 0));
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireCube(new Vector3(ShipSpawnArea.x, ShipSpawnArea.y, 0), new Vector3(ShipSpawnArea.width, ShipSpawnArea.height, 0));
     }
 }
