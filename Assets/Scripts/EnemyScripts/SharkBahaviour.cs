@@ -28,10 +28,12 @@ public class SharkBahaviour : Enemy
         maxHealth = 2;
         damage = 1;
         stoppingDistance = 2;
-        detectionDistance = 6;
+        detectionDistance = 10;
         FlickerCount = 3;
         FlickerDuration = 0.1f;
-        AttackTimer = 2;
+        AttackTimer = 1;
+        StartingAttackTimer = 1;
+        AttackDistance = 5;
     }
 
     // Update is called once per frame
@@ -69,10 +71,10 @@ public class SharkBahaviour : Enemy
     {
         if(AttackTimer <= 0)
         {
-            if(Vector2.Distance(transform.position, player.transform.position) < stoppingDistance)
+            if(Vector2.Distance(transform.position, player.transform.position) < AttackDistance)
             {
                 playerStats.TakeDamage(damage);
-                AttackTimer = 2;
+                AttackTimer = StartingAttackTimer;
             }
         }
     }
@@ -80,14 +82,11 @@ public class SharkBahaviour : Enemy
     void Timer()
     {
         AttackTimer -= Time.deltaTime;
+        Debug.Log(AttackTimer);
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Player")
-        {
-            collision.gameObject.GetComponent<PlayerStats>().TakeDamage(damage);
-        }
         if(collision.gameObject.tag == "Bullet")
         {
             TakeDamage(playerStats.damage);

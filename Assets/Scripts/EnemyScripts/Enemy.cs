@@ -19,6 +19,8 @@ public abstract class Enemy : MonoBehaviour
     public Slider healthBar;
     public const int StartPOSZ = -2;
     public float AttackTimer;
+    public float StartingAttackTimer;
+    public float AttackDistance;
     [Header("Player")]
     //Get a refernce to the player
     // public PlayerBehaviour player;

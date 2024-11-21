@@ -22,9 +22,11 @@ public class SerpentBehaviour : Enemy
         damage = 1;
         stoppingDistance = 2;
         detectionDistance = 20;
-        AttackTimer = 2;
+        AttackTimer = 1;
+        StartingAttackTimer = 1;
         AdhustHealthBar();
         GoldBag = GameObject.FindGameObjectWithTag("CoinBag");
+        AttackDistance = 5;
     }
 
     // Update is called once per frame
@@ -69,10 +71,10 @@ public class SerpentBehaviour : Enemy
     {
         if(AttackTimer <= 0)
         {
-            if(Vector2.Distance(transform.position, player.transform.position) < stoppingDistance)
+            if(Vector2.Distance(transform.position, player.transform.position) < AttackDistance)
             {
                 playerStats.TakeDamage(damage);
-                AttackTimer = 2;
+                AttackTimer = StartingAttackTimer;
             }
         }
     }
@@ -103,10 +105,6 @@ public class SerpentBehaviour : Enemy
     }
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Player")
-        {
-            collision.gameObject.GetComponent<PlayerStats>().TakeDamage(damage);
-        }
         if(collision.gameObject.tag == "Bullet")
         {
             Destroy(collision.gameObject);
