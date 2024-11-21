@@ -32,13 +32,15 @@ public class EnemyShipBehaviour : Enemy
         CanonVelocity = 25f;
         fireRate = 5f;
         startPosition = transform.position;
+        AdhustHealthBar();
+        GoldBag = GameObject.FindGameObjectWithTag("CoinBag");
     }
 
     // Update is called once per frame
     void Update()
     {
-        playerStats.fireRate -= Time.deltaTime;
-        // player = GameObject.Find("Player").GetComponent<PlayerStats>();
+        Attack();
+        playerStats = GameObject.Find("Player").GetComponent<PlayerStats>();
         Move();
         HandleShooting();
     }
@@ -77,20 +79,28 @@ public class EnemyShipBehaviour : Enemy
                 Destroy(CannonBall, 5.0f);
                 fireRate = 5f;
             }
-
         }
+    }
+    public override void Attack()
+    {
+        fireRate -= Time.deltaTime;
     }
 
     public override void TakeDamage(float damage)
     {
         StartCoroutine(Flicker());
         health -= damage;
+        AdhustHealthBar();
         if (health <= 0)
         {
             Death();
         }
     }
 
+    void AdhustHealthBar()
+    {
+        healthBar.value = health / maxHealth;
+    }
     public override IEnumerator Flicker()
     {
         for (int i = 0; i < FlickerCount; i++)
@@ -112,6 +122,7 @@ public class EnemyShipBehaviour : Enemy
         if (collision.gameObject.tag == "Bullet")
         {
             TakeDamage(playerStats.damage);
+            Destroy(collision.gameObject);
         }
     }
 
@@ -119,7 +130,9 @@ public class EnemyShipBehaviour : Enemy
     {
         if (health <= 0)
         {
+            Instantiate(GoldBag, transform.position, Quaternion.identity);
             Destroy(gameObject);
+            playerStats.ShipKills++;
         }
     }
 }

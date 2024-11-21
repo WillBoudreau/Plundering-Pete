@@ -8,9 +8,8 @@ public class PlayerStats : MonoBehaviour
     public HealthManager healthManager;
     [SerializeField] private UIManager uIManager;
     [SerializeField] private MusicChanger musicManager;
-    [SerializeField] private LevelManager levelManager;
     [SerializeField] private CheckpointManager checkpointManager;
-    [SerializeField] private DistanceTracker distanceTracker;
+    [SerializeField] private SpawnManager spawnManager;
     [Header("Number of Kills")]
     public int SharkKills;
     public int SerpentKills;
@@ -29,9 +28,8 @@ public class PlayerStats : MonoBehaviour
     public float playerHealth;
     public float magnet;
     public float bulletVelocity;
-    public int checkpoint;
-    public LayerMask groundLayer;
     public bool Win;
+    public LayerMask groundLayer;
     public Transform firePoint;
     public bool PlayerPlaced;
     [Header("Player Levels")]
@@ -44,6 +42,7 @@ public class PlayerStats : MonoBehaviour
     private Color originalColor;
     public float FlickerDuration = 0.1f; 
     public int FlickerCount = 5;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -51,18 +50,14 @@ public class PlayerStats : MonoBehaviour
         renderer = GetComponentInChildren<Renderer>();
         originalColor = GetComponentInChildren<Renderer>().material.color;
     }
+
+    //Hanlde the player (Called in PlayerBehaviour)
     public void HandlePlayer()
     {
-        HandleHealthBar();
         HandleMagnit();
     }
-    void HandleHealthBar()
-    {
-        Debug.Log("Player Health: " + playerHealth);
-        healthManager.health = playerHealth;
-        healthManager.playerhealth.maxValue = startHealth;
-        healthManager.playerhealth.value = playerHealth;
-    }
+
+    //Set the starting values for the player
     void SetValues()
     {
         //Set starting values
@@ -76,50 +71,46 @@ public class PlayerStats : MonoBehaviour
         magnet = 3f;
         //Assign values to be the starting values
         playerHealth = startHealth;
-        healthManager.playerhealth.maxValue = playerHealth;
+        healthManager.playerhealth.fillAmount = playerHealth;
         speed = StartSpeed;
         damage = startdamage;
         fireRate = startFireRate;
         //Set Win Bool
         Win = false;
     }
+
+    //Level up the player(Called in ShipUpgrade)
     public void LevelUp()
     {
-        if(Level == 1)
+        if(Level < PlayerLevels.Count)
         {
-            Level = 1;
-            PlayerLevels[0].SetActive(true);
-        }
-        else if(Level == 2 || IsLevel2)
-        {
-            Level ++;
+            Level++;
             if(Level == 2)
             {
                 IsLevel2 = true;
+                PlayerLevels[0].SetActive(false);
+                PlayerLevels[1].SetActive(true);
             }
-            else if(Level >= 2)
-            {
-                Level = 2;
-            }
-            PlayerLevels[0].SetActive(false);
-            PlayerLevels[1].SetActive(true);
-        }
-        else if(Level == 3 || IsLevel3)
-        {
-            Level = 3;
-            if(Level == 3)
+            else if(Level == 3)
             {
                 IsLevel3 = true;
+                IsLevel2 = false;
+                PlayerLevels[1].SetActive(false);
+                PlayerLevels[2].SetActive(true);
             }
-            else if(Level >= 3)
+            for(int i = 0; i < PlayerLevels.Count; i++)
             {
-                Level = 3;
+                PlayerLevels[i].SetActive( i == Level - 1);
             }
-            PlayerLevels[0].SetActive(false);
-            PlayerLevels[1].SetActive(false);
-            PlayerLevels[2].SetActive(true);
+        }
+        else
+        {
+            Level = PlayerLevels.Count;
+            Debug.Log("Max Level Reached");
         }
     }
+
+    //Handle the magnet power of the ship
     void HandleMagnit()
     {
         //Handle the magnet powerup
@@ -131,15 +122,18 @@ public class PlayerStats : MonoBehaviour
             }
         }
     }
+
+    //Take damage from the player(Called in PlayerBehaviour)
     public void TakeDamage(float damage)
     {
         StartCoroutine(Flicker());
         musicManager.PlaySound(2);
         playerHealth -= damage;
 
-        HandleHealthBar();
+        healthManager.HandlePlayerHealthBar(playerHealth, startHealth);
         Death();
     }
+
     //Flicker for damage
     IEnumerator Flicker()
     {
@@ -153,36 +147,32 @@ public class PlayerStats : MonoBehaviour
         }
         GetComponentInChildren<Renderer>().material.color = originalColor;
     }
+
+    //Death of the player
     public void Death()
     {
         if (playerHealth <= 0)
         {
-            // healthManager.IsDead = true;
             playerHealth = 0;
             uIManager.SetGameState("GameOver");
             ResetHealth();
-            Debug.Log("Player is Dead");
-            levelManager.SetFalse();
-            levelManager.ClearScene();
-            Debug.Log("Setting levelMan False");
-            checkpointManager.SetFalse();
-            Debug.Log("Setting Checkpoint False");
-            distanceTracker.SetFalse();
-            Debug.Log("Setting Distance False");
             Respawn();
+            checkpointManager.SetFalse();
         }
     }
+
+    //Respawn the player
     void Respawn()
     {
-        levelManager.PlacePlayer();
+        spawnManager.PlacePlayer();
         healthManager.IsDead = false;
     }
+
+    //Reset the health of the player
     private void ResetHealth()
     {
-        Debug.Log("Resetting Health");
         playerHealth = startHealth;
-        Debug.Log("Player Health: " + playerHealth);
         healthManager.health = playerHealth;
-        Debug.Log("Health Manager Health: " + healthManager.health);
+        healthManager.HandlePlayerHealthBar(playerHealth, startHealth);
     }
 }

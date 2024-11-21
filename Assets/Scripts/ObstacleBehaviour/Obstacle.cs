@@ -23,11 +23,11 @@ public class Obstacle : MonoBehaviour
     {
         ChooseDamage();
     }
-    void OnTriggerEnter(Collider other)
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        if(other.gameObject.tag == "Player")
+        if(collision.gameObject.tag == "Bullet")
         {
-            Debug.Log("Player Hit");
+            Destroy(collision.gameObject);
         }
     }
     void ChooseDamage()

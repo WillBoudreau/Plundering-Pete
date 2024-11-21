@@ -34,7 +34,6 @@ public class InventoryManager : MonoBehaviour
         {
             coinCount = maxCoins;
             IsMax = true;
-            Debug.Log("Max Coins Reached"); 
             if (!isFlashing)
             {
                 StartCoroutine(FlashRed());

@@ -5,100 +5,65 @@ using TMPro;
 
 public class MFGUpgrade : Upgrade
 {
-// Start is called before the first frame update
     [Header("Upgrade Values")]
-    public TextMeshProUGUI MFGText;
-    public TextMeshProUGUI costText;
-    public TextMeshProUGUI ButtonText;
     public float MaxMagnet;
-    public List<GameObject> BFMUpgrade= new List<GameObject>();
-    private int currentUpgradeIndex = 0;
-    public bool IsReset = false;
+    private const int BaseCost = 10;
+    private const float MagnetIncrement = 3;
 
     void Start()
     {
-        MaxMagnet = playerStats.magnet + 3;
-        cost = 10;
-        // Initialize the damageUpgrade images to white
-        foreach (var upgrade in BFMUpgrade)
-        {
-            var image = upgrade.GetComponent<UnityEngine.UI.Image>();
-            if (image != null)
-            {
-                image.color = Color.red;
-            }
-        }
+        MaxMagnet = playerStats.magnet + MagnetIncrement;
+        cost = BaseCost;
+        ResetIndicator(Color.red);
     }
 
     // Update is called once per frame
     void Update()
     {
-       MFGText.text = "Magnet: " + playerStats.magnet;
-       ButtonText.text = "Cost: " + cost;
-         if(IsReset == true)
-         {
-              MaxMagnet = playerStats.magnet + 3;
-              IsReset = false;
-         }
+       SetText();
+    }
+    public override void SetText()
+    {
+        costText.text = "Magnet: " + playerStats.magnet;
+        ButtonText.text = "$" + cost;
     }
 
+    // Check the cost of the upgrade
     public override void CostCheck()
     {
-        Debug.Log("Checking Cost for Magnet Upgrade");
         if (inventory.coinCount >= cost)
         {
             inventory.coinCount -= cost;
             UpgradePlayer();
-            UpdateUpgradeDisplay();
         }
         else
         {
-            Debug.Log("Not enough coins");
             costText.text = "Not enough coins";
         }
-    }
+    } 
 
+    // Upgrade the player
     public override void UpgradePlayer()
     {
+        upgradeManager.OnUpgradePurchased();
         if (playerStats.magnet < MaxMagnet)
         {
-            Debug.Log("Upgrading Player Magnet");
             playerStats.magnet ++;
-            Debug.Log("Player Magnet: " + playerStats.magnet);
+            UpdateUpgradeDisplay(Color.green);
         }
         else
         {
             inventory.coinCount += cost;
-            Debug.Log("Max Magnet Reached");
-            MFGText.text = "Max Magnet Reached";
+            messageText.text = "Max Magnet Reached";
         }
-    }
-    public override void Reset()
-    {
-        IsReset = true;
-        foreach (var upgrade in BFMUpgrade)
-        {
-            var image = upgrade.GetComponent<UnityEngine.UI.Image>();
-            if (image != null)
-            {
-                image.color = Color.red;
-            }
-        }
-        currentUpgradeIndex = 0;
-        MaxMagnet += 3;
-        cost += 10;
     }
 
-    void UpdateUpgradeDisplay()
+    // Reset the upgrade
+    public override void ResetUpgrade()
     {
-        if (currentUpgradeIndex < BFMUpgrade.Count)
-        {
-            var image = BFMUpgrade[currentUpgradeIndex].GetComponent<UnityEngine.UI.Image>();
-            if (image != null)
-            {
-                image.color = Color.green;
-            }
-            currentUpgradeIndex++;
-        }
+        ResetIndicator(Color.red);
+        currentUpgradeIndex = 0;
+        MaxMagnet += MagnetIncrement;
+        cost += BaseCost;
     }
 }

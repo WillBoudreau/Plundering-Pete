@@ -8,6 +8,7 @@ public class DistanceTracker : MonoBehaviour
 {
     [Header("Class calls")]
     public PlayerBehaviour playerBehaviour;
+    public PlayerMovementHandler playerMovementHandler;
     public PlayerStats playerStats;
     public CheckpointManager checkpointManager;
     public LevelManager levelManager;
@@ -16,9 +17,6 @@ public class DistanceTracker : MonoBehaviour
     public Transform startPosition;
     public float playerDistance; 
     public Transform endPosition;
-    public bool spawnlevel1;
-    public bool spawnlevel2;
-    public bool spawnlevel3;
     [Header("UI elements")]
     public Slider distanceTracker;
     public TextMeshProUGUI WarningText;
@@ -29,6 +27,7 @@ public class DistanceTracker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Checkpoint();
         if (startPosition == null || endPosition == null)
         {
             FindPositions();
@@ -36,9 +35,7 @@ public class DistanceTracker : MonoBehaviour
         checkpointManager.SetValues();
         SetValues();
         TrackDist();
-        Checkpoint();
         DisplayWarning();
-        playerDistance = Vector3.Distance(startPosition.position, playerBehaviour.transform.position);
     }
 
     void FindPositions()
@@ -60,18 +57,6 @@ public class DistanceTracker : MonoBehaviour
                 endPosition = endObj.transform;
             }
         }
-        // GameObject startObj = GameObject.Find("StartPos");
-        // GameObject endObj = GameObject.Find("EndPOS");
-
-        // if (startObj != null)
-        // {
-        //     startPosition = startObj.transform;
-        // }
-
-        // if (endObj != null)
-        // {
-        //     endPosition = endObj.transform;
-        // }
     }
 
     void SetValues()
@@ -86,48 +71,33 @@ public class DistanceTracker : MonoBehaviour
 
     void TrackDist()
     {
-        if (startPosition != null && playerBehaviour != null)
+        if(playerMovementHandler.IsMoving)
         {
-            distanceTracker.value = playerDistance;
+            playerDistance = Vector3.Distance(startPosition.position, playerBehaviour.transform.position);
+            if (startPosition != null && playerBehaviour != null)
+            {
+                distanceTracker.value = playerDistance;
+            }
         }
     }
-    void Checkpoint()
-    {
-            if (playerBehaviour.transform.position.y >=  checkpointManager.Checkpoint1 && !spawnlevel1)
-            {
-                spawnlevel1 = true;
-                checkpointManager.UpdateCheckpointStatus(0, true);
-            }
-            if (playerBehaviour.transform.position.y >= checkpointManager.Checkpoint2)
-            {
-                checkpointManager.UpdateCheckpointStatus(1, true);
-            }
-            if (playerBehaviour.transform.position.y >= checkpointManager.Checkpoint3 && !spawnlevel3)
-            {
-                spawnlevel3 = true;
-                checkpointManager.UpdateCheckpointStatus(2, true);
-            }
-    }
+
     void DisplayWarning()
     {
         WarningText.gameObject.SetActive(false);
-        if(playerStats.IsLevel2 == false && playerStats.transform.position.y >= checkpointManager.Checkpoint2)
+        float PlayerDist = playerBehaviour.transform.position.y;
+        bool IsLevel2 = playerStats.IsLevel2;
+        bool IsLevel3 = playerStats.IsLevel3;
+        if(!IsLevel2 && !IsLevel3 && PlayerDist >= checkpointManager.Checkpoint2)
         {
             // Display warning
             WarningText.gameObject.SetActive(true);
             WarningText.text = "YAARRR! Ye is about to enter dangerous waters! Your ship is not ready!";
         }
-        else if(playerStats.IsLevel3 == false && playerStats.transform.position.y >= checkpointManager.Checkpoint3)
+        else if(IsLevel3 == false && PlayerDist >= checkpointManager.Checkpoint3)
         {
             // Display warning
             WarningText.gameObject.SetActive(true);
             WarningText.text = "YAARRR! Ye is about to enter dangerous waters! Your ship is not ready!";
         }
-    }
-    public void SetFalse()
-    {
-        spawnlevel1 = false;
-        spawnlevel2 = false;
-        spawnlevel3 = false;
     }
 }

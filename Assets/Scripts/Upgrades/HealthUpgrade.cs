@@ -5,41 +5,26 @@ using TMPro;
 
 public class HealthUpgrade : Upgrade
 {
-  // Start is called before the first frame update
     [Header("Upgrade Values")]
-    public TextMeshProUGUI healthText;
-    public TextMeshProUGUI costText;
-    public TextMeshProUGUI ButtonText;
-    public float MaxHeatlh;
-    public List<GameObject> healthUpgrade = new List<GameObject>();
-    private int currentUpgradeIndex = 0;
-    public bool IsReset = false;
-
+    float MaxHeatlh;
+    private const int BaseCost = 10;
+    private const float HealthIncrement = 3;
     void Start()
     {
-        MaxHeatlh = 8;
-        cost = 10;
-        // Initialize the damageUpgrade images to white
-        foreach (var upgrade in healthUpgrade)
-        {
-            var image = upgrade.GetComponent<UnityEngine.UI.Image>();
-            if (image != null)
-            {
-                image.color = Color.red;
-            }
-        }
+        MaxHeatlh = playerStats.playerHealth + HealthIncrement;
+        cost = BaseCost;
+        ResetIndicator(Color.red);
     }
 
     // Update is called once per frame
     void Update()
     {
-        healthText.text = "Health: " + playerStats.playerHealth;
-        ButtonText.text = "Cost: " + cost;
-        if(IsReset == true)
-        {
-            MaxHeatlh = playerStats.playerHealth + 3;
-            IsReset = false;
-        }
+       SetText();
+    }
+    public override void SetText()
+    {
+        costText.text = "Health: " + playerStats.playerHealth;
+        ButtonText.text = "$" + cost;
     }
 
     public override void CostCheck()
@@ -49,59 +34,34 @@ public class HealthUpgrade : Upgrade
         {
             inventory.coinCount -= cost;
             UpgradePlayer();
-            UpdateUpgradeDisplay();
         }
         else
         {
-            Debug.Log("Not enough coins");
             costText.text = "Not enough coins";
         }
     }
 
     public override void UpgradePlayer()
-    {
+    {   
         if (playerStats.playerHealth < MaxHeatlh)
         {
-            Debug.Log("Upgrading Player Health");
             playerStats.playerHealth ++;
             playerStats.startHealth += 1;
-            playerStats.healthManager.playerhealth.maxValue += 1;
-            Debug.Log("Player Health: " + playerStats.playerHealth);
+            upgradeManager.OnUpgradePurchased();
+            playerStats.healthManager.HandlePlayerHealthBar(playerStats.playerHealth, playerStats.startHealth);
+            UpdateUpgradeDisplay(Color.green);
         }
         else
         {
-            Debug.Log("Player Health: " + playerStats.playerHealth + " Max Health: " + MaxHeatlh);
             inventory.coinCount += cost;
-            Debug.Log("Max health Reached");
-            healthText.text = "Max health Reached";
+            messageText.text = "Max health Reached";
         }
     }
-    public override void Reset()
+    public override void ResetUpgrade()
     {
-        IsReset = true;
-        foreach (var upgrade in healthUpgrade)
-        {
-            var image = upgrade.GetComponent<UnityEngine.UI.Image>();
-            if (image != null)
-            {
-                image.color = Color.red;
-            }
-        }
+        ResetIndicator(Color.red);
         currentUpgradeIndex = 0;
-        MaxHeatlh = playerStats.playerHealth + 3;
-        cost += 10;
-    }
-
-    void UpdateUpgradeDisplay()
-    {
-        if (currentUpgradeIndex < healthUpgrade.Count)
-        {
-            var image = healthUpgrade[currentUpgradeIndex].GetComponent<UnityEngine.UI.Image>();
-            if (image != null)
-            {
-                image.color = Color.green;
-            }
-            currentUpgradeIndex++;
-        }
+        MaxHeatlh = playerStats.playerHealth + HealthIncrement;
+        cost += BaseCost;
     }
 }

@@ -16,10 +16,8 @@ public class ObstacleManager : MonoBehaviour
     public GameObject Rock;
     public GameObject Iceberg;
     public GameObject Debris;
-    public bool hasSpawnedRocks;
-    public bool hasSpawnedIcebergs;
-    public bool hasSpawnedDebris;
     public float takenPOS = 3.0f;
+    public float safeDistance = 5.0f;
     [Header("Obstacle Zones")]
     [Header("Zone 1")]
     public float zone1Xnegative = -15;
@@ -40,11 +38,11 @@ public class ObstacleManager : MonoBehaviour
     public List<GameObject> Zone1Obstacles = new List<GameObject>();
     public List<GameObject> Zone2Obstacles = new List<GameObject>();
     public List<GameObject> Zone3Obstacles = new List<GameObject>();
+    private List<Vector3> usedPositions = new List<Vector3>();
     public int obstacle_Rock_Count;
     public int obstacle_Iceberg_Count;
     public int obstacle_Debris_Count;
     //List of occupied positions
-    private List<Vector3> usedPositions = new List<Vector3>();
 
     void Start()
     {
@@ -92,7 +90,7 @@ public class ObstacleManager : MonoBehaviour
             }
         }
     }
-    //Spawn obstacles in the zone or level
+    //Spawn obstacles in the zone that is passed in
     public void SpawnObstaclesInZone(ObstacleZone zone,List<GameObject> obstacles,Transform playerTransform, float safeDistance)
     {
         for (int i = 0; i < obstacles.Count; i++)
@@ -100,6 +98,7 @@ public class ObstacleManager : MonoBehaviour
             Vector3 spawnPosition = GetSafeSpawnPos(zone.Xnegative, zone.Xpositive, zone.Ynegative, zone.Ypositive, playerTransform.position, safeDistance);
             Instantiate(obstacles[i], spawnPosition, Quaternion.identity);
             usedPositions.Add(spawnPosition);
+            obstacles[i].SetActive(true);
         }
     }
     //Finds position on map
@@ -112,10 +111,14 @@ public class ObstacleManager : MonoBehaviour
     public Vector3 GetSafeSpawnPos(float XNeg, float XPos, float YNeg, float YPos, Vector3 playerPosition, float safeDistance)
     {
         Vector3 spawnPosition;
+        int attempts = 0;
+        int maxAttempts = 10;
         do
         {
             spawnPosition = GetSpawnPos(XNeg, XPos, YNeg, YPos);
-        } while (Vector3.Distance(spawnPosition, playerPosition) < safeDistance || IsPositionUsed(spawnPosition));
+            attempts++;
+        } while (Vector3.Distance(spawnPosition, playerPosition) < safeDistance || IsPositionUsed(spawnPosition) && attempts < maxAttempts);
+        Debug.Log("Attempts: " + attempts);
         return spawnPosition;
     }
     //For if the position is occupied pick another

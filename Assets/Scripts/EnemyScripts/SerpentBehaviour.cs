@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SerpentBehaviour : Enemy
 {
@@ -14,20 +15,25 @@ public class SerpentBehaviour : Enemy
     // Start is called before the first frame update
     void Start()
     {
-        renderer = GetComponent<Renderer>();
+        renderer = GetComponentInChildren<Renderer>();
         originalColor = renderer.material.color;
         speed = 8;
         health = 2;
         damage = 1;
         stoppingDistance = 2;
         detectionDistance = 20;
-
+        AttackTimer = 1;
+        StartingAttackTimer = 1;
+        AdhustHealthBar();
+        GoldBag = GameObject.FindGameObjectWithTag("CoinBag");
+        AttackDistance = 5;
     }
 
     // Update is called once per frame
     void Update()
     {
         player = GameObject.Find("Player");
+        AttackCooldownTimer();
         playerStats = GameObject.Find("Player").GetComponent<PlayerStats>();
         Move();
     }
@@ -45,8 +51,9 @@ public class SerpentBehaviour : Enemy
             if (Vector2.Distance(transform.position, player.transform.position) < detectionDistance)
             {
                 targetPosition = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
-                targetPosition.z = -2;
+                targetPosition.z = StartPOSZ;
                 transform.position = targetPosition;
+                Attack();
             }
         }
     }
@@ -54,10 +61,30 @@ public class SerpentBehaviour : Enemy
     {
         StartCoroutine(Flicker());
         health -= damage;
+        AdhustHealthBar();
         if(health <= 0)
         {
             Death();
         }
+    }
+    public override void Attack()
+    {
+        if(AttackTimer <= 0)
+        {
+            if(Vector2.Distance(transform.position, player.transform.position) < AttackDistance)
+            {
+                playerStats.TakeDamage(damage);
+                AttackTimer = StartingAttackTimer;
+            }
+        }
+    }
+    void AttackCooldownTimer()
+    {
+        AttackTimer -= Time.deltaTime;
+    }
+    void AdhustHealthBar()
+    {
+        healthBar.value = health / maxHealth;
     }
     public override IEnumerator Flicker()
     {
@@ -72,17 +99,12 @@ public class SerpentBehaviour : Enemy
     }
     public void Death()
     {
-        if(health <= 0)
-        {
-            Destroy(gameObject);
-        }
+        Instantiate(GoldBag, transform.position, Quaternion.identity);
+        Destroy(gameObject);
+        playerStats.SerpentKills++;
     }
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Player")
-        {
-            collision.gameObject.GetComponent<PlayerStats>().TakeDamage(damage);
-        }
         if(collision.gameObject.tag == "Bullet")
         {
             Destroy(collision.gameObject);
