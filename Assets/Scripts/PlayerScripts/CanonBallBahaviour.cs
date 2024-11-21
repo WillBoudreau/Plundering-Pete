@@ -14,6 +14,10 @@ public class CanonBallBahaviour : MonoBehaviour
     void Start()
     {
         enemyShip = GameObject.Find("EnemyShip").GetComponent<EnemyShipBehaviour>();
+        if(enemyShip == null)
+        {
+            Debug.LogError("EnemyShip is null");
+        }
     }
     void OnCollisionEnter2D(Collision2D collision)
     {

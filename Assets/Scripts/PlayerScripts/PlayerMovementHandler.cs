@@ -123,6 +123,7 @@ public class PlayerMovementHandler : MonoBehaviour
             case "Gold":
             if(inventoryManager.IsMax == false)
             {
+                musicManager.PlaySound(1);
                 inventoryManager.coinCount ++;
                 other.gameObject.SetActive(false);
             }
