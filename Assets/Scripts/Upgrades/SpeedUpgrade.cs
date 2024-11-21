@@ -5,41 +5,27 @@ using TMPro;
 
 public class SpeedUpgrade : Upgrade
 {
-    // Start is called before the first frame update
     [Header("Upgrade Values")]
-    public TextMeshProUGUI speedText;
-    public TextMeshProUGUI costText;
-    public TextMeshProUGUI ButtonText;
     public float MaxSpeed;
-    public List<GameObject> speedUpgrade = new List<GameObject>();
-    private int currentUpgradeIndex = 0;
-    public bool IsReset = false;
+    private const int BaseCost = 10;
+    private const float SpeedIncrement = 3;
 
     void Start()
     {
-        MaxSpeed = playerStats.speed + 3.0f;
-        cost = 10;
-        // Initialize the damageUpgrade images to white
-        foreach (var upgrade in speedUpgrade)
-        {
-            var image = upgrade.GetComponent<UnityEngine.UI.Image>();
-            if (image != null)
-            {
-                image.color = Color.red;
-            }
-        }
+        MaxSpeed = playerStats.speed + SpeedIncrement;
+        cost = BaseCost;
+        ResetIndicator(Color.red);
     }
 
     // Update is called once per frame
     void Update()
     {
-        speedText.text = "Speed: " + playerStats.speed;
-        ButtonText.text = "Cost: " + cost;
-        if(IsReset == true)
-        {
-            MaxSpeed = playerStats.speed + 3.0f;
-            IsReset = false;
-        }
+        SetText();
+    }
+    public override void SetText()
+    {
+        costText.text = "Speed: " + playerStats.speed;
+        ButtonText.text = "$" + cost;
     }
 
     public override void CostCheck()
@@ -49,11 +35,9 @@ public class SpeedUpgrade : Upgrade
         {
             inventory.coinCount -= cost;
             UpgradePlayer();
-            UpdateUpgradeDisplay();
         }
         else
         {
-            Debug.Log("Not enough coins");
             costText.text = "Not enough coins";
         }
     }
@@ -62,43 +46,21 @@ public class SpeedUpgrade : Upgrade
     {
         if (playerStats.speed < MaxSpeed)
         {
-            Debug.Log("Upgrading Player Speed");
             playerStats.speed ++;
-            Debug.Log("Player Speed: " + playerStats.speed);
+            UpdateUpgradeDisplay(Color.green);
+            upgradeManager.OnUpgradePurchased();
         }
         else
         {
             inventory.coinCount += cost;
-            Debug.Log("Max Speed Reached");
-            speedText.text = "Max Speed Reached";
+            messageText.text = "Max Speed Reached";
         }
     }
-    public override void Reset()
+    public override void ResetUpgrade()
     {
-        IsReset = true;
-        foreach (var upgrade in speedUpgrade)
-        {
-            var image = upgrade.GetComponent<UnityEngine.UI.Image>();
-            if (image != null)
-            {
-                image.color = Color.red;
-            }
-        }
+        ResetIndicator(Color.red);
         currentUpgradeIndex = 0;
-        MaxSpeed = playerStats.speed + 3.0f;
-        cost += 10;
-    }
-
-    void UpdateUpgradeDisplay()
-    {
-        if (currentUpgradeIndex < speedUpgrade.Count)
-        {
-            var image = speedUpgrade[currentUpgradeIndex].GetComponent<UnityEngine.UI.Image>();
-            if (image != null)
-            {
-                image.color = Color.green;
-            }
-            currentUpgradeIndex++;
-        }
+        MaxSpeed = playerStats.speed + SpeedIncrement;
+        cost += BaseCost;
     }
 }

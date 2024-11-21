@@ -2,19 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class HealthManager : MonoBehaviour
 {
     public UIManager uIManager;
     public GameObject player;
-    public Slider playerhealth;
+    public Image playerhealth;
+    public TextMeshProUGUI healthText;
     public float health;
+    public float maxHealth;
+    private const float StartingHealth = 5;
     public bool IsDead;
     // Start is called before the first frame update
     void Start()
     {
         IsDead = false;
+        maxHealth = StartingHealth;
         uIManager = FindObjectOfType<UIManager>();
+        health = maxHealth;
+        HandlePlayerHealthBar(health, maxHealth);
     }
 
     // Update is called once per frame
@@ -25,9 +32,14 @@ public class HealthManager : MonoBehaviour
             health = 0;
         }
     }
-    public virtual void TakeDamage(float damage)
+    public void HandlePlayerHealthBar(float health, float maxHealth)
     {
-        health -= damage;
+        playerhealth.fillAmount = health / maxHealth;
+        HealthCounter(health, maxHealth);
+    }
+    void HealthCounter(float health, float maxHealth)
+    {
+        healthText.text = "HP: " + health + "/" + maxHealth;
     }
     public virtual void Death()
     {

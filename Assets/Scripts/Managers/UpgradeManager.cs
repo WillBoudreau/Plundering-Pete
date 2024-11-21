@@ -7,63 +7,61 @@ public class UpgradeManager : MonoBehaviour
 {
     [Header("Class calls")]
     //Player reference  
-    public PlayerStats player;
-    public ShipUpgrade shipUpgrade;
-    public List<Upgrade> upgrades = new List<Upgrade>();
-    //InventoryManager reference
-    public InventoryManager inventory;
+    [SerializeField] private PlayerStats player;
+    [SerializeField] private ShipUpgrade shipUpgrade;
+    [SerializeField] private InventoryManager inventory;
+    [SerializeField] private List<Upgrade> upgrades = new List<Upgrade>();
     [Header("Text Slots")]
     //Text for the slots
-    public TextMeshProUGUI NumberCoinsText;
-    [Header("Variables")]
-    //Values and their max values
-    //Start Cost and Cost for the upgrades
-    public int ShipCost;
+    [SerializeField] private TextMeshProUGUI NumberCoinsText;
+    [SerializeField] private TextMeshProUGUI NumberUpgradesText;
+    [Header("Upgrade Limit")]
+    [SerializeField] private int totalUpgradesRequired = 9;
+
+    public int totalUpgrades = 0;
+    public bool CanUpgradeShip = false;
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player").GetComponent<PlayerStats>();
-        SetValues();
+        inventory = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
+        UpdateUpgradeText(totalUpgrades);
     }
-    // Update is called once per frame
     void Update()
     {
-        inventory = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
         SetText();
     }
+    //Set the text for the inventory
     void SetText()
     {
-        NumberCoinsText.text = "Doubloons " + inventory.coinCount + "/" + inventory.maxCoins;
+        NumberCoinsText.text = $"Doubloons {inventory.coinCount}/{inventory.maxCoins}";
     }
-    //Set the variable values at the start of the game
-    void SetValues()
+    public void OnUpgradePurchased()
     {
-        ShipCost = shipUpgrade.cost;
-    }
-    public void UpgradeShip()
-    {
-        if(inventory.coinCount >= ShipCost && player.IsLevel3 == false)
+        shipUpgrade.UpgradeShipDisplay(1);
+        totalUpgrades++;
+        UpdateUpgradeText(totalUpgrades);
+        if (totalUpgrades >= totalUpgradesRequired)
         {
-            Debug.Log("Upgrading Ship from manager");
-            if(player.IsLevel2 == false)
-            {
-                Debug.Log("Level 2");
-                player.IsLevel2 = true;
-                Reset();
-            }
-            else if(player.IsLevel2 == true && player.IsLevel3 == false)
-            {
-                player.IsLevel2 = false;
-                player.IsLevel3 = true;
-                Reset();
-            }
+            CanUpgradeShip = true;
+            shipUpgrade.UpgradeShipDisplay(0);
         }
     }
-    public void Reset()
+
+    void UpdateUpgradeText(int totalUpgrades)
     {
+        NumberUpgradesText.text = $"Upgrades {totalUpgrades}/{totalUpgradesRequired}";
+    }
+    //Reset the upgrades
+    public void ResetUpgrades()
+    {
+        Debug.Log("Resetting Upgrades");
+        totalUpgrades = 0;
+        shipUpgrade.UpgradeShipDisplay(1);
+        UpdateUpgradeText(totalUpgrades);
         foreach (var upgrade in upgrades)
         {
-            upgrade.Reset();
+            upgrade.ResetUpgrade();
         }
     }
 }

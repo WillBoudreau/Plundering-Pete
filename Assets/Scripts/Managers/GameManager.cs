@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     [Header("Class Calls")]
     public UIManager uiManager;
     public LevelManager levelManager;
+
+    public SpawnManager spawnManager;
     public GameObject player;
     public GameObject Camera;
     public PlayerBehaviour playerBehaviour;
@@ -18,7 +20,6 @@ public class GameManager : MonoBehaviour
     public InventoryManager inventoryManager;
     [Header("Variables")]
     public bool PlayerEnabled;
-    public Transform playerSpawnPoint;
     public Button loadButton;
     
 
@@ -41,32 +42,16 @@ public class GameManager : MonoBehaviour
         uiManager.UpdateUI();
         if (levelManager.levelName == "GameTestScene" && uiManager.currentGameState == UIManager.GameState.GamePlay)
         {
-            playerSpawnPoint = GameObject.Find("PlayerSpawnPoint").transform;
             if (playerStats.PlayerPlaced == false)
             {
-                levelManager.PlacePlayer();
+                spawnManager.PlacePlayerAtSpawn();
                 playerStats.PlayerPlaced = true;
             }
-            EnablePlayer();
-            EnableCamera();
-            EnableLoadButton();
-            Time.timeScale = 1;
+            EnableGameplay();
         }
-        else if(uiManager.currentGameState == UIManager.GameState.Pause | uiManager.currentGameState == UIManager.GameState.GameOver)
+        else if(uiManager.currentGameState == UIManager.GameState.Pause || uiManager.currentGameState == UIManager.GameState.GameOver)
         {
-            Time.timeScale = 0;
-            DisablePlayer();
-            DisableCamera();
-        }
-        else if(uiManager.currentGameState == UIManager.GameState.GameOver)
-        {
-            DisablePlayer();
-            DisableCamera();
-        }
-        else
-        {
-            DisablePlayer();
-            DisableCamera();
+            DisableGameplay();
         }
     }
 
@@ -87,6 +72,20 @@ public class GameManager : MonoBehaviour
                 uiManager.currentGameState = UIManager.GameState.GamePlay;
             }
         }
+    }
+    void EnableGameplay()
+    {
+        EnableCamera();
+        EnablePlayer();
+        EnableLoadButton();
+        Time.timeScale = 1;
+    }
+    void DisableGameplay()
+    {
+        DisablePlayer();
+        DisableCamera();
+        DisableLoadButton();
+        Time.timeScale = 0;
     }
     void EnableCamera()
     {

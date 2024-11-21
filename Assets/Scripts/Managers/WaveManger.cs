@@ -6,7 +6,8 @@ public class WaveManger : MonoBehaviour
 {
     //Class calls
     [Header("Classes")]
-    public CheckpointManager checkpointManager;
+    [SerializeField] private CheckpointManager checkpointManager;
+    [SerializeField] private SpawnManager spawnManager;
     [Header("Variables")]
     //List of all the enemy objects
     public List<GameObject> Sharks;
@@ -19,60 +20,30 @@ public class WaveManger : MonoBehaviour
     public GameObject ShipPrefab;
 
     //Number of each enemy to spawn
-    public int numSharks;
+    public int numSharks = 3;
     public int numSerpents;
     public int numShips;
     //Spawn Values
     public float spawnTime = 0f;
-    private int currentSpawnPointIndex = 0;
-    public int SharkSpawnIndex;
-    public int SerpentSpawnIndex;
-    public int ShipSpawnIndex;
-    [Header("Arrays")]
-    //List of Spawn points
-    public GameObject[] SpawnPoints1;
-    public GameObject[] SpawnPoints2;
-    public GameObject[] SpawnPoints3;
-    public List<GameObject> Enemies = new List<GameObject>();
+    [SerializeField] private bool hasSpawnedEnemies;
+    // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Wave Manager Started");
-        SetAll();
-        //UpdateCheckpointStatus(0, true);
+        UpdateLists();
     }
-    public void SetAll()
+    // Update is called once per frame
+    void Update()
     {
-        SetStartValues();
-        SetArrays();
-    }
-    void FixedUpdate()
-    {
-        StartCoroutine(SpawnEnemies());
         Timer();
-        FillArrays();
+        StartCoroutine(SpawnEnemiesForWave(hasSpawnedEnemies));
     }
+
+    //Timer for spawning enemies
     void Timer()
     {
         spawnTime -= Time.deltaTime;
     }
-    void SetStartValues()
-    {
-        //Set the number of starting enemies
-        numSharks = 50;
-        numSerpents = 50;
-        numShips = 50;
-        
-        //Update Lists after initiating the values
-        UpdateLists();
-    }
-    //Set the Length of the Arrays
-    void SetArrays()
-    {
-        SpawnPoints1 = new GameObject[3];
-        SpawnPoints2 = new GameObject[3];
-        SpawnPoints3 = new GameObject[3];
-    }
-
+    //Update the lists based off the num variables
     void UpdateLists()
     {
         //Update Lists based off values from the num variables
@@ -90,102 +61,42 @@ public class WaveManger : MonoBehaviour
         }
     }
 
-    //Fill the arrays with the spawn points
-    void FillArrays()
+    IEnumerator SpawnEnemiesForWave(bool hasSpawnedEnemies)
     {
-        //Fill the first array with spawn points tagged "SpawnPoint1"
-        GameObject[] spawnPoints1 = GameObject.FindGameObjectsWithTag("SpawnPoint1");
-        GameObject[] spawnPoints2 = GameObject.FindGameObjectsWithTag("SpawnPoint2");
-        GameObject[] spawnPoints3 = GameObject.FindGameObjectsWithTag("SpawnPoint3");
-
-        for(int i = 0; i < SpawnPoints1.Length && i < spawnPoints1.Length; i++)
+        if(spawnTime <= 0 && checkpointManager.FirstCheckpoint && !hasSpawnedEnemies && checkpointManager.SecondCheckpoint == false)
         {
-            SpawnPoints1[i] = spawnPoints1[i];
-        }
-
-        for(int i = 0; i < SpawnPoints2.Length && i < spawnPoints2.Length; i++)
-        {
-            SpawnPoints2[i] = spawnPoints2[i];
-        }
-
-        for(int i = 0; i < SpawnPoints3.Length && i < spawnPoints3.Length; i++)
-        {
-            SpawnPoints3[i] = spawnPoints3[i];
-        }
-    }
-    IEnumerator SpawnEnemies()
-    {
-        while (true)
-        {
-            if (spawnTime <= 0 && checkpointManager.FirstCheckpoint)
+            Debug.Log("Spawning Wave 1");
+            for(int i = 0; i < Sharks.Count; i++)
             {
-                //Debug.Log("Spawning Sharks");
-                SpawnEnemy(SharkPrefab, SpawnPoints1, ref SharkSpawnIndex);
-                spawnTime = 5f;
+                spawnManager.SpawnEnemyInRect(SharkPrefab,spawnManager.spawnArea1);
             }
-                if (spawnTime <= 0 && checkpointManager.SecondCheckpoint)
-                {
-                    // Spawn 5 sharks before each serpent
-                    for (int i = 0; i < 5; i++)
-                    {
-                        SpawnEnemy(SharkPrefab, SpawnPoints2, ref SerpentSpawnIndex);
-                    }
-                    SpawnEnemy(SerpentPrefab, SpawnPoints2, ref SerpentSpawnIndex);
-                    spawnTime = 5f;
-                }
-                if (spawnTime <= 0 && checkpointManager.ThirdCheckpoint)
-                {
-                    for(int i = 0; i < 10; i++)
-                    {
-                        SpawnEnemy(SharkPrefab, SpawnPoints3, ref SharkSpawnIndex);
-                    }
-                    for(int i = 0; i < 5; i++)
-                    {
-                        SpawnEnemy(SerpentPrefab, SpawnPoints3, ref SerpentSpawnIndex);
-                    }
-                    SpawnEnemy(ShipPrefab, SpawnPoints3, ref ShipSpawnIndex);
-                    spawnTime = 5f;
-                }
-            yield return new WaitForSeconds(2f);
+            spawnTime = 5f;
         }
-    }
-
-void SpawnEnemy(GameObject enemyPrefab, GameObject[] spawnPoints, ref int currentSpawnPointIndex)
-{
-    bool spawnSuccessful = false;
-    int attempts = 0;
-
-    while (!spawnSuccessful && attempts < spawnPoints.Length)
-    {
-        Vector3 spawnPos = spawnPoints[currentSpawnPointIndex].transform.position;
-        spawnPos.z = -2;
-
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(spawnPos, 5f); 
-        bool isOccupied = false;
-
-        foreach (Collider2D col in colliders)
+        if(spawnTime <= 0 && checkpointManager.SecondCheckpoint && checkpointManager.ThirdCheckpoint == false)
         {
-            if (col.gameObject.CompareTag("Enemy")) 
+            Debug.Log("Spawning Wave 2");
+            for(int i = 0; i < Serpents.Count; i++)
             {
-                isOccupied = true;
-                break;
+                spawnManager.SpawnEnemyInRect(SharkPrefab,spawnManager.spawnArea2);
             }
+            spawnManager.SpawnEnemyInRect(SerpentPrefab,spawnManager.spawnArea2);
+            spawnTime = 5f;
         }
-
-        if (!isOccupied)
+        if(spawnTime <= 0 && checkpointManager.ThirdCheckpoint)
         {
-            GameObject enemy = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
-            Enemies.Add(enemy);
-            spawnSuccessful = true; 
+            Debug.Log("Spawning Wave 3");
+            for(int i = 0; i < Sharks.Count; i++)
+            {
+                spawnManager.SpawnEnemyInRect(SharkPrefab,spawnManager.spawnArea3);
+            }
+            for(int i = 0; i < Serpents.Count; i++)
+            {
+                spawnManager.SpawnEnemyInRect(SerpentPrefab,spawnManager.spawnArea3);
+            }
+            spawnManager.SpawnEnemyInRect(ShipPrefab,spawnManager.spawnArea3);
+            spawnTime = 5f;
         }
-
-        currentSpawnPointIndex = (currentSpawnPointIndex + 1) % spawnPoints.Length;
-        attempts++;
+        hasSpawnedEnemies = true;
+        yield return new WaitForSeconds(spawnTime);
     }
-
-    if (!spawnSuccessful)
-    {
-        Debug.LogWarning("All spawn points are occupied. Enemy could not spawn.");
-    }
-}
 }

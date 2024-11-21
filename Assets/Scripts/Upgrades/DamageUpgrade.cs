@@ -4,106 +4,67 @@ using UnityEngine;
 using TMPro;
 public class DamageUpgrade : Upgrade
 {
-    // Start is called before the first frame update
     [Header("Upgrade Values")]
-    public TextMeshProUGUI damageText;
-    public TextMeshProUGUI costText;
-    public TextMeshProUGUI ButtonText;
+    //Upgrade Values
+    private const int DamageIncrement = 3;
+    private const int BaseCost = 10;
     public float MaxDamage;
-    public List<GameObject> damageUpgrade = new List<GameObject>();
-    private int currentUpgradeIndex = 0;
-    public bool IsReset = false;
 
     void Start()
     {
-        MaxDamage = playerStats.damage + 3;
-        cost = 10;
-        // Initialize the damageUpgrade images to white red 
-        foreach (var upgrade in damageUpgrade)
-        {
-            var image = upgrade.GetComponent<UnityEngine.UI.Image>();
-            if (image != null)
-            {
-                image.color = Color.red;
-            }
-        }
+        MaxDamage = playerStats.damage + DamageIncrement;
+        cost = BaseCost;
+        ResetIndicator(Color.red);
     }
 
     // Update is called once per frame
     void Update()
     {
-        damageText.text = "Damage: " + playerStats.damage;
-        ButtonText.text = "Cost: " + cost;
-        if(IsReset == true)
-        {
-            MaxDamage = playerStats.damage + 3;
-            IsReset = false;
-        }
+        SetText();
+    }
+    public override void SetText()
+    {
+        costText.text = "Damage: " + playerStats.damage;
+        ButtonText.text = "$" + cost;
     }
 
+    //Check the cost of the upgrade
     public override void CostCheck()
     {
         Debug.Log("Checking Cost for Damage Upgrade");
         if (inventory.coinCount >= cost)
         {
-            Debug.Log("Upgrading Player Damage");
             inventory.coinCount -= cost;
             UpgradePlayer();
-            UpdateUpgradeDisplay();
         }
         else
         {
-            Debug.Log("Not enough coins");
-            costText.text = "Not enough coins";
+            messageText.text = "Not enough coins";
         }
     }
 
+    //Upgrade the player damage
     public override void UpgradePlayer()
     {
         if (playerStats.damage < MaxDamage)
         {
-            Debug.Log("Upgrading Player Damage");
-            Debug.Log("Player Damage: " + playerStats.damage + " Max Damage: " + MaxDamage);
             playerStats.damage ++;
-            Debug.Log("Player Damage: " + playerStats.damage);
+            UpdateUpgradeDisplay(Color.green);
+            upgradeManager.OnUpgradePurchased();
         }
         else
         {
             inventory.coinCount += cost;
-            Debug.Log("Max Damage Reached");
-            damageText.text = "Max Damage Reached";
-            Debug.Log("Max Damage Reached");
-            Debug.Log("Player Damage: " + playerStats.damage + " Max Damage: " + MaxDamage);
+            messageText.text = "Max Damage Reached";
         }
-    }
-    public override void Reset()
-    {
-        IsReset = true;
-        foreach (var upgrade in damageUpgrade)
-        {
-            var image = upgrade.GetComponent<UnityEngine.UI.Image>();
-            if (image != null)
-            {
-                image.color = Color.red;
-            }
-        }
-        currentUpgradeIndex = 0;
-        MaxDamage = playerStats.damage + 3;
-        cost += 10;
-        Debug.Log("Resetting Damage Upgrade");
-        Debug.Log("Player Damage: " + playerStats.damage + " Max Damage: " + MaxDamage);
     }
 
-    void UpdateUpgradeDisplay()
+    //Reset the upgrade
+    public override void ResetUpgrade()
     {
-        if (currentUpgradeIndex < damageUpgrade.Count)
-        {
-            var image = damageUpgrade[currentUpgradeIndex].GetComponent<UnityEngine.UI.Image>();
-            if (image != null)
-            {
-                image.color = Color.green;
-            }
-            currentUpgradeIndex++;
-        }
+        ResetIndicator(Color.red);
+        currentUpgradeIndex = 0;
+        cost += BaseCost;
+        MaxDamage = playerStats.damage + DamageIncrement;
     }
 }

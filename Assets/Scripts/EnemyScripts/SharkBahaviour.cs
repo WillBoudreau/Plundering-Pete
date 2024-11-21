@@ -12,40 +12,38 @@ public class SharkBahaviour : Enemy
     public float maxHealth;
     float bottomY = -140f;
 
-    private PlayerStats player;
-    private Renderer renderer;
-    private GameObject Gold;
-    private Color originalColor;
-    private float speed;
-    private float health;
-    private float damage;
-    private int FlickerCount = 3;
-    private float FlickerDuration = 0.1f;
-
     // Start is called before the first frame update
     void Start()
     {
-        renderer = GetComponent<Renderer>();
-        Gold = GameObject.FindGameObjectWithTag("CoinBag");
+        renderer = GetComponentInChildren<Renderer>();
+        Gold = GameObject.FindGameObjectWithTag("Gold");
+        SetStats();
+        AdhustHealthBar();
+    }
+    void SetStats()
+    {
         originalColor = renderer.material.color;
         speed = 5;
         health = 2;
         maxHealth = 2;
         damage = 1;
         stoppingDistance = 2;
-        detectionDistance = 6;
+        detectionDistance = 10;
+        FlickerCount = 3;
+        FlickerDuration = 0.1f;
+        AttackTimer = 1;
+        StartingAttackTimer = 1;
+        AttackDistance = 5;
     }
 
     // Update is called once per frame
     void Update()
     {
-        player = GameObject.Find("Player").GetComponent<PlayerStats>();
+        player = GameObject.Find("Player");
         Move();
+        Timer();
         playerStats = GameObject.Find("Player").GetComponent<PlayerStats>();
-        if(Gold == null)
-        {
-            Gold = GameObject.FindGameObjectWithTag("CoinBag");
-        }
+        Gold = GameObject.FindGameObjectWithTag("Gold");
     }
 
     public override void Move()
@@ -58,8 +56,9 @@ public class SharkBahaviour : Enemy
         else if (Vector2.Distance(transform.position, player.transform.position) < detectionDistance)
         {
             Vector3 targetPosition = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
-            targetPosition.z = -2;
+            targetPosition.z = StartPOSZ;
             transform.position = targetPosition;
+            Attack();
         }
         else if (transform.position.y > bottomY)
         {
@@ -68,12 +67,26 @@ public class SharkBahaviour : Enemy
         }
     }
 
+    public override void Attack()
+    {
+        if(AttackTimer <= 0)
+        {
+            if(Vector2.Distance(transform.position, player.transform.position) < AttackDistance)
+            {
+                playerStats.TakeDamage(damage);
+                AttackTimer = StartingAttackTimer;
+            }
+        }
+    }
+
+    void Timer()
+    {
+        AttackTimer -= Time.deltaTime;
+        Debug.Log(AttackTimer);
+    }
+
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Player")
-        {
-            collision.gameObject.GetComponent<PlayerStats>().TakeDamage(damage);
-        }
         if(collision.gameObject.tag == "Bullet")
         {
             TakeDamage(playerStats.damage);
@@ -85,11 +98,17 @@ public class SharkBahaviour : Enemy
     {
         StartCoroutine(Flicker());
         health -= damage;
+        AdhustHealthBar();
         Debug.Log("Shark Health: " + health);
         if(health <= 0)
         {
             Death();
         }
+    }
+    void AdhustHealthBar()
+    {
+        healthBar.maxValue = maxHealth;
+        healthBar.value = health;
     }
 
     public override IEnumerator Flicker()
@@ -106,11 +125,8 @@ public class SharkBahaviour : Enemy
 
     void Death()
     {
-        Debug.Log("Shark Dead");
         Instantiate(Gold, transform.position, Quaternion.identity);
-        Debug.Log("Gold Dropped");
         Destroy(gameObject);
-        Debug.Log("Shark Kills" + player.SharkKills);
         playerStats.SharkKills += 1;
     }
 }

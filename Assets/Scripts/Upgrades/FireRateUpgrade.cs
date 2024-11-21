@@ -5,37 +5,33 @@ using TMPro;
 
 public class FireRateUpgrade : Upgrade
 {
-    // Start is called before the first frame update
     [Header("Upgrade Values")]
-    public TextMeshProUGUI FireRateText;
-    public TextMeshProUGUI costText;
-    public TextMeshProUGUI ButtonText;
     public float MaxFireRate;
-    public List<GameObject> FRUpgrade = new List<GameObject>();
-    private int currentUpgradeIndex = 0;
+    private const int BaseCost = 10;
+    private const float FireRateIncrement = 0.2f;
+    const float MinFireRate = 0.2f;
 
     void Start()
     {
-        MaxFireRate = playerStats.fireRate - 0.2f * FRUpgrade.Count;
-        cost = 10;
-        // Initialize the damageUpgrade images to white
-        foreach (var upgrade in FRUpgrade)
-        {
-            var image = upgrade.GetComponent<UnityEngine.UI.Image>();
-            if (image != null)
-            {
-                image.color = Color.red;
-            }
-        }
+        // Set the max fire rate to the player's fire rate minus the increment times the number of upgrades
+        MaxFireRate = playerStats.fireRate - FireRateIncrement * upgradeIndicators.Count;
+        cost = BaseCost;
+        // Initialize the fire rate upgrade images to red
+        ResetIndicator(Color.red);
     }
 
     // Update is called once per frame
     void Update()
     {
-        FireRateText.text = "Fire Rate: " + playerStats.startFireRate.ToString("F2");
-        ButtonText.text = "Cost: " + cost;
+        SetText();
+    }
+    public override void SetText()
+    {
+        costText.text = "Fire Rate: " + playerStats.startFireRate.ToString("F2");
+        ButtonText.text = "$" + cost;
     }
 
+    // Check the cost of the upgrade
     public override void CostCheck()
     {
         Debug.Log("Checking Cost for Fire Rate Upgrade");
@@ -46,54 +42,38 @@ public class FireRateUpgrade : Upgrade
         }
         else
         {
-            Debug.Log("Not enough coins");
-            costText.text = "Not enough coins";
+
+            messageText.text = "Not enough coins";
         }
     }
 
+    // Upgrade the player's fire rate
     public override void UpgradePlayer()
     {
         if (playerStats.startFireRate > MaxFireRate)
         {
-            Debug.Log("Upgrading Player Fire Rate");
-            playerStats.fireRate -= 0.2f;
-            playerStats.startFireRate -= 0.2f;
-            Debug.Log("Player FireRate: " + playerStats.fireRate.ToString("F2"));
-            UpdateUpgradeDisplay();
+            playerStats.fireRate -= FireRateIncrement;
+            playerStats.startFireRate -= FireRateIncrement;
+            UpdateUpgradeDisplay(Color.green);
+            upgradeManager.OnUpgradePurchased();
         }
         else
         {
             inventory.coinCount += cost;
-            Debug.Log("Max fire rate Reached");
-            FireRateText.text = "Max Fire Rate Reached";
+            messageText.text = "Max Fire Rate Reached";
         }
     }
-
-    public override void Reset()
+    
+    // Reset the upgrade
+    public override void ResetUpgrade()
     {
-        foreach (var upgrade in FRUpgrade)
-        {
-            var image = upgrade.GetComponent<UnityEngine.UI.Image>();
-            if (image != null)
-            {
-                image.color = Color.red;
-            }
-        }
+        ResetIndicator(Color.red);
         currentUpgradeIndex = 0;
-        MaxFireRate = playerStats.fireRate - 0.2f * FRUpgrade.Count;
-        cost = 10;
-    }
-
-    void UpdateUpgradeDisplay()
-    {
-        if (currentUpgradeIndex < FRUpgrade.Count)
+        MaxFireRate = playerStats.fireRate - FireRateIncrement * upgradeIndicators.Count;
+        if(MaxFireRate < MinFireRate)
         {
-            var image = FRUpgrade[currentUpgradeIndex].GetComponent<UnityEngine.UI.Image>();
-            if (image != null)
-            {
-                image.color = Color.green;
-            }
-            currentUpgradeIndex++;
+            MaxFireRate = MinFireRate;
         }
+        cost = BaseCost;
     }
 }
