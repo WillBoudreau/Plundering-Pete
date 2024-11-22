@@ -70,6 +70,7 @@ public class FireRateUpgrade : Upgrade
         ResetIndicator(Color.red);
         currentUpgradeIndex = 0;
         MaxFireRate = playerStats.fireRate - FireRateIncrement * upgradeIndicators.Count;
+        cost += BaseCost;
         if(MaxFireRate < MinFireRate)
         {
             MaxFireRate = MinFireRate;
