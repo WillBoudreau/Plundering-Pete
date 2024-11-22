@@ -95,6 +95,11 @@ public class SpawnManager : MonoBehaviour
                     isOccupied = true;
                     break;
                 }
+                else if(collider.gameObject.tag == "Player")
+                {
+                    isOccupied = true;
+                    break;
+                }
             }
             if(!isOccupied)
             {
