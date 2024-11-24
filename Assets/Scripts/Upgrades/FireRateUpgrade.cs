@@ -8,12 +8,12 @@ public class FireRateUpgrade : Upgrade
     [Header("Upgrade Values")]
     public float MaxFireRate;
     private const int BaseCost = 10;
-    private const float FireRateIncrement = 0.2f;
+    private const float FireRateIncrement = 0.1f;
 
     void Start()
     {
         // Set the max fire rate to the player's fire rate minus the increment times the number of upgrades
-        MaxFireRate = (playerStats.fireRate - (FireRateIncrement * upgradeIndicators.Count));
+        MaxFireRate = (playerStats.startFireRate - (FireRateIncrement * upgradeIndicators.Count));
         cost = BaseCost;
         // Initialize the fire rate upgrade images to red
         ResetIndicator(Color.red);

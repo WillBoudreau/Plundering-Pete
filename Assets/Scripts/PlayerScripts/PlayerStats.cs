@@ -66,7 +66,7 @@ public class PlayerStats : MonoBehaviour
         startHealth = 5;
         startdamage = 1;
         StartSpeed = 6;
-        startFireRate = 2.20f;
+        startFireRate = 2f;
         bulletVelocity = 25f;
         healthManager.health = playerHealth;
         magnet = 3f;
@@ -82,12 +82,13 @@ public class PlayerStats : MonoBehaviour
     public void AdjustFireRate(float increment)
     {
         fireRate = Mathf.Clamp(fireRate + increment, MinFireRate, startFireRate);
-        startFireRate = fireRate;
+        startFireRate += increment;
+        // startFireRate = fireRate;
         if(fireRate < MinFireRate)
         {
             fireRate = MinFireRate;
         }
-        Debug.Log("Fire Rate: " + fireRate + " Start Fire Rate: " + startFireRate);
+        Debug.Log("Fire RateFromStats: " + fireRate + " Start Fire RateFromStats: " + startFireRate);
     }
 
     //Level up the player(Called in ShipUpgrade)

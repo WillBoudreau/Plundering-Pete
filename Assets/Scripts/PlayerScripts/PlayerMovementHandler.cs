@@ -13,7 +13,6 @@ public class PlayerMovementHandler : MonoBehaviour
     [SerializeField] private float time = 5.0f;
     [Header("Player Movement")]
     [SerializeField] private float speed = 5.0f;
-    [SerializeField] private float startFireRate = 0.5f;
     [SerializeField] private float bulletVelocity = 10.0f;
     public GameObject bulletPrefab;
     public GameObject level2BulletPrefab;

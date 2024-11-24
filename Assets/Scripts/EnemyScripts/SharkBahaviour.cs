@@ -95,7 +95,6 @@ public class SharkBahaviour : Enemy
     void Timer()
     {
         AttackTimer -= Time.deltaTime;
-        Debug.Log(AttackTimer);
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
@@ -112,7 +111,6 @@ public class SharkBahaviour : Enemy
         StartCoroutine(Flicker());
         health -= damage;
         AdhustHealthBar();
-        Debug.Log("Shark Health: " + health);
         if(health <= 0)
         {
             Death();
