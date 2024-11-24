@@ -16,6 +16,7 @@ public class ShipUpgrade : Upgrade
     private const int HealthIncrement = 10;
     private const int SpeedIncrement = 10;
     private const int MagnetIncrement = 3;
+    private const float FireRateIncrement = 0.2f;
     void Start()
     {
         MaxLevel = 3;
@@ -98,6 +99,8 @@ public class ShipUpgrade : Upgrade
         playerStats.startHealth += HealthIncrement;
         playerStats.speed += SpeedIncrement;
         playerStats.magnet += MagnetIncrement;
+        playerStats.fireRate -= FireRateIncrement;
+        playerStats.startFireRate -= FireRateIncrement;
         cost += CostIncrement;
     }
 }

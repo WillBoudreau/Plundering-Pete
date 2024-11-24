@@ -65,7 +65,7 @@ public class PlayerStats : MonoBehaviour
         startHealth = 5;
         startdamage = 1;
         StartSpeed = 6;
-        startFireRate = 2;
+        startFireRate = 2f;
         bulletVelocity = 25f;
         healthManager.health = playerHealth;
         magnet = 3f;

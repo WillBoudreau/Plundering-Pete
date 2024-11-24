@@ -15,6 +15,7 @@ public class SpawnManager : MonoBehaviour
     public GameObject player;
     private const float PlayerZPOS = -2f;
     private const float CameraZPOS = -30f;
+    float spawnZone = 5.0f;
     void Update()
     {
         if(levelManager.levelName == "GameTestScene")
@@ -76,7 +77,7 @@ public class SpawnManager : MonoBehaviour
                 spawnArea = ShipSpawnArea;
             }
             Vector3 spawnPos = GetEnemySpawn(spawnArea);
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(spawnPos, 1.0f);
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(spawnPos, spawnZone);
             bool isOccupied = false;
             foreach(var collider in colliders)
             {
