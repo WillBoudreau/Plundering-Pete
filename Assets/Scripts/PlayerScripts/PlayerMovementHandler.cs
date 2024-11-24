@@ -37,7 +37,7 @@ public class PlayerMovementHandler : MonoBehaviour
         //Handle player shooting by tracking the mouse pos
         playerStats.fireRate -= Time.deltaTime;
     
-        if (Input.GetKeyDown(KeyCode.Mouse0) && playerStats.fireRate <= 0)
+        if (Input.GetKey(KeyCode.Mouse0) && playerStats.fireRate <= 0)
         {
             IsFiring = true;
             playerStats.fireRate = 0;
