@@ -99,8 +99,7 @@ public class ShipUpgrade : Upgrade
         playerStats.startHealth += HealthIncrement;
         playerStats.speed += SpeedIncrement;
         playerStats.magnet += MagnetIncrement;
-        playerStats.fireRate -= FireRateIncrement;
-        playerStats.startFireRate -= FireRateIncrement;
+        playerStats.AdjustFireRate(-FireRateIncrement);
         cost += CostIncrement;
     }
 }

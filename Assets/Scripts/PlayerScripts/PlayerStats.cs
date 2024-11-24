@@ -32,6 +32,7 @@ public class PlayerStats : MonoBehaviour
     public LayerMask groundLayer;
     public Transform firePoint;
     public bool PlayerPlaced;
+    const float MinFireRate = 0.1f;
     [Header("Player Levels")]
     public bool IsLevel2;
     public bool IsLevel3; 
@@ -65,7 +66,7 @@ public class PlayerStats : MonoBehaviour
         startHealth = 5;
         startdamage = 1;
         StartSpeed = 6;
-        startFireRate = 2f;
+        startFireRate = 2.20f;
         bulletVelocity = 25f;
         healthManager.health = playerHealth;
         magnet = 3f;
@@ -77,6 +78,16 @@ public class PlayerStats : MonoBehaviour
         fireRate = startFireRate;
         //Set Win Bool
         Win = false;
+    }
+    public void AdjustFireRate(float increment)
+    {
+        fireRate = Mathf.Clamp(fireRate + increment, MinFireRate, startFireRate);
+        startFireRate = fireRate;
+        if(fireRate < MinFireRate)
+        {
+            fireRate = MinFireRate;
+        }
+        Debug.Log("Fire Rate: " + fireRate + " Start Fire Rate: " + startFireRate);
     }
 
     //Level up the player(Called in ShipUpgrade)
