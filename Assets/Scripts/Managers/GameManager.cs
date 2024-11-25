@@ -78,6 +78,7 @@ public class GameManager : MonoBehaviour
         EnableCamera();
         EnablePlayer();
         EnableLoadButton();
+        DisableCursor();
         Time.timeScale = 1;
     }
     void DisableGameplay()
@@ -85,6 +86,7 @@ public class GameManager : MonoBehaviour
         DisablePlayer();
         DisableCamera();
         DisableLoadButton();
+        EnableCursor();
         Time.timeScale = 0;
     }
     void EnableCamera()
@@ -94,6 +96,16 @@ public class GameManager : MonoBehaviour
     void DisableCamera()
     {
         Camera.GetComponent<CameraManager>().enabled = false;
+    }
+    void EnableCursor()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+    void DisableCursor()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
     void EnablePlayer()
     {
