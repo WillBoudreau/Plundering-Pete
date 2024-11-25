@@ -85,10 +85,10 @@ public class PlayerMovementHandler : MonoBehaviour
 
         Vector2 movement = new Vector2(moveHorizontal, moveVertical) * speed;
         rb.velocity = movement;
-        if(Input.GetKeyDown(KeyCode.E))
-        {
-            playerStats.TakeDamage(1);
-        }
+        // if(Input.GetKeyDown(KeyCode.E))
+        // {
+        //     playerStats.TakeDamage(1);
+        // }
         if(rb.velocity.magnitude > 0)
         {
             IsMoving = true;

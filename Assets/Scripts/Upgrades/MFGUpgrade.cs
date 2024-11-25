@@ -9,10 +9,16 @@ public class MFGUpgrade : Upgrade
     public float MaxMagnet;
     private const int BaseCost = 10;
     private const float MagnetIncrement = 3;
+    // void Awake()
+    // {
+    //     cost = BaseCost;
+    //     ResetIndicator(Color.red);
+    //     MaxMagnet = (playerStats.magnet + MagnetIncrement);
+    // }
 
     void Start()
     {
-        MaxMagnet = playerStats.magnet + MagnetIncrement;
+        MaxMagnet = (playerStats.magnet + MagnetIncrement);
         cost = BaseCost;
         ResetIndicator(Color.red);
     }
@@ -54,7 +60,7 @@ public class MFGUpgrade : Upgrade
         else
         {
             inventory.coinCount += cost;
-            messageText.text = "Max Magnet Reached";
+            messageText.text = "Max Magnet" + MaxMagnet + " reached" + "Player Magnet: " + playerStats.magnet + "Magnet " + (playerStats.magnet + MagnetIncrement);
         }
     }
 
@@ -63,7 +69,7 @@ public class MFGUpgrade : Upgrade
     {
         ResetIndicator(Color.red);
         currentUpgradeIndex = 0;
-        MaxMagnet += MagnetIncrement;
+        MaxMagnet = playerStats.magnet + MagnetIncrement;
         cost += BaseCost;
     }
 }

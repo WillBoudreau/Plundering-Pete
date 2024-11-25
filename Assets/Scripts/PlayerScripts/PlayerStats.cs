@@ -44,6 +44,14 @@ public class PlayerStats : MonoBehaviour
     public float FlickerDuration = 0.1f; 
     public int FlickerCount = 5;
     
+    void Awake()
+    {
+        startHealth = 5;
+        playerHealth = startHealth;
+        magnet = 3f;
+        StartSpeed = 6;
+        speed = StartSpeed;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -63,17 +71,17 @@ public class PlayerStats : MonoBehaviour
     {
         //Set starting values
         Level = 1;
-        startHealth = 5;
+        //startHealth = 5;
         startdamage = 1;
-        StartSpeed = 6;
+        //StartSpeed = 6;
         startFireRate = 2f;
         bulletVelocity = 25f;
         healthManager.health = playerHealth;
-        magnet = 3f;
+        //magnet = 3f;
         //Assign values to be the starting values
-        playerHealth = startHealth;
+        //playerHealth = startHealth;
         healthManager.playerhealth.fillAmount = playerHealth;
-        speed = StartSpeed;
+        //speed = StartSpeed;
         damage = startdamage;
         fireRate = startFireRate;
         //Set Win Bool
