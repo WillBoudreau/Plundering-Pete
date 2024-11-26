@@ -69,7 +69,7 @@ public class MFGUpgrade : Upgrade
     {
         ResetIndicator(Color.red);
         currentUpgradeIndex = 0;
-        MaxMagnet = playerStats.magnet + MagnetIncrement;
+        MaxMagnet = (playerStats.magnet + MagnetIncrement);
         cost += BaseCost;
     }
 }

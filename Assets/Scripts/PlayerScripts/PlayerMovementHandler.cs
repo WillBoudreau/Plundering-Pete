@@ -87,7 +87,7 @@ public class PlayerMovementHandler : MonoBehaviour
         rb.velocity = movement;
         // if(Input.GetKeyDown(KeyCode.E))
         // {
-        //     playerStats.TakeDamage(1);
+        //     inventoryManager.coinCount++;
         // }
         if(rb.velocity.magnitude > 0)
         {
