@@ -13939,7 +13939,7 @@ MonoBehaviour:
   optionsMenu: {fileID: 1440979893}
   gamePlay: {fileID: 902718851}
   pauseMenu: {fileID: 424658875}
-  gameOver: {fileID: 1320562580}
+  gameOver: {fileID: 1667922869}
   winMenu: {fileID: 1742792122}
   upgradesMenu: {fileID: 1007322667}
   InstructionsScreen: {fileID: 392818792}
