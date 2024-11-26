@@ -24,8 +24,8 @@ public class SharkBahaviour : Enemy
     {
         originalColor = renderer.material.color;
         speed = 5;
-        health = 2;
-        maxHealth = 2;
+        health = 1.5f;
+        maxHealth = 1;
         damage = 1;
         stoppingDistance = 2;
         detectionDistance = 10;

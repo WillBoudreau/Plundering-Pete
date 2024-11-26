@@ -8,6 +8,9 @@ public class OptionsManager : MonoBehaviour
     public Slider volumeSlider;
     public AudioSource musicSource;
     public GameObject MusicChanger;
+    public Slider SFXSlider;
+    public AudioSource SFXSource;
+
 
     // Start is called before the first frame update
     void Start()
@@ -20,11 +23,17 @@ public class OptionsManager : MonoBehaviour
     void Update()
     {
         musicSource = MusicChanger.GetComponent<AudioSource>();
+        SFXSource = MusicChanger.GetComponent<AudioSource>();
     }
 
     public void SetVolume(float volume)
     {
         musicSource.volume = volume;
         Debug.Log("Volume: " + volume);
+    }
+    public void SetSFXVolume(float volume)
+    {
+        SFXSource.volume = volume;
+        Debug.Log("SFX Volume: " + volume);
     }
 }

@@ -18,7 +18,7 @@ public class SerpentBehaviour : Enemy
         renderer = GetComponentInChildren<Renderer>();
         originalColor = renderer.material.color;
         speed = 8;
-        health = 2;
+        health = 10;
         damage = 1;
         stoppingDistance = 2;
         detectionDistance = 20;
