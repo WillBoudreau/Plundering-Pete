@@ -6,6 +6,7 @@ public class MusicChanger : MonoBehaviour
 {
     public AudioClip[] music;
     public AudioClip[] effects;
+    public AudioClip[] damageEffects;
     public AudioSource musicSource;
     public AudioSource effectsSource;
     private int currentTrackIndex = 0;
@@ -14,17 +15,36 @@ public class MusicChanger : MonoBehaviour
     void Start()
     {
         //Get the music sources
+        AddMusicToArray();
+        //Get the effects sources
+        AddEffectsToArray();
+        //Damage sound effects
+        AddDamageEffectsToArray();
+        PlaySceneTrack("MainMenuScene");
+
+    }
+    void AddMusicToArray()
+    {
         music = new AudioClip[3];
         music[0] = Resources.Load<AudioClip>("Sail The Seven Seas (1)");
         music[1] = Resources.Load<AudioClip>("Sailing The Seven Seas");
         music[2] = Resources.Load<AudioClip>("Music3");
-        //Get the effects sources
+    }
+    void AddEffectsToArray()
+    {
         effects = new AudioClip[3];
         effects[0] = Resources.Load<AudioClip>("CannonShot_Rework");
         effects[1] = Resources.Load<AudioClip>("coin-dropped-81172");
         effects[2] = Resources.Load<AudioClip>("Plunder'inPeteDamage 1");
-        PlaySceneTrack("MainMenuScene");
-
+    }
+    void AddDamageEffectsToArray()
+    {
+        damageEffects = new AudioClip[5];
+        damageEffects[0] = Resources.Load<AudioClip>("DamageSoundEffect1");
+        damageEffects[1] = Resources.Load<AudioClip>("DamageSoundEffect2");
+        damageEffects[2] = Resources.Load<AudioClip>("DamageSoundEffect3");
+        damageEffects[3] = Resources.Load<AudioClip>("DamageSoundEffect4");
+        damageEffects[4] = Resources.Load<AudioClip>("DamageSoundEffect5");
     }
     //Play the music for the scene
     public void PlaySceneTrack(string sceneName)
@@ -52,5 +72,9 @@ public class MusicChanger : MonoBehaviour
     public void PlaySound(int index)
     {
         effectsSource.PlayOneShot(effects[index]);
+    }
+    public void PlayDamageSound(int index)
+    {
+        effectsSource.PlayOneShot(damageEffects[index]);
     }
 }
