@@ -179,6 +179,7 @@ public class PlayerStats : MonoBehaviour
         if (playerHealth <= 0)
         {
             playerHealth = 0;
+            musicManager.PlaySound(3);
             uIManager.SetGameState("GameOver");
             ResetHealth();
             Respawn();

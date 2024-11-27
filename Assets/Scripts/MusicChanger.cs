@@ -32,10 +32,11 @@ public class MusicChanger : MonoBehaviour
     }
     void AddEffectsToArray()
     {
-        effects = new AudioClip[3];
+        effects = new AudioClip[4];
         effects[0] = Resources.Load<AudioClip>("CannonShot_Rework");
         effects[1] = Resources.Load<AudioClip>("coin-dropped-81172");
         effects[2] = Resources.Load<AudioClip>("Plunder'inPeteDamage 1");
+        effects[3] = Resources.Load<AudioClip>("DeathSoundEffect");
     }
     void AddDamageEffectsToArray()
     {
