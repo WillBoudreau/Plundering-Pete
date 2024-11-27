@@ -6493,7 +6493,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -2.3849487}
+  m_AnchoredPosition: {x: 0, y: -2.3848877}
   m_SizeDelta: {x: 0, y: 4.7700195}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &884719224
@@ -6708,7 +6708,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 22.541016, y: -2.3849487}
+  m_AnchoredPosition: {x: 22.541016, y: -2.3848877}
   m_SizeDelta: {x: -45.082, y: 4.77}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &902718853
@@ -18612,6 +18612,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 030ff53116a78324db522a9e2b21c0f6, type: 3}
   - {fileID: 8300000, guid: 21970a5f3746ac049a4aa2416169c6fe, type: 3}
   effects: []
+  damageEffects:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   musicSource: {fileID: 2083907202}
   effectsSource: {fileID: 2083907203}
 --- !u!82 &2083907202

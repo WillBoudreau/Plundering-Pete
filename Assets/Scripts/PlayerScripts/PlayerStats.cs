@@ -147,11 +147,16 @@ public class PlayerStats : MonoBehaviour
     public void TakeDamage(float damage)
     {
         StartCoroutine(Flicker());
-        musicManager.PlaySound(2);
+        ChooseDamageSound();
         playerHealth -= damage;
-
         healthManager.HandlePlayerHealthBar(playerHealth, startHealth);
         Death();
+    }
+    void ChooseDamageSound()
+    {
+        System.Random random = new System.Random();
+        int randomNumber = random.Next(0, musicManager.damageEffects.Length);
+        musicManager.PlayDamageSound(randomNumber);
     }
 
     //Flicker for damage
