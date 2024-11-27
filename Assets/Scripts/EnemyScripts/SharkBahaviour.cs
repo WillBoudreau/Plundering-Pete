@@ -24,8 +24,8 @@ public class SharkBahaviour : Enemy
     {
         originalColor = renderer.material.color;
         speed = 5;
-        health = 2;
-        maxHealth = 2;
+        health = 1.5f;
+        maxHealth = 1;
         damage = 1;
         stoppingDistance = 2;
         detectionDistance = 10;
@@ -53,7 +53,7 @@ public class SharkBahaviour : Enemy
             Debug.Log("Dead");
             Destroy(gameObject);
         }
-        else if (Vector2.Distance(transform.position, player.transform.position) < detectionDistance)
+        else if (Vector2.Distance(transform.position, player.transform.position) < detectionDistance && PlayerInFront())
         {
             Vector3 targetPosition = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
             targetPosition.z = StartPOSZ;
@@ -64,6 +64,19 @@ public class SharkBahaviour : Enemy
         {
             Vector3 targetPosition = new Vector3(transform.position.x, bottomY, transform.position.z);
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+        }
+    }
+    bool PlayerInFront()
+    {
+        Vector2 toPlayer =(player.transform.position - transform.position).normalized;
+        float dot = Vector2.Dot(toPlayer, transform.up);
+        if(dot > 0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
         }
     }
 
@@ -82,7 +95,6 @@ public class SharkBahaviour : Enemy
     void Timer()
     {
         AttackTimer -= Time.deltaTime;
-        Debug.Log(AttackTimer);
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
@@ -99,7 +111,6 @@ public class SharkBahaviour : Enemy
         StartCoroutine(Flicker());
         health -= damage;
         AdhustHealthBar();
-        Debug.Log("Shark Health: " + health);
         if(health <= 0)
         {
             Death();

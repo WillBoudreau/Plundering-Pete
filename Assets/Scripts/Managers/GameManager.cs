@@ -9,15 +9,16 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     [Header("Class Calls")]
-    public UIManager uiManager;
-    public LevelManager levelManager;
+    [SerializeField] private UIManager uiManager;
+    [SerializeField] private LevelManager levelManager;
 
-    public SpawnManager spawnManager;
+    [SerializeField] private SpawnManager spawnManager;
+    [SerializeField] private PlayerBehaviour playerBehaviour;
+    [SerializeField] private PlayerStats playerStats;
+    [SerializeField] private InventoryManager inventoryManager;
+    [Header("GameObjects")]
     public GameObject player;
     public GameObject Camera;
-    public PlayerBehaviour playerBehaviour;
-    [SerializeField] private PlayerStats playerStats;
-    public InventoryManager inventoryManager;
     [Header("Variables")]
     public bool PlayerEnabled;
     public Button loadButton;
@@ -26,6 +27,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Get the components
         uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
         playerBehaviour = GameObject.Find("Player").GetComponent<PlayerBehaviour>();
         inventoryManager = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
@@ -40,6 +42,7 @@ public class GameManager : MonoBehaviour
     {
         Pause();
         uiManager.UpdateUI();
+        //If the game is in the gameplay state, enable the player and camera
         if (levelManager.levelName == "GameTestScene" && uiManager.currentGameState == UIManager.GameState.GamePlay)
         {
             if (playerStats.PlayerPlaced == false)
@@ -55,7 +58,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
+    //Pause the game
     void Pause()
     {
         if(PlayerEnabled == true)
@@ -73,11 +76,13 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+    //Enable and disable gameplay
     void EnableGameplay()
     {
         EnableCamera();
         EnablePlayer();
         EnableLoadButton();
+        DisableCursor();
         Time.timeScale = 1;
     }
     void DisableGameplay()
@@ -85,8 +90,10 @@ public class GameManager : MonoBehaviour
         DisablePlayer();
         DisableCamera();
         DisableLoadButton();
+        EnableCursor();
         Time.timeScale = 0;
     }
+    //Enable and disable camera, cursor, player, and load button
     void EnableCamera()
     {
         Camera.GetComponent<CameraManager>().enabled = true;
@@ -94,6 +101,16 @@ public class GameManager : MonoBehaviour
     void DisableCamera()
     {
         Camera.GetComponent<CameraManager>().enabled = false;
+    }
+    void EnableCursor()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+    void DisableCursor()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
     void EnablePlayer()
     {
@@ -115,6 +132,7 @@ public class GameManager : MonoBehaviour
     {
         loadButton.interactable = false;
     }
+    //Save and load game
     public void Save()
     {
         BinaryFormatter bf = new BinaryFormatter();
@@ -148,6 +166,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("Game Loaded");
          }
     }
+    //Player data
     [System.Serializable]
     class PlayerData
     {

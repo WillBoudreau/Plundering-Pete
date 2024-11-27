@@ -12,7 +12,7 @@ public class SpeedUpgrade : Upgrade
 
     void Start()
     {
-        MaxSpeed = playerStats.speed + SpeedIncrement;
+        MaxSpeed = (playerStats.speed + SpeedIncrement);
         cost = BaseCost;
         ResetIndicator(Color.red);
     }
@@ -53,7 +53,7 @@ public class SpeedUpgrade : Upgrade
         else
         {
             inventory.coinCount += cost;
-            messageText.text = "Max Speed Reached";
+            messageText.text = "Max Speed" + MaxSpeed + "Player Speed" + playerStats.speed + "Speed Increment" + SpeedIncrement + "Speed" + (playerStats.speed+SpeedIncrement);
         }
     }
     public override void ResetUpgrade()

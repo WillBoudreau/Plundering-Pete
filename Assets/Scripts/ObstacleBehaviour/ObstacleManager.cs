@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ObstacleManager : MonoBehaviour
 {
+    //Struct for the obstacle zones
     public struct ObstacleZone
     {
         public float Xnegative;

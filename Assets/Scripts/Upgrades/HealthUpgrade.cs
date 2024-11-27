@@ -6,12 +6,18 @@ using TMPro;
 public class HealthUpgrade : Upgrade
 {
     [Header("Upgrade Values")]
-    float MaxHeatlh;
+    public const float HealthIncrement = 3;
     private const int BaseCost = 10;
-    private const float HealthIncrement = 3;
+    public float MaxHeatlh;
+    // void Awake()
+    // {
+    //     cost = BaseCost;
+    //     ResetIndicator(Color.red);
+    //     MaxHeatlh = (playerStats.playerHealth + HealthIncrement);
+    // }
     void Start()
     {
-        MaxHeatlh = playerStats.playerHealth + HealthIncrement;
+        MaxHeatlh = (playerStats.playerHealth + HealthIncrement);
         cost = BaseCost;
         ResetIndicator(Color.red);
     }
@@ -54,7 +60,7 @@ public class HealthUpgrade : Upgrade
         else
         {
             inventory.coinCount += cost;
-            messageText.text = "Max health Reached";
+            messageText.text = "Max health" + MaxHeatlh + " reached" + "Player Health: " + playerStats.playerHealth + "Start Health: " + playerStats.startHealth + "Health " + (playerStats.playerHealth + HealthIncrement);
         }
     }
     public override void ResetUpgrade()

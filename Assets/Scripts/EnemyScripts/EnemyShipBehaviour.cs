@@ -25,8 +25,8 @@ public class EnemyShipBehaviour : Enemy
         renderer = GetComponent<Renderer>();
         originalColor = renderer.material.color;
         speed = 2;
-        health = 2;
-        maxHealth = 2;
+        health = 20;
+        maxHealth = 20;
         damage = 1;
         stoppingDistance = 2;
         CanonVelocity = 25f;

@@ -13,10 +13,12 @@ public class MusicChanger : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Get the music sources
         music = new AudioClip[3];
         music[0] = Resources.Load<AudioClip>("Sail The Seven Seas (1)");
         music[1] = Resources.Load<AudioClip>("Sailing The Seven Seas");
         music[2] = Resources.Load<AudioClip>("Music3");
+        //Get the effects sources
         effects = new AudioClip[3];
         effects[0] = Resources.Load<AudioClip>("CannonShot_Rework");
         effects[1] = Resources.Load<AudioClip>("coin-dropped-81172");
@@ -24,7 +26,7 @@ public class MusicChanger : MonoBehaviour
         PlaySceneTrack("MainMenuScene");
 
     }
-
+    //Play the music for the scene
     public void PlaySceneTrack(string sceneName)
     {
         Debug.Log("Playing music for scene: " + sceneName);
@@ -46,7 +48,7 @@ public class MusicChanger : MonoBehaviour
         }
         musicSource.Play();
     }
-
+    //Play the sound effect
     public void PlaySound(int index)
     {
         effectsSource.PlayOneShot(effects[index]);
