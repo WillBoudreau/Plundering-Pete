@@ -32,6 +32,7 @@ public class PlayerStats : MonoBehaviour
     public LayerMask groundLayer;
     public Transform firePoint;
     public bool PlayerPlaced;
+    const float MinFireRate = 0.1f;
     [Header("Player Levels")]
     public bool IsLevel2;
     public bool IsLevel3; 
@@ -43,6 +44,14 @@ public class PlayerStats : MonoBehaviour
     public float FlickerDuration = 0.1f; 
     public int FlickerCount = 5;
     
+    void Awake()
+    {
+        startHealth = 5;
+        playerHealth = startHealth;
+        magnet = 3f;
+        StartSpeed = 6;
+        speed = StartSpeed;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -62,21 +71,32 @@ public class PlayerStats : MonoBehaviour
     {
         //Set starting values
         Level = 1;
-        startHealth = 5;
+        //startHealth = 5;
         startdamage = 1;
-        StartSpeed = 6;
-        startFireRate = 2;
+        //StartSpeed = 6;
+        startFireRate = 2f;
         bulletVelocity = 25f;
         healthManager.health = playerHealth;
-        magnet = 3f;
+        //magnet = 3f;
         //Assign values to be the starting values
-        playerHealth = startHealth;
+        //playerHealth = startHealth;
         healthManager.playerhealth.fillAmount = playerHealth;
-        speed = StartSpeed;
+        //speed = StartSpeed;
         damage = startdamage;
         fireRate = startFireRate;
         //Set Win Bool
         Win = false;
+    }
+    public void AdjustFireRate(float increment)
+    {
+        fireRate = Mathf.Clamp(fireRate + increment, MinFireRate, startFireRate);
+        startFireRate += increment;
+        // startFireRate = fireRate;
+        if(fireRate < MinFireRate)
+        {
+            fireRate = MinFireRate;
+        }
+        Debug.Log("Fire RateFromStats: " + fireRate + " Start Fire RateFromStats: " + startFireRate);
     }
 
     //Level up the player(Called in ShipUpgrade)

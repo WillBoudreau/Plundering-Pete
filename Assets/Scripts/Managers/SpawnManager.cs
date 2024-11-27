@@ -15,6 +15,7 @@ public class SpawnManager : MonoBehaviour
     public GameObject player;
     private const float PlayerZPOS = -2f;
     private const float CameraZPOS = -30f;
+    float spawnZone = 5.0f;
     void Update()
     {
         if(levelManager.levelName == "GameTestScene")
@@ -22,6 +23,7 @@ public class SpawnManager : MonoBehaviour
             FindSpawnPointInScene();
         }
     }
+    //Place the player at the spawn point coordinates
     public void PlacePlayer()
     {
         Vector3 playerPosition = playerSpawnPoint.position;
@@ -32,7 +34,7 @@ public class SpawnManager : MonoBehaviour
         cameraPosition.z =  CameraZPOS;
         Camera.transform.position = cameraPosition;
     }
-
+    //Place the player at the spawn point
     public void PlacePlayerAtSpawn()
     {
         Transform spawnPoint = FindSpawnPointInScene();
@@ -45,7 +47,7 @@ public class SpawnManager : MonoBehaviour
             Debug.Log("Spawn point not found");
         }
     }
-
+    //Find the spawn point in the scene
     Transform FindSpawnPointInScene()
     {
         GameObject spawnPoint = GameObject.Find("SpawnPoint");
@@ -56,6 +58,7 @@ public class SpawnManager : MonoBehaviour
         }
         return null;
     }
+    //Get a random spawn point in the specified area
     Vector3 GetEnemySpawn(Rect spawnArea)
     {
         Vector3 spawnPoint = new Vector3();
@@ -64,6 +67,7 @@ public class SpawnManager : MonoBehaviour
         spawnPoint.z = 0;
         return spawnPoint;
     }
+    //Spawn an enemy in the specified area
     public void SpawnEnemyInRect(GameObject enemyPrefab, Rect spawnArea)
     {
         bool spawnSuccessful = false;
@@ -76,7 +80,7 @@ public class SpawnManager : MonoBehaviour
                 spawnArea = ShipSpawnArea;
             }
             Vector3 spawnPos = GetEnemySpawn(spawnArea);
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(spawnPos, 1.0f);
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(spawnPos, spawnZone);
             bool isOccupied = false;
             foreach(var collider in colliders)
             {
@@ -95,6 +99,11 @@ public class SpawnManager : MonoBehaviour
                     isOccupied = true;
                     break;
                 }
+                else if(collider.gameObject.tag == "Player")
+                {
+                    isOccupied = true;
+                    break;
+                }
             }
             if(!isOccupied)
             {
@@ -108,6 +117,7 @@ public class SpawnManager : MonoBehaviour
             Debug.Log("Failed to spawn enemy");
         }
     }
+    //Draw the spawn areas in the editor
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;

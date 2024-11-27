@@ -13,7 +13,6 @@ public class PlayerMovementHandler : MonoBehaviour
     [SerializeField] private float time = 5.0f;
     [Header("Player Movement")]
     [SerializeField] private float speed = 5.0f;
-    [SerializeField] private float startFireRate = 0.5f;
     [SerializeField] private float bulletVelocity = 10.0f;
     public GameObject bulletPrefab;
     public GameObject level2BulletPrefab;
@@ -37,7 +36,7 @@ public class PlayerMovementHandler : MonoBehaviour
         //Handle player shooting by tracking the mouse pos
         playerStats.fireRate -= Time.deltaTime;
     
-        if (Input.GetKeyDown(KeyCode.Mouse0) && playerStats.fireRate <= 0)
+        if (Input.GetKey(KeyCode.Mouse0) && playerStats.fireRate <= 0)
         {
             IsFiring = true;
             playerStats.fireRate = 0;
@@ -86,10 +85,10 @@ public class PlayerMovementHandler : MonoBehaviour
 
         Vector2 movement = new Vector2(moveHorizontal, moveVertical) * speed;
         rb.velocity = movement;
-        if(Input.GetKeyDown(KeyCode.E))
-        {
-            playerStats.TakeDamage(1);
-        }
+        // if(Input.GetKeyDown(KeyCode.E))
+        // {
+        //     inventoryManager.coinCount++;
+        // }
         if(rb.velocity.magnitude > 0)
         {
             IsMoving = true;
