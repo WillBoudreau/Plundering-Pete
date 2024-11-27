@@ -42,6 +42,7 @@ public class CheckpointManager : MonoBehaviour
         yield return new WaitForSeconds(5);
         checkpointText.text = "";
     }
+    //Check the player's position and update the checkpoint status
     void Checkpoint()
     {
         if (playerBehaviour.transform.position.y >=  Checkpoint1)
@@ -57,7 +58,7 @@ public class CheckpointManager : MonoBehaviour
             UpdateCheckpointStatus(2, true);
         }
     }
-
+    //Update the checkpoint status
     public void UpdateCheckpointStatus(int checkpointIndex, bool status)
     {
         if(levelManager.levelName == "GameTestScene")
@@ -94,7 +95,7 @@ public class CheckpointManager : MonoBehaviour
             }
         }
     }
-
+    //Add the checkpoint bonus to the player's coin count
     void CheckpointBonus(int checkpointbonus, bool status)
     {
         if(status)
@@ -103,7 +104,7 @@ public class CheckpointManager : MonoBehaviour
             inventoryManager.coinCount += checkpointbonus;
         }
     }
-
+    //Set the checkpoint booleans to false
     public void SetFalse()
     {
         FirstCheckpoint = false;

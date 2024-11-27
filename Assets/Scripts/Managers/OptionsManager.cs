@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class OptionsManager : MonoBehaviour
 {
+    [Header("Options Values")]
     public Slider volumeSlider;
     public AudioSource musicSource;
     public GameObject MusicChanger;
@@ -17,6 +18,8 @@ public class OptionsManager : MonoBehaviour
     {
         volumeSlider.value = musicSource.volume;
         volumeSlider.onValueChanged.AddListener(SetVolume);
+        SFXSlider.value = SFXSource.volume;
+        SFXSlider.onValueChanged.AddListener(SetSFXVolume);
     }
 
     // Update is called once per frame
@@ -25,12 +28,13 @@ public class OptionsManager : MonoBehaviour
         musicSource = MusicChanger.GetComponent<AudioSource>();
         SFXSource = MusicChanger.GetComponent<AudioSource>();
     }
-
+    //Set the volume of the music
     public void SetVolume(float volume)
     {
         musicSource.volume = volume;
         Debug.Log("Volume: " + volume);
     }
+    //Set the volume of the sound effects
     public void SetSFXVolume(float volume)
     {
         SFXSource.volume = volume;

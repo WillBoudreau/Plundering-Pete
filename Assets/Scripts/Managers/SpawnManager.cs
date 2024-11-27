@@ -23,6 +23,7 @@ public class SpawnManager : MonoBehaviour
             FindSpawnPointInScene();
         }
     }
+    //Place the player at the spawn point coordinates
     public void PlacePlayer()
     {
         Vector3 playerPosition = playerSpawnPoint.position;
@@ -33,7 +34,7 @@ public class SpawnManager : MonoBehaviour
         cameraPosition.z =  CameraZPOS;
         Camera.transform.position = cameraPosition;
     }
-
+    //Place the player at the spawn point
     public void PlacePlayerAtSpawn()
     {
         Transform spawnPoint = FindSpawnPointInScene();
@@ -46,7 +47,7 @@ public class SpawnManager : MonoBehaviour
             Debug.Log("Spawn point not found");
         }
     }
-
+    //Find the spawn point in the scene
     Transform FindSpawnPointInScene()
     {
         GameObject spawnPoint = GameObject.Find("SpawnPoint");
@@ -57,6 +58,7 @@ public class SpawnManager : MonoBehaviour
         }
         return null;
     }
+    //Get a random spawn point in the specified area
     Vector3 GetEnemySpawn(Rect spawnArea)
     {
         Vector3 spawnPoint = new Vector3();
@@ -65,6 +67,7 @@ public class SpawnManager : MonoBehaviour
         spawnPoint.z = 0;
         return spawnPoint;
     }
+    //Spawn an enemy in the specified area
     public void SpawnEnemyInRect(GameObject enemyPrefab, Rect spawnArea)
     {
         bool spawnSuccessful = false;
@@ -114,6 +117,7 @@ public class SpawnManager : MonoBehaviour
             Debug.Log("Failed to spawn enemy");
         }
     }
+    //Draw the spawn areas in the editor
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
