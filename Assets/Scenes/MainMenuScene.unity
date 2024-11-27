@@ -3421,7 +3421,7 @@ MonoBehaviour:
   volumeSlider: {fileID: 1820428726}
   musicSource: {fileID: 2083907202}
   MusicChanger: {fileID: 2083907198}
-  SFXSlider: {fileID: 0}
+  SFXSlider: {fileID: 2124648558}
   SFXSource: {fileID: 0}
 --- !u!1 &472894841
 GameObject:
