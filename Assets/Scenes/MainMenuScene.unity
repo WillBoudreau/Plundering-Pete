@@ -6465,6 +6465,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 887945055}
   m_CullTransparentMesh: 1
+--- !u!1 &899329641
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 899329642}
+  - component: {fileID: 899329643}
+  m_Layer: 0
+  m_Name: UIBehaviours
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &899329642
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 899329641}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -47.32187, y: -19.453156, z: -6.25751}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1612513595}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &899329643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 899329641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 114006c12cb402b47ba37fd423280e49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiManager: {fileID: 1728282020}
+  text: {fileID: 2064994873}
+  GameOverText: GameOver
+  speed: 0.1
 --- !u!1 &900754622 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8829330189392537515, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
@@ -11414,6 +11462,7 @@ Transform:
   - {fileID: 1556131825}
   - {fileID: 324095956}
   - {fileID: 1626319225}
+  - {fileID: 899329642}
   m_Father: {fileID: 1547232562}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1613720157
@@ -12551,6 +12600,7 @@ GameObject:
   - component: {fileID: 1667922870}
   - component: {fileID: 1667922872}
   - component: {fileID: 1667922871}
+  - component: {fileID: 1667922873}
   m_Layer: 5
   m_Name: GameOverUI
   m_TagString: Untagged
@@ -12623,6 +12673,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1667922869}
   m_CullTransparentMesh: 1
+--- !u!114 &1667922873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1667922869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 114006c12cb402b47ba37fd423280e49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiManager: {fileID: 0}
+  text: {fileID: 2064994873}
+  GameOverText: Game Over Womp Womp
+  speed: 0.1
 --- !u!1 &1679824561 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1744041394810459262, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
@@ -17843,7 +17909,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Game Over Womp Womp '
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 54009ce9477610e4fbec065c92d56823, type: 2}
   m_sharedMaterial: {fileID: -3367406078993063493, guid: 54009ce9477610e4fbec065c92d56823, type: 2}
