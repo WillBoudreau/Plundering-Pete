@@ -3288,7 +3288,7 @@ MonoBehaviour:
   musicSource: {fileID: 2083907202}
   MusicChanger: {fileID: 2083907198}
   SFXSlider: {fileID: 2124648558}
-  SFXSource: {fileID: 0}
+  SFXSource: {fileID: 2083907202}
 --- !u!1 &472894841
 GameObject:
   m_ObjectHideFlags: 0
@@ -6290,7 +6290,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -2.3848877}
+  m_AnchoredPosition: {x: 0, y: -2.3848267}
   m_SizeDelta: {x: 0, y: 4.7700195}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &884719224
@@ -6505,7 +6505,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 22.541016, y: -2.3848877}
+  m_AnchoredPosition: {x: 22.541016, y: -2.3848267}
   m_SizeDelta: {x: -45.082, y: 4.77}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &902718853
@@ -10842,6 +10842,8 @@ MonoBehaviour:
   Camera: {fileID: 177806781}
   PlayerEnabled: 0
   loadButton: {fileID: 1368000655}
+  FirstTime: 1
+  KeepSailing: {fileID: 781799710}
 --- !u!114 &1547232564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12555,7 +12557,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1667922870
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13948,6 +13950,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Instructions
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1547232563}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: FirstTimeLoad
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1819685367
@@ -17829,7 +17843,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You Died...
+  m_text: 'Game Over Womp Womp '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 54009ce9477610e4fbec065c92d56823, type: 2}
   m_sharedMaterial: {fileID: -3367406078993063493, guid: 54009ce9477610e4fbec065c92d56823, type: 2}

@@ -24,6 +24,9 @@ public class UIManager : MonoBehaviour
     public InventoryManager inventoryManager;
     public DistanceTracker distanceTracker;
     public PlayerStats playerStats;
+    /// <summary>
+    //public EndGameText endGameText;
+    /// </summary>
     [Header("UI GameObjects")]
     public GameObject mainMenu;
     public GameObject optionsMenu;
@@ -71,6 +74,7 @@ public class UIManager : MonoBehaviour
                 DeactivateAllUI();
                 gameOver.SetActive(true);
                 UpdateGameOver();
+                // endGameText.ShowText();
                 break;
             case GameState.Win:
                 DeactivateAllUI();

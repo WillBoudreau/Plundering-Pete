@@ -22,11 +22,14 @@ public class GameManager : MonoBehaviour
     [Header("Variables")]
     public bool PlayerEnabled;
     public Button loadButton;
+    public bool FirstTime = true;
+    public GameObject KeepSailing;
     
 
     // Start is called before the first frame update
     void Start()
     {
+        KeepSailing.SetActive(false);
         //Get the components
         uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
         playerBehaviour = GameObject.Find("Player").GetComponent<PlayerBehaviour>();
@@ -55,6 +58,15 @@ public class GameManager : MonoBehaviour
         else if(uiManager.currentGameState == UIManager.GameState.Pause || uiManager.currentGameState == UIManager.GameState.GameOver)
         {
             DisableGameplay();
+        }
+    }
+    public void FirstTimeLoad()
+    {
+        if(FirstTime == true)
+        {
+            FirstTime = false;
+            Load();
+            KeepSailing.SetActive(true);
         }
     }
 
@@ -91,7 +103,7 @@ public class GameManager : MonoBehaviour
         DisableCamera();
         DisableLoadButton();
         EnableCursor();
-        Time.timeScale = 0;
+        //Time.timeScale = 0;
     }
     //Enable and disable camera, cursor, player, and load button
     void EnableCamera()
@@ -144,6 +156,7 @@ public class GameManager : MonoBehaviour
         data.speed = playerStats.speed;
         data.Gold = inventoryManager.coinCount;
         data.Level = playerStats.Level;
+        data.FirstTime = FirstTime;
         Debug.Log("Game Saved");
 
         bf.Serialize(file, data);
@@ -158,6 +171,7 @@ public class GameManager : MonoBehaviour
             PlayerData data = (PlayerData)bf.Deserialize(file);
             file.Close();
 
+            FirstTime = data.FirstTime;
             playerStats.playerHealth = data.health;
             playerStats.damage = data.damage;
             playerStats.speed = data.speed;
@@ -175,5 +189,6 @@ public class GameManager : MonoBehaviour
         public float speed;
         public int Gold;
         public int Level;
+        public bool FirstTime;
     }
 }
