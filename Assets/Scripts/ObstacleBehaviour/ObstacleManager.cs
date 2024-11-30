@@ -13,6 +13,8 @@ public class ObstacleManager : MonoBehaviour
         public float Ypositive;
     }
     public ObstacleZone zone1, zone2, zone3;
+    [Header("Object Calls")]
+    [SerializeField] private Camera mainCamera;
     [Header("Variables")]
     public GameObject Rock;
     public GameObject Iceberg;
@@ -118,7 +120,7 @@ public class ObstacleManager : MonoBehaviour
         {
             spawnPosition = GetSpawnPos(XNeg, XPos, YNeg, YPos);
             attempts++;
-        } while (Vector3.Distance(spawnPosition, playerPosition) < safeDistance || IsPositionUsed(spawnPosition) && attempts < maxAttempts);
+        } while ((Vector3.Distance(spawnPosition, playerPosition) < safeDistance || IsPositionUsed(spawnPosition) || IsInCameraView(spawnPosition)) && attempts < maxAttempts);
         Debug.Log("Attempts: " + attempts);
         return spawnPosition;
     }
@@ -133,5 +135,11 @@ public class ObstacleManager : MonoBehaviour
             }
         }
         return false;
+    }
+    //Check if the position is within the camera's view
+    private bool IsInCameraView(Vector3 position)
+    {
+        Vector3 viewportPoint = mainCamera.WorldToViewportPoint(position);
+        return viewportPoint.x > 0 && viewportPoint.x < 1 && viewportPoint.y > 0 && viewportPoint.y < 1;
     }
 }

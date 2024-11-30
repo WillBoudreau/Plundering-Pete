@@ -12738,6 +12738,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb6c6962b94f7e84d845fa63478f8071, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCamera: {fileID: 177806784}
   Rock: {fileID: 3600233302650675057, guid: eb50ad4c55b86d849b7d005a469850e3, type: 3}
   Iceberg: {fileID: 8951899304849922272, guid: 1da721168e4fcea4b96b6c5582c929b1, type: 3}
   Debris: {fileID: 8951899304849922272, guid: 60e159277ab1693428d34dcd836a49d7, type: 3}
@@ -14365,6 +14366,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelManager: {fileID: 1051185688}
+  mainCamera: {fileID: 177806784}
   Doubloon: {fileID: 7112107127442301048, guid: 8c67685f1765d5a4582752a597e62618, type: 3}
   Doubloons: []
   numofDoubloons: 0
