@@ -34,13 +34,13 @@ public class EnemyShipBehaviour : Enemy
         startPosition = transform.position;
         AdhustHealthBar();
         GoldBag = GameObject.FindGameObjectWithTag("CoinBag");
+        playerStats = GameObject.Find("Player").GetComponent<PlayerStats>();
     }
 
     // Update is called once per frame
     void Update()
     {
         Attack();
-        playerStats = GameObject.Find("Player").GetComponent<PlayerStats>();
         Move();
         HandleShooting();
     }

@@ -24,9 +24,6 @@ public class UIManager : MonoBehaviour
     public InventoryManager inventoryManager;
     public DistanceTracker distanceTracker;
     public PlayerStats playerStats;
-    /// <summary>
-    //public EndGameText endGameText;
-    /// </summary>
     [Header("UI GameObjects")]
     public GameObject mainMenu;
     public GameObject optionsMenu;
@@ -40,6 +37,7 @@ public class UIManager : MonoBehaviour
     public GameObject CreditsScreen;
     public GameObject results;
     [Header("Texts")]
+    public TextMeshProUGUI GameOverText;
     public TextMeshProUGUI playerCoins;
     public TextMeshProUGUI playerSharkKills;
     public TextMeshProUGUI playerSerpentKills;
@@ -73,8 +71,8 @@ public class UIManager : MonoBehaviour
             case GameState.GameOver:
                 DeactivateAllUI();
                 gameOver.SetActive(true);
-                UpdateGameOver();
-                // endGameText.ShowText();
+                //UpdateGameOver();
+                //endGameText.ShowText();
                 break;
             case GameState.Win:
                 DeactivateAllUI();
@@ -130,7 +128,7 @@ public class UIManager : MonoBehaviour
     void UpdateGameOver()
     {
         //Set the texts in the Game Over screen
-        playerCoins.text = "Coins Collected: " + inventoryManager.coinCount.ToString();
+        //playerCoins.text = "Coins Collected: " + inventoryManager.coinCount.ToString();
         playerSharkKills.text = "Sharks Killed: " + playerStats.SharkKills.ToString();
         playerSerpentKills.text = "Serpents Killed: " + playerStats.SerpentKills.ToString();
         playerShipKills.text = "Ships Sunk: " + playerStats.ShipKills.ToString();

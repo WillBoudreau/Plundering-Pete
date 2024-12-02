@@ -1799,7 +1799,7 @@ RectTransform:
   m_Father: {fileID: 1912446170}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -5091,7 +5091,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &681592909
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6290,7 +6290,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -2.3847656}
+  m_AnchoredPosition: {x: 0, y: -2.3847046}
   m_SizeDelta: {x: 0, y: 4.7700195}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &884719224
@@ -6510,8 +6510,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiManager: {fileID: 1728282020}
+  GameOverText: {fileID: 2064994873}
+  GameOverDoubloons: {fileID: 1088758527}
   text: {fileID: 2064994873}
-  GameOverText: GameOver
   speed: 0.1
 --- !u!1 &900754622 stripped
 GameObject:
@@ -6535,7 +6536,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &902718852
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6553,7 +6554,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 22.541016, y: -2.3847656}
+  m_AnchoredPosition: {x: 22.541016, y: -2.3847046}
   m_SizeDelta: {x: -45.082, y: 4.77}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &902718853
@@ -6969,7 +6970,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 3.4135742}
+  m_AnchoredPosition: {x: 0, y: 3.4136353}
   m_SizeDelta: {x: 0, y: 6.8273}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1007322669
@@ -7797,7 +7798,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 54009ce9477610e4fbec065c92d56823, type: 2}
   m_sharedMaterial: {fileID: -3367406078993063493, guid: 54009ce9477610e4fbec065c92d56823, type: 2}
@@ -7954,54 +7955,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1120296412}
   m_CullTransparentMesh: 1
---- !u!1 &1134395747
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1134395748}
-  - component: {fileID: 1134395749}
-  m_Layer: 0
-  m_Name: EnemyManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1134395748
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1134395747}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -378.39487, y: -250.00555, z: 1.4322689}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1612513595}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1134395749
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1134395747}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ddae4363b6e59b94eb61012a9e218bce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Shark: {fileID: 4724370820435506893, guid: 276f63cd8fc351b42a0406ce0fd8f74a, type: 3}
-  SharkSpawn: {fileID: 3267169091984192866, guid: f86f17bb3304e9544a00b2e4347a7fa4, type: 3}
-  NumSharks: 0
-  spawnPoints: []
 --- !u!1 &1135685405 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5338968883979651826, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
@@ -10958,6 +10911,7 @@ MonoBehaviour:
   playerDistance: 0
   endPosition: {fileID: 0}
   distanceTracker: {fileID: 364805127}
+  WarningBoard: {fileID: 681592908}
   WarningText: {fileID: 1438943767}
 --- !u!1 &1565549282
 GameObject:
@@ -11244,7 +11198,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 800, y: 0}
+  m_AnchoredPosition: {x: 808, y: 0}
   m_SizeDelta: {x: 300, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1599229416
@@ -11449,7 +11403,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 734893756}
-  - {fileID: 1134395748}
   - {fileID: 1039502978}
   - {fileID: 1051185687}
   - {fileID: 464774161}
@@ -12600,14 +12553,13 @@ GameObject:
   - component: {fileID: 1667922870}
   - component: {fileID: 1667922872}
   - component: {fileID: 1667922871}
-  - component: {fileID: 1667922873}
   m_Layer: 5
   m_Name: GameOverUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1667922870
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12648,7 +12600,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.84705883}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -12673,22 +12625,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1667922869}
   m_CullTransparentMesh: 1
---- !u!114 &1667922873
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1667922869}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 114006c12cb402b47ba37fd423280e49, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  uiManager: {fileID: 0}
-  text: {fileID: 2064994873}
-  GameOverText: Game Over Womp Womp
-  speed: 0.1
 --- !u!1 &1679824561 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1744041394810459262, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
@@ -13389,6 +13325,7 @@ MonoBehaviour:
   LoadingScreen: {fileID: 788866811}
   CreditsScreen: {fileID: 1613720157}
   results: {fileID: 1667922869}
+  GameOverText: {fileID: 0}
   playerCoins: {fileID: 1088758527}
   playerSharkKills: {fileID: 312332215}
   playerSerpentKills: {fileID: 1829017820}
@@ -17093,14 +17030,14 @@ RectTransform:
   m_GameObject: {fileID: 1995962112}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.1018751, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 945867850}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -827, y: 0}
+  m_AnchoredPosition: {x: -843.36, y: 0}
   m_SizeDelta: {x: 300, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1995962114
@@ -17308,7 +17245,7 @@ RectTransform:
   m_Father: {fileID: 485279118}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: -3.2300034, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

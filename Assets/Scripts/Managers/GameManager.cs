@@ -59,13 +59,17 @@ public class GameManager : MonoBehaviour
         {
             DisableGameplay();
         }
+        else if(uiManager.currentGameState == UIManager.GameState.Upgrades)
+        {
+            Time.timeScale = 0;
+        }
     }
     public void FirstTimeLoad()
     {
         if(FirstTime == true)
         {
             FirstTime = false;
-            Load();
+            //Load();
             KeepSailing.SetActive(true);
         }
     }
@@ -78,6 +82,7 @@ public class GameManager : MonoBehaviour
             if(Input.GetKeyDown(KeyCode.Escape))
             {
                 uiManager.currentGameState = UIManager.GameState.Pause;
+                //Time.timeScale = 0;
             }
         }
         else if(PlayerEnabled == false && uiManager.currentGameState == UIManager.GameState.Pause)
@@ -103,7 +108,7 @@ public class GameManager : MonoBehaviour
         DisableCamera();
         DisableLoadButton();
         EnableCursor();
-        //Time.timeScale = 0;
+        Time.timeScale = 0;
     }
     //Enable and disable camera, cursor, player, and load button
     void EnableCamera()

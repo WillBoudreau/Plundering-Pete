@@ -7,8 +7,10 @@ using UnityEngine.UI;
 public class EndGameText : MonoBehaviour
 {
     [SerializeField] private UIManager uiManager;
+    [Header("End Game text Fields")]
+    [SerializeField] private TextMeshProUGUI GameOverText;
+    [SerializeField] private TextMeshProUGUI GameOverDoubloons;
     public TextMeshProUGUI text;
-    public string GameOverText;
     public float speed = 0.1f;
     bool hasShown = false;
     void Update()
@@ -24,17 +26,19 @@ public class EndGameText : MonoBehaviour
     }
     public void ShowText()
     {
-        StartCoroutine(ShowGameOverText());
         hasShown = true;
+        GameOverText.text = "";
+        GameOverDoubloons.text = "";
+        StartCoroutine(ShowGameOverText(GameOverText, "Game Over"));
+        StartCoroutine(ShowGameOverText(GameOverDoubloons, $"You collected {uiManager.inventoryManager.coinCount} Doubloons"));
     }
 
-    public IEnumerator ShowGameOverText()
+    public IEnumerator ShowGameOverText(TextMeshProUGUI text,string content)
     {
-        text.text = "";
-        foreach (char letter in GameOverText.ToCharArray())
+        foreach (char letter in content.ToCharArray())
         {
             text.text += letter;
-            yield return new WaitForSeconds(speed);
+            yield return new WaitForSecondsRealtime(speed);
         }
     }
 }

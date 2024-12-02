@@ -27,14 +27,15 @@ public class SerpentBehaviour : Enemy
         AdhustHealthBar();
         GoldBag = GameObject.FindGameObjectWithTag("CoinBag");
         AttackDistance = 5;
+        player = GameObject.Find("Player");
+        playerStats = GameObject.Find("Player").GetComponent<PlayerStats>();
     }
+
 
     // Update is called once per frame
     void Update()
     {
-        player = GameObject.Find("Player");
         AttackCooldownTimer();
-        playerStats = GameObject.Find("Player").GetComponent<PlayerStats>();
         Move();
     }
     public override void Move()
