@@ -26,7 +26,7 @@ public class SerpentBehaviour : Enemy
         StartingAttackTimer = 1;
         AdhustHealthBar();
         GoldBag = GameObject.FindGameObjectWithTag("CoinBag");
-        AttackDistance = 5;
+        AttackDistance = 3;
         player = GameObject.Find("Player");
         playerStats = GameObject.Find("Player").GetComponent<PlayerStats>();
     }

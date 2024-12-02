@@ -15,6 +15,8 @@ public class SharkBahaviour : Enemy
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.Find("Player");
+        playerStats = GameObject.Find("Player").GetComponent<PlayerStats>();
         renderer = GetComponentInChildren<Renderer>();
         Gold = GameObject.FindGameObjectWithTag("Gold");
         SetStats();
@@ -33,17 +35,14 @@ public class SharkBahaviour : Enemy
         FlickerDuration = 0.1f;
         AttackTimer = 1;
         StartingAttackTimer = 1;
-        AttackDistance = 5;
+        AttackDistance = 3;
     }
 
     // Update is called once per frame
     void Update()
     {
-        player = GameObject.Find("Player");
         Move();
         Timer();
-        playerStats = GameObject.Find("Player").GetComponent<PlayerStats>();
-        Gold = GameObject.FindGameObjectWithTag("Gold");
     }
 
     public override void Move()
@@ -95,6 +94,7 @@ public class SharkBahaviour : Enemy
     void Timer()
     {
         AttackTimer -= Time.deltaTime;
+        Debug.Log(AttackTimer);
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
