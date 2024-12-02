@@ -78,4 +78,12 @@ public class MusicChanger : MonoBehaviour
     {
         effectsSource.PlayOneShot(damageEffects[index]);
     }
+    public void DevTools()
+    {
+        Debug.Log("Dev Tools");
+        if(Input.GetKeyDown(KeyCode.M))
+        {
+            PlaySound(0);
+        }
+    }
 }
