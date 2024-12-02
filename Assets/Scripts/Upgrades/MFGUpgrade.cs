@@ -9,12 +9,12 @@ public class MFGUpgrade : Upgrade
     public float MaxMagnet;
     private const int BaseCost = 10;
     private const float MagnetIncrement = 3;
-    // void Awake()
-    // {
-    //     cost = BaseCost;
-    //     ResetIndicator(Color.red);
-    //     MaxMagnet = (playerStats.magnet + MagnetIncrement);
-    // }
+    void Awake()
+    {
+        cost = BaseCost;
+        ResetIndicator(Color.red);
+        MaxMagnet = (playerStats.magnet + MagnetIncrement);
+    }
 
     void Start()
     {
