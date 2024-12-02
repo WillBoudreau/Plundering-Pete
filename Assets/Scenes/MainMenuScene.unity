@@ -11677,6 +11677,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelManager: {fileID: 1051185688}
+  distanceTracker: {fileID: 1556131826}
   Camera: {fileID: 177806781}
   spawnArea1:
     serializedVersion: 2

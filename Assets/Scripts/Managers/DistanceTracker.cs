@@ -82,6 +82,10 @@ public class DistanceTracker : MonoBehaviour
             }
         }
     }
+    public void ResetValues()
+    {
+        distanceTracker.value = 0;
+    }
 
     void DisplayWarning()
     {

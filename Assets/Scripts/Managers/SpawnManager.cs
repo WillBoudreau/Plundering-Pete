@@ -5,6 +5,7 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     [SerializeField] private LevelManager levelManager;
+    [SerializeField] private DistanceTracker distanceTracker;
     [SerializeField] private GameObject Camera;
     [Header("Spawns")]
     public Rect spawnArea1;
@@ -33,6 +34,8 @@ public class SpawnManager : MonoBehaviour
         Vector3 cameraPosition = playerSpawnPoint.position;
         cameraPosition.z =  CameraZPOS;
         Camera.transform.position = cameraPosition;
+
+        distanceTracker.ResetValues();
     }
     //Place the player at the spawn point
     public void PlacePlayerAtSpawn()
