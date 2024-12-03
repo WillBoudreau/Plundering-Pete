@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
             }
             EnableGameplay();
         }
-        else if(uiManager.currentGameState == UIManager.GameState.Pause || uiManager.currentGameState == UIManager.GameState.GameOver)
+        else if(uiManager.currentGameState == UIManager.GameState.Pause || uiManager.currentGameState == UIManager.GameState.GameOver || uiManager.currentGameState == UIManager.GameState.Win)
         {
             DisableGameplay();
         }

@@ -80,10 +80,10 @@ public class PlayerMovementHandler : MonoBehaviour
     public void HandleMovement()
     {
         //Handle input using the old input system. TODO: change to new input system
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
+        float moveHorizontal = Input.GetAxisRaw("Horizontal");
+        float moveVertical = Input.GetAxisRaw("Vertical");
 
-        const float inputThreshold = 0.1f;
+        const float inputThreshold = 0.001f;
         Vector2 movement = new Vector2(moveHorizontal, moveVertical) * speed;
 
         if(movement.magnitude > inputThreshold)
