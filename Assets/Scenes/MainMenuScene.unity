@@ -1452,8 +1452,6 @@ MonoBehaviour:
   moveSpeed: 5
   startPosition: {x: 0, y: 0, z: 0}
   playerMovementHandler: {fileID: 551069651}
-  shakeDuration: 0
-  shakeMagnitude: 0
 --- !u!1 &226042012
 GameObject:
   m_ObjectHideFlags: 0
@@ -6514,7 +6512,7 @@ MonoBehaviour:
   GameOverText: {fileID: 2064994873}
   GameOverDoubloons: {fileID: 1088758527}
   text: {fileID: 2064994873}
-  speed: 0.1
+  speed: 0.05
 --- !u!1 &900754622 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8829330189392537515, guid: 5f33b5013c7b8b1439ade026d3506f13, type: 3}
