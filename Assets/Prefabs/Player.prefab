@@ -80,7 +80,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2539373535196076664
 Transform:
   m_ObjectHideFlags: 0
@@ -226,7 +226,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.022518158, y: 5.0345144}
+  m_Offset: {x: 0.006376028, y: 5.039895}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: -0.23188406}
@@ -237,7 +237,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4.9007235, y: 7.6346436}
+  m_Size: {x: 4.351891, y: 7.1719017}
   m_EdgeRadius: 0
 --- !u!1 &4680544976309677066
 GameObject:
@@ -291,12 +291,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerStats: {fileID: 0}
   playerMovementHandler: {fileID: 0}
-  DoubloonText: {fileID: 0}
   time: 5
   inventoryManager: {fileID: 0}
-  levelManager: {fileID: 0}
-  uIManager: {fileID: 0}
-  checkpointManager: {fileID: 0}
 --- !u!50 &6613851258276622460
 Rigidbody2D:
   serializedVersion: 4
@@ -428,8 +424,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerStats: {fileID: 0}
   musicManager: {fileID: 0}
+  uIManager: {fileID: 0}
+  inventoryManager: {fileID: 0}
+  checkpointManager: {fileID: 0}
+  time: 5
   speed: 5
-  startFireRate: 0.5
   bulletVelocity: 10
   bulletPrefab: {fileID: 0}
   level2BulletPrefab: {fileID: 0}
@@ -437,6 +436,7 @@ MonoBehaviour:
   mainCamera: {fileID: 0}
   IsMoving: 0
   rb: {fileID: 0}
+  IsFiring: 0
 --- !u!114 &216527445050619400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -452,9 +452,9 @@ MonoBehaviour:
   healthManager: {fileID: 0}
   uIManager: {fileID: 0}
   musicManager: {fileID: 0}
-  levelManager: {fileID: 0}
   checkpointManager: {fileID: 0}
-  distanceTracker: {fileID: 0}
+  spawnManager: {fileID: 0}
+  cameraManager: {fileID: 0}
   SharkKills: 0
   SerpentKills: 0
   ShipKills: 0
@@ -468,11 +468,10 @@ MonoBehaviour:
   playerHealth: 0
   magnet: 0
   bulletVelocity: 0
-  checkpoint: 0
+  Win: 0
   groundLayer:
     serializedVersion: 2
     m_Bits: 0
-  Win: 0
   firePoint: {fileID: 0}
   PlayerPlaced: 0
   IsLevel2: 0
@@ -646,7 +645,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.016727805, y: 3.188848}
+  m_Offset: {x: -0.011082172, y: 3.2001395}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: -0.34210527}
@@ -657,7 +656,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.7033098, y: 4.536029}
+  m_Size: {x: 2.172615, y: 4.0843744}
   m_EdgeRadius: 0
 --- !u!1 &5466722645970942545
 GameObject:
@@ -823,7 +822,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0018703341, y: 3.0979338}
+  m_Offset: {x: -0.022466421, y: 3.0979338}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -834,7 +833,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.7557235, y: 6.51149}
+  m_Size: {x: 2.7145314, y: 6.51149}
   m_EdgeRadius: 0
 --- !u!1 &5747765554910861601
 GameObject:
