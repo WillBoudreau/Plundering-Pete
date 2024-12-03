@@ -83,8 +83,20 @@ public class PlayerMovementHandler : MonoBehaviour
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
 
+        const float inputThreshold = 0.1f;
         Vector2 movement = new Vector2(moveHorizontal, moveVertical) * speed;
-        rb.velocity = movement;
+
+        if(movement.magnitude > inputThreshold)
+        {
+            rb.velocity = movement.normalized * speed;
+            IsMoving = true;
+        }
+        else
+        {
+            rb.velocity = Vector2.zero;
+            rb.angularVelocity = 0;
+            IsMoving = false;
+        }
         if(Input.GetKeyDown(KeyCode.E))
         {
             playerStats.TakeDamage(1);
@@ -92,14 +104,6 @@ public class PlayerMovementHandler : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Q))
         {
             inventoryManager.coinCount += 5;
-        }
-        if(rb.velocity.magnitude > 0)
-        {
-            IsMoving = true;
-        }
-        else
-        {
-            IsMoving = false;
         }
     }
 
