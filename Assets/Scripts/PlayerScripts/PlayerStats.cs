@@ -10,6 +10,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private MusicChanger musicManager;
     [SerializeField] private CheckpointManager checkpointManager;
     [SerializeField] private SpawnManager spawnManager;
+    [SerializeField] private CameraManager cameraManager;
     [Header("Number of Kills")]
     public int SharkKills;
     public int SerpentKills;
@@ -151,6 +152,7 @@ public class PlayerStats : MonoBehaviour
         playerHealth -= damage;
         healthManager.HandlePlayerHealthBar(playerHealth, startHealth);
         Death();
+        cameraManager.ShakeCamera();
     }
     void ChooseDamageSound()
     {

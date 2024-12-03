@@ -1452,6 +1452,8 @@ MonoBehaviour:
   moveSpeed: 5
   startPosition: {x: 0, y: 0, z: 0}
   playerMovementHandler: {fileID: 551069651}
+  shakeDuration: 0
+  shakeMagnitude: 0
 --- !u!1 &226042012
 GameObject:
   m_ObjectHideFlags: 0
@@ -6289,7 +6291,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -2.3847046}
+  m_AnchoredPosition: {x: 0, y: -2.3847656}
   m_SizeDelta: {x: 0, y: 4.7700195}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &884719224
@@ -6553,7 +6555,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 22.541016, y: -2.3847046}
+  m_AnchoredPosition: {x: 22.541016, y: -2.3847656}
   m_SizeDelta: {x: -45.082, y: 4.77}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &902718853
@@ -11679,6 +11681,7 @@ MonoBehaviour:
   levelManager: {fileID: 1051185688}
   distanceTracker: {fileID: 1556131826}
   Camera: {fileID: 177806781}
+  mainCamera: {fileID: 177806784}
   spawnArea1:
     serializedVersion: 2
     x: -10
@@ -15642,6 +15645,10 @@ PrefabInstance:
       propertyPath: spawnManager
       value: 
       objectReference: {fileID: 1626319226}
+    - target: {fileID: 216527445050619400, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: cameraManager
+      value: 
+      objectReference: {fileID: 177806785}
     - target: {fileID: 216527445050619400, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
       propertyPath: healthManager
       value: 

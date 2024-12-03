@@ -7,6 +7,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private LevelManager levelManager;
     [SerializeField] private DistanceTracker distanceTracker;
     [SerializeField] private GameObject Camera;
+    [SerializeField] private Camera mainCamera;
     [Header("Spawns")]
     public Rect spawnArea1;
     public Rect spawnArea2;
@@ -35,6 +36,8 @@ public class SpawnManager : MonoBehaviour
         cameraPosition.z =  CameraZPOS;
         Camera.transform.position = cameraPosition;
 
+        // mainCamera.transform.position = cameraPosition;
+
         distanceTracker.ResetValues();
     }
     //Place the player at the spawn point
@@ -58,6 +61,10 @@ public class SpawnManager : MonoBehaviour
         if(spawnPoint != null)
         {
             return spawnPoint.transform;
+        }
+        if(spawnPoint == null)
+        {
+            Debug.Log("Spawn point not found");
         }
         return null;
     }
