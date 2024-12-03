@@ -86,4 +86,12 @@ public class MusicChanger : MonoBehaviour
             PlaySound(0);
         }
     }
+    public void StopSound()
+    {
+       effectsSource.Stop();
+    }
+    public void StopMusic()
+    {
+        musicSource.Stop();
+    }
 }

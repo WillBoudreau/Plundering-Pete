@@ -13316,6 +13316,7 @@ MonoBehaviour:
   inventoryManager: {fileID: 1039502979}
   distanceTracker: {fileID: 1556131826}
   playerStats: {fileID: 551069652}
+  musicManager: {fileID: 2083907201}
   mainMenu: {fileID: 884719222}
   optionsMenu: {fileID: 1440979893}
   gamePlay: {fileID: 902718851}
@@ -18076,7 +18077,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.502
+  m_Volume: 0.52
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -18172,7 +18173,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 3a73d3f3403c6c14787c800c6dc8270e, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.585
   m_Pitch: 1
   Loop: 0
   Mute: 0

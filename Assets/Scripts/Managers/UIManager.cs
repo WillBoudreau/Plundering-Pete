@@ -24,6 +24,7 @@ public class UIManager : MonoBehaviour
     public InventoryManager inventoryManager;
     public DistanceTracker distanceTracker;
     public PlayerStats playerStats;
+    public MusicChanger musicManager;
     [Header("UI GameObjects")]
     public GameObject mainMenu;
     public GameObject optionsMenu;
@@ -81,6 +82,7 @@ public class UIManager : MonoBehaviour
             case GameState.Upgrades:
                 DeactivateAllUI();
                 upgradesMenu.SetActive(true);
+                musicManager.StopSound();
                 break;
             case GameState.Instructions:
                 DeactivateAllUI();
