@@ -37,11 +37,7 @@ public class CanonBallBahaviour : MonoBehaviour
             {
                 Destroy(this.gameObject);
             }
-            // if(collision.gameObject.tag == "CanonBall")
-            // {
-            //     Destroy(this.gameObject);
-            //     Destroy(collision.gameObject);
-            // }
+
         }
         if(canonBallType == CanonBallType.Player)
         {

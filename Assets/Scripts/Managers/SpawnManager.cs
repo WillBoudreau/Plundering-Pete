@@ -12,6 +12,7 @@ public class SpawnManager : MonoBehaviour
     public Rect spawnArea1;
     public Rect spawnArea2;
     public Rect spawnArea3;
+    public Rect PlayerSpawnArea;
     public Rect ShipSpawnArea;
     public Transform playerSpawnPoint; 
     public GameObject player;
@@ -29,16 +30,24 @@ public class SpawnManager : MonoBehaviour
     public void PlacePlayer()
     {
         Vector3 playerPosition = playerSpawnPoint.position;
-        playerPosition.z = PlayerZPOS;
-        player.transform.position = playerPosition;
+        if(!IsValidPlayerSpawn(playerPosition))
+        {
+            Debug.Log("Invalid player spawn point");
+            playerPosition.x = Mathf.Clamp(playerPosition.x, PlayerSpawnArea.xMin, PlayerSpawnArea.xMax);
+            playerPosition.y = Mathf.Clamp(playerPosition.y, PlayerSpawnArea.yMin, PlayerSpawnArea.yMax);
+        }
+        else if(IsValidPlayerSpawn(playerPosition))
+        {
+            //Vector3 playerPosition = playerSpawnPoint.position;
+            playerPosition.z = PlayerZPOS;
+            player.transform.position = playerPosition;
 
-        Vector3 cameraPosition = playerSpawnPoint.position;
-        cameraPosition.z =  CameraZPOS;
-        Camera.transform.position = cameraPosition;
+            Vector3 cameraPosition = playerSpawnPoint.position;
+            cameraPosition.z =  CameraZPOS;
+            Camera.transform.position = cameraPosition;
 
-        // mainCamera.transform.position = cameraPosition;
-
-        distanceTracker.ResetValues();
+            distanceTracker.ResetValues();
+        }
     }
     //Place the player at the spawn point
     public void PlacePlayerAtSpawn()
@@ -51,6 +60,18 @@ public class SpawnManager : MonoBehaviour
         else
         {
             Debug.Log("Spawn point not found");
+        }
+    }
+    private bool IsValidPlayerSpawn(Vector3 spawnPoint)
+    {
+        Rect validSpawnArea = PlayerSpawnArea;
+        if(validSpawnArea.Contains(spawnPoint))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
     //Find the spawn point in the scene
@@ -143,5 +164,7 @@ public class SpawnManager : MonoBehaviour
         Gizmos.DrawWireCube(new Vector3(spawnArea3.x, spawnArea3.y, 0), new Vector3(spawnArea3.width, spawnArea3.height, 0));
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube(new Vector3(ShipSpawnArea.x, ShipSpawnArea.y, 0), new Vector3(ShipSpawnArea.width, ShipSpawnArea.height, 0));
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawWireCube(new Vector3(PlayerSpawnArea.x, PlayerSpawnArea.y, 0), new Vector3(PlayerSpawnArea.width, PlayerSpawnArea.height, 0));
     }
 }

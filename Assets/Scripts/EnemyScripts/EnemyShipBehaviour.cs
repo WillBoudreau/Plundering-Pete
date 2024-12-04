@@ -124,6 +124,17 @@ public class EnemyShipBehaviour : Enemy
             TakeDamage(playerStats.damage);
             Destroy(collision.gameObject);
         }
+        if(collision.gameObject.tag == "Border")
+        {
+            if(movingRight)
+            {
+                movingRight = false;
+            }
+            else if(!movingRight)
+            {
+                movingRight = true;
+            }
+        }
     }
 
     public void Death()
