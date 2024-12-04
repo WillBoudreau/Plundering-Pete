@@ -17784,6 +17784,22 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2539373535196076664, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.726232
+      objectReference: {fileID: 0}
+    - target: {fileID: 2539373535196076664, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.6678153
+      objectReference: {fileID: 0}
+    - target: {fileID: 2539373535196076664, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 2539373535196076664, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4.68
+      objectReference: {fileID: 0}
     - target: {fileID: 2573283647024255874, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
       propertyPath: m_Size.x
       value: 4.3202143
@@ -17920,6 +17936,10 @@ PrefabInstance:
       propertyPath: speed
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 4098233298752386087, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: firePoint
+      value: 
+      objectReference: {fileID: 1107478806}
     - target: {fileID: 4098233298752386087, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
       propertyPath: uIManager
       value: 

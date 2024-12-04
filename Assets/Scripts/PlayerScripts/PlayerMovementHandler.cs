@@ -17,6 +17,7 @@ public class PlayerMovementHandler : MonoBehaviour
     public GameObject bulletPrefab;
     public GameObject level2BulletPrefab;
     public GameObject level3BulletPrefab;
+    public Transform firePoint;
     public Camera mainCamera;
     public bool IsMoving;
     public Rigidbody2D rb;
@@ -44,7 +45,7 @@ public class PlayerMovementHandler : MonoBehaviour
             Vector2 direction = (mouseWorldPOS - (Vector2)transform.position).normalized;
             
             float bulletSpawnDist = 1.0f;
-            Vector3 bulletSpawnPos = playerStats.firePoint.position + (playerStats.firePoint.forward * bulletSpawnDist);
+            Vector3 bulletSpawnPos = firePoint.position + (firePoint.forward * bulletSpawnDist);
             bulletSpawnPos.z = -2;
 
             musicManager.PlaySound(0);
@@ -108,7 +109,7 @@ public class PlayerMovementHandler : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.R))
         {
             playerStats.LevelUp();
-            
+
         }
     }
 
