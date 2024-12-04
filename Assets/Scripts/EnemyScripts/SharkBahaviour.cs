@@ -10,7 +10,7 @@ public class SharkBahaviour : Enemy
     public float stoppingDistance;
     public float detectionDistance;
     public float maxHealth;
-    float bottomY = -140f;
+    float bottomY = -160f;
 
     // Start is called before the first frame update
     void Start()
