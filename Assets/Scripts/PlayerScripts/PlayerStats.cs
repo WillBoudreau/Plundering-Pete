@@ -11,6 +11,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private CheckpointManager checkpointManager;
     [SerializeField] private SpawnManager spawnManager;
     [SerializeField] private CameraManager cameraManager;
+    [SerializeField] private InventoryManager inventory;
     [Header("Number of Kills")]
     public int SharkKills;
     public int SerpentKills;
@@ -21,6 +22,7 @@ public class PlayerStats : MonoBehaviour
     public float startdamage;
     public float StartSpeed;
     public float startFireRate;
+    public float startMagnet;
     [Header("Player values")]
     //Player values 
     public float speed;
@@ -33,6 +35,7 @@ public class PlayerStats : MonoBehaviour
     public LayerMask groundLayer;
     public bool PlayerPlaced;
     const float MinFireRate = 0.1f;
+    const float MinMagnet = 3f;
     [Header("Player Levels")]
     public bool IsLevel2;
     public bool IsLevel3; 
@@ -48,7 +51,8 @@ public class PlayerStats : MonoBehaviour
     {
         startHealth = 5;
         playerHealth = startHealth;
-        magnet = 3f;
+        startMagnet = 3f;
+        magnet = startMagnet;
         StartSpeed = 6;
         speed = StartSpeed;
     }
@@ -77,7 +81,7 @@ public class PlayerStats : MonoBehaviour
         startFireRate = 2f;
         bulletVelocity = 25f;
         healthManager.health = playerHealth;
-        //magnet = 3f;
+        magnet = startMagnet;
         //Assign values to be the starting values
         //playerHealth = startHealth;
         healthManager.playerhealth.fillAmount = playerHealth;
@@ -87,6 +91,7 @@ public class PlayerStats : MonoBehaviour
         //Set Win Bool
         Win = false;
     }
+    //Adjust the speed of the player(Called in ShipUpgrade)
     public void AdjustFireRate(float increment)
     {
         fireRate = Mathf.Clamp(fireRate + increment, MinFireRate, startFireRate);
@@ -129,16 +134,41 @@ public class PlayerStats : MonoBehaviour
             Debug.Log("Max Level Reached");
         }
     }
+    public void AdjustMagnet(float increment)
+    {
+        magnet = Mathf.Clamp(magnet + increment, MinMagnet, startMagnet);
+        startMagnet += increment;
+        magnet += increment;
+        if(magnet < startMagnet)
+        {
+            magnet = startMagnet;
+        }
+        Debug.Log("MagnetFromStats: " + magnet + " Start MagnetFromStats: " + startMagnet);
+    }
 
     //Handle the magnet power of the ship
     void HandleMagnit()
     {
+        if(magnet < startMagnet)
+        {
+            magnet = startMagnet;
+        }
+        Debug.Log("Player is handling magnet, magnet is: " + magnet);
         //Handle the magnet powerup
         foreach (GameObject coin in GameObject.FindGameObjectsWithTag("Gold"))
         {
+            Debug.Log("Player is handling magnet, coin is: " + coin + " magnet is: " + magnet);
             if (Vector2.Distance(transform.position, coin.transform.position) < magnet)
             {
-                coin.transform.position = Vector2.MoveTowards(coin.transform.position, transform.position, 0.1f);
+                if(inventory.coinCount >= inventory.maxCoins)
+                {
+                    coin.transform.position = Vector2.MoveTowards(coin.transform.position, coin.transform.position, 0.1f);
+                }
+                else
+                {
+                    Debug.Log("Player is handling magnet, coin is close, magnet is: " + magnet);
+                    coin.transform.position = Vector2.MoveTowards(coin.transform.position, transform.position, 0.1f);
+                }
             }
         }
     }
@@ -147,11 +177,17 @@ public class PlayerStats : MonoBehaviour
     public void TakeDamage(float damage)
     {
         StartCoroutine(Flicker());
+        Debug.Log("Player is taking damage, magnet is: " + magnet);
         ChooseDamageSound();
+        Debug.Log("Player is taking damage,chose sound, magnet is: " + magnet);
         playerHealth -= damage;
+        Debug.Log("Player is taking damage, health is: " + playerHealth + " magnet is: " + magnet);
         healthManager.HandlePlayerHealthBar(playerHealth, startHealth);
+        Debug.Log("Player is taking damage, health is handled, magnet is: " + magnet);
         Death();
+        Debug.Log("Player is taking damage, death is handled, magnet is: " + magnet);
         cameraManager.ShakeCamera();
+        Debug.Log("Player is taking damage, camera is shaking, magnet is: " + magnet);
     }
     void ChooseDamageSound()
     {
@@ -183,8 +219,11 @@ public class PlayerStats : MonoBehaviour
             musicManager.StopSound();
             musicManager.PlaySound(3);
             uIManager.SetGameState("GameOver");
+            Debug.Log("Player is Dead, magnet is: " + magnet);
             ResetHealth();
+            Debug.Log("Player is Dead,health is reset, magnet is: " + magnet);
             Respawn();
+            Debug.Log("Player is Dead, respawned, magnet is: " + magnet);
             checkpointManager.SetFalse();
         }
     }

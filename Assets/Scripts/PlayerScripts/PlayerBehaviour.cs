@@ -24,17 +24,22 @@ public class PlayerBehaviour : MonoBehaviour
     void Update()
     {
         UpdateCounter();
+        Debug.Log("Magnet: " + playerStats.magnet);
         HandlePlayer();
+        Debug.Log("Player Stats: " + playerStats.magnet);
     }
     //Handle the player
     void HandlePlayer()
     {
         playerMovementHandler.HandlePlayerMovement();
+        Debug.Log("Handling Player");
+        Debug.Log("Magnet: " + playerStats.magnet);
         playerStats.HandlePlayer();
+        Debug.Log("Player Stats: " + playerStats.magnet);
     }
     //Update the Doubloon counter
     void UpdateCounter()
     {
-        inventoryManager.coinText.text = $"x{inventoryManager.coinCount}";
+        inventoryManager.coinText.text = $"x{inventoryManager.coinCount}/{inventoryManager.maxCoins}";
     }
 }

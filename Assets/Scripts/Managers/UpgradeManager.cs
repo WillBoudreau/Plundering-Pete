@@ -34,7 +34,7 @@ public class UpgradeManager : MonoBehaviour
     //Set the text for the inventory
     void SetText()
     {
-        NumberCoinsText.text = $"Doubloons {inventory.coinCount}/{inventory.maxCoins}";
+        NumberCoinsText.text = $"{inventory.coinCount}/{inventory.maxCoins}";
     }
     public void OnUpgradePurchased()
     {

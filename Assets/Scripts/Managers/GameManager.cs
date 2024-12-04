@@ -171,6 +171,8 @@ public class GameManager : MonoBehaviour
         data.Gold = inventoryManager.coinCount;
         data.Level = playerStats.Level;
         data.FirstTime = FirstTime;
+        data.magnet = playerStats.magnet;
+        Debug.Log("Magnet: " + playerStats.magnet);
         Debug.Log("Game Saved");
 
         bf.Serialize(file, data);
@@ -191,6 +193,8 @@ public class GameManager : MonoBehaviour
             playerStats.speed = data.speed;
             inventoryManager.coinCount = data.Gold;
             playerStats.Level = data.Level;
+            playerStats.magnet = data.magnet;
+            Debug.Log("Magnet: " + playerStats.magnet);
             Debug.Log("Game Loaded");
          }
     }
@@ -204,5 +208,6 @@ public class GameManager : MonoBehaviour
         public int Gold;
         public int Level;
         public bool FirstTime;
+        public float magnet;
     }
 }

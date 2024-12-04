@@ -14,10 +14,16 @@ public class MFGUpgrade : Upgrade
         cost = BaseCost;
         ResetIndicator(Color.red);
         MaxMagnet = (playerStats.magnet + MagnetIncrement);
+        Debug.Log("Player Stats: " + playerStats.magnet);
+        Debug.Log("Max Magnet: " + MaxMagnet);
+        Debug.Log("Magnet Increment: " + MagnetIncrement);
     }
 
     void Start()
     {
+        Debug.Log("Player Stats: " + playerStats.magnet);
+        Debug.Log("Max Magnet: " + MaxMagnet);
+        Debug.Log("Magnet Increment: " + MagnetIncrement);
         MaxMagnet = (playerStats.magnet + MagnetIncrement);
         cost = BaseCost;
         ResetIndicator(Color.red);
@@ -26,7 +32,7 @@ public class MFGUpgrade : Upgrade
     // Update is called once per frame
     void Update()
     {
-       SetText();
+        SetText();
     }
     public override void SetText()
     {
@@ -55,12 +61,13 @@ public class MFGUpgrade : Upgrade
         if (playerStats.magnet < MaxMagnet)
         {
             playerStats.magnet ++;
+            playerStats.startMagnet ++;
             UpdateUpgradeDisplay(Color.green);
         }
         else
         {
             inventory.coinCount += cost;
-            messageText.text = "Max Magnet" + MaxMagnet + " reached" + "Player Magnet: " + playerStats.magnet + "Magnet " + (playerStats.magnet + MagnetIncrement);
+            messageText.text = "Max Magnet Reached";
         }
     }
 
@@ -70,6 +77,9 @@ public class MFGUpgrade : Upgrade
         ResetIndicator(Color.red);
         currentUpgradeIndex = 0;
         MaxMagnet = (playerStats.magnet + MagnetIncrement);
+        Debug.Log("Player Stats: " + playerStats.magnet);
+        Debug.Log("Max Magnet: " + MaxMagnet);
+        Debug.Log("Magnet Increment: " + MagnetIncrement);
         cost += BaseCost;
     }
 }
