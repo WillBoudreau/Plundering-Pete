@@ -17,7 +17,8 @@ public class UIManager : MonoBehaviour
         GameOver,
         Upgrades,
         Win,
-        Results
+        Results,
+        Instructions2
     }
     public GameState currentGameState;
     [Header("Class calls")]
@@ -34,6 +35,7 @@ public class UIManager : MonoBehaviour
     public GameObject winMenu;
     public GameObject upgradesMenu;
     public GameObject InstructionsScreen;
+    public GameObject InstructionsScreen2;
     public GameObject LoadingScreen;
     public GameObject CreditsScreen;
     public GameObject results;
@@ -96,6 +98,10 @@ public class UIManager : MonoBehaviour
                 DeactivateAllUI();
                 results.SetActive(true);
                 break;
+            case GameState.Instructions2:
+                DeactivateAllUI();
+                InstructionsScreen2.SetActive(true);
+                break;
             default:
                 break;
             
@@ -113,6 +119,7 @@ public class UIManager : MonoBehaviour
         InstructionsScreen.SetActive(true);
         CreditsScreen.SetActive(true);
         results.SetActive(true);
+        InstructionsScreen2.SetActive(true);
     }
     void DeactivateAllUI()
     {
@@ -126,6 +133,7 @@ public class UIManager : MonoBehaviour
         InstructionsScreen.SetActive(false);
         CreditsScreen.SetActive(false);
         results.SetActive(false);
+        InstructionsScreen2.SetActive(false);
     }
     void UpdateGameOver()
     {
@@ -170,6 +178,9 @@ public class UIManager : MonoBehaviour
                 break;
             case "Results":
                 currentGameState = GameState.Results;
+                break;
+            case "Instructions2":
+                currentGameState = GameState.Instructions2;
                 break;
             default:
                 currentGameState = GameState.MainMenu;
