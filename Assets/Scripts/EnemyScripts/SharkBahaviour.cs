@@ -132,11 +132,16 @@ public class SharkBahaviour : Enemy
         }
         renderer.material.color = originalColor;
     }
+    void DeathEffect()
+    {
+        deathAnim.SetTrigger("Death");
+    }
 
     void Death()
     {
         Instantiate(Gold, transform.position, Quaternion.identity);
         Destroy(gameObject);
+        DeathEffect();
         playerStats.SharkKills += 1;
     }
 }

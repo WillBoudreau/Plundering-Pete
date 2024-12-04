@@ -105,6 +105,11 @@ public class PlayerMovementHandler : MonoBehaviour
         {
             inventoryManager.coinCount += 5;
         }
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            playerStats.LevelUp();
+            
+        }
     }
 
     //Ensure the player remains within the camera bounds

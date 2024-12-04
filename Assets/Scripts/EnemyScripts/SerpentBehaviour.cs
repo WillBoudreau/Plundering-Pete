@@ -26,7 +26,7 @@ public class SerpentBehaviour : Enemy
         StartingAttackTimer = 1;
         AdhustHealthBar();
         GoldBag = GameObject.FindGameObjectWithTag("CoinBag");
-        AttackDistance = 3;
+        AttackDistance = 2f;
         player = GameObject.Find("Player");
         playerStats = GameObject.Find("Player").GetComponent<PlayerStats>();
     }
@@ -108,8 +108,11 @@ public class SerpentBehaviour : Enemy
     {
         if(collision.gameObject.tag == "Bullet")
         {
-            Destroy(collision.gameObject);
+            Debug.Log("Bullet Hit");
+            Debug.Log(playerStats.damage);
+            Debug.Log(health);
             TakeDamage(playerStats.damage);
+            Destroy(collision.gameObject);
         }
     }
 }

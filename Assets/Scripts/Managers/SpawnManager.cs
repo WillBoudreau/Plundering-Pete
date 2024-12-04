@@ -17,7 +17,7 @@ public class SpawnManager : MonoBehaviour
     public GameObject player;
     private const float PlayerZPOS = -2f;
     private const float CameraZPOS = -30f;
-    float spawnZone = 5.0f;
+    float spawnZone = 10.0f;
     void Update()
     {
         if(levelManager.levelName == "GameTestScene")
@@ -113,6 +113,11 @@ public class SpawnManager : MonoBehaviour
                 {
                     isOccupied = true;
                     break;
+                }
+                if(Vector3.Distance(player.transform.position, spawnArea.center) < spawnZone)
+                {
+                    Debug.Log("Player is too close to spawn point");
+                    isOccupied = true;
                 }
             }
             if(!isOccupied)

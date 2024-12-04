@@ -26,6 +26,9 @@ public abstract class Enemy : MonoBehaviour
     // public PlayerBehaviour player;
     public GameObject player;
     public PlayerStats playerStats;
+    [Header("Death Animation")]
+    //Death Animation
+    public Animator deathAnim;
     //Base Enemy functions
     public abstract void Move();
     public abstract void TakeDamage(float damage);

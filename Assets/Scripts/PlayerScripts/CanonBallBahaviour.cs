@@ -13,14 +13,19 @@ public class CanonBallBahaviour : MonoBehaviour
     [SerializeField] private EnemyShipBehaviour enemyShip;
     void Start()
     {
-        enemyShip = GameObject.Find("EnemyShip").GetComponent<EnemyShipBehaviour>();
-        if(enemyShip == null)
+        if(enemyShip != null)
         {
-            Debug.LogError("EnemyShip is null");
+            Collider2D collider = GetComponent<Collider2D>();
+            Physics2D.IgnoreCollision(collider, enemyShip.GetComponent<Collider2D>());
         }
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
+        if(collision.gameObject.tag == "Obstacle")
+        {
+            Debug.Log("Hit obstacle");
+            Destroy(this.gameObject);
+        }
         if(canonBallType == CanonBallType.Enemy)
         {
             if(collision.gameObject.tag == "Player")
@@ -28,6 +33,15 @@ public class CanonBallBahaviour : MonoBehaviour
                 collision.gameObject.GetComponent<PlayerStats>().TakeDamage(enemyShip.damage);
                 Destroy(this.gameObject);
             }
+            if(collision.gameObject.tag == "Obstacle")
+            {
+                Destroy(this.gameObject);
+            }
+            // if(collision.gameObject.tag == "CanonBall")
+            // {
+            //     Destroy(this.gameObject);
+            //     Destroy(collision.gameObject);
+            // }
         }
         if(canonBallType == CanonBallType.Player)
         {
@@ -36,10 +50,6 @@ public class CanonBallBahaviour : MonoBehaviour
                 Destroy(this.gameObject);
                 Destroy(collision.gameObject);
             }
-        }
-        if(collision.gameObject.tag == "obstacle")
-        {
-            Destroy(this.gameObject);
         }
     }
 }
