@@ -25,10 +25,9 @@ public class MusicChanger : MonoBehaviour
     }
     void AddMusicToArray()
     {
-        music = new AudioClip[3];
+        music = new AudioClip[2];
         music[0] = Resources.Load<AudioClip>("Sail The Seven Seas (1)");
         music[1] = Resources.Load<AudioClip>("Sailing The Seven Seas");
-        music[2] = Resources.Load<AudioClip>("Music3");
     }
     void AddEffectsToArray()
     {
@@ -51,6 +50,7 @@ public class MusicChanger : MonoBehaviour
     public void PlaySceneTrack(string sceneName)
     {
         Debug.Log("Playing music for scene: " + sceneName);
+        StopMusic();
         switch(sceneName)
         {
             case "GameTestScene":
@@ -64,7 +64,6 @@ public class MusicChanger : MonoBehaviour
             default:
                 Debug.Log("Playing music for scene 2 : " + sceneName);
                 musicSource.clip = music[0];
-                currentTrackIndex = (currentTrackIndex + 1) % music.Length;
                 break;
         }
         musicSource.Play();
