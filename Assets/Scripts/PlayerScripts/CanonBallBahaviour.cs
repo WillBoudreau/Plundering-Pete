@@ -37,7 +37,10 @@ public class CanonBallBahaviour : MonoBehaviour
             {
                 Destroy(this.gameObject);
             }
-
+            if(collision.gameObject.tag == "Shark" || collision.gameObject.tag == "Serpent" || collision.gameObject.tag == "EnemyShip")
+            {
+                Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>());
+            }
         }
         if(canonBallType == CanonBallType.Player)
         {

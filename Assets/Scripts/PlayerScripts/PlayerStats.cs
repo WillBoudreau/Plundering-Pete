@@ -31,7 +31,6 @@ public class PlayerStats : MonoBehaviour
     public float bulletVelocity;
     public bool Win;
     public LayerMask groundLayer;
-    public Transform firePoint;
     public bool PlayerPlaced;
     const float MinFireRate = 0.1f;
     [Header("Player Levels")]
