@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
     public Button loadButton;
     public bool FirstTime = true;
     public GameObject KeepSailing;
+    public GameObject StartButton;
+    public GameObject ResumeButton;
     
 
     // Start is called before the first frame update
@@ -38,6 +40,7 @@ public class GameManager : MonoBehaviour
         DisablePlayer();
         DisableCamera();
         DisableLoadButton();
+        ResumeButton.SetActive(false);
     }
 
     // Update is called once per frame
@@ -71,7 +74,13 @@ public class GameManager : MonoBehaviour
             FirstTime = false;
             //Load();
             KeepSailing.SetActive(true);
+            SwitchButton();
         }
+    }
+    void SwitchButton()
+    {
+        StartButton.SetActive(false);
+        ResumeButton.SetActive(true);
     }
 
     //Pause the game
