@@ -17,13 +17,15 @@ public class UIManager : MonoBehaviour
         GameOver,
         Upgrades,
         Win,
-        Results
+        Results,
+        Instructions2
     }
     public GameState currentGameState;
     [Header("Class calls")]
     public InventoryManager inventoryManager;
     public DistanceTracker distanceTracker;
     public PlayerStats playerStats;
+    public MusicChanger musicManager;
     [Header("UI GameObjects")]
     public GameObject mainMenu;
     public GameObject optionsMenu;
@@ -33,10 +35,12 @@ public class UIManager : MonoBehaviour
     public GameObject winMenu;
     public GameObject upgradesMenu;
     public GameObject InstructionsScreen;
+    public GameObject InstructionsScreen2;
     public GameObject LoadingScreen;
     public GameObject CreditsScreen;
     public GameObject results;
     [Header("Texts")]
+    public TextMeshProUGUI GameOverText;
     public TextMeshProUGUI playerCoins;
     public TextMeshProUGUI playerSharkKills;
     public TextMeshProUGUI playerSerpentKills;
@@ -70,7 +74,8 @@ public class UIManager : MonoBehaviour
             case GameState.GameOver:
                 DeactivateAllUI();
                 gameOver.SetActive(true);
-                UpdateGameOver();
+                //UpdateGameOver();
+                //endGameText.ShowText();
                 break;
             case GameState.Win:
                 DeactivateAllUI();
@@ -79,6 +84,7 @@ public class UIManager : MonoBehaviour
             case GameState.Upgrades:
                 DeactivateAllUI();
                 upgradesMenu.SetActive(true);
+                musicManager.StopSound();
                 break;
             case GameState.Instructions:
                 DeactivateAllUI();
@@ -91,6 +97,10 @@ public class UIManager : MonoBehaviour
             case GameState.Results:
                 DeactivateAllUI();
                 results.SetActive(true);
+                break;
+            case GameState.Instructions2:
+                DeactivateAllUI();
+                InstructionsScreen2.SetActive(true);
                 break;
             default:
                 break;
@@ -109,6 +119,7 @@ public class UIManager : MonoBehaviour
         InstructionsScreen.SetActive(true);
         CreditsScreen.SetActive(true);
         results.SetActive(true);
+        InstructionsScreen2.SetActive(true);
     }
     void DeactivateAllUI()
     {
@@ -122,11 +133,12 @@ public class UIManager : MonoBehaviour
         InstructionsScreen.SetActive(false);
         CreditsScreen.SetActive(false);
         results.SetActive(false);
+        InstructionsScreen2.SetActive(false);
     }
     void UpdateGameOver()
     {
         //Set the texts in the Game Over screen
-        playerCoins.text = "Coins Collected: " + inventoryManager.coinCount.ToString();
+        //playerCoins.text = "Coins Collected: " + inventoryManager.coinCount.ToString();
         playerSharkKills.text = "Sharks Killed: " + playerStats.SharkKills.ToString();
         playerSerpentKills.text = "Serpents Killed: " + playerStats.SerpentKills.ToString();
         playerShipKills.text = "Ships Sunk: " + playerStats.ShipKills.ToString();
@@ -166,6 +178,9 @@ public class UIManager : MonoBehaviour
                 break;
             case "Results":
                 currentGameState = GameState.Results;
+                break;
+            case "Instructions2":
+                currentGameState = GameState.Instructions2;
                 break;
             default:
                 currentGameState = GameState.MainMenu;

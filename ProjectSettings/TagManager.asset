@@ -22,6 +22,8 @@ TagManager:
   - CoinBag
   - Level2
   - Level3
+  - Border
+  - Level4
   layers:
   - Default
   - TransparentFX

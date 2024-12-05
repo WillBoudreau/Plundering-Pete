@@ -35,6 +35,6 @@ public class PlayerBehaviour : MonoBehaviour
     //Update the Doubloon counter
     void UpdateCounter()
     {
-        inventoryManager.coinText.text = $"x{inventoryManager.coinCount}";
+        inventoryManager.coinText.text = $"x{inventoryManager.coinCount}/{inventoryManager.maxCoins}";
     }
 }

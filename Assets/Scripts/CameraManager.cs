@@ -22,4 +22,23 @@ public class CameraManager : MonoBehaviour
             transform.Translate(Vector3.up * moveSpeed * Time.deltaTime);
         }
     }
+    public void ShakeCamera()
+    {
+        StartCoroutine(Shake());
+    }
+    IEnumerator Shake()
+    {
+        float shakeDuration = 0.1f;
+        float shakeAmount = 0.1f;
+        float decreaseFactor = 1.0f;
+        Vector3 originalPos = transform.position;
+
+        while (shakeDuration > 0)
+        {
+            transform.position = originalPos + Random.insideUnitSphere * shakeAmount;
+            shakeDuration -= Time.deltaTime * decreaseFactor;
+            yield return null;
+        }
+        transform.position = originalPos;
+    }
 }

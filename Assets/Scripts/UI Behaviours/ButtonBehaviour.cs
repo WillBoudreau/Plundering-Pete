@@ -11,12 +11,20 @@ public class ButtonBehaviour : MonoBehaviour
     //public TextMeshProUGUI buttonText;
     public UIManager uIManger;
     public float Timer = 1f;
+    void Update()
+    {
+        OnButtonHover();
+    }
     public void OnButtonPress(string GameState)
     {
         DisableText();
         StartCoroutine(ChangeText(GameState));
         uIManger.currentGameState = UIManager.GameState.Instructions;
         EnableText();
+    }
+    public void OnButtonHover()
+    {
+        Debug.Log("Hovering");
     }
     void DisableText()
     {

@@ -10,11 +10,15 @@ public class SharkBahaviour : Enemy
     public float stoppingDistance;
     public float detectionDistance;
     public float maxHealth;
-    float bottomY = -140f;
+    float bottomY = -160f;
+    bool canAttack = true;
 
     // Start is called before the first frame update
     void Start()
     {
+        deathAnim = GetComponentInChildren<Animator>();
+        player = GameObject.Find("Player");
+        playerStats = GameObject.Find("Player").GetComponent<PlayerStats>();
         renderer = GetComponentInChildren<Renderer>();
         Gold = GameObject.FindGameObjectWithTag("Gold");
         SetStats();
@@ -33,17 +37,14 @@ public class SharkBahaviour : Enemy
         FlickerDuration = 0.1f;
         AttackTimer = 1;
         StartingAttackTimer = 1;
-        AttackDistance = 5;
+        AttackDistance = 3;
     }
 
     // Update is called once per frame
     void Update()
     {
-        player = GameObject.Find("Player");
         Move();
         Timer();
-        playerStats = GameObject.Find("Player").GetComponent<PlayerStats>();
-        Gold = GameObject.FindGameObjectWithTag("Gold");
     }
 
     public override void Move()
@@ -82,12 +83,15 @@ public class SharkBahaviour : Enemy
 
     public override void Attack()
     {
-        if(AttackTimer <= 0)
+        if(canAttack)
         {
-            if(Vector2.Distance(transform.position, player.transform.position) < AttackDistance)
+            if(AttackTimer <= 0)
             {
-                playerStats.TakeDamage(damage);
-                AttackTimer = StartingAttackTimer;
+                if(Vector2.Distance(transform.position, player.transform.position) < AttackDistance)
+                {
+                    playerStats.TakeDamage(damage);
+                    AttackTimer = StartingAttackTimer;
+                }
             }
         }
     }
@@ -133,11 +137,29 @@ public class SharkBahaviour : Enemy
         }
         renderer.material.color = originalColor;
     }
+    void DeathEffect()
+    {
+        deathAnim.SetTrigger("Death");
+        canAttack = false;
+        damage = 0;
+        speed = 0;
+        this.gameObject.GetComponent<Collider2D>().enabled = false;
+        Debug.Log("Death");
+    }
 
     void Death()
     {
+        DeathEffect();
+        playerStats.SharkKills += 1;
+        StartCoroutine(DeathDelay());
+    }
+    IEnumerator DeathDelay()
+    {
+        if(deathAnim != null)
+        {
+            yield return new WaitForSeconds(deathAnim.GetCurrentAnimatorStateInfo(0).length);
+        }
         Instantiate(Gold, transform.position, Quaternion.identity);
         Destroy(gameObject);
-        playerStats.SharkKills += 1;
     }
 }

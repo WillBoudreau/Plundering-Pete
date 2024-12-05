@@ -8,6 +8,7 @@ public class HealthManager : MonoBehaviour
 {
     public UIManager uIManager;
     public GameObject player;
+    [SerializeField] private PlayerStats playerStats;
     public Image playerhealth;
     public TextMeshProUGUI healthText;
     public float health;
@@ -27,9 +28,9 @@ public class HealthManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(health <= 0)
+        if(playerStats.playerHealth <= 0)
         {
-            health = 0;
+           IsDead = true;
         }
     }
     public void HandlePlayerHealthBar(float health, float maxHealth)

@@ -13,6 +13,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private CheckpointManager checkpointManager;  
     [SerializeField] private ObstacleManager obstacleManager;
     [SerializeField] private PlayerBehaviour player;
+    [SerializeField] private PlayerStats playerStats;
     [SerializeField] private SpawnManager spawnManager;
     [Header("Loading Screen")]
     public List<AsyncOperation> scenesToLoad = new List<AsyncOperation>();
@@ -66,7 +67,7 @@ public class LevelManager : MonoBehaviour
         ClearObstacles();
         ResetLevel();
         UpdateZoneObstacles();
-        spawnManager.PlacePlayerAtSpawn();
+        //spawnManager.PlacePlayerAtSpawn();
         musicChanger.PlaySceneTrack(SceneManager.GetActiveScene().name);
     } 
 
@@ -110,7 +111,7 @@ public class LevelManager : MonoBehaviour
     public void UpdateObjects()
     {
         //Update the objects in the scene
-        if(checkpointManager.FirstCheckpoint == true && !hasSpawnedZone[0])
+        if(checkpointManager.FirstCheckpoint == true && !hasSpawnedZone[0] && playerStats.PlayerPlaced == true)
         {
             SpawnObjects();
         }
@@ -130,5 +131,10 @@ public class LevelManager : MonoBehaviour
         obstacleManager.Zone1Obstacles.Clear();
         obstacleManager.Zone2Obstacles.Clear();
         obstacleManager.Zone3Obstacles.Clear();
+        obstacleManager.currentRockCount = 0;
+        obstacleManager.currentRockCount2 = 0;
+        obstacleManager.currentRockCount3 = 0;
+        obstacleManager.usedPositions.Clear();
+        checkpointManager.SetFalse();
     }
 }

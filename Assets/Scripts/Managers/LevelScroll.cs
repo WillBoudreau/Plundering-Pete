@@ -4,34 +4,35 @@ using UnityEngine;
 
 public class LevelScroll : MonoBehaviour
 {
-    public GameObject LevelTile;
-    public GameObject Player;
-    Vector3 PlayerPos;
-    public float maxDistToSpawn;
-    public float LevelLength;
+    public GameObject levelPrefab;
+    public Transform levelSpawnPoint;
+    public Transform levelSpawnInitialPoint;
+    public float levelScrollSpeed = 5.0f;
+    public float spawnThreshold = -1000f;
 
+    private GameObject lastSpawnedLevel;
     // Start is called before the first frame update
     void Start()
     {
-        maxDistToSpawn = 20;
+        SpawnInitialLevel();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        TrackPlayer();
-    }
-    void TrackPlayer()
-    {
-        PlayerPos = Player.transform.position;
-        if(PlayerPos.z > LevelLength - maxDistToSpawn)
+        if (lastSpawnedLevel.transform.position.y < spawnThreshold)
         {
-            SpawnTile();
+            GameObject newLevel = SpawnLevel();
+            Destroy(lastSpawnedLevel);
+            lastSpawnedLevel = newLevel;
         }
+        lastSpawnedLevel.transform.Translate(Vector2.down * levelScrollSpeed * Time.deltaTime);
     }
-    void SpawnTile()
+    void SpawnInitialLevel()
     {
-        Instantiate(LevelTile, new Vector3(0, 0, LevelLength), Quaternion.identity);
-        LevelLength += 20;
+        lastSpawnedLevel = Instantiate(levelPrefab, levelSpawnInitialPoint.position, levelSpawnPoint.rotation);
+    }
+    GameObject SpawnLevel()
+    {
+        return Instantiate(levelPrefab, levelSpawnPoint.position, levelSpawnPoint.rotation);
     }
 }

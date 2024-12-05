@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     [Header("Class Calls")]
     [SerializeField] private UIManager uiManager;
     [SerializeField] private LevelManager levelManager;
-
+    [SerializeField] private CheckpointManager checkpointManager;
     [SerializeField] private SpawnManager spawnManager;
     [SerializeField] private PlayerBehaviour playerBehaviour;
     [SerializeField] private PlayerStats playerStats;
@@ -22,11 +22,16 @@ public class GameManager : MonoBehaviour
     [Header("Variables")]
     public bool PlayerEnabled;
     public Button loadButton;
+    public bool FirstTime = true;
+    public GameObject KeepSailing;
+    public GameObject StartButton;
+    public GameObject ResumeButton;
     
 
     // Start is called before the first frame update
     void Start()
     {
+        KeepSailing.SetActive(false);
         //Get the components
         uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
         playerBehaviour = GameObject.Find("Player").GetComponent<PlayerBehaviour>();
@@ -35,6 +40,7 @@ public class GameManager : MonoBehaviour
         DisablePlayer();
         DisableCamera();
         DisableLoadButton();
+        ResumeButton.SetActive(false);
     }
 
     // Update is called once per frame
@@ -52,10 +58,33 @@ public class GameManager : MonoBehaviour
             }
             EnableGameplay();
         }
-        else if(uiManager.currentGameState == UIManager.GameState.Pause || uiManager.currentGameState == UIManager.GameState.GameOver)
+        else if(uiManager.currentGameState == UIManager.GameState.Pause || uiManager.currentGameState == UIManager.GameState.GameOver || uiManager.currentGameState == UIManager.GameState.Win)
         {
             DisableGameplay();
         }
+        if(uiManager.currentGameState == UIManager.GameState.GameOver || uiManager.currentGameState == UIManager.GameState.Win)
+        {
+            checkpointManager.SetFalse();
+        }
+        else if(uiManager.currentGameState == UIManager.GameState.Upgrades)
+        {
+            Time.timeScale = 0;
+        }
+    }
+    public void FirstTimeLoad()
+    {
+        if(FirstTime == true)
+        {
+            FirstTime = false;
+            //Load();
+            KeepSailing.SetActive(true);
+            SwitchButton();
+        }
+    }
+    void SwitchButton()
+    {
+        StartButton.SetActive(false);
+        ResumeButton.SetActive(true);
     }
 
     //Pause the game
@@ -66,6 +95,7 @@ public class GameManager : MonoBehaviour
             if(Input.GetKeyDown(KeyCode.Escape))
             {
                 uiManager.currentGameState = UIManager.GameState.Pause;
+                //Time.timeScale = 0;
             }
         }
         else if(PlayerEnabled == false && uiManager.currentGameState == UIManager.GameState.Pause)
@@ -144,6 +174,8 @@ public class GameManager : MonoBehaviour
         data.speed = playerStats.speed;
         data.Gold = inventoryManager.coinCount;
         data.Level = playerStats.Level;
+        data.FirstTime = FirstTime;
+        data.magnet = playerStats.magnet;
         Debug.Log("Game Saved");
 
         bf.Serialize(file, data);
@@ -158,11 +190,14 @@ public class GameManager : MonoBehaviour
             PlayerData data = (PlayerData)bf.Deserialize(file);
             file.Close();
 
+            FirstTime = data.FirstTime;
             playerStats.playerHealth = data.health;
             playerStats.damage = data.damage;
             playerStats.speed = data.speed;
             inventoryManager.coinCount = data.Gold;
             playerStats.Level = data.Level;
+            playerStats.magnet = data.magnet;
+            Debug.Log("Magnet: " + playerStats.magnet);
             Debug.Log("Game Loaded");
          }
     }
@@ -175,5 +210,7 @@ public class GameManager : MonoBehaviour
         public float speed;
         public int Gold;
         public int Level;
+        public bool FirstTime;
+        public float magnet;
     }
 }
