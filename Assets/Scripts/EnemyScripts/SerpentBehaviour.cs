@@ -12,10 +12,12 @@ public class SerpentBehaviour : Enemy
     public float detectionDistance;
     public float maxHealth;
     float bottomY = -15f;
+    bool canAttack = true;
     // Start is called before the first frame update
     void Start()
     {
         renderer = GetComponentInChildren<Renderer>();
+        deathAnim = GetComponentInChildren<Animator>();
         originalColor = renderer.material.color;
         speed = 8;
         health = 10;
@@ -70,12 +72,15 @@ public class SerpentBehaviour : Enemy
     }
     public override void Attack()
     {
-        if(AttackTimer <= 0)
+        if(canAttack)
         {
-            if(Vector2.Distance(transform.position, player.transform.position) < AttackDistance)
+            if(AttackTimer <= 0)
             {
-                playerStats.TakeDamage(damage);
-                AttackTimer = StartingAttackTimer;
+                if(Vector2.Distance(transform.position, player.transform.position) < AttackDistance)
+                {
+                    playerStats.TakeDamage(damage);
+                    AttackTimer = StartingAttackTimer;
+                }
             }
         }
     }
@@ -98,21 +103,37 @@ public class SerpentBehaviour : Enemy
         }
         renderer.material.color = originalColor;
     }
+    void DeathEffect()
+    {
+        deathAnim.SetTrigger("Death");
+        canAttack = false;
+        damage = 0;
+        speed = 0;
+        this.gameObject.GetComponent<Collider2D>().enabled = false;
+
+    }
     public void Death()
     {
-        Instantiate(GoldBag, transform.position, Quaternion.identity);
-        Destroy(gameObject);
+        DeathEffect();
         playerStats.SerpentKills++;
+        StartCoroutine(DeathDelay());
     }
     public void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.tag == "Bullet")
         {
             Debug.Log("Bullet Hit");
-            Debug.Log(playerStats.damage);
-            Debug.Log(health);
             TakeDamage(playerStats.damage);
             Destroy(collision.gameObject);
         }
+    }
+    IEnumerator DeathDelay()
+    {
+        if(deathAnim != null)
+        {
+            yield return new WaitForSeconds(deathAnim.GetCurrentAnimatorStateInfo(0).length);
+        }
+        Instantiate(GoldBag, transform.position, Quaternion.identity);
+        Destroy(gameObject);
     }
 }
