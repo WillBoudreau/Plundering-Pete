@@ -8,6 +8,7 @@ public class WaveManger : MonoBehaviour
     [Header("Classes")]
     [SerializeField] private CheckpointManager checkpointManager;
     [SerializeField] private SpawnManager spawnManager;
+    [SerializeField] private Camera camera;
     [Header("Variables")]
     //List of all the enemy objects
     public List<GameObject> Sharks;

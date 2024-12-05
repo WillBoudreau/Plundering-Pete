@@ -25,12 +25,14 @@ public class CheckpointManager : MonoBehaviour
     public float Checkpoint1;
     public float Checkpoint2;
     public float Checkpoint3;
+    public float Checkpoint4;
 
     public void SetValues()
     {
         Checkpoint1 = -120;
         Checkpoint2 = 25;
         Checkpoint3 = 200;
+        Checkpoint4 = 300;
     }
     void Update()
     {
@@ -56,6 +58,10 @@ public class CheckpointManager : MonoBehaviour
         if (playerBehaviour.transform.position.y >= Checkpoint3)
         {
             UpdateCheckpointStatus(2, true);
+        }
+        if(playerBehaviour.transform.position.y >= Checkpoint4)
+        {
+            
         }
     }
     //Update the checkpoint status

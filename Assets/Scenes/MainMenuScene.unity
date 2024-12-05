@@ -2711,6 +2711,7 @@ MonoBehaviour:
   Checkpoint1: 0
   Checkpoint2: 0
   Checkpoint3: 0
+  Checkpoint4: 0
 --- !u!1 &362043387
 GameObject:
   m_ObjectHideFlags: 0
@@ -15294,6 +15295,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   checkpointManager: {fileID: 324095957}
   spawnManager: {fileID: 1626319226}
+  camera: {fileID: 0}
   Sharks:
   - {fileID: 4724370820435506893, guid: 276f63cd8fc351b42a0406ce0fd8f74a, type: 3}
   Serpents:
@@ -21104,7 +21106,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.52
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

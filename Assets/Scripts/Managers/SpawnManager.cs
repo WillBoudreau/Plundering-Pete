@@ -111,47 +111,62 @@ public class SpawnManager : MonoBehaviour
                 spawnArea = ShipSpawnArea;
             }
             Vector3 spawnPos = GetEnemySpawn(spawnArea);
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(spawnPos, spawnZone);
-            bool isOccupied = false;
-            foreach(var collider in colliders)
+            if(IsInCameraView(spawnPos))
             {
-                if(collider.gameObject.tag == "Shark")
-                {
-                    isOccupied = true;
-                    break;
-                }
-                else if(collider.gameObject.tag == "Serpent")
-                {
-                    isOccupied = true;
-                    break;
-                }
-                else if(collider.gameObject.tag == "EnemyShip")
-                {
-                    isOccupied = true;
-                    break;
-                }
-                else if(collider.gameObject.tag == "Player")
-                {
-                    isOccupied = true;
-                    break;
-                }
-                else if(Vector3.Distance(player.transform.position, spawnArea.center) < spawnZone)
-                {
-                    Debug.Log("Player is too close to spawn point");
-                    isOccupied = true;
-                }
+                Debug.Log("Enemy is in camera view");
+                attempts++;
             }
-            if(!isOccupied)
+            else if(!IsInCameraView(spawnPos))
             {
-                GameObject enemy = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
-                spawnSuccessful = true;
+                
+                Collider2D[] colliders = Physics2D.OverlapCircleAll(spawnPos, spawnZone);
+                bool isOccupied = false;
+                foreach(var collider in colliders)
+                {
+                    if(collider.gameObject.tag == "Shark")
+                    {
+                        isOccupied = true;
+                        break;
+                    }
+                    else if(collider.gameObject.tag == "Serpent")
+                    {
+                        isOccupied = true;
+                        break;
+                    }
+                    else if(collider.gameObject.tag == "EnemyShip")
+                    {
+                        isOccupied = true;
+                        break;
+                    }
+                    else if(collider.gameObject.tag == "Player")
+                    {
+                        isOccupied = true;
+                        break;
+                    }
+                    else if(Vector3.Distance(player.transform.position, spawnArea.center) < spawnZone)
+                    {
+                        Debug.Log("Player is too close to spawn point");
+                        isOccupied = true;
+                    }
+                }
+                if(!isOccupied)
+                {
+                    GameObject enemy = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
+                    spawnSuccessful = true;
+                }
+                attempts++;
             }
-            attempts++;
+            if(!spawnSuccessful)
+            {
+                Debug.Log("Failed to spawn enemy");
+            }
         }
-        if(!spawnSuccessful)
-        {
-            Debug.Log("Failed to spawn enemy");
-        }
+    }
+    bool IsInCameraView(Vector3 position)
+    {
+        Vector3 screenPoint = mainCamera.WorldToViewportPoint(position);
+        bool onScreen = screenPoint.z > 0 && screenPoint.x > 0 && screenPoint.x < 1 && screenPoint.y > 0 && screenPoint.y < 1;
+        return onScreen;
     }
     //Draw the spawn areas in the editor
     void OnDrawGizmos()
