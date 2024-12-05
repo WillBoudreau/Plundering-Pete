@@ -95,8 +95,7 @@ public class ShipUpgrade : Upgrade
     {
         playerStats.LevelUp();
         playerStats.damage += DamageIncrement;
-        playerStats.playerHealth += HealthIncrement;
-        playerStats.startHealth += HealthIncrement;
+        playerStats.AdjustHealth(HealthIncrement);
         playerStats.speed += SpeedIncrement;
         playerStats.AdjustMagnet(MagnetIncrement);
         playerStats.AdjustFireRate(-FireRateIncrement);

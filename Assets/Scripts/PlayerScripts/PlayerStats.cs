@@ -36,6 +36,7 @@ public class PlayerStats : MonoBehaviour
     public bool PlayerPlaced;
     const float MinFireRate = 0.1f;
     const float MinMagnet = 3f;
+    const float MinHealth = 5f;
     [Header("Player Levels")]
     public bool IsLevel2;
     public bool IsLevel3; 
@@ -67,7 +68,7 @@ public class PlayerStats : MonoBehaviour
     //Hanlde the player (Called in PlayerBehaviour)
     public void HandlePlayer()
     {
-        HandleMagnit();
+        HandleStats();
     }
 
     //Set the starting values for the player
@@ -145,9 +146,19 @@ public class PlayerStats : MonoBehaviour
         }
         Debug.Log("MagnetFromStats: " + magnet + " Start MagnetFromStats: " + startMagnet);
     }
+    public void AdjustHealth(float increment)
+    {
+        playerHealth = Mathf.Clamp(playerHealth + increment,MinHealth,startHealth);
+        playerHealth += increment;
+        startHealth += increment;
+        if(playerHealth < startHealth)
+        {
+            playerHealth = startHealth;
+        }
+    }
 
     //Handle the magnet power of the ship
-    void HandleMagnit()
+    void HandleStats()
     {
         if(magnet < startMagnet)
         {
@@ -219,11 +230,8 @@ public class PlayerStats : MonoBehaviour
             musicManager.StopSound();
             musicManager.PlaySound(3);
             uIManager.SetGameState("GameOver");
-            Debug.Log("Player is Dead, magnet is: " + magnet);
             ResetHealth();
-            Debug.Log("Player is Dead,health is reset, magnet is: " + magnet);
             Respawn();
-            Debug.Log("Player is Dead, respawned, magnet is: " + magnet);
             checkpointManager.SetFalse();
         }
     }

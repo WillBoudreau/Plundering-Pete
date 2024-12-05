@@ -10,7 +10,17 @@ public class CanonBallBahaviour : MonoBehaviour
         Enemy
     }
     public CanonBallType canonBallType;
-    [SerializeField] private EnemyShipBehaviour enemyShip;
+    public EnemyShipBehaviour enemyShip;
+    public GameObject[] sharks;
+    public GameObject[] serpents;
+    public GameObject[] enemyShips;
+
+    void Awake()
+    {
+        GameObject[] sharks = GameObject.FindGameObjectsWithTag("Shark");
+        GameObject[] serpents = GameObject.FindGameObjectsWithTag("Serpent");
+        GameObject[] enemyShips = GameObject.FindGameObjectsWithTag("EnemyShip");
+    }
     void Start()
     {
         if(enemyShip != null)
@@ -18,6 +28,10 @@ public class CanonBallBahaviour : MonoBehaviour
             Collider2D collider = GetComponent<Collider2D>();
             Physics2D.IgnoreCollision(collider, enemyShip.GetComponent<Collider2D>());
         }
+        GameObject[] sharks = GameObject.FindGameObjectsWithTag("Shark");
+        GameObject[] serpents = GameObject.FindGameObjectsWithTag("Serpent");
+        GameObject[] enemyShips = GameObject.FindGameObjectsWithTag("EnemyShip");
+
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -36,10 +50,18 @@ public class CanonBallBahaviour : MonoBehaviour
             if(collision.gameObject.tag == "Obstacle")
             {
                 Destroy(this.gameObject);
-            }
-            if(collision.gameObject.tag == "Shark" || collision.gameObject.tag == "Serpent" || collision.gameObject.tag == "EnemyShip")
+            } 
+            foreach (GameObject shark in sharks)
             {
-                Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>());
+                Physics2D.IgnoreCollision(GetComponent<Collider2D>(), shark.GetComponent<Collider2D>());
+            }
+            foreach (GameObject serpent in serpents)
+            {
+                Physics2D.IgnoreCollision(GetComponent<Collider2D>(), serpent.GetComponent<Collider2D>());
+            }
+            foreach (GameObject enemyShip in enemyShips)
+            {
+                Physics2D.IgnoreCollision(GetComponent<Collider2D>(), enemyShip.GetComponent<Collider2D>());
             }
         }
         if(canonBallType == CanonBallType.Player)
