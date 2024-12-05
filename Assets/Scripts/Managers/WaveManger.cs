@@ -100,4 +100,22 @@ public class WaveManger : MonoBehaviour
         hasSpawnedEnemies = true;
         yield return new WaitForSeconds(spawnTime);
     }
+    void DespawnEnemies()
+    {
+        GameObject[] shark = GameObject.FindGameObjectsWithTag("Shark");
+        GameObject[] serpent = GameObject.FindGameObjectsWithTag("Serpent");
+        GameObject[] ship = GameObject.FindGameObjectsWithTag("EnemyShip");
+        foreach(GameObject s in shark)
+        {
+            Destroy(s);
+        }
+        foreach(GameObject s in serpent)
+        {
+            Destroy(s);
+        }
+        foreach(GameObject s in ship)
+        {
+            Destroy(s);
+        }
+    }
 }

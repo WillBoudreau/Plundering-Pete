@@ -199,12 +199,20 @@ public class PlayerStats : MonoBehaviour
     //Take damage from the player(Called in PlayerBehaviour)
     public void TakeDamage(float damage)
     {
-        StartCoroutine(Flicker());
-        ChooseDamageSound();
-        playerHealth -= damage;
-        healthManager.HandlePlayerHealthBar(playerHealth, startHealth);
-        Death();
-        cameraManager.ShakeCamera();
+        Debug.Log("Player took damage" + damage);
+        if(!healthManager.IsDead)
+        {
+            if(uIManager.currentGameState == UIManager.GameState.GameOver)
+            {
+                return;
+            }
+            StartCoroutine(Flicker());
+            ChooseDamageSound();
+            playerHealth -= damage;
+            healthManager.HandlePlayerHealthBar(playerHealth, startHealth);
+            Death();
+            cameraManager.ShakeCamera();
+        }
     }
     void ChooseDamageSound()
     {
@@ -249,6 +257,10 @@ public class PlayerStats : MonoBehaviour
         checkpointManager.SetFalse();
         spawnManager.PlacePlayerAtSpawn();
         healthManager.IsDead = false;
+        if(playerHealth < startHealth)
+        {
+            playerHealth = startHealth;
+        }
     }
 
     //Reset the health of the player

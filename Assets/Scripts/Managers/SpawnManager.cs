@@ -9,6 +9,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private GameObject Camera;
     [SerializeField] private Camera mainCamera;
     [SerializeField] private CheckpointManager checkPointManager;
+    [SerializeField] private PlayerStats playerStats;
     [Header("Spawns")]
     public Rect spawnArea1;
     public Rect spawnArea2;
@@ -54,6 +55,10 @@ public class SpawnManager : MonoBehaviour
                 Camera.transform.position = cameraPosition;
 
                 distanceTracker.ResetValues();
+                if(playerStats.playerHealth <= 0)
+                {
+                    playerStats.playerHealth = playerStats.startHealth;
+                }
             }
         }
     }

@@ -6815,6 +6815,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uIManager: {fileID: 1728282020}
   player: {fileID: 551069641}
+  playerStats: {fileID: 551069652}
   playerhealth: {fileID: 982991170}
   healthText: {fileID: 1878414940}
   health: 0
@@ -14107,6 +14108,7 @@ MonoBehaviour:
   Camera: {fileID: 177806781}
   mainCamera: {fileID: 177806784}
   checkPointManager: {fileID: 324095957}
+  playerStats: {fileID: 551069652}
   spawnArea1:
     serializedVersion: 2
     x: -10
@@ -15712,7 +15714,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   checkpointManager: {fileID: 324095957}
   spawnManager: {fileID: 1626319226}
-  camera: {fileID: 0}
+  camera: {fileID: 177806784}
   Sharks:
   - {fileID: 4724370820435506893, guid: 276f63cd8fc351b42a0406ce0fd8f74a, type: 3}
   Serpents:
