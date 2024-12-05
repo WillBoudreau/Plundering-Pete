@@ -17,9 +17,9 @@ public class CanonBallBahaviour : MonoBehaviour
 
     void Awake()
     {
-        GameObject[] sharks = GameObject.FindGameObjectsWithTag("Shark");
-        GameObject[] serpents = GameObject.FindGameObjectsWithTag("Serpent");
-        GameObject[] enemyShips = GameObject.FindGameObjectsWithTag("EnemyShip");
+        sharks = GameObject.FindGameObjectsWithTag("Shark");
+        serpents = GameObject.FindGameObjectsWithTag("Serpent");
+        enemyShips = GameObject.FindGameObjectsWithTag("EnemyShip");
     }
     void Start()
     {
@@ -31,9 +31,9 @@ public class CanonBallBahaviour : MonoBehaviour
     }
     void Update()
     {
-        GameObject[] sharks = GameObject.FindGameObjectsWithTag("Shark");
-        GameObject[] serpents = GameObject.FindGameObjectsWithTag("Serpent");
-        GameObject[] enemyShips = GameObject.FindGameObjectsWithTag("EnemyShip");
+        sharks = GameObject.FindGameObjectsWithTag("Shark");
+        serpents = GameObject.FindGameObjectsWithTag("Serpent");
+        enemyShips = GameObject.FindGameObjectsWithTag("EnemyShip");
     }
     void OnCollisionEnter2D(Collision2D collision)
     {

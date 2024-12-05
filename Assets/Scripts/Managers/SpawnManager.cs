@@ -135,7 +135,7 @@ public class SpawnManager : MonoBehaviour
                     isOccupied = true;
                     break;
                 }
-                if(Vector3.Distance(player.transform.position, spawnArea.center) < spawnZone)
+                else if(Vector3.Distance(player.transform.position, spawnArea.center) < spawnZone)
                 {
                     Debug.Log("Player is too close to spawn point");
                     isOccupied = true;
