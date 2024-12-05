@@ -19,6 +19,8 @@ public class EnemyShipBehaviour : Enemy
     public float moveDistance = 5f;
     public float moveSpeed = 2f;
     bool canAttack = true;
+    float minX = -10f;
+    float maxX = 10f;
 
     // Start is called before the first frame update
     void Start()
@@ -52,7 +54,7 @@ public class EnemyShipBehaviour : Enemy
         if (movingRight)
         {
             transform.position += Vector3.right * moveSpeed * Time.deltaTime;
-            if (transform.position.x >= startPosition.x + moveDistance)
+            if(transform.position.x >= Mathf.Min(startPosition.x + moveDistance,maxX))
             {
                 movingRight = false;
             }
@@ -60,7 +62,7 @@ public class EnemyShipBehaviour : Enemy
         else
         {
             transform.position += Vector3.left * moveSpeed * Time.deltaTime;
-            if (transform.position.x <= startPosition.x - moveDistance)
+            if (transform.position.x <= Mathf.Max(startPosition.x - moveDistance,minX))
             {
                 movingRight = true;
             }

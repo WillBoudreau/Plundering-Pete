@@ -18335,6 +18335,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 551069652}
     - target: {fileID: 4098233298752386087, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
+      propertyPath: shipUpgrade
+      value: 
+      objectReference: {fileID: 1080032334}
+    - target: {fileID: 4098233298752386087, guid: fc106ab73cde2a249b3d5b5af49dd625, type: 3}
       propertyPath: bulletPrefab
       value: 
       objectReference: {fileID: 7112107127442301048, guid: f02f163f8e234174bbe061f2bec20ad8, type: 3}

@@ -10,6 +10,7 @@ public class PlayerMovementHandler : MonoBehaviour
     [SerializeField] private UIManager uIManager;
     [SerializeField] private InventoryManager inventoryManager;
     [SerializeField] private CheckpointManager checkpointManager;
+    [SerializeField] private ShipUpgrade shipUpgrade;
     [SerializeField] private float time = 5.0f;
     [Header("Player Movement")]
     [SerializeField] private float speed = 5.0f;
@@ -108,8 +109,7 @@ public class PlayerMovementHandler : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.R))
         {
-            playerStats.LevelUp();
-
+            shipUpgrade.UpgradeBonus();
         }
     }
 
