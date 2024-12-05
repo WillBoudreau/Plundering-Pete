@@ -28,10 +28,12 @@ public class CanonBallBahaviour : MonoBehaviour
             Collider2D collider = GetComponent<Collider2D>();
             Physics2D.IgnoreCollision(collider, enemyShip.GetComponent<Collider2D>());
         }
+    }
+    void Update()
+    {
         GameObject[] sharks = GameObject.FindGameObjectsWithTag("Shark");
         GameObject[] serpents = GameObject.FindGameObjectsWithTag("Serpent");
         GameObject[] enemyShips = GameObject.FindGameObjectsWithTag("EnemyShip");
-
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -51,6 +53,10 @@ public class CanonBallBahaviour : MonoBehaviour
             {
                 Destroy(this.gameObject);
             } 
+            // if(collision.gameObject.tag =="Shark" || collision.gameObject.tag == "Serpent" || collision.gameObject.tag == "EnemyShip")
+            // {
+            //     Destroy(this.gameObject);
+            // }
             foreach (GameObject shark in sharks)
             {
                 Physics2D.IgnoreCollision(GetComponent<Collider2D>(), shark.GetComponent<Collider2D>());

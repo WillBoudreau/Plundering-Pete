@@ -19,8 +19,8 @@ public class EnemyShipBehaviour : Enemy
     public float moveDistance = 5f;
     public float moveSpeed = 2f;
     bool canAttack = true;
-    float minX = -10f;
-    float maxX = 10f;
+    float minX = -20f;
+    float maxX = 20f;
 
     // Start is called before the first frame update
     void Start()
@@ -135,10 +135,12 @@ public class EnemyShipBehaviour : Enemy
         {
             if(movingRight)
             {
+                Debug.Log("Moving Left");
                 movingRight = false;
             }
             else if(!movingRight)
             {
+                Debug.Log("Moving Right");
                 movingRight = true;
             }
         }
