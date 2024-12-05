@@ -37,6 +37,7 @@ public class PlayerStats : MonoBehaviour
     const float MinFireRate = 0.1f;
     const float MinMagnet = 3f;
     const float MinHealth = 5f;
+    public bool CanCollect;
     [Header("Player Levels")]
     public bool IsLevel2;
     public bool IsLevel3; 
@@ -102,7 +103,6 @@ public class PlayerStats : MonoBehaviour
         {
             fireRate = MinFireRate;
         }
-        Debug.Log("Fire RateFromStats: " + fireRate + " Start Fire RateFromStats: " + startFireRate);
     }
 
     //Level up the player(Called in ShipUpgrade)
@@ -144,7 +144,6 @@ public class PlayerStats : MonoBehaviour
         {
             magnet = startMagnet;
         }
-        Debug.Log("MagnetFromStats: " + magnet + " Start MagnetFromStats: " + startMagnet);
     }
     public void AdjustHealth(float increment)
     {
@@ -164,21 +163,29 @@ public class PlayerStats : MonoBehaviour
         {
             magnet = startMagnet;
         }
-        Debug.Log("Player is handling magnet, magnet is: " + magnet);
-        //Handle the magnet powerup
-        foreach (GameObject coin in GameObject.FindGameObjectsWithTag("Gold"))
+        if(inventory.IsMax)
         {
-            Debug.Log("Player is handling magnet, coin is: " + coin + " magnet is: " + magnet);
-            if (Vector2.Distance(transform.position, coin.transform.position) < magnet)
+            CanCollect = false;
+        }
+        else
+        {
+            CanCollect = true;
+        }
+        //Handle the magnet powerup
+        if(CanCollect)
+        {
+            foreach (GameObject coin in GameObject.FindGameObjectsWithTag("Gold"))
             {
-                if(inventory.coinCount >= inventory.maxCoins)
+                if (Vector2.Distance(transform.position, coin.transform.position) < magnet)
                 {
-                    coin.transform.position = Vector2.MoveTowards(coin.transform.position, coin.transform.position, 0.1f);
-                }
-                else
-                {
-                    Debug.Log("Player is handling magnet, coin is close, magnet is: " + magnet);
-                    coin.transform.position = Vector2.MoveTowards(coin.transform.position, transform.position, 0.1f);
+                    if(inventory.coinCount >= inventory.maxCoins)
+                    {
+                        coin.transform.position = Vector2.MoveTowards(coin.transform.position, coin.transform.position, 0.1f);
+                    }
+                    else
+                    {
+                        coin.transform.position = Vector2.MoveTowards(coin.transform.position, transform.position, 0.1f);
+                    }
                 }
             }
         }
@@ -188,17 +195,11 @@ public class PlayerStats : MonoBehaviour
     public void TakeDamage(float damage)
     {
         StartCoroutine(Flicker());
-        Debug.Log("Player is taking damage, magnet is: " + magnet);
         ChooseDamageSound();
-        Debug.Log("Player is taking damage,chose sound, magnet is: " + magnet);
         playerHealth -= damage;
-        Debug.Log("Player is taking damage, health is: " + playerHealth + " magnet is: " + magnet);
         healthManager.HandlePlayerHealthBar(playerHealth, startHealth);
-        Debug.Log("Player is taking damage, health is handled, magnet is: " + magnet);
         Death();
-        Debug.Log("Player is taking damage, death is handled, magnet is: " + magnet);
         cameraManager.ShakeCamera();
-        Debug.Log("Player is taking damage, camera is shaking, magnet is: " + magnet);
     }
     void ChooseDamageSound()
     {
