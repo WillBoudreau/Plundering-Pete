@@ -38,6 +38,10 @@ public class CheckpointManager : MonoBehaviour
     void Update()
     {
         Checkpoint();
+        if(playerStats.playerHealth <= 0)
+        {
+            SetFalse();
+        }
     }
     IEnumerator UpdateText()
     {
@@ -70,6 +74,7 @@ public class CheckpointManager : MonoBehaviour
     {
         if(levelManager.levelName == "GameTestScene")
         {
+            SetFalse();
             switch (checkpointIndex)
             {
                 case 0:

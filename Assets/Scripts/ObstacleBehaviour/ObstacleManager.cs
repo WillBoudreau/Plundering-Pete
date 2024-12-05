@@ -11,10 +11,34 @@ public class ObstacleManager : MonoBehaviour
         public float Xpositive;
         public float Ynegative;
         public float Ypositive;
+        public override bool Equals(object obj)
+        {
+            if (!(obj is ObstacleZone))
+                return false;
+
+            ObstacleZone other = (ObstacleZone)obj;
+            return Xnegative == other.Xnegative && Xpositive == other.Xpositive && Ynegative == other.Ynegative && Ypositive == other.Ypositive;
+        }
+
+        public override int GetHashCode()
+        {
+            return Xnegative.GetHashCode() ^ Xpositive.GetHashCode() ^ Ynegative.GetHashCode() ^ Ypositive.GetHashCode();
+        }
+
+        public static bool operator ==(ObstacleZone a, ObstacleZone b)
+        {
+            return a.Equals(b);
+        }
+
+        public static bool operator !=(ObstacleZone a, ObstacleZone b)
+        {
+            return !a.Equals(b);
+        }
     }
     public ObstacleZone zone1, zone2, zone3;
     [Header("Object Calls")]
     [SerializeField] private Camera mainCamera;
+    [SerializeField] private PlayerStats playerStats;
     [Header("Variables")]
     public GameObject Rock;
     public GameObject Iceberg;
@@ -22,7 +46,12 @@ public class ObstacleManager : MonoBehaviour
     public float takenPOS = 3.0f;
     public float safeDistance = 10.0f;
     public int currentRockCount = 0;
+    public int currentRockCount2 = 0;
+    public int currentRockCount3 = 0;
     public int RockMaxZone1 = 10;
+    public int RockMaxZone2 = 15;
+    public int RockMaxZone3 = 20;
+
     [Header("Obstacle Zones")]
     [Header("Zone 1")]
     public float zone1Xnegative = -15;
@@ -47,8 +76,6 @@ public class ObstacleManager : MonoBehaviour
     public int obstacle_Rock_Count;
     public int obstacle_Iceberg_Count;
     public int obstacle_Debris_Count;
-    public int IcebergMax = 10;
-    public int DebrisMax = 10;
     //List of occupied positions
 
     void Start()
@@ -56,6 +83,13 @@ public class ObstacleManager : MonoBehaviour
         zone1 = new ObstacleZone{Xnegative = zone1Xnegative, Xpositive = zone1Xpositive, Ynegative = zone1Ynegative, Ypositive = zone1Ypositive};
         zone2 = new ObstacleZone{Xnegative = zone2Xnegative, Xpositive = zone2Xpositive, Ynegative = zone2Ynegative, Ypositive = zone2Ypositive};
         zone3 = new ObstacleZone{Xnegative = zone3Xnegative, Xpositive = zone3Xpositive, Ynegative = zone3Ynegative, Ypositive = zone3Ypositive};
+    }
+    void Update()
+    {
+        if(playerStats.playerHealth <= 0)
+        {
+            ClearAllObstacles();
+        }
     }
     //Adding obstacles to their respective lists
     public void AddObstaclesToList()
@@ -70,8 +104,9 @@ public class ObstacleManager : MonoBehaviour
             }
         }
         //Zone 2 only spawns rocks and icebergs
-        if(Zone2Obstacles.Count <= 0)
+        if(Zone2Obstacles.Count <= RockMaxZone2 && currentRockCount2 < RockMaxZone2)
         {
+            int rocksToSpawn = Mathf.Min(RockMaxZone2 - Zone2Obstacles.Count, RockMaxZone2 - currentRockCount2);
             for(int i = 0; i < obstacle_Rock_Count; i++)
             {
                 Zone2Obstacles.Add(Rock);
@@ -82,8 +117,9 @@ public class ObstacleManager : MonoBehaviour
             }
         }
         //Zone 3 spawns all obstacles
-        if(Zone3Obstacles.Count <= 0)
+        if(Zone3Obstacles.Count <= RockMaxZone3 && currentRockCount3 < RockMaxZone3)
         {
+            int rocksToSpawn = Mathf.Min(RockMaxZone3 - Zone3Obstacles.Count, RockMaxZone3 - currentRockCount3);
             for (int i = 0; i < obstacle_Rock_Count; i++)
             {
                 Zone3Obstacles.Add(Rock);
@@ -104,19 +140,56 @@ public class ObstacleManager : MonoBehaviour
         for (int i = 0; i < obstacles.Count; i++)
         {
             Vector3 spawnPosition = GetSafeSpawnPos(zone.Xnegative, zone.Xpositive, zone.Ynegative, zone.Ypositive, playerTransform.position, safeDistance);
-            if(obstacles[i] == Rock && currentRockCount >= RockMaxZone1)
-            {
-                continue;
-            }
             if(obstacles[i] == Rock)
             {
-                currentRockCount++;
+                if(zone == zone1 && currentRockCount < RockMaxZone1)
+                {
+                    currentRockCount++;
+                }
+                else if(zone == zone2 && currentRockCount2 < RockMaxZone2)
+                {
+                    currentRockCount2++;
+                }
+                else if(zone == zone3 && currentRockCount3 < RockMaxZone3)
+                {
+                    currentRockCount3++;
+                }
+                else
+                {
+                    continue;
+                }
             }
-            Instantiate(obstacles[i], spawnPosition, Quaternion.identity);
-            usedPositions.Add(spawnPosition);
-            obstacles[i].SetActive(true);
+            else if(obstacles[i] == Iceberg)
+            {
+                if(zone == zone2 && currentRockCount2 < RockMaxZone2)
+                {
+                    currentRockCount2++;
+                }
+                else if(zone == zone3 && currentRockCount3 < RockMaxZone3)
+                {
+                    currentRockCount3++;
+                }
+                else
+                {
+                    continue;
+                }
+            }
+            else if(obstacles[i] == Debris)
+            {
+                if(zone == zone3 && currentRockCount3 < RockMaxZone3)
+                {
+                    currentRockCount3++;
+                }
+                else
+                {
+                    continue;
+                }
+            }
+                Instantiate(obstacles[i], spawnPosition, Quaternion.identity);
+                usedPositions.Add(spawnPosition);
+                obstacles[i].SetActive(true);
+            }
         }
-    }
     //Finds position on map
     public Vector3 GetSpawnPos(float XNeg,float XPos,float YNeg,float YPos)
     {
@@ -155,5 +228,16 @@ public class ObstacleManager : MonoBehaviour
         Vector3 viewportPoint = mainCamera.WorldToViewportPoint(position);
         bool InView = viewportPoint.x > 0 && viewportPoint.x < 1 && viewportPoint.y > 0 && viewportPoint.y < 1;
         return InView;
+    }
+    void ClearAllObstacles()
+    {
+        GameObject[] allObstacles = GameObject.FindGameObjectsWithTag("Obstacle");
+        foreach (GameObject obstacle in allObstacles)
+        {
+            Destroy(obstacle);
+        }
+        Zone1Obstacles.Clear();
+        Zone2Obstacles.Clear();
+        Zone3Obstacles.Clear();
     }
 }

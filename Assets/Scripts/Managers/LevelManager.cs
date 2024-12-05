@@ -132,6 +132,9 @@ public class LevelManager : MonoBehaviour
         obstacleManager.Zone2Obstacles.Clear();
         obstacleManager.Zone3Obstacles.Clear();
         obstacleManager.currentRockCount = 0;
+        obstacleManager.currentRockCount2 = 0;
+        obstacleManager.currentRockCount3 = 0;
         obstacleManager.usedPositions.Clear();
+        checkpointManager.SetFalse();
     }
 }

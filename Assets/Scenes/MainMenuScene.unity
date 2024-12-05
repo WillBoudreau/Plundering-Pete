@@ -2835,6 +2835,7 @@ MonoBehaviour:
   levelManager: {fileID: 1051185688}
   inventoryManager: {fileID: 1039502979}
   playerBehaviour: {fileID: 551069647}
+  playerStats: {fileID: 551069652}
   checkpointbonus: 5
   checkpointText: {fileID: 2022907992}
   FirstCheckpoint: 0
@@ -8878,6 +8879,7 @@ MonoBehaviour:
   checkpointManager: {fileID: 324095957}
   obstacleManager: {fileID: 1683598818}
   player: {fileID: 551069647}
+  playerStats: {fileID: 551069652}
   spawnManager: {fileID: 1626319226}
   levelName: 
   safeDistance: 5
@@ -12984,6 +12986,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiManager: {fileID: 1728282020}
   levelManager: {fileID: 1051185688}
+  checkpointManager: {fileID: 324095957}
   spawnManager: {fileID: 1626319226}
   playerBehaviour: {fileID: 551069647}
   playerStats: {fileID: 551069652}
@@ -14103,6 +14106,7 @@ MonoBehaviour:
   distanceTracker: {fileID: 1556131826}
   Camera: {fileID: 177806781}
   mainCamera: {fileID: 177806784}
+  checkPointManager: {fileID: 324095957}
   spawnArea1:
     serializedVersion: 2
     x: -10
@@ -15257,11 +15261,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 177806784}
+  playerStats: {fileID: 551069652}
   Rock: {fileID: 3600233302650675057, guid: eb50ad4c55b86d849b7d005a469850e3, type: 3}
   Iceberg: {fileID: 8951899304849922272, guid: 1da721168e4fcea4b96b6c5582c929b1, type: 3}
   Debris: {fileID: 8951899304849922272, guid: 60e159277ab1693428d34dcd836a49d7, type: 3}
   takenPOS: 5
   safeDistance: 5
+  currentRockCount: 0
+  currentRockCount2: 0
+  currentRockCount3: 0
+  RockMaxZone1: 10
+  RockMaxZone2: 15
+  RockMaxZone3: 20
   zone1Xnegative: -15
   zone1Xpositive: 15
   zone1Ynegative: -25
@@ -15277,6 +15288,7 @@ MonoBehaviour:
   Zone1Obstacles: []
   Zone2Obstacles: []
   Zone3Obstacles: []
+  usedPositions: []
   obstacle_Rock_Count: 5
   obstacle_Iceberg_Count: 5
   obstacle_Debris_Count: 5
