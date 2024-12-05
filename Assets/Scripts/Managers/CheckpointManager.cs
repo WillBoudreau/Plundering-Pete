@@ -9,6 +9,7 @@ public class CheckpointManager : MonoBehaviour
     [SerializeField] private LevelManager levelManager;
     [SerializeField] private InventoryManager inventoryManager;
     [SerializeField] private PlayerBehaviour playerBehaviour;
+    [SerializeField] private PlayerStats playerStats;
     [Header("Variables")]
     public int checkpointbonus = 5;
     public TextMeshProUGUI checkpointText;
@@ -29,7 +30,7 @@ public class CheckpointManager : MonoBehaviour
 
     public void SetValues()
     {
-        Checkpoint1 = -120;
+        Checkpoint1 = -100;
         Checkpoint2 = 25;
         Checkpoint3 = 200;
         Checkpoint4 = 300;

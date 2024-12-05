@@ -57,11 +57,16 @@ public class PlayerStats : MonoBehaviour
         magnet = startMagnet;
         StartSpeed = 6;
         speed = StartSpeed;
+        if(playerHealth < startHealth)
+        {
+            playerHealth = startHealth;
+        }
     }
     // Start is called before the first frame update
     void Start()
     {
         SetValues();
+        this.GetComponent<Collider2D>().enabled = true;
         renderer = GetComponentInChildren<Renderer>();
         originalColor = GetComponentInChildren<Renderer>().material.color;
     }
@@ -228,6 +233,7 @@ public class PlayerStats : MonoBehaviour
         if (playerHealth <= 0)
         {
             playerHealth = 0;
+            this.GetComponent<Collider2D>().enabled = false;
             musicManager.StopSound();
             musicManager.PlaySound(3);
             uIManager.SetGameState("GameOver");
@@ -240,15 +246,21 @@ public class PlayerStats : MonoBehaviour
     //Respawn the player
     void Respawn()
     {
-        spawnManager.PlacePlayer();
+        checkpointManager.SetFalse();
+        spawnManager.PlacePlayerAtSpawn();
         healthManager.IsDead = false;
     }
 
     //Reset the health of the player
     private void ResetHealth()
     {
+        checkpointManager.SetFalse();
         playerHealth = startHealth;
         healthManager.health = playerHealth;
         healthManager.HandlePlayerHealthBar(playerHealth, startHealth);
+        if(playerHealth < startHealth)
+        {
+            playerHealth = startHealth;
+        }
     }
 }

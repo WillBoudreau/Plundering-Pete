@@ -8,6 +8,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private DistanceTracker distanceTracker;
     [SerializeField] private GameObject Camera;
     [SerializeField] private Camera mainCamera;
+    [SerializeField] private CheckpointManager checkPointManager;
     [Header("Spawns")]
     public Rect spawnArea1;
     public Rect spawnArea2;
@@ -38,16 +39,31 @@ public class SpawnManager : MonoBehaviour
         }
         else if(IsValidPlayerSpawn(playerPosition))
         {
-            //Vector3 playerPosition = playerSpawnPoint.position;
-            playerPosition.z = PlayerZPOS;
-            player.transform.position = playerPosition;
+            if(IsOnCheckpoint(playerPosition))
+            {
+                playerPosition.y -= 10;
+            }
+            else if(!IsOnCheckpoint(playerPosition))
+            {
+                 //Vector3 playerPosition = playerSpawnPoint.position;
+                playerPosition.z = PlayerZPOS;
+                player.transform.position = playerPosition;
 
-            Vector3 cameraPosition = playerSpawnPoint.position;
-            cameraPosition.z =  CameraZPOS;
-            Camera.transform.position = cameraPosition;
+                Vector3 cameraPosition = playerSpawnPoint.position;
+                cameraPosition.z =  CameraZPOS;
+                Camera.transform.position = cameraPosition;
 
-            distanceTracker.ResetValues();
+                distanceTracker.ResetValues();
+            }
         }
+    }
+    bool IsOnCheckpoint(Vector3 position)
+    {
+        float tolerance = 10f;
+        return Mathf.Abs(position.y - checkPointManager.Checkpoint1) < tolerance || 
+        Mathf.Abs(position.y - checkPointManager.Checkpoint2) < tolerance || 
+        Mathf.Abs(position.y - checkPointManager.Checkpoint3) < tolerance || 
+        Mathf.Abs(position.y - checkPointManager.Checkpoint4) < tolerance;
     }
     //Place the player at the spawn point
     public void PlacePlayerAtSpawn()
@@ -65,14 +81,18 @@ public class SpawnManager : MonoBehaviour
     private bool IsValidPlayerSpawn(Vector3 spawnPoint)
     {
         Rect validSpawnArea = PlayerSpawnArea;
-        if(validSpawnArea.Contains(spawnPoint))
-        {
-            return true;
-        }
-        else
+
+        Vector3 originalPosition = spawnPoint;
+
+        spawnPoint.x = Mathf.Clamp(spawnPoint.x, validSpawnArea.xMin, validSpawnArea.xMax);
+        spawnPoint.y = Mathf.Clamp(spawnPoint.y, validSpawnArea.yMin, validSpawnArea.yMax);
+
+        if(spawnPoint != originalPosition)
         {
             return false;
         }
+
+        return validSpawnArea.Contains(new Vector2(spawnPoint.x, spawnPoint.y));
     }
     //Find the spawn point in the scene
     Transform FindSpawnPointInScene()
@@ -81,7 +101,12 @@ public class SpawnManager : MonoBehaviour
         playerSpawnPoint = spawnPoint.transform;
         if(spawnPoint != null)
         {
-            return spawnPoint.transform;
+            Vector3 potentialSpawn = spawnPoint.transform.position;
+            if(IsValidPlayerSpawn(potentialSpawn))
+            {
+                playerSpawnPoint.position = potentialSpawn;
+                return spawnPoint.transform;
+            }
         }
         if(spawnPoint == null)
         {

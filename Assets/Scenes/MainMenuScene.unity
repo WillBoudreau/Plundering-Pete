@@ -2268,7 +2268,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Music - Created in Juno
+  m_text: Music - Created in Suno
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 54009ce9477610e4fbec065c92d56823, type: 2}
   m_sharedMaterial: {fileID: -3367406078993063493, guid: 54009ce9477610e4fbec065c92d56823, type: 2}

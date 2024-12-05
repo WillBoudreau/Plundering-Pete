@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     [Header("Class Calls")]
     [SerializeField] private UIManager uiManager;
     [SerializeField] private LevelManager levelManager;
-
+    [SerializeField] private CheckpointManager checkpointManager;
     [SerializeField] private SpawnManager spawnManager;
     [SerializeField] private PlayerBehaviour playerBehaviour;
     [SerializeField] private PlayerStats playerStats;
@@ -61,6 +61,10 @@ public class GameManager : MonoBehaviour
         else if(uiManager.currentGameState == UIManager.GameState.Pause || uiManager.currentGameState == UIManager.GameState.GameOver || uiManager.currentGameState == UIManager.GameState.Win)
         {
             DisableGameplay();
+        }
+        if(uiManager.currentGameState == UIManager.GameState.GameOver || uiManager.currentGameState == UIManager.GameState.Win)
+        {
+            checkpointManager.SetFalse();
         }
         else if(uiManager.currentGameState == UIManager.GameState.Upgrades)
         {
@@ -172,7 +176,6 @@ public class GameManager : MonoBehaviour
         data.Level = playerStats.Level;
         data.FirstTime = FirstTime;
         data.magnet = playerStats.magnet;
-        Debug.Log("Magnet: " + playerStats.magnet);
         Debug.Log("Game Saved");
 
         bf.Serialize(file, data);
