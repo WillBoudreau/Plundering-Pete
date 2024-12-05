@@ -9,6 +9,7 @@ public class CheckpointManager : MonoBehaviour
     [SerializeField] private LevelManager levelManager;
     [SerializeField] private InventoryManager inventoryManager;
     [SerializeField] private PlayerBehaviour playerBehaviour;
+    [SerializeField] private PlayerStats playerStats;
     [Header("Variables")]
     public int checkpointbonus = 5;
     public TextMeshProUGUI checkpointText;
@@ -25,16 +26,22 @@ public class CheckpointManager : MonoBehaviour
     public float Checkpoint1;
     public float Checkpoint2;
     public float Checkpoint3;
+    public float Checkpoint4;
 
     public void SetValues()
     {
-        Checkpoint1 = -120;
+        Checkpoint1 = -100;
         Checkpoint2 = 25;
         Checkpoint3 = 200;
+        Checkpoint4 = 300;
     }
     void Update()
     {
         Checkpoint();
+        if(playerStats.playerHealth <= 0)
+        {
+            SetFalse();
+        }
     }
     IEnumerator UpdateText()
     {
@@ -57,12 +64,17 @@ public class CheckpointManager : MonoBehaviour
         {
             UpdateCheckpointStatus(2, true);
         }
+        if(playerBehaviour.transform.position.y >= Checkpoint4)
+        {
+            
+        }
     }
     //Update the checkpoint status
     public void UpdateCheckpointStatus(int checkpointIndex, bool status)
     {
         if(levelManager.levelName == "GameTestScene")
         {
+            SetFalse();
             switch (checkpointIndex)
             {
                 case 0:

@@ -53,6 +53,10 @@ public class HealthUpgrade : Upgrade
         {
             playerStats.playerHealth ++;
             playerStats.startHealth += 1;
+            if(playerStats.playerHealth < playerStats.startHealth)
+            {
+                playerStats.playerHealth = playerStats.startHealth;
+            }
             upgradeManager.OnUpgradePurchased();
             playerStats.healthManager.HandlePlayerHealthBar(playerStats.playerHealth, playerStats.startHealth);
             UpdateUpgradeDisplay(Color.green);

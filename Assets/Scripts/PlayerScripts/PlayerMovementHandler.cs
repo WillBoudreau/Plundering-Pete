@@ -10,6 +10,7 @@ public class PlayerMovementHandler : MonoBehaviour
     [SerializeField] private UIManager uIManager;
     [SerializeField] private InventoryManager inventoryManager;
     [SerializeField] private CheckpointManager checkpointManager;
+    [SerializeField] private ShipUpgrade shipUpgrade;
     [SerializeField] private float time = 5.0f;
     [Header("Player Movement")]
     [SerializeField] private float speed = 5.0f;
@@ -17,6 +18,7 @@ public class PlayerMovementHandler : MonoBehaviour
     public GameObject bulletPrefab;
     public GameObject level2BulletPrefab;
     public GameObject level3BulletPrefab;
+    public Transform firePoint;
     public Camera mainCamera;
     public bool IsMoving;
     public Rigidbody2D rb;
@@ -44,7 +46,7 @@ public class PlayerMovementHandler : MonoBehaviour
             Vector2 direction = (mouseWorldPOS - (Vector2)transform.position).normalized;
             
             float bulletSpawnDist = 1.0f;
-            Vector3 bulletSpawnPos = playerStats.firePoint.position + (playerStats.firePoint.forward * bulletSpawnDist);
+            Vector3 bulletSpawnPos = firePoint.position + (firePoint.forward * bulletSpawnDist);
             bulletSpawnPos.z = -2;
 
             musicManager.PlaySound(0);
@@ -80,23 +82,35 @@ public class PlayerMovementHandler : MonoBehaviour
     public void HandleMovement()
     {
         //Handle input using the old input system. TODO: change to new input system
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
+        float moveHorizontal = Input.GetAxisRaw("Horizontal");
+        float moveVertical = Input.GetAxisRaw("Vertical");
 
+        const float inputThreshold = 0.001f;
         Vector2 movement = new Vector2(moveHorizontal, moveVertical) * speed;
-        rb.velocity = movement;
-        // if(Input.GetKeyDown(KeyCode.E))
-        // {
-        //     inventoryManager.coinCount++;
-        // }
-        if(rb.velocity.magnitude > 0)
+
+        if(movement.magnitude > inputThreshold)
         {
+            rb.velocity = movement.normalized * speed;
             IsMoving = true;
         }
         else
         {
+            rb.velocity = Vector2.zero;
+            rb.angularVelocity = 0;
             IsMoving = false;
         }
+        // if(Input.GetKeyDown(KeyCode.E))
+        // {
+        //     playerStats.TakeDamage(5);
+        // }
+        // if(Input.GetKeyDown(KeyCode.Q))
+        // {
+        //     inventoryManager.coinCount += 50;
+        // }
+        // if(Input.GetKeyDown(KeyCode.R))
+        // {
+        //     shipUpgrade.UpgradeBonus();
+        // }
     }
 
     //Ensure the player remains within the camera bounds

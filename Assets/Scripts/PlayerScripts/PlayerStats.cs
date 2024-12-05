@@ -10,6 +10,8 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private MusicChanger musicManager;
     [SerializeField] private CheckpointManager checkpointManager;
     [SerializeField] private SpawnManager spawnManager;
+    [SerializeField] private CameraManager cameraManager;
+    [SerializeField] private InventoryManager inventory;
     [Header("Number of Kills")]
     public int SharkKills;
     public int SerpentKills;
@@ -20,6 +22,7 @@ public class PlayerStats : MonoBehaviour
     public float startdamage;
     public float StartSpeed;
     public float startFireRate;
+    public float startMagnet;
     [Header("Player values")]
     //Player values 
     public float speed;
@@ -30,9 +33,11 @@ public class PlayerStats : MonoBehaviour
     public float bulletVelocity;
     public bool Win;
     public LayerMask groundLayer;
-    public Transform firePoint;
     public bool PlayerPlaced;
     const float MinFireRate = 0.1f;
+    const float MinMagnet = 3f;
+    const float MinHealth = 5f;
+    public bool CanCollect;
     [Header("Player Levels")]
     public bool IsLevel2;
     public bool IsLevel3; 
@@ -48,14 +53,20 @@ public class PlayerStats : MonoBehaviour
     {
         startHealth = 5;
         playerHealth = startHealth;
-        magnet = 3f;
+        startMagnet = 3f;
+        magnet = startMagnet;
         StartSpeed = 6;
         speed = StartSpeed;
+        if(playerHealth < startHealth)
+        {
+            playerHealth = startHealth;
+        }
     }
     // Start is called before the first frame update
     void Start()
     {
         SetValues();
+        this.GetComponent<Collider2D>().enabled = true;
         renderer = GetComponentInChildren<Renderer>();
         originalColor = GetComponentInChildren<Renderer>().material.color;
     }
@@ -63,7 +74,7 @@ public class PlayerStats : MonoBehaviour
     //Hanlde the player (Called in PlayerBehaviour)
     public void HandlePlayer()
     {
-        HandleMagnit();
+        HandleStats();
     }
 
     //Set the starting values for the player
@@ -77,7 +88,7 @@ public class PlayerStats : MonoBehaviour
         startFireRate = 2f;
         bulletVelocity = 25f;
         healthManager.health = playerHealth;
-        //magnet = 3f;
+        magnet = startMagnet;
         //Assign values to be the starting values
         //playerHealth = startHealth;
         healthManager.playerhealth.fillAmount = playerHealth;
@@ -87,6 +98,7 @@ public class PlayerStats : MonoBehaviour
         //Set Win Bool
         Win = false;
     }
+    //Adjust the speed of the player(Called in ShipUpgrade)
     public void AdjustFireRate(float increment)
     {
         fireRate = Mathf.Clamp(fireRate + increment, MinFireRate, startFireRate);
@@ -96,7 +108,6 @@ public class PlayerStats : MonoBehaviour
         {
             fireRate = MinFireRate;
         }
-        Debug.Log("Fire RateFromStats: " + fireRate + " Start Fire RateFromStats: " + startFireRate);
     }
 
     //Level up the player(Called in ShipUpgrade)
@@ -129,16 +140,58 @@ public class PlayerStats : MonoBehaviour
             Debug.Log("Max Level Reached");
         }
     }
+    public void AdjustMagnet(float increment)
+    {
+        magnet = Mathf.Clamp(magnet + increment, MinMagnet, startMagnet);
+        startMagnet += increment;
+        magnet += increment;
+        if(magnet < startMagnet)
+        {
+            magnet = startMagnet;
+        }
+    }
+    public void AdjustHealth(float increment)
+    {
+        playerHealth = Mathf.Clamp(playerHealth + increment,MinHealth,startHealth);
+        playerHealth += increment;
+        startHealth += increment;
+        if(playerHealth < startHealth)
+        {
+            playerHealth = startHealth;
+        }
+    }
 
     //Handle the magnet power of the ship
-    void HandleMagnit()
+    void HandleStats()
     {
-        //Handle the magnet powerup
-        foreach (GameObject coin in GameObject.FindGameObjectsWithTag("Gold"))
+        if(magnet < startMagnet)
         {
-            if (Vector2.Distance(transform.position, coin.transform.position) < magnet)
+            magnet = startMagnet;
+        }
+        if(inventory.IsMax)
+        {
+            CanCollect = false;
+        }
+        else
+        {
+            CanCollect = true;
+        }
+        //Handle the magnet powerup
+        if(CanCollect)
+        {
+            foreach (GameObject coin in GameObject.FindGameObjectsWithTag("Gold"))
             {
-                coin.transform.position = Vector2.MoveTowards(coin.transform.position, transform.position, 0.1f);
+                if (Vector2.Distance(transform.position, coin.transform.position) < magnet)
+                {
+                    if(inventory.coinCount >= inventory.maxCoins)
+                    {
+                        coin.transform.position = Vector2.MoveTowards(coin.transform.position, coin.transform.position, 0.1f);
+                    }
+                    else
+                    {
+                        coin.transform.position = Vector2.MoveTowards(coin.transform.position, transform.position, 0.1f);
+                    }
+                }
             }
         }
     }
@@ -146,12 +199,26 @@ public class PlayerStats : MonoBehaviour
     //Take damage from the player(Called in PlayerBehaviour)
     public void TakeDamage(float damage)
     {
-        StartCoroutine(Flicker());
-        musicManager.PlaySound(2);
-        playerHealth -= damage;
-
-        healthManager.HandlePlayerHealthBar(playerHealth, startHealth);
-        Death();
+        Debug.Log("Player took damage" + damage);
+        if(!healthManager.IsDead)
+        {
+            if(uIManager.currentGameState == UIManager.GameState.GameOver)
+            {
+                return;
+            }
+            StartCoroutine(Flicker());
+            ChooseDamageSound();
+            playerHealth -= damage;
+            healthManager.HandlePlayerHealthBar(playerHealth, startHealth);
+            Death();
+            cameraManager.ShakeCamera();
+        }
+    }
+    void ChooseDamageSound()
+    {
+        System.Random random = new System.Random();
+        int randomNumber = random.Next(0, musicManager.damageEffects.Length);
+        musicManager.PlayDamageSound(randomNumber);
     }
 
     //Flicker for damage
@@ -174,6 +241,9 @@ public class PlayerStats : MonoBehaviour
         if (playerHealth <= 0)
         {
             playerHealth = 0;
+            this.GetComponent<Collider2D>().enabled = false;
+            musicManager.StopSound();
+            musicManager.PlaySound(3);
             uIManager.SetGameState("GameOver");
             ResetHealth();
             Respawn();
@@ -184,15 +254,25 @@ public class PlayerStats : MonoBehaviour
     //Respawn the player
     void Respawn()
     {
-        spawnManager.PlacePlayer();
+        checkpointManager.SetFalse();
+        spawnManager.PlacePlayerAtSpawn();
         healthManager.IsDead = false;
+        if(playerHealth < startHealth)
+        {
+            playerHealth = startHealth;
+        }
     }
 
     //Reset the health of the player
     private void ResetHealth()
     {
+        checkpointManager.SetFalse();
         playerHealth = startHealth;
         healthManager.health = playerHealth;
         healthManager.HandlePlayerHealthBar(playerHealth, startHealth);
+        if(playerHealth < startHealth)
+        {
+            playerHealth = startHealth;
+        }
     }
 }

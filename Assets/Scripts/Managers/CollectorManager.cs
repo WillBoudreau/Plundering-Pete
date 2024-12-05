@@ -7,6 +7,7 @@ public class CollectorManager : MonoBehaviour
 {
     [Header("Class calls")]
     [SerializeField] private LevelManager levelManager;
+    [SerializeField] private Camera mainCamera;
     [Header("Variables")]
     [SerializeField] private GameObject Doubloon;
     [SerializeField] private List<GameObject> Doubloons = new List<GameObject>();
@@ -48,11 +49,11 @@ public class CollectorManager : MonoBehaviour
             for (int i = 0; i < numofDoubloons; i++)
             {
                 Vector3 spawnPosition = GetRandomSpawnPosition();
-                if (Vector3.Distance(spawnPosition, playerTransform.position) < safeDistance)
+                if (Vector3.Distance(spawnPosition, playerTransform.position) < safeDistance || IsInCameraView(spawnPosition))
                 {
                     spawnPosition = GetRandomSpawnPosition();
                 }
-                else if(spawnPosition == Doubloons[i].transform.position)
+                else if (spawnPosition == Doubloons[i].transform.position)
                 {
                     spawnPosition = GetRandomSpawnPosition();
                 }
@@ -71,4 +72,11 @@ public class CollectorManager : MonoBehaviour
         float y = Random.Range(mapMinBounds.y, mapMaxBounds.y);
         return new Vector3(x, y, -2);
     }
+
+    //Check if the position is within the camera's view
+    private bool IsInCameraView(Vector3 position)
+    {
+        Vector3 viewportPoint = mainCamera.WorldToViewportPoint(position);
+        return viewportPoint.x > 0 && viewportPoint.x < 1 && viewportPoint.y > 0 && viewportPoint.y < 1;
+    }  
 }

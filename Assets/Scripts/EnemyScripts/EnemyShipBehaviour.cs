@@ -18,11 +18,15 @@ public class EnemyShipBehaviour : Enemy
     private bool movingRight = true;
     public float moveDistance = 5f;
     public float moveSpeed = 2f;
+    bool canAttack = true;
+    float minX = -20f;
+    float maxX = 20f;
 
     // Start is called before the first frame update
     void Start()
     {
         renderer = GetComponent<Renderer>();
+        deathAnim = GetComponent<Animator>();
         originalColor = renderer.material.color;
         speed = 2;
         health = 20;
@@ -34,13 +38,13 @@ public class EnemyShipBehaviour : Enemy
         startPosition = transform.position;
         AdhustHealthBar();
         GoldBag = GameObject.FindGameObjectWithTag("CoinBag");
+        playerStats = GameObject.Find("Player").GetComponent<PlayerStats>();
     }
 
     // Update is called once per frame
     void Update()
     {
         Attack();
-        playerStats = GameObject.Find("Player").GetComponent<PlayerStats>();
         Move();
         HandleShooting();
     }
@@ -50,7 +54,7 @@ public class EnemyShipBehaviour : Enemy
         if (movingRight)
         {
             transform.position += Vector3.right * moveSpeed * Time.deltaTime;
-            if (transform.position.x >= startPosition.x + moveDistance)
+            if(transform.position.x >= Mathf.Min(startPosition.x + moveDistance,maxX))
             {
                 movingRight = false;
             }
@@ -58,7 +62,7 @@ public class EnemyShipBehaviour : Enemy
         else
         {
             transform.position += Vector3.left * moveSpeed * Time.deltaTime;
-            if (transform.position.x <= startPosition.x - moveDistance)
+            if (transform.position.x <= Mathf.Max(startPosition.x - moveDistance,minX))
             {
                 movingRight = true;
             }
@@ -67,19 +71,22 @@ public class EnemyShipBehaviour : Enemy
 
     void HandleShooting()
     {
-        if (fireRate <= 0)
+        if(canAttack)
         {
-            for (int i = 0; i < 3; i++)
+            if (fireRate <= 0)
             {
-                float bulletSpawnDist = 1.0f;
-                Vector3 CanonBallSpawnPos = CanonFirePoint.position + (CanonFirePoint.forward * bulletSpawnDist);
-                CanonBallSpawnPos.z = -2;
-                GameObject CannonBall = Instantiate(CanonBall, CanonBallSpawnPos, Quaternion.identity);
-                CannonBall.GetComponent<Rigidbody2D>().velocity = Vector2.up * CanonVelocity;
-                Destroy(CannonBall, 5.0f);
-                fireRate = 5f;
+                for (int i = 0; i < 3; i++)
+                {
+                    float bulletSpawnDist = 1.0f;
+                    Vector3 CanonBallSpawnPos = CanonFirePoint.position + (CanonFirePoint.forward * bulletSpawnDist);
+                    CanonBallSpawnPos.z = -2;
+                    GameObject CannonBall = Instantiate(CanonBall, CanonBallSpawnPos, Quaternion.identity);
+                    CannonBall.GetComponent<Rigidbody2D>().velocity = Vector2.up * CanonVelocity;
+                    Destroy(CannonBall, 5.0f);
+                    fireRate = 5f;
+                }
             }
-        }
+        } 
     }
     public override void Attack()
     {
@@ -124,15 +131,45 @@ public class EnemyShipBehaviour : Enemy
             TakeDamage(playerStats.damage);
             Destroy(collision.gameObject);
         }
+        if(collision.gameObject.tag == "Border")
+        {
+            if(movingRight)
+            {
+                Debug.Log("Moving Left");
+                movingRight = false;
+            }
+            else if(!movingRight)
+            {
+                Debug.Log("Moving Right");
+                movingRight = true;
+            }
+        }
+    }
+    void DeathEffect()
+    {
+        deathAnim.SetTrigger("Death");
+        canAttack = false;
+        damage = 0;
+        speed = 0;
+        this.gameObject.GetComponent<Collider2D>().enabled = false;
     }
 
     public void Death()
     {
         if (health <= 0)
         {
-            Instantiate(GoldBag, transform.position, Quaternion.identity);
-            Destroy(gameObject);
+            DeathEffect();
             playerStats.ShipKills++;
+            StartCoroutine(DeathDelay());
         }
+    }
+    IEnumerator DeathDelay()
+    {
+        if (deathAnim != null)
+        {
+            yield return new WaitForSeconds(deathAnim.GetCurrentAnimatorStateInfo(0).length);
+        }
+        Instantiate(GoldBag, transform.position, Quaternion.identity);
+        Destroy(gameObject);
     }
 }

@@ -651,8 +651,11 @@ MonoBehaviour:
   FlickerCount: 0
   healthBar: {fileID: 2972099145136889105}
   AttackTimer: 0
+  StartingAttackTimer: 0
+  AttackDistance: 0
   player: {fileID: 0}
   playerStats: {fileID: 0}
+  deathAnim: {fileID: 6889515382710781820}
   stoppingDistance: 0
   detectionDistance: 0
   maxHealth: 0
