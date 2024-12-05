@@ -99,18 +99,18 @@ public class PlayerMovementHandler : MonoBehaviour
             rb.angularVelocity = 0;
             IsMoving = false;
         }
-        if(Input.GetKeyDown(KeyCode.E))
-        {
-            playerStats.TakeDamage(5);
-        }
-        if(Input.GetKeyDown(KeyCode.Q))
-        {
-            inventoryManager.coinCount += 50;
-        }
-        if(Input.GetKeyDown(KeyCode.R))
-        {
-            shipUpgrade.UpgradeBonus();
-        }
+        // if(Input.GetKeyDown(KeyCode.E))
+        // {
+        //     playerStats.TakeDamage(5);
+        // }
+        // if(Input.GetKeyDown(KeyCode.Q))
+        // {
+        //     inventoryManager.coinCount += 50;
+        // }
+        // if(Input.GetKeyDown(KeyCode.R))
+        // {
+        //     shipUpgrade.UpgradeBonus();
+        // }
     }
 
     //Ensure the player remains within the camera bounds
