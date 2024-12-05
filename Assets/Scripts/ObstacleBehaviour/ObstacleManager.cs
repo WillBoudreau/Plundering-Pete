@@ -63,7 +63,7 @@ public class ObstacleManager : MonoBehaviour
         //Spawns rocks in zone 1
         if (Zone1Obstacles.Count <= RockMaxZone1 && currentRockCount < RockMaxZone1)
         {
-            int rocksToSpawn  = Mathf.Min(RockMaxZone1 - Zone1Obstacles.Count, RockMaxZione1 - currentRockCount);
+            int rocksToSpawn  = Mathf.Min(RockMaxZone1 - Zone1Obstacles.Count, RockMaxZone1 - currentRockCount);
             for (int i = 0; i < obstacle_Rock_Count; i++)
             {
                 Zone1Obstacles.Add(Rock);
