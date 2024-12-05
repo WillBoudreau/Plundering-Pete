@@ -100,11 +100,11 @@ public class PlayerMovementHandler : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.E))
         {
-            playerStats.TakeDamage(1);
+            playerStats.TakeDamage(5);
         }
         if(Input.GetKeyDown(KeyCode.Q))
         {
-            inventoryManager.coinCount += 5;
+            inventoryManager.coinCount += 50;
         }
         if(Input.GetKeyDown(KeyCode.R))
         {
