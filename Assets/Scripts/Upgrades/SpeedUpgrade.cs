@@ -53,7 +53,7 @@ public class SpeedUpgrade : Upgrade
         else
         {
             inventory.coinCount += cost;
-            messageText.text = "Max Speed" + MaxSpeed + "Player Speed" + playerStats.speed + "Speed Increment" + SpeedIncrement + "Speed" + (playerStats.speed+SpeedIncrement);
+            messageText.text = "Max Speed Reached";
         }
     }
     public override void ResetUpgrade()

@@ -64,7 +64,7 @@ public class HealthUpgrade : Upgrade
         else
         {
             inventory.coinCount += cost;
-            messageText.text = "Max health" + MaxHeatlh + " reached" + "Player Health: " + playerStats.playerHealth + "Start Health: " + playerStats.startHealth + "Health " + (playerStats.playerHealth + HealthIncrement);
+            messageText.text = "Max Health Reached";
         }
     }
     public override void ResetUpgrade()
