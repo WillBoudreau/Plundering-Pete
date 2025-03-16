@@ -61,21 +61,25 @@ public class WaveManger : MonoBehaviour
             Ships.Add(ShipPrefab);
         }
     }
-
+    //Spawn enemies for the wave
     IEnumerator SpawnEnemiesForWave(bool hasSpawnedEnemies)
     {
+        //Spawn enemies based off the checkpoint
         if(spawnTime <= 0 && checkpointManager.FirstCheckpoint && !hasSpawnedEnemies && checkpointManager.SecondCheckpoint == false)
         {
             Debug.Log("Spawning Wave 1");
+            //Spawn the sharks based on the amount of sharks in the list 
             for(int i = 0; i < Sharks.Count; i++)
             {
                 spawnManager.SpawnEnemyInRect(SharkPrefab,spawnManager.spawnArea1);
             }
             spawnTime = 5f;
         }
+        //Spawn Serpents
         if(spawnTime <= 0 && checkpointManager.SecondCheckpoint && checkpointManager.ThirdCheckpoint == false)
         {
             Debug.Log("Spawning Wave 2");
+            //Spawn serpents based on the amount of serpents in the list
             for(int i = 0; i < Serpents.Count; i++)
             {
                 spawnManager.SpawnEnemyInRect(SharkPrefab,spawnManager.spawnArea2);
@@ -83,9 +87,11 @@ public class WaveManger : MonoBehaviour
             spawnManager.SpawnEnemyInRect(SerpentPrefab,spawnManager.spawnArea2);
             spawnTime = 5f;
         }
+        //Spawn Ships
         if(spawnTime <= 0 && checkpointManager.ThirdCheckpoint)
         {
             Debug.Log("Spawning Wave 3");
+            //Spawn ships based on the amount of ships in the list
             for(int i = 0; i < Sharks.Count; i++)
             {
                 spawnManager.SpawnEnemyInRect(SharkPrefab,spawnManager.spawnArea3);
@@ -100,6 +106,7 @@ public class WaveManger : MonoBehaviour
         hasSpawnedEnemies = true;
         yield return new WaitForSeconds(spawnTime);
     }
+    //Despawn the enemies
     void DespawnEnemies()
     {
         GameObject[] shark = GameObject.FindGameObjectsWithTag("Shark");

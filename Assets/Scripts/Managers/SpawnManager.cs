@@ -83,6 +83,7 @@ public class SpawnManager : MonoBehaviour
             Debug.Log("Spawn point not found");
         }
     }
+    //Check if the spawn point is valid
     private bool IsValidPlayerSpawn(Vector3 spawnPoint)
     {
         Rect validSpawnArea = PlayerSpawnArea;
@@ -131,28 +132,33 @@ public class SpawnManager : MonoBehaviour
     //Spawn an enemy in the specified area
     public void SpawnEnemyInRect(GameObject enemyPrefab, Rect spawnArea)
     {
+        //Is the spawn successful
         bool spawnSuccessful = false;
         int attempts = 0;
         while(!spawnSuccessful && attempts < 10)
         {
             Debug.Log("Spawning enemy");
+            //Get the spawn point for the enemy
             if(enemyPrefab.tag == "EnemyShip")
             {
                 spawnArea = ShipSpawnArea;
             }
             Vector3 spawnPos = GetEnemySpawn(spawnArea);
+            //Check if the spawn point is in the camera view, to prevent spawning enemies popping in
             if(IsInCameraView(spawnPos))
             {
                 Debug.Log("Enemy is in camera view");
                 attempts++;
             }
+            //Check if the spawn point is outside of the camera view
             else if(!IsInCameraView(spawnPos))
             {
-                
+                //Check if the spawn point is occupied
                 Collider2D[] colliders = Physics2D.OverlapCircleAll(spawnPos, spawnZone);
                 bool isOccupied = false;
                 foreach(var collider in colliders)
                 {
+                    //Check if the spawn point is occupied by an enemy
                     if(collider.gameObject.tag == "Shark")
                     {
                         isOccupied = true;
@@ -168,6 +174,7 @@ public class SpawnManager : MonoBehaviour
                         isOccupied = true;
                         break;
                     }
+                    //Check if the spawn point is occupied by the player
                     else if(collider.gameObject.tag == "Player")
                     {
                         isOccupied = true;
@@ -179,6 +186,7 @@ public class SpawnManager : MonoBehaviour
                         isOccupied = true;
                     }
                 }
+                //Spawn the enemy if the spawn point is not occupied
                 if(!isOccupied)
                 {
                     GameObject enemy = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
@@ -186,12 +194,14 @@ public class SpawnManager : MonoBehaviour
                 }
                 attempts++;
             }
+            //Log a message if the enemy failed to spawn
             if(!spawnSuccessful)
             {
                 Debug.Log("Failed to spawn enemy");
             }
         }
     }
+    //Check if the spawn point is in the camera view
     bool IsInCameraView(Vector3 position)
     {
         Vector3 screenPoint = mainCamera.WorldToViewportPoint(position);
